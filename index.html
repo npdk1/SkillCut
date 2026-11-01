@@ -127,6 +127,24 @@
       transform: none;
     }
 
+    /* Media frames open with a wipe instead of a slide — motion that matches
+       what the element is (a frame being revealed), not a generic fade-up. */
+    .js-motion .m-reveal[data-reveal="mask"] {
+      transform: none;
+      clip-path: inset(0 0 92% 0);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .js-motion .m-reveal[data-reveal="mask"] {
+        transition:
+          opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+          clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--m-delay, 0s);
+      }
+    }
+    .js-motion .m-reveal[data-reveal="mask"].m-in {
+      clip-path: inset(0 0 0 0);
+    }
+
     /* ============================================================
        LIGHT THEME — same structure, inverted surface + ink contrast
        ============================================================ */
@@ -344,7 +362,7 @@
   <section id="comparison" class="pt-10 pb-16 px-4 sm:px-6 max-w-6xl mx-auto">
     
     <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-10">
+    <div class="text-center max-w-3xl mx-auto mb-10" data-reveal>
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-accent-500/10 text-accent-500 border border-accent-500/20 mb-3">
         <span>KẾT QUẢ THỰC TẾ TRÊN VIDEO ẨM THỰC</span>
       </div>
@@ -357,7 +375,7 @@
     </div>
 
     <!-- Comparison Studio Card -->
-    <div class="bg-dark-surface border border-dark-border rounded-2xl p-4 sm:p-6 shadow-2xl">
+    <div class="bg-dark-surface border border-dark-border rounded-2xl p-4 sm:p-6 shadow-2xl" data-reveal="mask" style="--m-delay:0.06s">
       
       <!-- Studio Header Controls -->
       <div class="flex flex-wrap items-center justify-between pb-4 mb-4 border-b border-dark-border gap-3">
@@ -401,7 +419,6 @@
         <!-- Background Video: AFTER (SkillCut) -->
         <video id="video-split-after" class="absolute inset-0 w-full h-full object-cover" loop playsinline muted preload="auto">
           <source src="./assets/after.mp4" type="video/mp4" />
-          <source src="https://github.com/user-attachments/assets/5c9b257f-e231-416c-8c22-bd231318a648" type="video/mp4" />
         </video>
         <div class="absolute top-4 right-4 z-10 px-2.5 py-1 rounded-md bg-brand-500/90 text-dark-bg text-xs font-bold tracking-wider shadow flex items-center gap-1.5">
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -412,7 +429,6 @@
         <div id="split-overlay" class="compare-overlay">
           <video id="video-split-orig" class="absolute top-0 left-0 max-w-none h-full object-cover" loop playsinline muted preload="auto">
             <source src="./assets/original.mp4" type="video/mp4" />
-            <source src="https://github.com/user-attachments/assets/97c8308d-15a9-43be-83d9-f1db0beb2747" type="video/mp4" />
           </video>
           <div class="absolute top-4 left-4 z-10 px-2.5 py-1 rounded-md bg-dark-bg/90 border border-slate-600 text-slate-300 text-xs font-semibold tracking-wider flex items-center gap-1.5">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
@@ -449,10 +465,7 @@
             <span class="px-2 py-0.5 rounded bg-dark-surface text-slate-400 font-mono">30s • Nhiều ngắt quãng</span>
           </div>
           <div class="relative w-full aspect-[9/16] rounded-lg overflow-hidden bg-black">
-            <video id="video-side-orig" class="w-full h-full object-cover" loop playsinline muted preload="auto">
-              <source src="./assets/original.mp4" type="video/mp4" />
-              <source src="https://github.com/user-attachments/assets/97c8308d-15a9-43be-83d9-f1db0beb2747" type="video/mp4" />
-            </video>
+            <video id="video-side-orig" class="w-full h-full object-cover" loop playsinline muted preload="none" data-src="./assets/original.mp4"></video>
           </div>
           <div class="mt-3 text-xs text-slate-400 text-center">
             Chưa cắt khoảng lặng, âm lượng chênh lệch, không có phụ đề.
@@ -469,10 +482,7 @@
             <span class="px-2 py-0.5 rounded bg-brand-500/10 text-brand-400 font-mono font-bold">18s • Tinh gọn 100%</span>
           </div>
           <div class="relative w-full aspect-[9/16] rounded-lg overflow-hidden bg-black">
-            <video id="video-side-after" class="w-full h-full object-cover" loop playsinline muted preload="auto">
-              <source src="./assets/after.mp4" type="video/mp4" />
-              <source src="https://github.com/user-attachments/assets/5c9b257f-e231-416c-8c22-bd231318a648" type="video/mp4" />
-            </video>
+            <video id="video-side-after" class="w-full h-full object-cover" loop playsinline muted preload="none" data-src="./assets/after.mp4"></video>
           </div>
           <div class="mt-3 text-xs text-slate-300 text-center">
             Gọt sạch 8.5s lặng, phụ đề karaoke động không nền, thẻ công đoạn bật nảy.
@@ -505,7 +515,7 @@
     </div>
 
     <!-- 4 Key Transformation Cards Under Video -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8" data-reveal-group>
       
       <div class="bg-dark-surface border border-dark-border rounded-xl p-4 hover:border-brand-500/40 transition-colors">
         <div class="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-400 flex items-center justify-center font-bold mb-3">
@@ -564,7 +574,7 @@
        ========================================================================= -->
   <section id="benefits" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto border-t border-dark-border">
     
-    <div class="text-center max-w-2xl mx-auto mb-12">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
       <h2 class="text-3xl font-display font-extrabold text-white">
         Tại Sao SkillCut Đánh Bại <br />
         <span class="text-brand-400">Cách Dựng Video Truyền Thống?</span>
@@ -575,7 +585,7 @@
     </div>
 
     <!-- Comparison Table -->
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto" data-reveal style="--m-delay:0.08s">
       <table class="w-full text-left border-collapse text-sm">
         <thead>
           <tr class="border-b border-dark-border">
@@ -636,7 +646,7 @@
        ========================================================================= -->
   <section id="skills" class="py-16 px-4 sm:px-6 max-w-6xl mx-auto border-t border-dark-border">
     
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4" data-reveal>
       <div>
         <h2 class="text-3xl font-display font-extrabold text-white">
           Kho Template &amp; Skill Cho Từng Ngành
@@ -784,7 +794,7 @@
        ========================================================================= -->
   <section id="how-it-works" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto border-t border-dark-border">
     
-    <div class="text-center max-w-2xl mx-auto mb-12">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
       <h2 class="text-3xl font-display font-extrabold text-white">
         Dựng Video Triệu View <br />
         <span class="text-brand-400">Chỉ Với 3 Bước Đơn Giản</span>
@@ -838,7 +848,7 @@
        ========================================================================= -->
   <section id="integrations" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto border-t border-dark-border">
 
-    <div class="text-center max-w-2xl mx-auto mb-10">
+    <div class="text-center max-w-2xl mx-auto mb-10" data-reveal>
       <h2 class="text-3xl font-display font-extrabold text-white">
         Giao Skill Cho Trợ Lý A.I Bạn Đang Dùng
       </h2>
@@ -926,7 +936,7 @@
        8. OPEN SOURCE & GITHUB REPOSITORY (Transparent & Community-Driven)
        ========================================================================= -->
   <section class="py-16 px-4 sm:px-6 max-w-5xl mx-auto border-t border-dark-border">
-    <div class="oss-card bg-gradient-to-br from-dark-surface via-dark-card to-dark-surface border border-dark-border rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+    <div class="oss-card bg-gradient-to-br from-dark-surface via-dark-card to-dark-surface border border-dark-border rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden" data-reveal>
       
       <div class="max-w-2xl mx-auto">
         <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-white">
@@ -1386,13 +1396,13 @@
         timecodeDisplay.textContent = `${formatTime(vSplitAfter.currentTime)} / ${formatTime(vSplitAfter.duration)}`;
         
         // Sync original video time
-        if (Math.abs(vSplitOrig.currentTime - vSplitAfter.currentTime) > 0.2) {
+        if (vSplitOrig.readyState > 0 && Math.abs(vSplitOrig.currentTime - vSplitAfter.currentTime) > 0.2) {
           vSplitOrig.currentTime = vSplitAfter.currentTime;
         }
-        if (Math.abs(vSideOrig.currentTime - vSplitAfter.currentTime) > 0.2) {
+        if (vSideOrig.readyState > 0 && Math.abs(vSideOrig.currentTime - vSplitAfter.currentTime) > 0.2) {
           vSideOrig.currentTime = vSplitAfter.currentTime;
         }
-        if (Math.abs(vSideAfter.currentTime - vSplitAfter.currentTime) > 0.2) {
+        if (vSideAfter.readyState > 0 && Math.abs(vSideAfter.currentTime - vSplitAfter.currentTime) > 0.2) {
           vSideAfter.currentTime = vSplitAfter.currentTime;
         }
       });
@@ -1401,7 +1411,7 @@
         if (!vSplitAfter.duration) return;
         const targetTime = (e.target.value / 100) * vSplitAfter.duration;
         allVideos.forEach(v => {
-          if (v) v.currentTime = targetTime;
+          if (v && v.readyState > 0) v.currentTime = targetTime;
         });
       });
 
@@ -1433,6 +1443,16 @@
         containerSplit.classList.add('hidden');
         containerSide.classList.remove('hidden');
         containerSide.classList.add('grid');
+
+        // Load-on-demand: the side-by-side clips only fetch when this view opens.
+        [vSideOrig, vSideAfter].forEach((v) => {
+          if (v.dataset.src && !v.getAttribute('src')) {
+            v.src = v.dataset.src;
+            v.load();
+          }
+          if (vSplitAfter.duration) v.currentTime = vSplitAfter.currentTime;
+          if (isPlaying) v.play().catch(() => {});
+        });
       });
 
       // 6. FOCAL MOMENT — the "cut", performed once when the comparison enters view.
@@ -1504,6 +1524,11 @@
           });
         });
 
+        // Single blocks: section headers, media frames, tables, cards.
+        document.querySelectorAll('[data-reveal]').forEach((el) => {
+          el.classList.add('m-reveal');
+        });
+
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const revealNow = (el) => el.classList.add('m-in');
 
@@ -1514,13 +1539,15 @@
           return;
         }
 
+        // Load-on-scroll: each block animates in the first time it reaches the
+        // lower third of the viewport, then is never touched again.
         const io = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             revealNow(entry.target);
             io.unobserve(entry.target);
           });
-        }, { rootMargin: '0px 0px -8% 0px' });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.01 });
 
         document.querySelectorAll('.m-reveal').forEach((el) => io.observe(el));
       } catch (err) {
