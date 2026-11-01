@@ -42,7 +42,7 @@ Click the speaker icon on a clip to turn the sound on.
 
 **Original — raw, unedited**
 
-<video src="https://raw.githubusercontent.com/npdk1/SkillCut/main/assets/original.mp4" width="300" controls playsinline preload="metadata"></video>
+<video src="https://media.githubusercontent.com/media/npdk1/SkillCut/main/assets/original.mp4" controls playsinline preload="metadata"></video>
 
 Uncut pauses, uneven audio, no captions, no rhythm.
 
