@@ -9,9 +9,9 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](./LICENSE)
 [![AI Ready](https://img.shields.io/badge/AI-Claude%20%7C%20Codex%20%7C%20Antigravity-0ea5e9?style=flat-square)](#skill-library)
 [![Language](https://img.shields.io/badge/docs-EN%20%7C%20VI-a855f7?style=flat-square)](#-tiếng-việt)
-[![Live Demo](https://img.shields.io/badge/demo-index.html-f59e0b?style=flat-square)](./index.html)
+[![Live Demo](https://img.shields.io/badge/demo-live-f59e0b?style=flat-square)](https://npdk1.github.io/SkillCut/)
 
-[Live landing page](./index.html) · [Skill library](#skill-library) · [Quick start](#quick-start) · [Tiếng Việt](#-tiếng-việt)
+[**Live demo**](https://npdk1.github.io/SkillCut/) · [Skill library](#skill-library) · [Quick start](#quick-start) · [Tiếng Việt](#-tiếng-việt)
 
 </div>
 
@@ -34,24 +34,24 @@ You get back a finished **9:16 clip at 4K 60fps**: silence trimmed, karaoke capt
 ## Before / After
 
 Same frame, same footage. Left is untouched — right was cut by SkillCut.
-Sound is off by default; click the speaker icon on either clip to hear it.
+Both previews loop silently; **[open the live demo](https://npdk1.github.io/SkillCut/)** to watch with sound and scrub the timeline.
 
 <table>
 <tr>
 <td align="center" width="50%">
 
-**Original — raw, unedited**
+<a href="https://npdk1.github.io/SkillCut/"><img src="./assets/original-preview.webp" alt="Original — raw footage" width="300"></a>
 
-<video src="https://github.com/npdk1/SkillCut/releases/download/v1.0.0/original.mp4" controls playsinline preload="metadata"></video>
+**Original — raw, unedited**
 
 Uncut pauses · no captions · no rhythm
 
 </td>
 <td align="center" width="50%">
 
-**After SkillCut — 8.5s of silence removed**
+<a href="https://npdk1.github.io/SkillCut/"><img src="./assets/after-preview.webp" alt="After SkillCut" width="300"></a>
 
-<video src="https://github.com/npdk1/SkillCut/releases/download/v1.0.0/after.mp4" controls playsinline preload="metadata"></video>
+**After SkillCut — 8.5s of silence removed**
 
 Bare karaoke captions · step badges · on-beat cuts
 
@@ -59,8 +59,8 @@ Bare karaoke captions · step badges · on-beat cuts
 </tr>
 </table>
 
-> Source files: [`assets/original.mp4`](./assets/original.mp4), [`assets/after.mp4`](./assets/after.mp4)
-> · downloadable from [Releases](https://github.com/npdk1/SkillCut/releases/tag/v1.0.0).
+> Full clips with audio: [`assets/original.mp4`](./assets/original.mp4), [`assets/after.mp4`](./assets/after.mp4)
+> · also attached to [Releases](https://github.com/npdk1/SkillCut/releases/tag/v1.0.0).
 
 ---
 
@@ -103,7 +103,7 @@ cd SkillCut
 
 Then either:
 
-- **See the demo** — open [`index.html`](./index.html) in a browser (no build step, no dependencies).
+- **See the demo** — [live version](https://npdk1.github.io/SkillCut/), or open [`index.html`](./index.html) locally (no build step, no dependencies).
 - **Use a skill** — point your AI assistant at the folder, e.g.:
 
 ```text
@@ -131,7 +131,10 @@ SkillCut/
 ├── index.html                                  # product landing page (EN / VI, dark / light)
 ├── assets/
 │   ├── original.mp4                            # raw footage used in the comparison
-│   └── after.mp4                               # SkillCut output
+│   ├── after.mp4                               # SkillCut output
+│   ├── original-preview.webp                   # looping README preview
+│   ├── after-preview.webp                      # looping README preview
+│   └── logo.svg                                # brand mark
 ├── good-skills/
 │   ├── remotion-food-short-vn/                 # food / F&B skill
 │   └── remotion-house-review-vn/               # house tour / real estate skill
@@ -188,7 +191,7 @@ git clone https://github.com/npdk1/SkillCut.git
 cd SkillCut
 ```
 
-- **Xem demo:** mở [`index.html`](./index.html) bằng trình duyệt — không cần build, không cần cài gì.
+- **Xem demo:** bản [live](https://npdk1.github.io/SkillCut/), hoặc mở [`index.html`](./index.html) bằng trình duyệt — không cần build, không cần cài gì.
 - **Dùng skill:** trỏ trợ lý A.I vào thư mục skill, ví dụ:
 
 ```text
