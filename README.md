@@ -7,11 +7,11 @@
 **Templates & skill files that turn raw footage into million-view short clips — handed straight to your AI.**
 
 [![MIT License](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](./LICENSE)
-[![AI Ready](https://img.shields.io/badge/AI-Claude%20%7C%20Codex%20%7C%20Antigravity-0ea5e9?style=flat-square)](#-works-with-your-ai)
+[![AI Ready](https://img.shields.io/badge/AI-Claude%20%7C%20Codex%20%7C%20Antigravity-0ea5e9?style=flat-square)](#skill-library)
 [![Language](https://img.shields.io/badge/docs-EN%20%7C%20VI-a855f7?style=flat-square)](#-tiếng-việt)
 [![Live Demo](https://img.shields.io/badge/demo-index.html-f59e0b?style=flat-square)](./index.html)
 
-[Live landing page](./index.html) · [Skill library](#-skill-library) · [Quick start](#-quick-start) · [Tiếng Việt](#-tiếng-việt)
+[Live landing page](./index.html) · [Skill library](#skill-library) · [Quick start](#quick-start) · [Tiếng Việt](#-tiếng-việt)
 
 </div>
 
