@@ -33,33 +33,37 @@ You get back a finished **9:16 clip at 4K 60fps**: silence trimmed, karaoke capt
 
 ## Before / After
 
-Same raw footage. Left is untouched, right was cut by SkillCut.
-Click the speaker icon on a clip to turn the sound on.
+Same frame, same footage. Left is untouched — right was cut by SkillCut.
 
 <table>
 <tr>
 <td align="center" width="50%">
 
+<a href="https://github.com/npdk1/SkillCut/blob/main/assets/original.mp4"><img src="./assets/original-poster.jpg" alt="Original clip" width="100%"></a>
+
 **Original — raw, unedited**
 
-<video src="https://media.githubusercontent.com/media/npdk1/SkillCut/main/assets/original.mp4" controls playsinline preload="metadata"></video>
+Uncut pauses · no captions · no rhythm
 
-Uncut pauses, uneven audio, no captions, no rhythm.
+▶ **[Play with sound](https://github.com/npdk1/SkillCut/blob/main/assets/original.mp4)**
 
 </td>
 <td align="center" width="50%">
 
+<a href="https://github.com/npdk1/SkillCut/blob/main/assets/after.mp4"><img src="./assets/after-poster.jpg" alt="After SkillCut" width="100%"></a>
+
 **After SkillCut — 8.5s of silence removed**
 
-<video src="https://raw.githubusercontent.com/npdk1/SkillCut/main/assets/after.mp4" width="300" controls playsinline preload="metadata"></video>
+Bare karaoke captions · step badges · on-beat cuts
 
-Bare karaoke captions, step badges, on-beat cuts, 4K 60fps.
+▶ **[Play with sound](https://github.com/npdk1/SkillCut/blob/main/assets/after.mp4)**
 
 </td>
 </tr>
 </table>
 
-> Files live in [`assets/`](./assets) (`original.mp4`, `after.mp4`).
+> Files live in [`assets/`](./assets) (`original.mp4`, `after.mp4`). Click a clip to open it in the
+> GitHub player — sound is on, and the timeline can be scrubbed.
 
 ---
 
