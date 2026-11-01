@@ -106,31 +106,39 @@
       
       <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3 group">
-        <div class="w-9 h-9 rounded-xl bg-dark-card border border-dark-borderLight flex items-center justify-center text-brand-400 group-hover:border-brand-500/50 transition-colors">
-          <!-- Video-Cut Lucide Vector Mark -->
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="6" cy="6" r="3"></circle>
-            <circle cx="6" cy="18" r="3"></circle>
-            <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
-            <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
-            <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
-          </svg>
+        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500/20 via-accent-500/10 to-indigo-500/20 p-[1px] shadow-lg shadow-brand-500/10 group-hover:shadow-brand-500/25 transition-all">
+          <div class="w-full h-full bg-dark-card rounded-[11px] flex items-center justify-center">
+            <!-- SkillCut mark: sliced gradient tile (the "cut") + play -->
+            <svg class="w-6 h-6 group-hover:scale-105 transition-transform" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="scGrad" x1="5" y1="3" x2="27" y2="29" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#34D399" />
+                  <stop offset="52%" stop-color="#22D3EE" />
+                  <stop offset="100%" stop-color="#6366F1" />
+                </linearGradient>
+              </defs>
+              <path d="M11 4H18L28 14V21A7 7 0 0 1 21 28H11A7 7 0 0 1 4 21V11A7 7 0 0 1 11 4Z" fill="url(#scGrad)" />
+              <path d="M20.8 4H22.5A5.5 5.5 0 0 1 28 9.5V11.2L20.8 4Z" fill="url(#scGrad)" />
+              <path d="M11.4 10.5V21.5L21.2 16Z" fill="#F8FAFC" />
+            </svg>
+          </div>
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-lg font-display font-bold tracking-tight text-white">SkillCut</span>
+          <span class="text-lg font-display font-bold tracking-tight text-white group-hover:text-brand-300 transition-colors">SkillCut</span>
           <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-brand-500/10 text-brand-400 border border-brand-500/20 font-semibold">Studio</span>
         </div>
       </a>
 
       <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
         <a href="#comparison" class="hover:text-brand-400 transition-colors flex items-center gap-2">
           <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
           So Sánh Video
         </a>
         <a href="#benefits" class="hover:text-white transition-colors">Hiệu Quả</a>
-        <a href="#skills" class="hover:text-white transition-colors">Thư Viện Skill</a>
+        <a href="#skills" class="hover:text-white transition-colors">Kho Skill</a>
         <a href="#how-it-works" class="hover:text-white transition-colors">Quy Trình</a>
+        <a href="#integrations" class="hover:text-white transition-colors">Công Cụ AI</a>
       </nav>
 
       <!-- Action Buttons -->
@@ -505,9 +513,6 @@
         </tbody>
       </table>
     </div>
-        </tbody>
-      </table>
-    </div>
 
   </section>
 
@@ -521,13 +526,13 @@
         <h2 class="text-3xl font-display font-extrabold text-white">
           Kho Preset Skill Đa Dạng Theo Ngành
         </h2>
-        <p class="text-slate-400 text-sm mt-1">
-          Mỗi skill được lập trình sẵn các quy tắc chuyển cảnh, typography và màu sắc tối ưu theo từng chủ đề video.
+        <p class="text-slate-400 text-sm mt-2">
+          Mỗi chủ đề có một bộ chuyển động (motion), nhịp cắt và typography riêng — không dùng chung một template.
         </p>
       </div>
 
       <!-- Quick Tag -->
-      <span class="text-xs font-mono text-slate-400">Hỗ trợ TikTok • Facebook Reels • YouTube Shorts</span>
+      <span class="text-xs font-mono text-slate-400">Du lịch • Học tập • Kiến trúc • Bất động sản • Công nghệ</span>
     </div>
 
     <!-- Skill Cards Grid -->
@@ -543,98 +548,115 @@
             <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">Food Short Editorial</h3>
+        <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">Ẩm Thực &amp; F&amp;B</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Tối ưu cho quán ăn, ẩm thực: phụ đề chữ vàng không nền, tự bắt các bước nấu và chèn thẻ lưu ý bắt mắt.
+          Phụ đề chữ vàng không nền, macro cận món ăn ở khoảnh khắc hấp dẫn nhất, tự bắt các bước nấu và chèn thẻ lưu ý bắt mắt.
         </p>
         <div class="mt-4 pt-4 border-t border-dark-border flex items-center justify-between text-xs text-slate-400">
-          <span>Nhịp cắt: Nhanh dồn dập</span>
-          <span class="text-brand-400 font-semibold">Tỷ lệ giữ chân 88%</span>
+          <span>Motion: Macro + Nhịp cắt nhanh</span>
+          <span class="text-brand-400 font-semibold">Giữ chân 88%</span>
         </div>
       </div>
 
-      <!-- Skill 2: Podcast & Talkshow -->
-      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-accent-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-accent-500/10 text-accent-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+      <!-- Skill 2: Du lịch -->
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-sky-500/40 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-white group-hover:text-accent-500 transition-colors">Podcast &amp; Talkshow Master</h3>
+        <h3 class="text-lg font-bold text-white group-hover:text-sky-400 transition-colors">Du Lịch &amp; Trải Nghiệm</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Gọt sạch từ "ừm, à", zoom cận mặt khi nói luận điểm quan trọng, phụ đề từ khóa đổi màu thu hút.
+          Speed-ramp tăng tốc chuyển cảnh theo nhịp bass, whip-pan mượt giữa các địa điểm, punch-in nhấn vào khoảnh khắc đẹp. Overlay toạ độ GPS + tên địa danh trôi nhẹ, phụ đề trắng viền mảnh.
         </p>
         <div class="mt-4 pt-4 border-t border-dark-border flex items-center justify-between text-xs text-slate-400">
-          <span>Nhịp cắt: Theo cảm xúc câu</span>
-          <span class="text-accent-500 font-semibold">Phụ đề AI chuẩn 99%</span>
+          <span>Motion: Speed-ramp + Whip-pan</span>
+          <span class="text-sky-400 font-semibold">Khớp nhịp bass</span>
         </div>
       </div>
 
-      <!-- Skill 3: Viral Hook 3S -->
-      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-indigo-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+      <!-- Skill 3: Học tập -->
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-violet-500/40 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">Kinetic Viral Hook</h3>
+        <h3 class="text-lg font-bold text-white group-hover:text-violet-400 transition-colors">Học Tập &amp; Tập Trung</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Đẩy cao trào giật gân lên ngay 3 giây đầu, kết hợp âm thanh SFX "whoosh/pop" ngăn chặn lướt qua clip.
+          Đồng hồ Pomodoro đếm ngược động ở góc khung, split-screen "tài liệu + người nói", highlighter quét sáng từng từ khoá. Nhạc lofi tự giảm âm lượng khi có giọng nói.
         </p>
         <div class="mt-4 pt-4 border-t border-dark-border flex items-center justify-between text-xs text-slate-400">
-          <span>Tác dụng: Chống lướt bỏ</span>
-          <span class="text-indigo-400 font-semibold">Giữ chân 3s đầu 94%</span>
+          <span>Motion: Split-screen + Highlighter</span>
+          <span class="text-violet-400 font-semibold">Nhạc tự duck</span>
         </div>
       </div>
 
-      <!-- Skill 4: E-commerce & UGC -->
-      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-emerald-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+      <!-- Skill 4: Giáo dục -->
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-cyan-500/40 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            <path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">UGC &amp; Product Review</h3>
+        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Giáo Dục &amp; Bài Giảng</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Khung PiP cận cảnh chất liệu sản phẩm, chèn thẻ đánh giá 5 sao và sticker giảm giá kích thích ra đơn.
+          Kinetic diagram và mindmap tự vẽ nét, auto-zoom vào vùng kiến thức đang giảng, cắt sạch khoảng ngập ngừng. Phụ đề karaoke từng từ + banner "Điểm chính" cuối mỗi ý.
         </p>
         <div class="mt-4 pt-4 border-t border-dark-border flex items-center justify-between text-xs text-slate-400">
-          <span>Dành cho: Bán hàng TikTok Shop</span>
-          <span class="text-emerald-400 font-semibold">Tăng CTR mua 35%</span>
+          <span>Motion: Diagram vẽ nét + Auto-zoom</span>
+          <span class="text-cyan-400 font-semibold">Cắt sạch khoảng lặng</span>
         </div>
       </div>
 
-      <!-- Skill 5: Document & Vox Parallax -->
+      <!-- Skill 5: Kiến trúc -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-amber-500/40 transition-all">
         <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">Vox 2.5D Parallax Essay</h3>
+        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">Kiến Trúc &amp; Nội Thất</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Biến các bức ảnh tài liệu tĩnh và chụp báo thành chuyển động 3D chiều sâu phong cách phóng sự Vox.
+          Dolly camera trôi chậm tạo chiều sâu, lưới tỉ lệ vàng và đường kích thước CAD tự vẽ theo nét kiến trúc. Tag vật liệu (gỗ, đá, kính) trôi theo cử động, tông màu trung tính cao cấp.
         </p>
         <div class="mt-4 pt-4 border-t border-dark-border flex items-center justify-between text-xs text-slate-400">
-          <span>Phong cách: Báo chí cao cấp</span>
-          <span class="text-amber-400 font-semibold">Chiều sâu 3D sống động</span>
+          <span>Motion: Dolly chậm + CAD line</span>
+          <span class="text-amber-400 font-semibold">Tông màu tạp chí</span>
         </div>
       </div>
 
-      <!-- Skill 6: Beat Sync Montage -->
+      <!-- Skill 6: Bất động sản -->
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-emerald-500/40 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">Bất Động Sản &amp; Tour Nhà</h3>
+        <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+          Flycam chuyển phòng liền mạch không cắt cứng, sơ đồ mặt bằng 3D radar xoay theo hướng di chuyển. HUD thông số hiện dần: diện tích, số phòng, giá, pháp lý.
+        </p>
+        <div class="mt-4 pt-4 border-t border-dark-border flex items-center justify-between text-xs text-slate-400">
+          <span>Motion: Flycam + Floor-plan 3D</span>
+          <span class="text-emerald-400 font-semibold">HUD thông số</span>
+        </div>
+      </div>
+
+      <!-- Skill 7: Công nghệ -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-rose-500/40 transition-all">
         <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-white group-hover:text-rose-400 transition-colors">Beat-Snap Travel Montage</h3>
+        <h3 class="text-lg font-bold text-white group-hover:text-rose-400 transition-colors">Công Nghệ &amp; Review</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Phân tích các nốt bass trong bài hát, tự động búng chuyển cảnh giật theo từng nhịp trống hoàn hảo.
+          Spec-sheet kính mờ viền neon, zoom crop cận chi tiết sản phẩm 4K, split so sánh thông số trước/sau. Phụ đề kiểu code editor, SFX whoosh kim loại tạo cảm giác công nghệ.
         </p>
         <div class="mt-4 pt-4 border-t border-dark-border flex items-center justify-between text-xs text-slate-400">
-          <span>Chuẩn xác: Khớp từng frame</span>
-          <span class="text-rose-400 font-semibold">Auto Beat Matching</span>
+          <span>Motion: Zoom crop + Split thông số</span>
+          <span class="text-rose-400 font-semibold">Spec-sheet neon</span>
         </div>
       </div>
 
@@ -664,9 +686,9 @@
         <div class="w-10 h-10 rounded-full bg-brand-500 text-dark-bg font-extrabold flex items-center justify-center text-base mb-4 shadow-lg shadow-brand-500/20">
           1
         </div>
-        <h3 class="text-lg font-bold text-white">Gửi Video Thô</h3>
+        <h3 class="text-lg font-bold text-white">Gửi Video Thô + File Phụ Đề</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Quay bằng điện thoại hoặc máy ảnh. Bạn cứ nói tự nhiên, không cần lo lắng về việc nói vấp hay ngập ngừng.
+          Tải lên video gốc quay bằng điện thoại hoặc máy ảnh, kèm file phụ đề (.srt / .txt). Cứ nói tự nhiên, không cần lo vấp hay ngập ngừng.
         </p>
       </div>
 
@@ -675,9 +697,9 @@
         <div class="w-10 h-10 rounded-full bg-accent-500 text-dark-bg font-extrabold flex items-center justify-center text-base mb-4 shadow-lg shadow-accent-500/20">
           2
         </div>
-        <h3 class="text-lg font-bold text-white">Chọn Phong Cách Skill</h3>
+        <h3 class="text-lg font-bold text-white">Chọn Phong Cách</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-          Lựa chọn preset phù hợp (Ẩm thực, Bán hàng, Podcast, Du lịch...). Thuật toán sẽ tự động gọt dũa và phối nhạc.
+          Chọn preset theo ngành: Ẩm thực, Du lịch, Học tập, Kiến trúc, Bất động sản, Công nghệ... Thuật toán tự gọt dũa, thêm motion và phối nhạc.
         </p>
       </div>
 
@@ -697,7 +719,96 @@
   </section>
 
   <!-- =========================================================================
-       7. OPEN SOURCE & GITHUB REPOSITORY (Transparent & Community-Driven)
+       7. TÍCH HỢP AI CODING AGENT (Supported Tools & Brand Logos)
+       ========================================================================= -->
+  <section id="integrations" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto border-t border-dark-border">
+
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <h2 class="text-3xl font-display font-extrabold text-white">
+        Cắm Vào AI Agent Bạn Đang Dùng
+      </h2>
+      <p class="mt-2 text-slate-400 text-sm">
+        SkillCut là bộ skill <span class="font-mono text-slate-300">.md</span> — chạy trực tiếp trong agent bạn đã quen, không cần học công cụ mới.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <!-- Claude Code -->
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 hover:border-[#D97757]/40 transition-colors">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-11 h-11 rounded-xl bg-[#D97757]/10 flex items-center justify-center shrink-0">
+            <!-- Claude official mark -->
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#D97757" aria-hidden="true">
+              <path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-base leading-tight">Claude Code</h3>
+            <span class="text-[11px] font-mono text-slate-500">Anthropic</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Bộ skill <span class="font-mono text-slate-300">.md</span> chạy native trong terminal. Gọi skill để cắt khoảng lặng, tạo phụ đề và render video ngay trong phiên làm việc.
+        </p>
+      </div>
+
+      <!-- Antigravity -->
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 hover:border-sky-500/40 transition-colors">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-11 h-11 rounded-xl bg-sky-500/10 flex items-center justify-center shrink-0">
+            <!-- Google Antigravity gradient spark -->
+            <svg class="w-6 h-6" viewBox="0 0 24 24" aria-hidden="true">
+              <defs>
+                <linearGradient id="agGrad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#4285F4"/>
+                  <stop offset="35%" stop-color="#34A853"/>
+                  <stop offset="70%" stop-color="#FBBC05"/>
+                  <stop offset="100%" stop-color="#EA4335"/>
+                </linearGradient>
+              </defs>
+              <path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81" fill="url(#agGrad)"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-base leading-tight">Antigravity</h3>
+            <span class="text-[11px] font-mono text-slate-500">Google</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Agent IDE của Google. SkillCut dựng và tinh chỉnh timeline Remotion song song với việc viết code trong cùng một workspace.
+        </p>
+      </div>
+
+      <!-- Codex -->
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 hover:border-emerald-500/40 transition-colors">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+            <!-- OpenAI Codex blossom -->
+            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-base leading-tight">Codex</h3>
+            <span class="text-[11px] font-mono text-slate-500">OpenAI</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Agent của OpenAI. Sinh composition, xử lý file phụ đề và tự động render theo preset bạn chọn.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="mt-6 text-center text-xs font-mono text-slate-500">
+      Tương thích mọi agent đọc được skill <span class="text-slate-400">.md</span> • Không cần cài thêm phần mềm dựng phim
+    </p>
+
+  </section>
+
+  <!-- =========================================================================
+       8. OPEN SOURCE & GITHUB REPOSITORY (Transparent & Community-Driven)
        ========================================================================= -->
   <section class="py-16 px-4 sm:px-6 max-w-5xl mx-auto border-t border-dark-border">
     <div class="bg-gradient-to-br from-dark-surface via-dark-card to-dark-surface border border-dark-border rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
@@ -726,17 +837,26 @@
   </section>
 
   <!-- =========================================================================
-       8. FOOTER
+       9. FOOTER
        ========================================================================= -->
   <footer class="py-12 px-4 sm:px-6 max-w-7xl mx-auto border-t border-dark-border">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
       
       <!-- Logo & Copyright -->
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 p-[1px]">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-500/20 via-accent-500/10 to-indigo-500/20 p-[1px]">
           <div class="w-full h-full bg-dark-surface rounded-[7px] flex items-center justify-center">
-            <svg class="w-4 h-4 text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
+            <svg class="w-5 h-5" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="scGradF" x1="5" y1="3" x2="27" y2="29" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#34D399" />
+                  <stop offset="52%" stop-color="#22D3EE" />
+                  <stop offset="100%" stop-color="#6366F1" />
+                </linearGradient>
+              </defs>
+              <path d="M11 4H18L28 14V21A7 7 0 0 1 21 28H11A7 7 0 0 1 4 21V11A7 7 0 0 1 11 4Z" fill="url(#scGradF)" />
+              <path d="M20.8 4H22.5A5.5 5.5 0 0 1 28 9.5V11.2L20.8 4Z" fill="url(#scGradF)" />
+              <path d="M11.4 10.5V21.5L21.2 16Z" fill="#F8FAFC" />
             </svg>
           </div>
         </div>
@@ -747,7 +867,8 @@
       <!-- Footer Links -->
       <div class="flex items-center gap-6 text-xs text-slate-400">
         <a href="#comparison" class="hover:text-white transition-colors">So Sánh Video</a>
-        <a href="#skills" class="hover:text-white transition-colors">Thư Viện Skill</a>
+        <a href="#skills" class="hover:text-white transition-colors">Kho Skill</a>
+        <a href="#integrations" class="hover:text-white transition-colors">Công Cụ AI</a>
         <a href="https://github.com/npdk1/SkillCut" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">
           <span>GitHub</span>
           <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
