@@ -33,21 +33,33 @@ You get back a finished **9:16 clip at 4K 60fps**: silence trimmed, karaoke capt
 
 ## Before / After
 
-Same raw footage. The first clip is untouched; the second was cut by SkillCut.
+Same raw footage. Left is untouched, right was cut by SkillCut.
+Click the speaker icon on a clip to turn the sound on.
 
-### Original — raw, unedited
+<table>
+<tr>
+<td align="center" width="50%">
 
-<video src="https://github.com/user-attachments/assets/97c8308d-15a9-43be-83d9-f1db0beb2747" controls muted loop></video>
+**Original — raw, unedited**
+
+<video src="https://raw.githubusercontent.com/npdk1/SkillCut/main/assets/original.mp4" width="300" controls playsinline preload="metadata"></video>
 
 Uncut pauses, uneven audio, no captions, no rhythm.
 
-### After SkillCut — 8.5s of silence removed
+</td>
+<td align="center" width="50%">
 
-<video src="https://github.com/user-attachments/assets/5c9b257f-e231-416c-8c22-bd231318a648" controls muted loop></video>
+**After SkillCut — 8.5s of silence removed**
+
+<video src="https://raw.githubusercontent.com/npdk1/SkillCut/main/assets/after.mp4" width="300" controls playsinline preload="metadata"></video>
 
 Bare karaoke captions, step badges, on-beat cuts, 4K 60fps.
 
-> Local copies live in [`assets/`](./assets) (`original.mp4`, `after.mp4`).
+</td>
+</tr>
+</table>
+
+> Files live in [`assets/`](./assets) (`original.mp4`, `after.mp4`).
 
 ---
 
