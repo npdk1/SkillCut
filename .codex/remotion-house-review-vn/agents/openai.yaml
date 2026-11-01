@@ -1,0 +1,5 @@
+interface:
+  display_name: "Remotion House Review VN"
+  short_description: "Dựng video review nhà dọc từ video và SRT"
+  brand_color: "#FFD21C"
+  default_prompt: "Dùng $remotion-house-review-vn để dựng demo 30 giây cho video review nhà và SRT này."
