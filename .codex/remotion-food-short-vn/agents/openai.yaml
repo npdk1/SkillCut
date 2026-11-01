@@ -1,0 +1,5 @@
+interface:
+  display_name: "Remotion Food Short VN"
+  short_description: "Dựng video món ăn dọc bớt cảm giác AI"
+  brand_color: "#FFD329"
+  default_prompt: "Dùng $remotion-food-short-vn để dựng demo 30 giây cho video món ăn này."
