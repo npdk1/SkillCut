@@ -104,6 +104,30 @@
     }
 
     /* ============================================================
+       MOTION — content is visible by default; .js-motion opts in.
+       No .js-motion (script blocked) means the page renders normally.
+       ============================================================ */
+    .js-motion .m-hero,
+    .js-motion .m-reveal {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .js-motion .m-hero,
+      .js-motion .m-reveal {
+        transition:
+          opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--m-delay, 0s);
+      }
+    }
+    .js-motion .m-hero.m-in,
+    .js-motion .m-reveal.m-in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ============================================================
        LIGHT THEME — same structure, inverted surface + ink contrast
        ============================================================ */
     html { color-scheme: dark; }
@@ -167,6 +191,12 @@
     /* Header icon buttons */
     .theme-toggle-icon { transition: opacity .15s ease, transform .2s ease; }
   </style>
+
+  <script>
+    /* Opt into the reveal states only when the reveal script can run.
+       Placed before <body> so nothing paints hidden. */
+    document.documentElement.classList.add('js-motion');
+  </script>
 </head>
 <body class="bg-dark-bg text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
 
@@ -255,22 +285,22 @@
   <!-- =========================================================================
        2. HERO SECTION
        ========================================================================= -->
-  <section class="relative pt-16 pb-12 overflow-hidden">
+  <section class="relative pt-14 sm:pt-16 pb-4 overflow-hidden">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
 
       <!-- Main Headline (No Eyebrow Kicker, Direct & Authoritative) -->
-      <h1 class="text-4xl sm:text-6xl font-display font-extrabold tracking-tight text-white leading-tight">
+      <h1 class="m-hero text-4xl sm:text-6xl font-display font-extrabold tracking-tight text-white leading-tight" style="--m-delay:0s">
         Biến Video Thô Thành Clip Triệu View <br />
         <span class="text-brand-400">Tự Động Với SkillCut</span>
       </h1>
 
       <!-- Customer Subheadline -->
-      <p class="mt-5 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed" data-i18n="hero.sub">
+      <p class="m-hero mt-5 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed" style="--m-delay:0.08s" data-i18n="hero.sub">
         SkillCut là kho <strong class="text-white font-semibold">template và skill dựng video</strong> để giao cho A.I làm thay bạn. Chọn phong cách, đưa video thô cùng file phụ đề — nhận lại clip 9:16 hoàn chỉnh.
       </p>
 
       <!-- Key Trust Proofs (Using Lucide Check Icons, Zero Emojis) -->
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium text-slate-300">
+      <div class="m-hero mt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium text-slate-300" style="--m-delay:0.16s">
         <div class="flex items-center gap-2">
           <div class="w-5 h-5 rounded-md bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -292,7 +322,7 @@
       </div>
 
       <!-- Hero Call To Actions -->
-      <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
+      <div class="m-hero mt-9 flex flex-wrap items-center justify-center gap-4" style="--m-delay:0.24s">
         <a href="#comparison" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-dark-bg font-bold text-sm transition-colors flex items-center gap-2 shadow-lg shadow-brand-500/15">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -311,7 +341,7 @@
   <!-- =========================================================================
        3. THE CORE SHOWCASE: TRƯỚC & SAU KHI DÙNG SKILLCUT (Before & After)
        ========================================================================= -->
-  <section id="comparison" class="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+  <section id="comparison" class="pt-10 pb-16 px-4 sm:px-6 max-w-6xl mx-auto">
     
     <!-- Section Header -->
     <div class="text-center max-w-3xl mx-auto mb-10">
@@ -621,7 +651,7 @@
     </div>
 
     <!-- Skill Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-reveal-group>
       
       <!-- Skill 1: Food & Dining (Featured) -->
       <div class="bg-dark-surface border border-brand-500/40 rounded-2xl p-6 relative group hover:border-brand-400 transition-all shadow-lg hover:glow-brand">
@@ -729,7 +759,7 @@
       </div>
 
       <!-- Skill 7: Công nghệ -->
-      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-rose-500/40 transition-all">
+      <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-rose-500/40 transition-all lg:col-start-2">
         <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
           <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
@@ -764,7 +794,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-reveal-group>
       
       <!-- Step 1 -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 relative">
@@ -817,7 +847,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5" data-reveal-group>
 
       <!-- Claude Code -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 hover:border-[#D97757]/40 transition-colors">
@@ -1405,11 +1435,98 @@
         containerSide.classList.add('grid');
       });
 
+      // 6. FOCAL MOMENT — the "cut", performed once when the comparison enters view.
+      //    It explains what the product does (and that the divider is draggable)
+      //    without adding decoration anywhere else on the page.
+      const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let sweepDone = false;
+
+      function runCutSweep() {
+        if (sweepDone || reduceMotionQuery.matches) return;
+        if (containerSplit.classList.contains('hidden')) return;
+        sweepDone = true;
+
+        let cancelled = false;
+        const cancel = () => { cancelled = true; };
+        containerSplit.addEventListener('pointerdown', cancel, { once: true });
+
+        const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+        const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+        const OUT_MS = 700;
+        const BACK_MS = 600;
+        const start = performance.now();
+
+        const step = (now) => {
+          if (cancelled) return;
+          const t = now - start;
+          let p;
+          if (t < OUT_MS) p = 50 - 26 * easeOut(t / OUT_MS);
+          else if (t < OUT_MS + BACK_MS) p = 24 + 26 * easeInOut((t - OUT_MS) / BACK_MS);
+          else p = 50;
+          splitOverlay.style.width = p + '%';
+          splitHandle.style.left = p + '%';
+          if (t < OUT_MS + BACK_MS) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }
+
+      const comparisonSection = document.getElementById('comparison');
+      if ('IntersectionObserver' in window) {
+        const sweepObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            sweepObserver.disconnect();
+            runCutSweep();
+          });
+        }, { threshold: 0.45 });
+        sweepObserver.observe(comparisonSection);
+      }
+
       // Auto start video smoothly in muted state
       setTimeout(() => {
         playAll();
       }, 500);
     });
+  </script>
+
+<script>
+    /* Reveal choreography. If anything here throws, the class is removed and
+       every section stays visible — motion must never be able to hide content. */
+    (() => {
+      const root = document.documentElement;
+      try {
+        if (!root.classList.contains('js-motion')) return;
+
+        document.querySelectorAll('[data-reveal-group]').forEach((group) => {
+          Array.from(group.children).forEach((el, i) => {
+            el.classList.add('m-reveal');
+            el.style.setProperty('--m-delay', Math.min(i, 6) * 0.05 + 's');
+          });
+        });
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const revealNow = (el) => el.classList.add('m-in');
+
+        document.querySelectorAll('.m-hero').forEach(revealNow);
+
+        if (reduced || !('IntersectionObserver' in window)) {
+          document.querySelectorAll('.m-reveal').forEach(revealNow);
+          return;
+        }
+
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            revealNow(entry.target);
+            io.unobserve(entry.target);
+          });
+        }, { rootMargin: '0px 0px -8% 0px' });
+
+        document.querySelectorAll('.m-reveal').forEach((el) => io.observe(el));
+      } catch (err) {
+        root.classList.remove('js-motion');
+      }
+    })();
   </script>
 
 </body>
