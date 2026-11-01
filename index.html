@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPLICE.MD — Thư Viện Băng Từ skill.md Dựng Video Bằng AI (Zero-GUI)</title>
+  <title>CreativeTemplate — Dựng Video Bằng Code & AI Skills (Zero-GUI)</title>
+  <meta name="description" content="Thư viện Open Source lưu trữ các skill.md và Remotion workflows dựng video tự động bằng AI. Không cần mở Premiere/CapCut. Mã nguồn mở tại github.com/npdk1/creativetemplate." />
 
-  <!-- Google Fonts: Syne, Instrument Serif, Space Grotesk, JetBrains Mono -->
+  <!-- Google Fonts: Plus Jakarta Sans (UI) & JetBrains Mono (Code/Status) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- GSAP & ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            serif: ['Instrument Serif', 'serif'],
-            sans: ['Space Grotesk', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            vscode: {
+              bg: '#0D1117',
+              panel: '#161B22',
+              editor: '#1E1E1E',
+              sidebar: '#181818',
+              activity: '#121212',
+              border: '#30363D',
+              borderLight: '#21262D',
+              blue: '#0078D4',
+              blueHover: '#0066B8',
+              accent: '#38BDF8',
+              green: '#3FB950',
+              yellow: '#E3B341',
+              purple: '#BC8CFF',
+              orange: '#FFA657',
+              statusBar: '#007ACC',
+              text: '#F0F6FC',
+              muted: '#8B949E'
+            }
           }
         }
       }
@@ -33,1703 +50,1617 @@
   </script>
 
   <style>
-    /* ==========================================================================
-       SWISS EDITORIAL × TEENAGE ENGINEERING × 16MM CUTTING ROOM TOKENS
-       ZERO PURPLE / ZERO CYAN GLOW / ZERO GLASSMORPHISM SLOP
-       ========================================================================== */
     :root {
-      --bg-stock: #F3EFE6;       /* Warm 16mm archival paper stock */
-      --bg-putty: #E7E2D5;       /* Teenage Engineering anodized putty */
-      --bg-well: #DDD7C8;        /* Recessed hardware bay */
-      --bg-monitor: #111110;     /* CRT / NLE field monitor bezel */
-      --ink-primary: #141413;    /* Deep carbon printer ink */
-      --ink-muted: #5C5952;      /* Technical specification gray */
-      --ink-faint: #8C887E;      /* Ruler markings */
-      --grid-line: rgba(20, 20, 19, 0.16);
-      --grid-strong: #141413;
-      --accent-orange: #FF3E00;  /* International Signal Orange */
-      --accent-amber: #D98A00;   /* Phosphor Amber */
-      --accent-green: #007A4D;   /* Splice Tape Green */
-      --surface-card: #FAF7F0;
-      --shadow-hard: 3px 3px 0px #141413;
-      --shadow-hard-sm: 2px 2px 0px #141413;
-    }
-
-    html.darkroom {
-      --bg-stock: #0E0E0D;       /* Matte carbon darkroom */
-      --bg-putty: #171715;       /* Dark anodized chassis */
-      --bg-well: #1F1F1C;        /* Recessed dark bay */
-      --bg-monitor: #070706;
-      --ink-primary: #EAE5D9;    /* Warm bone ink */
-      --ink-muted: #9E998E;      /* Muted warm technical gray */
-      --ink-faint: #5E5B54;
-      --grid-line: rgba(234, 229, 217, 0.14);
-      --grid-strong: #EAE5D9;
-      --accent-orange: #FF4800;  /* Tungsten Orange */
-      --accent-amber: #FFB300;   /* Amber Timecode LED */
-      --accent-green: #00E676;   /* Terminal Phosphor Green */
-      --surface-card: #141412;
-      --shadow-hard: 3px 3px 0px #000000;
-      --shadow-hard-sm: 2px 2px 0px #000000;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
     }
 
     * {
       box-sizing: border-box;
-      border-color: var(--grid-line);
+      scrollbar-width: thin;
+      scrollbar-color: #30363D #161B22;
     }
 
-    ::selection {
-      background: var(--accent-orange);
-      color: #FFFFFF;
-    }
-
-    body {
-      background-color: var(--bg-stock);
-      color: var(--ink-primary);
-      font-family: 'Space Grotesk', sans-serif;
-      overflow-x: hidden;
-      transition: background-color 0.25s ease, color 0.25s ease;
-    }
-
-    /* Subtle tactile paper / film grain texture */
-    .paper-grain {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 90;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    /* Exposed Swiss Grid Lines & Crosshairs */
-    .swiss-border-b { border-bottom: 1px solid var(--grid-line); }
-    .swiss-border-t { border-top: 1px solid var(--grid-line); }
-    .swiss-border-r { border-right: 1px solid var(--grid-line); }
-    .swiss-border-l { border-left: 1px solid var(--grid-line); }
-    .swiss-box {
-      border: 1px solid var(--grid-line);
-      background-color: var(--bg-stock);
-    }
-
-    /* Crosshair corner marker */
-    .crosshair {
-      position: relative;
-    }
-    .crosshair::after {
-      content: "+";
-      position: absolute;
-      bottom: -8px;
-      right: -5px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      line-height: 1;
-      color: var(--ink-faint);
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    /* Teenage Engineering Tactile Mechanical Key / Button */
-    .te-btn {
-      background-color: var(--surface-card);
-      color: var(--ink-primary);
-      border: 1.5px solid var(--grid-strong);
-      box-shadow: var(--shadow-hard-sm);
-      transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.12s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-    .te-btn:hover {
-      background-color: var(--bg-putty);
-    }
-    .te-btn:active, .te-btn.active-pressed {
-      transform: translate(2px, 2px);
-      box-shadow: 0px 0px 0px var(--grid-strong);
-    }
-
-    .te-btn-orange {
-      background-color: var(--accent-orange);
-      color: #FFFFFF;
-      border: 1.5px solid var(--grid-strong);
-      box-shadow: var(--shadow-hard);
-      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.12s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-    .te-btn-orange:hover {
-      filter: brightness(1.06);
-    }
-    .te-btn-orange:active {
-      transform: translate(3px, 3px);
-      box-shadow: 0px 0px 0px var(--grid-strong);
-    }
-
-    /* Tape Cartridge Card */
-    .cartridge-card {
-      background-color: var(--surface-card);
-      border: 1.5px solid var(--grid-strong);
-      box-shadow: var(--shadow-hard);
-      transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.16s ease, background-color 0.16s ease;
-      position: relative;
-    }
-    .cartridge-card:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 5px 5px 0px var(--grid-strong);
-    }
-    .cartridge-card.selected-cart {
-      outline: 2px solid var(--accent-orange);
-      background-color: var(--bg-putty);
-    }
-
-    /* Notched tape corner */
-    .tape-notch {
-      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
-    }
-
-    /* Film Sprocket Holes on Left Rail */
-    .sprocket-pattern {
-      background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 14px,
-        var(--ink-faint) 14px,
-        var(--ink-faint) 22px,
-        transparent 22px,
-        transparent 36px
-      );
-      background-size: 8px 36px;
-      background-position: center;
-      background-repeat: repeat-y;
-    }
-
-    /* Perforated Ticket Edge */
-    .perforated-divider {
-      background-image: linear-gradient(to bottom, var(--grid-strong) 45%, transparent 0%);
-      background-position: right;
-      background-size: 1.5px 10px;
-      background-repeat: repeat-y;
-    }
-    .perforated-horizontal {
-      background-image: linear-gradient(to right, var(--grid-strong) 45%, transparent 0%);
-      background-position: top;
-      background-size: 10px 1.5px;
-      background-repeat: repeat-x;
-    }
-
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 8px;
+      height: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: var(--bg-putty);
+      background: #161B22;
     }
     ::-webkit-scrollbar-thumb {
-      background: var(--ink-primary);
+      background: #30363D;
+      border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-orange);
+      background: #484F58;
     }
 
-    /* Diagonal Hazard Stripe Bar */
-    .hazard-stripe {
-      background: repeating-linear-gradient(
-        -45deg,
-        var(--accent-orange),
-        var(--accent-orange) 6px,
-        transparent 6px,
-        transparent 12px
-      );
+    /* Subtle grid background pattern */
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(48, 54, 61, 0.3) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(48, 54, 61, 0.3) 1px, transparent 1px);
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(0, 120, 212, 0.15) 0%, rgba(56, 189, 248, 0.06) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Terminal blinking cursor */
+    .term-cursor::after {
+      content: "▋";
+      color: #38BDF8;
+      animation: blink 1s step-start infinite;
+      margin-left: 2px;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Custom video split slider */
+    .video-split-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .video-split-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      overflow: hidden;
+      border-right: 2px solid #0078D4;
     }
   </style>
 </head>
-<body class="antialiased">
 
-  <!-- Archival Film Grain -->
-  <div class="paper-grain"></div>
+<body class="bg-vscode-bg text-vscode-text font-sans antialiased min-h-screen selection:bg-vscode-blue selection:text-white">
 
-  <!-- ==========================================================================
-       LEFT VERTICAL 16MM SPROCKET & LIVE FRAME RULER RAIL (FIXED DESKTOP)
-       ========================================================================== -->
-  <aside class="fixed top-0 left-0 bottom-0 w-9 swiss-border-r z-40 hidden lg:flex flex-col justify-between items-center py-3 bg-[var(--bg-putty)] select-none">
-    <div class="font-mono text-[9px] tracking-widest uppercase [writing-mode:vertical-rl] rotate-180 text-[var(--ink-muted)]">
-      16MM // KODAK-EASTMAN // SPLICE.MD
-    </div>
-
-    <!-- Sprocket Track + Live Scroll Indicator -->
-    <div class="relative flex-1 w-full my-3 flex justify-center">
-      <div class="w-2.5 h-full sprocket-pattern opacity-40"></div>
-      <div id="sprocket-playhead" class="absolute top-0 left-0 right-0 h-5 bg-[var(--accent-orange)] flex items-center justify-center font-mono text-[8px] font-bold text-white">
-        ▶
-      </div>
-    </div>
-
-    <div id="rail-frame-counter" class="font-mono text-[9px] font-bold [writing-mode:vertical-rl] rotate-180 text-[var(--accent-orange)]">
-      FRM 0000
-    </div>
-  </aside>
-
-  <!-- ==========================================================================
-       MAIN ARCHITECTURAL WRAPPER (OFFSET FOR LEFT SPROCKET RAIL)
-       ========================================================================== -->
-  <div class="lg:pl-9 min-h-screen flex flex-col">
-
-    <!-- ========================================================================
-         TOP HARDWARE STATUS RAIL & DARKROOM SWITCH
-         ======================================================================== -->
-    <header class="sticky top-0 z-40 swiss-border-b bg-[var(--bg-stock)]/95 backdrop-blur-xs">
-      <div class="max-w-[1440px] mx-auto grid grid-cols-12 items-center text-xs font-mono">
-
-        <!-- Brand Unit -->
-        <div class="col-span-6 sm:col-span-3 px-4 py-3 swiss-border-r flex items-center justify-between">
-          <a href="#" class="flex items-center gap-2.5 group">
-            <span class="inline-block w-3.5 h-3.5 bg-[var(--accent-orange)] border border-[var(--grid-strong)]"></span>
-            <span class="font-display font-extrabold text-sm tracking-tight">SPLICE.MD</span>
-          </a>
-          <span class="text-[10px] px-1.5 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-line)] text-[var(--ink-muted)]">
-            REV 2.6
-          </span>
-        </div>
-
-        <!-- Live Running SMPTE Timecode & Engine Telemetry -->
-        <div class="hidden md:flex md:col-span-4 px-4 py-3 swiss-border-r items-center justify-between text-[11px]">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[var(--accent-green)] animate-pulse"></span>
-            <span class="text-[var(--ink-muted)]">TC:</span>
-            <span id="live-smpte-clock" class="font-bold tracking-wider">01:14:22:08</span>
+  <!-- =========================================================================
+       TOP GLOBAL NAVBAR (VS Code / GitHub Style)
+       ========================================================================= -->
+  <header class="sticky top-0 z-50 bg-[#0D1117]/90 backdrop-blur-md border-b border-vscode-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      
+      <!-- Brand & Repo Name -->
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/npdk1/creativetemplate" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 text-white hover:text-vscode-accent transition-colors group">
+          <!-- VS Code Logo SVG -->
+          <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.15 2.587L18.21.21a1.49 1.49 0 0 0-1.705.29l-9.46 8.63-4.43-3.36a.93.93 0 0 0-1.12.02l-1.15.89a.925.925 0 0 0-.01 1.45l3.87 3.37-3.87 3.37a.925.925 0 0 0 .01 1.45l1.15.89c.33.25.79.26 1.12.02l4.43-3.36 9.46 8.63c.48.44 1.15.56 1.705.29l4.94-2.377c.52-.25.85-.77.85-1.35V3.937c0-.58-.33-1.1-.85-1.35zM18 17.5l-6.5-5.5L18 6.5v11z" fill="#0078D4"/>
+          </svg>
+          <div class="flex items-center gap-1.5 font-semibold text-sm tracking-tight">
+            <span class="text-vscode-muted group-hover:text-vscode-text transition-colors">npdk1</span>
+            <span class="text-vscode-border">/</span>
+            <span class="text-white font-bold">creativetemplate</span>
+            <span class="ml-1.5 px-1.5 py-0.5 rounded text-[10px] font-mono font-medium bg-vscode-borderLight text-vscode-accent border border-vscode-border">Open Source</span>
           </div>
-          <span class="text-[var(--ink-faint)]">24.00 FPS // ZERO-GUI</span>
-        </div>
+        </a>
 
-        <!-- Quick Section Jump Coordinates -->
-        <nav class="hidden xl:flex xl:col-span-3 px-4 py-3 swiss-border-r items-center justify-between text-[11px]">
-          <a href="#sec-bench" class="hover:text-[var(--accent-orange)] transition">[01. BÀN DỰNG]</a>
-          <a href="#sec-rack" class="hover:text-[var(--accent-orange)] transition">[02. BĂNG TỪ]</a>
-          <a href="#sec-patchbay" class="hover:text-[var(--accent-orange)] transition">[03. PATCHBAY]</a>
-          <a href="#sec-pass" class="hover:text-[var(--accent-orange)] transition font-bold text-[var(--accent-orange)]">[04. NHẬN VÉ]</a>
+        <!-- Quick Nav Links -->
+        <nav class="hidden md:flex items-center gap-1 ml-4 text-xs font-medium text-vscode-muted">
+          <a href="#ide-simulator" class="px-2.5 py-1.5 rounded-md hover:text-white hover:bg-vscode-panel transition-colors">IDE Simulator</a>
+          <a href="#marketplace" class="px-2.5 py-1.5 rounded-md hover:text-white hover:bg-vscode-panel transition-colors">Skill Extensions</a>
+          <a href="#workflow-composer" class="px-2.5 py-1.5 rounded-md hover:text-white hover:bg-vscode-panel transition-colors">Workflow Composer</a>
+          <a href="#docs" class="px-2.5 py-1.5 rounded-md hover:text-white hover:bg-vscode-panel transition-colors">Docs</a>
         </nav>
-
-        <!-- Physical Darkroom Toggle Switch -->
-        <div class="col-span-6 sm:col-span-9 md:col-span-5 xl:col-span-2 px-4 py-2.5 flex items-center justify-end gap-3">
-          <button
-            type="button"
-            id="theme-toggle-btn"
-            class="te-btn px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider flex items-center gap-2"
-            title="Chuyển đổi chế độ Phòng Cắt Phim Sáng / Phòng Tối"
-          >
-            <span id="theme-indicator-dot" class="w-2 h-2 bg-[var(--accent-orange)]"></span>
-            <span id="theme-label">DAYLIGHT</span>
-          </button>
-        </div>
-
-      </div>
-    </header>
-
-    <!-- ========================================================================
-         SEC_01 & SEC_02: ASYMMETRIC EDITORIAL MANIFESTO + LIVE NLE BENCH
-         ======================================================================== -->
-    <section id="sec-bench" class="max-w-[1440px] w-full mx-auto swiss-border-b">
-
-      <!-- Section Index Coordinate Bar -->
-      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
-        <div class="col-span-6 sm:col-span-4 px-4 py-1.5 swiss-border-r flex items-center justify-between">
-          <span>SEC_01 // MANIFESTO & LIVE_NLE_BENCH</span>
-          <span>[A1]</span>
-        </div>
-        <div class="col-span-6 sm:col-span-4 px-4 py-1.5 swiss-border-r hidden sm:flex items-center justify-between">
-          <span>TARGET: NON-EDITORS / CREATORS</span>
-          <span>100% PROMPT-DRIVEN</span>
-        </div>
-        <div class="col-span-6 sm:col-span-4 px-4 py-1.5 flex items-center justify-between">
-          <span>BATCH #01 STATUS:</span>
-          <span class="text-[var(--accent-orange)] font-bold">COMING SOON // 84% FULL</span>
-        </div>
       </div>
 
-      <!-- Main Hero 12-Col Swiss Split -->
-      <div class="grid grid-cols-1 lg:grid-cols-12">
-
-        <!-- LEFT 5 COLS: Editorial Manifesto & Value Proposition -->
-        <div class="lg:col-span-5 p-6 sm:p-10 swiss-border-r flex flex-col justify-between crosshair">
-          <div class="space-y-6">
-
-            <!-- Technical Spec Stamp -->
-            <div class="gsap-reveal inline-flex items-center gap-2 border border-[var(--grid-strong)] bg-[var(--bg-putty)] px-2.5 py-1 font-mono text-[11px] uppercase">
-              <span class="px-1.5 py-0.2 bg-[var(--accent-orange)] text-white font-bold">ZERO-GUI</span>
-              <span>CỘNG ĐỒNG COMBO SKILL.MD DỰNG VIDEO BẰNG AI</span>
-            </div>
-
-            <!-- Brutalist Editorial Headline -->
-            <h1 class="gsap-reveal font-display font-extrabold text-4xl sm:text-5xl xl:text-[54px] leading-[0.98] tracking-tight uppercase">
-              Dựng Video Không Cần Mở Phần Mềm.
-              <span class="font-serif italic font-normal normal-case text-5xl sm:text-6xl xl:text-[64px] block mt-1 text-[var(--accent-orange)]">
-                Chỉ cần nạp một băng skill.md.
-              </span>
-            </h1>
-
-            <!-- Editorial Copy -->
-            <p class="gsap-reveal text-base sm:text-lg leading-relaxed text-[var(--ink-muted)] font-normal">
-              Bạn không cần biết timeline Premiere, không cần học keyframe After Effects hay ngồi cắt tay từng đoạn ngập ngừng.
-              <strong class="text-[var(--ink-primary)] font-semibold">SPLICE.MD</strong> là kho lưu trữ mở các bộ <code class="font-mono text-xs px-1.5 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-strong)] text-[var(--ink-primary)]">skill.md</code> được đóng gói sẵn — biến Claude Code, Cursor hoặc AI Agent thành thợ dựng phim chuyên nghiệp chỉ bằng một câu lệnh tiếng Việt.
-            </p>
-
-            <!-- 3-Column Technical Telemetry Strip -->
-            <div class="gsap-reveal grid grid-cols-3 border border-[var(--grid-strong)] bg-[var(--surface-card)] font-mono">
-              <div class="p-3 swiss-border-r">
-                <div class="text-[10px] text-[var(--ink-muted)] uppercase">KỸ NĂNG DỰNG PHIM</div>
-                <div class="text-xl sm:text-2xl font-bold mt-0.5">0.0%</div>
-                <div class="text-[10px] text-[var(--accent-green)]">Ai cũng làm được</div>
-              </div>
-              <div class="p-3 swiss-border-r">
-                <div class="text-[10px] text-[var(--ink-muted)] uppercase">COMBO DỰNG SẴN</div>
-                <div class="text-xl sm:text-2xl font-bold mt-0.5">120+</div>
-                <div class="text-[10px] text-[var(--ink-muted)]">Chuẩn hóa tiếng Việt</div>
-              </div>
-              <div class="p-3">
-                <div class="text-[10px] text-[var(--ink-muted)] uppercase">THỜI GIAN DỰNG</div>
-                <div class="text-xl sm:text-2xl font-bold mt-0.5 text-[var(--accent-orange)]">-94%</div>
-                <div class="text-[10px] text-[var(--ink-muted)]">Từ 4 giờ → 3 phút</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Action Bar & Countdown -->
-          <div class="gsap-reveal pt-8 mt-8 swiss-border-t space-y-4">
-            <div class="flex items-center justify-between font-mono text-xs">
-              <span class="uppercase text-[var(--ink-muted)]">ĐẾM NGƯỢC PHÁT HÀNH KHO BĂNG #01:</span>
-              <span id="countdown-readout" class="font-bold px-2 py-0.5 bg-[var(--ink-primary)] text-[var(--bg-stock)]">
-                14D : 08H : 41M : 19S
-              </span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <a
-                href="#sec-pass"
-                class="te-btn-orange py-3.5 px-5 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-between"
-              >
-                <span>Lấy Vé Early Access</span>
-                <span>[BATCH_01 →]</span>
-              </a>
-              <a
-                href="#sec-rack"
-                class="te-btn py-3.5 px-5 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-between"
-              >
-                <span>Thử 6 Băng skill.md</span>
-                <span>[INSPECT ↓]</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT 7 COLS: REAL KEYBOARD-DRIVEN NLE PREVIEW DECK (CANVAS + TRANSPORT) -->
-        <div class="lg:col-span-7 bg-[var(--bg-putty)] flex flex-col justify-between">
-
-          <!-- Deck Top Technical Header -->
-          <div class="px-5 py-3 swiss-border-b flex flex-wrap items-center justify-between gap-2 font-mono text-xs bg-[var(--surface-card)]">
-            <div class="flex items-center gap-2.5">
-              <span class="px-2 py-0.5 bg-[var(--ink-primary)] text-[var(--bg-stock)] font-bold text-[10px]">
-                NLE DECK // FIELD MONITOR
-              </span>
-              <span id="deck-active-cart-label" class="font-bold text-[var(--accent-orange)]">
-                CART-01: razor-talk-vi.skill.md
-              </span>
-            </div>
-            <div class="flex items-center gap-3 text-[11px]">
-              <button
-                type="button"
-                id="toggle-ab-mode-btn"
-                class="te-btn px-2.5 py-0.5 text-[10px] font-bold uppercase"
-                title="Phím tắt: M"
-              >
-                CHẾ ĐỘ: <span id="ab-mode-text" class="text-[var(--accent-green)]">SAU KHI CHẠY SKILL.MD (AI CUT)</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Canvas Monitor Viewport + VU Meter Bay -->
-          <div class="p-4 sm:p-6 grid grid-cols-12 gap-3 items-stretch">
-
-            <!-- Main Procedural Video Canvas (10 cols) -->
-            <div class="col-span-12 sm:col-span-10 bg-[var(--bg-monitor)] border-2 border-[var(--grid-strong)] relative overflow-hidden aspect-video flex items-center justify-center">
-              <canvas id="nle-monitor-canvas" width="800" height="450" class="w-full h-full block"></canvas>
-
-              <!-- Overlay Corner Crop Marks -->
-              <div class="absolute top-2.5 left-3 font-mono text-[10px] text-[#EAE5D9]/80 flex items-center gap-2 pointer-events-none">
-                <span id="monitor-rec-dot" class="w-2 h-2 rounded-full bg-[#FF3E00]"></span>
-                <span id="monitor-state-badge">PLAYING // 24FPS</span>
-              </div>
-              <div class="absolute top-2.5 right-3 font-mono text-[10px] text-[#FFB300] pointer-events-none" id="monitor-tc-overlay">
-                TC 00:00:04:12
-              </div>
-            </div>
-
-            <!-- Right Vertical Audio VU Meter & Telemetry (2 cols) -->
-            <div class="col-span-12 sm:col-span-2 bg-[var(--bg-monitor)] border-2 border-[var(--grid-strong)] p-2.5 flex sm:flex-col justify-between items-center font-mono text-[9px] text-[#EAE5D9]">
-              <div class="text-center w-full border-b border-white/15 pb-1">
-                <div class="text-[8px] text-neutral-400">LUFS</div>
-                <div id="vu-lufs-readout" class="text-[11px] font-bold text-[#00E676]">-14.0</div>
-              </div>
-
-              <!-- Stereo Bar Graph -->
-              <div class="flex-1 flex items-end justify-center gap-2 py-2 w-full h-24 sm:h-auto">
-                <div class="w-3 h-full bg-neutral-800 relative overflow-hidden flex flex-col justify-end">
-                  <div id="vu-bar-l" class="w-full bg-gradient-to-t from-[#00E676] via-[#FFB300] to-[#FF3E00] transition-all duration-75" style="height: 68%;"></div>
-                </div>
-                <div class="w-3 h-full bg-neutral-800 relative overflow-hidden flex flex-col justify-end">
-                  <div id="vu-bar-r" class="w-full bg-gradient-to-t from-[#00E676] via-[#FFB300] to-[#FF3E00] transition-all duration-75" style="height: 74%;"></div>
-                </div>
-              </div>
-
-              <div class="text-center w-full border-t border-white/15 pt-1">
-                <div class="text-[8px] text-neutral-400">SILENCE</div>
-                <div id="vu-cut-status" class="text-[10px] font-bold text-[#FF3E00]">CUT -40dB</div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Multi-Track Timeline Scrubbing & Silence Cut Map -->
-          <div class="px-4 sm:px-6 pb-4 space-y-2">
-            <div class="flex items-center justify-between font-mono text-[10px] text-[var(--ink-muted)]">
-              <span>TIMELINE SCRUBBER (KÉO THANH ĐỎ HOẶC BẤM PHÍM J / K / L / SPACE)</span>
-              <span id="scrub-frame-info" class="text-[var(--ink-primary)] font-bold">FRAME: 108 / 360</span>
-            </div>
-
-            <!-- Interactive Scrubbing Track Container -->
-            <div
-              id="timeline-scrub-track"
-              class="relative h-20 bg-[var(--surface-card)] border-2 border-[var(--grid-strong)] cursor-ew-resize select-none overflow-hidden p-1.5 space-y-1"
-            >
-              <!-- Playhead Vertical Needle -->
-              <div id="nle-playhead" class="absolute top-0 bottom-0 left-[30%] w-[2px] bg-[var(--accent-orange)] z-20 pointer-events-none">
-                <div class="w-3.5 h-3.5 -ml-[6px] bg-[var(--accent-orange)] text-white font-mono text-[8px] flex items-center justify-center font-bold">
-                  ▼
-                </div>
-              </div>
-
-              <!-- Track 1: Dialogue & Silence Removal Blocks -->
-              <div class="grid grid-cols-12 gap-1 h-5 items-center font-mono text-[9px]">
-                <div class="col-span-2 px-1.5 font-bold truncate bg-[var(--bg-putty)] h-full flex items-center">V1 // VOICE</div>
-                <div class="col-span-10 grid grid-cols-12 gap-0.5 h-full">
-                  <div class="col-span-3 bg-[var(--ink-primary)] text-[var(--bg-stock)] flex items-center px-1.5 truncate">HOOK_OPEN</div>
-                  <div class="col-span-1 hazard-stripe opacity-75 flex items-center justify-center text-[8px] font-bold" title="Đã cắt khoảng thở">CUT</div>
-                  <div class="col-span-4 bg-[var(--ink-primary)] text-[var(--bg-stock)] flex items-center px-1.5 truncate">CORE_VALUE_VI</div>
-                  <div class="col-span-1 hazard-stripe opacity-75 flex items-center justify-center text-[8px] font-bold">CUT</div>
-                  <div class="col-span-3 bg-[var(--ink-primary)] text-[var(--bg-stock)] flex items-center px-1.5 truncate">CTA_CLOSE</div>
-                </div>
-              </div>
-
-              <!-- Track 2: Kinetic Vietnamese Captions -->
-              <div class="grid grid-cols-12 gap-1 h-5 items-center font-mono text-[9px]">
-                <div class="col-span-2 px-1.5 font-bold truncate bg-[var(--bg-putty)] h-full flex items-center">T1 // SUB_VI</div>
-                <div class="col-span-10 grid grid-cols-10 gap-1 h-full">
-                  <div class="col-span-3 bg-[var(--accent-amber)]/30 border border-[var(--accent-amber)] flex items-center px-1 truncate">"Dựng video..."</div>
-                  <div class="col-span-4 bg-[var(--accent-amber)]/30 border border-[var(--accent-amber)] flex items-center px-1 truncate">"...chỉ bằng 1 file skill.md"</div>
-                  <div class="col-span-3 bg-[var(--accent-amber)]/30 border border-[var(--accent-amber)] flex items-center px-1 truncate">"...không cần biết edit!"</div>
-                </div>
-              </div>
-
-              <!-- Track 3: Auto B-Roll & Punch Zoom Triggers -->
-              <div class="grid grid-cols-12 gap-1 h-5 items-center font-mono text-[9px]">
-                <div class="col-span-2 px-1.5 font-bold truncate bg-[var(--bg-putty)] h-full flex items-center">FX // AGENT</div>
-                <div class="col-span-10 grid grid-cols-12 gap-1 h-full">
-                  <div class="col-span-2 bg-[var(--accent-green)]/25 border border-[var(--accent-green)] flex items-center px-1 truncate">ZOOM 1.18x</div>
-                  <div class="col-span-5 bg-[var(--accent-orange)]/20 border border-[var(--accent-orange)] flex items-center px-1 truncate">PIP_BROLL: terminal_demo.mp4</div>
-                  <div class="col-span-5 bg-[var(--accent-green)]/25 border border-[var(--accent-green)] flex items-center px-1 truncate">LUT: KODAK_2383 + WHOOSH.WAV</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tactile Hardware Transport Keys (J / K / L / SPACE / PRESET) -->
-          <div class="px-4 sm:px-6 py-3.5 swiss-border-t bg-[var(--surface-card)] flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-            <div class="flex items-center gap-2">
-              <button type="button" id="btn-transport-j" class="te-btn px-3 py-1.5 text-[11px] font-bold">
-                [J] ◀◀ TUA LÙI
-              </button>
-              <button type="button" id="btn-transport-k" class="te-btn px-3 py-1.5 text-[11px] font-bold">
-                [K] ■ DỪNG
-              </button>
-              <button type="button" id="btn-transport-space" class="te-btn-orange px-4 py-1.5 text-[11px] font-bold">
-                [SPACE] ▶ PLAY / PAUSE
-              </button>
-              <button type="button" id="btn-transport-l" class="te-btn px-3 py-1.5 text-[11px] font-bold">
-                [L] ▶▶ TUA NHANH 2X
-              </button>
-            </div>
-
-            <div class="flex items-center gap-2 text-[11px]">
-              <span class="text-[var(--ink-muted)] hidden sm:inline">CLI COMMAND:</span>
-              <code id="deck-cli-command" class="px-2.5 py-1 bg-[var(--bg-putty)] border border-[var(--grid-strong)] font-bold">
-                claude "Dựng raw.mp4 với @razor-talk-vi.skill.md"
-              </code>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================================
-         SEC_03: HORIZONTAL / GRID CARTRIDGE RACK (SKILL.MD COMBO LIBRARY)
-         ======================================================================== -->
-    <section id="sec-rack" class="max-w-[1440px] w-full mx-auto swiss-border-b">
-
-      <!-- Section Coordinate Header -->
-      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
-        <div class="col-span-8 sm:col-span-6 px-4 py-1.5 swiss-border-r">
-          SEC_02 // CARTRIDGE_RACK (THƯ VIỆN BĂNG TỪ SKILL.MD DỰNG SẴN)
-        </div>
-        <div class="col-span-4 sm:col-span-6 px-4 py-1.5 flex items-center justify-between">
-          <span class="hidden sm:inline">CLICK BẤT KỲ BĂNG TỪ NÀO ĐỂ NẠP VÀO BÀN DỰNG & XEM MÃ NGUỒN</span>
-          <span class="font-bold text-[var(--ink-primary)]">[6 CARTRIDGES LOADED]</span>
-        </div>
+      <!-- Center Search / Command Palette Shortcut Button -->
+      <div class="hidden sm:flex items-center">
+        <button type="button" id="open-cmd-palette-btn" class="flex items-center gap-3 px-3 py-1.5 text-xs font-mono text-vscode-muted bg-vscode-panel border border-vscode-border rounded-md hover:border-vscode-accent/50 hover:text-white transition-all shadow-inner">
+          <svg class="w-3.5 h-3.5 text-vscode-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <span>Search skills & commands...</span>
+          <kbd class="px-1.5 py-0.5 text-[10px] bg-vscode-borderLight border border-vscode-border rounded text-vscode-accent font-semibold">Ctrl+K</kbd>
+        </button>
       </div>
 
-      <!-- Editorial Section Title + Category Filter Switches -->
-      <div class="p-6 sm:p-10 swiss-border-b flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-        <div>
-          <div class="font-mono text-xs uppercase text-[var(--accent-orange)] font-bold mb-2">
-            // OPEN-SOURCE VIDEO SKILL CARTRIDGES
-          </div>
-          <h2 class="font-display font-extrabold text-3xl sm:text-5xl uppercase tracking-tight leading-none">
-            Khay Băng Kỹ Năng <span class="font-serif italic font-normal normal-case text-4xl sm:text-6xl">skill.md</span>
-          </h2>
-          <p class="text-[var(--ink-muted)] text-sm sm:text-base mt-2 max-w-2xl">
-            Mỗi cuộn băng là một file Markdown chứa đầy đủ thông số cắt FFmpeg, luật nhịp điệu, cấu hình Whisper tiếng Việt và template Remotion. Tải về máy hoặc nạp trực tiếp vào AI Agent của bạn.
-          </p>
-        </div>
+      <!-- Right Action Items (GitHub Star & Clone) -->
+      <div class="flex items-center gap-2.5">
+        <!-- GitHub Star Badge -->
+        <a href="https://github.com/npdk1/creativetemplate" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#21262D] hover:bg-[#30363D] text-white border border-[#30363D] rounded-md transition-all group">
+          <!-- Official GitHub Octocat SVG -->
+          <svg class="w-4 h-4 text-white group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>Star</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-vscode-borderLight text-vscode-muted border border-vscode-border">1.2k</span>
+        </a>
 
-        <!-- Tactile Filter Switches -->
-        <div class="flex flex-wrap gap-2 font-mono text-xs" id="rack-filters">
-          <button type="button" data-filter="all" class="rack-filter-btn te-btn-orange px-3.5 py-2 font-bold uppercase">
-            TẤT CẢ [06]
-          </button>
-          <button type="button" data-filter="short" class="rack-filter-btn te-btn px-3.5 py-2 font-bold uppercase">
-            REELS / TIKTOK [02]
-          </button>
-          <button type="button" data-filter="talk" class="rack-filter-btn te-btn px-3.5 py-2 font-bold uppercase">
-            PODCAST / TALK [02]
-          </button>
-          <button type="button" data-filter="essay" class="rack-filter-btn te-btn px-3.5 py-2 font-bold uppercase">
-            DOCUMENTARY / SHOP [02]
+        <!-- Primary Clone / Run button -->
+        <a href="#ide-simulator" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-vscode-blue hover:bg-vscode-blueHover text-white rounded-md transition-colors shadow">
+          <span>Run Demo</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO SECTION (VS Code Landing Page Aesthetic)
+       ========================================================================= -->
+  <section class="relative pt-12 pb-16 overflow-hidden bg-grid-pattern border-b border-vscode-border">
+    <div class="hero-glow"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      
+      <!-- Release pill tag -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-vscode-panel border border-vscode-border text-vscode-muted mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-vscode-green animate-pulse"></span>
+        <span class="text-white font-semibold">v2.4 Release:</span> Remotion Food Short VN + Realtime A/B Video Player
+        <a href="https://github.com/npdk1/creativetemplate" target="_blank" class="text-vscode-accent hover:underline flex items-center gap-1 ml-1">
+          GitHub Repo
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
+        Video Editing. <br />
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#0078D4] via-[#38BDF8] to-[#3FB950]">Reimagined as Code.</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="mt-6 text-base sm:text-xl text-vscode-muted max-w-2xl mx-auto leading-relaxed">
+        Thư viện băng từ <code class="px-1.5 py-0.5 rounded bg-vscode-panel text-vscode-accent border border-vscode-border font-mono text-sm">skill.md</code> và Remotion chuẩn Studio. Tự động cắt khoảng lặng, tạo phụ đề động không nền, chèn popup insight và render video 4K bằng một dòng lệnh.
+      </p>
+
+      <!-- CTA Buttons & Clone Command -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <!-- Direct GitHub repo CTA -->
+        <a href="https://github.com/npdk1/creativetemplate" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-6 py-3 rounded-lg bg-vscode-blue hover:bg-vscode-blueHover text-white font-semibold text-sm transition-all shadow-lg hover:shadow-vscode-blue/20">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>Khám Phá Trên GitHub</span>
+          <span class="text-xs px-1.5 py-0.5 rounded bg-white/20 font-mono">MIT</span>
+        </a>
+
+        <!-- Git Clone Copy Box -->
+        <div class="flex items-center bg-vscode-panel border border-vscode-border rounded-lg p-1.5 shadow-sm">
+          <span class="text-vscode-green font-mono text-xs pl-3 pr-2 select-none">$</span>
+          <input type="text" readonly value="git clone https://github.com/npdk1/creativetemplate.git" class="bg-transparent text-vscode-text font-mono text-xs outline-none w-64 sm:w-80 cursor-text" id="git-clone-input" />
+          <button type="button" id="copy-clone-btn" class="px-3 py-1.5 rounded-md bg-vscode-borderLight hover:bg-vscode-border text-xs font-mono font-medium text-white transition-colors flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            <span id="copy-clone-text">Copy</span>
           </button>
         </div>
       </div>
 
-      <!-- Master-Detail Split: Left = 6 Cartridges Grid (7 cols), Right = Live Code Inspector Drawer (5 cols) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12">
+      <!-- Feature badges -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-vscode-muted">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-vscode-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          <span>100% Free & Open Source</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-vscode-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          <span>Remotion + React + FFmpeg</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-vscode-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          <span>Zero-GUI Automation</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-vscode-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          <span>Local Audio Muted Toggle</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Left 7 Cols: Physical Tape Cartridges Grid -->
-        <div class="lg:col-span-7 p-6 sm:p-8 swiss-border-r bg-[var(--bg-stock)]">
-          <div id="cartridge-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <!-- Populated by JS -->
+  <!-- =========================================================================
+       MAIN INTERACTIVE SECTION: VS CODE IDE & NLE SIMULATOR
+       ========================================================================= -->
+  <section id="ide-simulator" class="py-12 px-4 sm:px-6 max-w-7xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 pb-4 border-b border-vscode-border gap-4">
+      <div>
+        <div class="text-xs font-mono uppercase tracking-wider text-vscode-accent flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-vscode-accent"></span>
+          Integrated Development Environment
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">CreativeStudio IDE Simulator</h2>
+      </div>
+      <div class="flex items-center gap-3 text-xs font-mono">
+        <span class="text-vscode-muted">Preset Đang Tải:</span>
+        <span class="px-2.5 py-1 rounded bg-vscode-panel border border-vscode-border text-vscode-green font-semibold" id="active-skill-badge">
+          remotion-food-short-vn.skill.md
+        </span>
+      </div>
+    </div>
+
+    <!-- VS Code Window Frame Container -->
+    <div class="bg-[#181818] border border-vscode-border rounded-xl shadow-2xl overflow-hidden flex flex-col transition-all">
+      
+      <!-- 1. VS Code Window Titlebar -->
+      <div class="h-9 bg-[#1E1E1E] border-b border-[#2B2B2B] flex items-center justify-between px-3 select-none">
+        <!-- Window controls (macOS style dots) -->
+        <div class="flex items-center gap-2 w-20">
+          <span class="w-3 h-3 rounded-full bg-[#ED6A5E] inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-[#F5BF4F] inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-[#62C554] inline-block"></span>
+        </div>
+
+        <!-- Center breadcrumb / Title -->
+        <div class="flex items-center gap-2 text-xs font-mono text-[#CCCCCC] truncate max-w-md">
+          <svg class="w-3.5 h-3.5 text-vscode-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+          </svg>
+          <span class="text-vscode-muted">creativetemplate</span>
+          <span class="text-[#555]">&gt;</span>
+          <span class="text-vscode-muted">good-skills</span>
+          <span class="text-[#555]">&gt;</span>
+          <span class="text-white font-medium" id="titlebar-active-file">remotion-food-short-vn</span>
+        </div>
+
+        <!-- Right GitHub repo link badge -->
+        <div class="w-20 flex justify-end">
+          <a href="https://github.com/npdk1/creativetemplate" target="_blank" rel="noopener noreferrer" class="text-vscode-muted hover:text-white transition-colors" title="Open repo in GitHub">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. VS Code Main Body (Activity Bar + Sidebar + Editor + Player) -->
+      <div class="flex flex-col lg:flex-row min-h-[580px]">
+        
+        <!-- Left Activity Bar (Narrow Icons strip) -->
+        <div class="w-12 bg-[#121212] border-r border-[#2B2B2B] flex flex-col items-center py-3 gap-5 flex-shrink-0 text-[#858585]">
+          <button type="button" class="text-white hover:text-white transition-colors relative" title="Explorer">
+            <span class="absolute -left-3 top-0 bottom-0 w-0.5 bg-vscode-blue"></span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+          </button>
+          <button type="button" class="hover:text-white transition-colors" title="Search">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </button>
+          <button type="button" class="hover:text-white transition-colors" title="Source Control">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+          </button>
+          <button type="button" class="hover:text-white transition-colors text-vscode-accent" title="Extensions & Skills">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          </button>
+          <div class="mt-auto flex flex-col items-center gap-4">
+            <a href="https://github.com/npdk1/creativetemplate" target="_blank" class="hover:text-white transition-colors" title="GitHub Remote">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <button type="button" class="hover:text-white transition-colors" title="Settings">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </button>
           </div>
         </div>
 
-        <!-- Right 5 Cols: Live Cartridge Inspector & Direct .MD Exporter -->
-        <div class="lg:col-span-5 bg-[var(--bg-putty)] flex flex-col justify-between">
-          <div>
-            <!-- Inspector Top Bar -->
-            <div class="px-5 py-3.5 swiss-border-b bg-[var(--surface-card)] flex items-center justify-between font-mono text-xs">
+        <!-- Left File Explorer Sidebar -->
+        <div class="w-full lg:w-56 bg-[#181818] border-r border-[#2B2B2B] p-2 text-xs font-mono select-none flex-shrink-0">
+          <div class="px-2 py-1 text-[11px] font-bold text-vscode-muted uppercase tracking-wider flex items-center justify-between">
+            <span>EXPLORER</span>
+            <span class="text-vscode-accent text-[10px]">CREATIVETEMPLATE</span>
+          </div>
+
+          <div class="mt-2 space-y-0.5">
+            <!-- Folder: good-skills -->
+            <div class="flex items-center gap-1.5 px-2 py-1 text-[#CCCCCC] font-semibold cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-vscode-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <span>good-skills</span>
+            </div>
+
+            <!-- Sub items -->
+            <div class="pl-4 space-y-0.5">
+              <button type="button" class="ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#E0E0E0] bg-[#2A2D2E] text-vscode-accent font-medium" data-file="remotion-food-short-vn">
+                <span class="text-vscode-blue font-bold">M↓</span>
+                <span class="truncate">remotion-food-short-vn</span>
+              </button>
+              <button type="button" class="ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#8E8E8E] hover:text-white hover:bg-[#202020] transition-colors" data-file="razor-talk-vi">
+                <span class="text-vscode-orange font-bold">M↓</span>
+                <span class="truncate">razor-talk-vi.skill.md</span>
+              </button>
+              <button type="button" class="ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#8E8E8E] hover:text-white hover:bg-[#202020] transition-colors" data-file="kinetic-hook-916">
+                <span class="text-vscode-green font-bold">M↓</span>
+                <span class="truncate">kinetic-hook-916.skill.md</span>
+              </button>
+              <button type="button" class="ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#8E8E8E] hover:text-white hover:bg-[#202020] transition-colors" data-file="vox-archive-3d">
+                <span class="text-vscode-yellow font-bold">M↓</span>
+                <span class="truncate">vox-archive-3d.skill.md</span>
+              </button>
+            </div>
+
+            <!-- Folder: remotion-edit -->
+            <div class="flex items-center gap-1.5 px-2 py-1 text-[#CCCCCC] font-semibold cursor-pointer mt-2">
+              <svg class="w-3.5 h-3.5 text-vscode-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              <span>remotion-edit/src</span>
+            </div>
+            <div class="pl-4 space-y-0.5">
+              <button type="button" class="ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#8E8E8E] hover:text-white hover:bg-[#202020] transition-colors" data-file="Composition.tsx">
+                <span class="text-[#3178C6] font-bold">TSX</span>
+                <span class="truncate">Composition.tsx</span>
+              </button>
+              <button type="button" class="ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#8E8E8E] hover:text-white hover:bg-[#202020] transition-colors" data-file="captions.json">
+                <span class="text-[#CBCB41] font-bold">{}</span>
+                <span class="truncate">captions.json</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Code Editor Pane -->
+        <div class="flex-1 bg-vscode-editor flex flex-col border-r border-[#2B2B2B] min-w-0">
+          
+          <!-- Editor Tabs Header -->
+          <div class="h-9 bg-[#181818] border-b border-[#2B2B2B] flex items-center overflow-x-auto select-none">
+            <div class="flex items-center h-full px-4 gap-2 bg-vscode-editor border-t-2 border-vscode-blue text-xs font-mono text-white">
+              <span class="text-vscode-blue font-bold">M↓</span>
+              <span id="tab-active-title">SKILL.md</span>
+              <button type="button" class="text-vscode-muted hover:text-white ml-2 text-xs">×</button>
+            </div>
+            <div class="flex items-center h-full px-4 gap-2 bg-[#181818] border-r border-[#252526] text-xs font-mono text-vscode-muted hover:text-white cursor-pointer" id="btn-switch-tab-tsx">
+              <span class="text-[#3178C6] font-bold">TSX</span>
+              <span>Composition.tsx</span>
+            </div>
+            <div class="ml-auto pr-3 flex items-center gap-2">
+              <button type="button" id="copy-editor-code-btn" class="px-2 py-1 rounded bg-[#2A2D2E] hover:bg-[#383B3D] text-[11px] font-mono text-white transition-colors flex items-center gap-1" title="Copy skill code">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <span>Copy Code</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Editor Body with Line Numbers -->
+          <div class="p-4 overflow-y-auto max-h-[460px] font-mono text-xs leading-relaxed text-[#D4D4D4] flex gap-3">
+            <!-- Line Numbers Column -->
+            <div class="select-none text-right text-[#5A5A5A] space-y-0.5 w-6 flex-shrink-0" id="code-line-numbers">
+              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div>
+            </div>
+
+            <!-- Code Content Pane -->
+            <pre class="flex-1 overflow-x-auto whitespace-pre font-mono" id="editor-code-view">
+<span class="text-[#6A9955]">---</span>
+<span class="text-[#9CDCFE]">name</span>: <span class="text-[#CE9178]">remotion-food-short-vn</span>
+<span class="text-[#9CDCFE]">description</span>: <span class="text-[#CE9178]">Dựng video món ăn dọc bằng Remotion theo phong cách editorial Việt Nam</span>
+<span class="text-[#9CDCFE]">repository</span>: <span class="text-[#CE9178]">https://github.com/npdk1/creativetemplate</span>
+<span class="text-[#6A9955]">---</span>
+
+<span class="text-[#569CD6]"># 1. HỆ THỐNG PHỤ ĐỀ KARAOKE KHÔNG NỀN (ZERO-GUI)</span>
+- Phụ đề nổi trực tiếp trên video: <span class="text-[#4EC9B0]">no-background</span>, <span class="text-[#4EC9B0]">no-pill-card</span>.
+- Nhấn từ đang đọc bằng accent <span class="text-[#DCDCAA]">#FFA657 (Vàng Mật Ong)</span>.
+- Giữ nguyên cỡ chữ để tránh hiện tượng dòng phụ đề nhảy giật.
+
+<span class="text-[#569CD6]"># 2. POPUP INSIGHT & STEP BADGE (CÔNG ĐOẠN)</span>
+- Nhãn công đoạn có số bước và vạch màu, canh trái né mặt nhân vật.
+- Phân tích SRT tự động tạo insight cards: lợi ích, gia vị, tỷ lệ.
+
+<span class="text-[#569CD6]"># 3. TRANSITION & RENDERING RULES</span>
+- Không dùng CSS animation/transition; dùng <span class="text-[#4EC9B0]">interpolate()</span> & <span class="text-[#4EC9B0]">spring()</span>.
+- Xuất 60fps chuẩn TikTok / Reels / Shorts 9:16.
+            </pre>
+          </div>
+
+          <!-- Quick Run Skill Prompt Bar -->
+          <div class="mt-auto border-t border-[#2B2B2B] bg-[#161616] p-2.5 flex items-center justify-between text-xs font-mono">
+            <div class="flex items-center gap-2 text-vscode-muted truncate">
+              <span class="text-vscode-green font-bold">PROMPT:</span>
+              <span class="text-white truncate" id="active-skill-prompt">"Dựng ba_chi_dau_phu.mp4 theo chuẩn @remotion-food-short-vn"</span>
+            </div>
+            <button type="button" id="copy-skill-prompt-btn" class="px-2.5 py-1 rounded bg-vscode-blue hover:bg-vscode-blueHover text-white font-medium transition-colors flex-shrink-0 flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              <span>Copy Prompt</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Studio Live Preview & Video A/B Comparison -->
+        <div class="w-full lg:w-[480px] bg-[#121212] flex flex-col flex-shrink-0">
+          
+          <!-- Preview Header -->
+          <div class="h-9 bg-[#181818] border-b border-[#2B2B2B] px-3 flex items-center justify-between select-none">
+            <div class="flex items-center gap-2 text-xs font-mono text-white">
+              <span class="w-2 h-2 rounded-full bg-vscode-green animate-pulse"></span>
+              <span class="font-bold">PREVIEW: REMOTION STUDIO</span>
+            </div>
+
+            <!-- Mode Selector (A/B Comparison or After Cut) -->
+            <div class="flex items-center gap-1 bg-[#252526] p-0.5 rounded text-[11px] font-mono">
+              <button type="button" id="btn-mode-after" class="px-2 py-0.5 rounded bg-vscode-blue text-white font-semibold transition-colors">
+                AI Remotion Cut
+              </button>
+              <button type="button" id="btn-mode-original" class="px-2 py-0.5 rounded text-vscode-muted hover:text-white transition-colors">
+                Raw Footage
+              </button>
+              <button type="button" id="btn-mode-split" class="px-2 py-0.5 rounded text-vscode-muted hover:text-white transition-colors">
+                Split A|B
+              </button>
+            </div>
+          </div>
+
+          <!-- Video Monitor Screen Container -->
+          <div class="p-3 bg-[#0A0A0A] flex flex-col items-center justify-center flex-1 relative min-h-[360px]">
+            
+            <div class="relative w-full max-w-[280px] aspect-[9/16] rounded-lg overflow-hidden border border-vscode-border bg-black shadow-lg">
+              
+              <!-- Video Player (Primary - AI Cut) -->
+              <video 
+                id="main-preview-video" 
+                class="w-full h-full object-cover" 
+                playsinline 
+                loop 
+                muted 
+                preload="metadata"
+                src="https://github.com/user-attachments/assets/5c9b257f-e231-416c-8c22-bd231318a648">
+                <!-- Local Fallback source -->
+                <source src="good-skills/remotion-food-short-vn/video_output/after.mp4" type="video/mp4" />
+                <source src="Video/after.mp4" type="video/mp4" />
+              </video>
+
+              <!-- Video Player Secondary (Raw original footage for split mode) -->
+              <div id="split-overlay-container" class="absolute inset-0 w-1/2 overflow-hidden border-r-2 border-vscode-accent hidden">
+                <video 
+                  id="split-secondary-video" 
+                  class="absolute top-0 left-0 h-full max-w-none object-cover" 
+                  style="width: 280px;"
+                  playsinline 
+                  loop 
+                  muted 
+                  preload="metadata"
+                  src="https://github.com/user-attachments/assets/97c8308d-15a9-43be-83d9-f1db0beb2747">
+                  <source src="good-skills/remotion-food-short-vn/video_output/original.mp4" type="video/mp4" />
+                  <source src="Video/original.mp4" type="video/mp4" />
+                </video>
+                <span class="absolute top-2 left-2 px-1.5 py-0.5 bg-black/75 text-[9px] font-mono font-bold text-vscode-orange rounded">RAW</span>
+              </div>
+
+              <!-- Top Video Overlay Badges -->
+              <div class="absolute top-2.5 right-2.5 flex items-center gap-1.5 pointer-events-none">
+                <span id="video-state-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-green/90 text-black">
+                  60 FPS • AFTER
+                </span>
+              </div>
+
+              <!-- Audio Unmute Toggle Button (Floating) -->
+              <button 
+                type="button" 
+                id="btn-toggle-audio" 
+                class="absolute bottom-3 right-3 p-2 rounded-full bg-black/80 hover:bg-vscode-blue text-white border border-white/20 transition-all shadow-md z-20 flex items-center gap-1.5 text-xs font-mono"
+                title="Bật/Tắt âm thanh video">
+                <svg id="icon-muted" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+                </svg>
+                <svg id="icon-unmuted" class="w-4 h-4 hidden text-vscode-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+                </svg>
+                <span id="audio-label" class="text-[10px] font-semibold pr-0.5">Muted</span>
+              </button>
+            </div>
+
+            <!-- Transport & Playback Control Bar -->
+            <div class="w-full max-w-[280px] mt-3 space-y-2 font-mono text-xs">
+              <!-- Timeline scrubber slider -->
               <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 bg-[var(--accent-green)]"></span>
-                <span id="inspector-filename" class="font-bold">razor-talk-vi.skill.md</span>
+                <span class="text-[10px] text-vscode-muted w-8" id="time-current">00:00</span>
+                <input 
+                  type="range" 
+                  id="timeline-scrubber" 
+                  min="0" 
+                  max="100" 
+                  value="0" 
+                  class="flex-1 h-1.5 bg-[#252526] rounded-lg appearance-none cursor-pointer accent-vscode-blue" />
+                <span class="text-[10px] text-vscode-muted w-8 text-right" id="time-duration">00:30</span>
               </div>
-              <span id="inspector-serial" class="px-2 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-strong)] text-[10px] font-bold">
-                CART-01
-              </span>
+
+              <!-- Buttons Bar -->
+              <div class="flex items-center justify-between">
+                <button type="button" id="btn-play-pause" class="px-3 py-1 bg-vscode-blue hover:bg-vscode-blueHover text-white rounded font-bold transition-colors flex items-center gap-1">
+                  <svg id="play-icon" class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  <svg id="pause-icon" class="w-3 h-3 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                  <span id="play-pause-text">Play</span>
+                </button>
+
+                <div class="text-[11px] text-vscode-muted">
+                  <span id="fps-counter" class="text-vscode-green font-bold">60.0 FPS</span> • 1080×1920
+                </div>
+
+                <a href="https://github.com/npdk1/creativetemplate" target="_blank" class="text-[11px] text-vscode-accent hover:underline flex items-center gap-0.5">
+                  <span>Git Assets</span>
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+              </div>
             </div>
 
-            <!-- Cartridge Metadata Spec Table -->
-            <div class="grid grid-cols-3 swiss-border-b font-mono text-[11px] bg-[var(--bg-stock)]">
-              <div class="p-3 swiss-border-r">
-                <div class="text-[9px] text-[var(--ink-muted)]">ENGINE STACK</div>
-                <div id="inspector-engine" class="font-bold mt-0.5 truncate">FFmpeg + Whisper</div>
-              </div>
-              <div class="p-3 swiss-border-r">
-                <div class="text-[9px] text-[var(--ink-muted)]">ĐỘ KHÓ KỸ THUẬT</div>
-                <div class="font-bold mt-0.5 text-[var(--accent-green)]">0% NLE SKILL</div>
-              </div>
-              <div class="p-3">
-                <div class="text-[9px] text-[var(--ink-muted)]">TỐC ĐỘ XỬ LÝ</div>
-                <div id="inspector-speed" class="font-bold mt-0.5 text-[var(--accent-orange)]">~42s / phút video</div>
-              </div>
-            </div>
-
-            <!-- Raw skill.md Source Code Viewer -->
-            <div class="p-5">
-              <div class="flex items-center justify-between font-mono text-[10px] text-[var(--ink-muted)] mb-2">
-                <span>NỘI DUNG FILE SKILL.MD CHUẨN HÓA:</span>
-                <span>UTF-8 // MARKDOWN + YAML</span>
-              </div>
-              <pre
-                id="inspector-code-view"
-                class="font-mono text-xs leading-relaxed p-4 bg-[var(--bg-monitor)] text-[#EAE5D9] border-2 border-[var(--grid-strong)] overflow-x-auto max-h-[380px]"
-              ></pre>
-            </div>
-          </div>
-
-          <!-- Inspector Action Footer (Copy, Download .md, Load to NLE Monitor) -->
-          <div class="p-5 swiss-border-t bg-[var(--surface-card)] space-y-3">
-            <div class="font-mono text-[11px] text-[var(--ink-muted)]">
-              LỆNH GỌI TRONG CLAUDE CODE / CURSOR:
-              <code id="inspector-prompt-example" class="block mt-1 p-2 bg-[var(--bg-putty)] border border-[var(--grid-strong)] text-[var(--ink-primary)] font-bold">
-                "Áp dụng @razor-talk-vi.skill.md cho file_quay_tho.mp4"
-              </code>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 font-mono text-xs">
-              <button
-                type="button"
-                id="btn-copy-cart-md"
-                class="te-btn py-2.5 px-3 font-bold uppercase flex items-center justify-center gap-1.5"
-              >
-                <span>[COPY .MD]</span>
-              </button>
-              <button
-                type="button"
-                id="btn-download-cart-md"
-                class="te-btn py-2.5 px-3 font-bold uppercase flex items-center justify-center gap-1.5"
-              >
-                <span>[TẢI FILE .MD ↓]</span>
-              </button>
-              <button
-                type="button"
-                id="btn-load-to-monitor"
-                class="te-btn-orange py-2.5 px-3 font-bold uppercase flex items-center justify-center gap-1.5"
-              >
-                <span>[NẠP LÊN MONITOR ▲]</span>
-              </button>
-            </div>
           </div>
         </div>
 
       </div>
-    </section>
 
-    <!-- ========================================================================
-         SEC_04: INTERACTIVE COMBO PATCHBAY (STACK & COMPILE CUSTOM SKILL.MD)
-         ======================================================================== -->
-    <section id="sec-patchbay" class="max-w-[1440px] w-full mx-auto swiss-border-b">
-
-      <!-- Section Coordinate Header -->
-      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
-        <div class="col-span-8 sm:col-span-6 px-4 py-1.5 swiss-border-r">
-          SEC_03 // PATCHBAY_COMPILER (BỘ GHÉP MẠCH COMBO SKILL.MD TÙY CHỈNH)
-        </div>
-        <div class="col-span-4 sm:col-span-6 px-4 py-1.5 flex items-center justify-between">
-          <span class="hidden sm:inline">BẬT/TẮT CÁC CÔNG TẮC ĐỂ TỰ ĐỘNG BIÊN DỊCH FILE COMBO-SKILL.MD</span>
-          <span id="patchbay-active-count" class="font-bold text-[var(--accent-orange)]">4 / 6 MODULES ACTIVE</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12">
-
-        <!-- Left 6 Cols: Tactile Toggle Switches for Atomic Micro-Skills -->
-        <div class="lg:col-span-6 p-6 sm:p-10 swiss-border-r space-y-6">
-          <div>
-            <div class="font-mono text-xs uppercase text-[var(--accent-green)] font-bold mb-1">
-              // MODULAR SKILL COMPOSER
-            </div>
-            <h2 class="font-display font-extrabold text-3xl sm:text-4xl uppercase tracking-tight">
-              Tự Ghép Mạch <span class="font-serif italic font-normal normal-case text-4xl sm:text-5xl text-[var(--accent-orange)]">Combo skill.md</span> Của Riêng Bạn
-            </h2>
-            <p class="text-sm text-[var(--ink-muted)] mt-2">
-              Không cần biết viết code. Chỉ cần gạt công tắc chọn các thao tác hậu kỳ bạn muốn, hệ thống sẽ tự động đóng gói thành một file <code class="font-mono font-bold text-[var(--ink-primary)]">custom-combo.skill.md</code> duy nhất.
-            </p>
+      <!-- 3. VS Code Integrated Terminal Panel (Bottom Drawer) -->
+      <div class="bg-[#181818] border-t border-[#2B2B2B] flex flex-col font-mono text-xs">
+        <!-- Terminal Header Tabs -->
+        <div class="h-8 bg-[#181818] border-b border-[#252526] px-4 flex items-center justify-between text-[#CCCCCC]">
+          <div class="flex items-center gap-4 text-[11px]">
+            <button type="button" class="text-white border-b border-vscode-blue pb-0.5 font-bold flex items-center gap-1.5">
+              <span>TERMINAL</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-vscode-green"></span>
+            </button>
+            <button type="button" class="text-vscode-muted hover:text-white transition-colors">OUTPUT</button>
+            <button type="button" class="text-vscode-muted hover:text-white transition-colors">PROBLEMS (0)</button>
+            <button type="button" class="text-vscode-muted hover:text-white transition-colors">DEBUG CONSOLE</button>
           </div>
-
-          <!-- Atomic Micro-Skill Toggle List -->
-          <div id="patchbay-switches" class="space-y-3">
-            <!-- Populated by JS -->
-          </div>
-
-          <!-- Telemetry Summary Bar -->
-          <div class="grid grid-cols-3 border-2 border-[var(--grid-strong)] bg-[var(--surface-card)] font-mono text-xs">
-            <div class="p-3 swiss-border-r">
-              <div class="text-[10px] text-[var(--ink-muted)]">ƯỚC TÍNH TOKEN</div>
-              <div id="patch-tokens" class="text-lg font-bold mt-0.5">~1,420 tok</div>
-            </div>
-            <div class="p-3 swiss-border-r">
-              <div class="text-[10px] text-[var(--ink-muted)]">THỜI GIAN RENDER</div>
-              <div id="patch-render-time" class="text-lg font-bold mt-0.5 text-[var(--accent-orange)]">~38 giây</div>
-            </div>
-            <div class="p-3">
-              <div class="text-[10px] text-[var(--ink-muted)]">ĐẦU RA HỖ TRỢ</div>
-              <div class="text-sm font-bold mt-1 text-[var(--accent-green)]">MP4 / XML / JSON</div>
-            </div>
+          <div class="flex items-center gap-3 text-vscode-muted">
+            <span class="text-[10px] text-vscode-green">bash</span>
+            <button type="button" id="clear-term-btn" class="hover:text-white" title="Clear terminal">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
           </div>
         </div>
 
-        <!-- Right 6 Cols: Live Compiled combo-skill.md Output -->
-        <div class="lg:col-span-6 p-6 sm:p-10 bg-[var(--bg-putty)] flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between font-mono text-xs mb-3">
-              <span class="px-2.5 py-1 bg-[var(--ink-primary)] text-[var(--bg-stock)] font-bold">
-                LIVE COMPILER OUTPUT // custom-combo.skill.md
-              </span>
-              <span class="text-[var(--ink-muted)]">AUTO-UPDATED</span>
-            </div>
-
-            <pre
-              id="patchbay-compiled-code"
-              class="font-mono text-xs leading-relaxed p-5 bg-[var(--bg-monitor)] text-[#00E676] border-2 border-[var(--grid-strong)] overflow-x-auto h-[390px]"
-            ></pre>
-          </div>
-
-          <div class="pt-5 mt-5 swiss-border-t flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-            <span class="text-[var(--ink-muted)]">
-              Dán file này vào thư mục <code class="text-[var(--ink-primary)] font-bold">.claude/skills/</code> hoặc <code class="text-[var(--ink-primary)] font-bold">.cursor/rules/</code>
-            </span>
-            <div class="flex items-center gap-2.5">
-              <button type="button" id="btn-copy-compiled" class="te-btn px-4 py-2.5 font-bold uppercase">
-                [COPY COMBO .MD]
-              </button>
-              <button type="button" id="btn-download-compiled" class="te-btn-orange px-4 py-2.5 font-bold uppercase">
-                [XUẤT FILE CUSTOM-COMBO.MD ↓]
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========================================================================
-         SEC_05: PERFORATED STUDIO WAITLIST PASS (EARLY ACCESS TICKET)
-         ======================================================================== -->
-    <section id="sec-pass" class="max-w-[1440px] w-full mx-auto swiss-border-b">
-
-      <!-- Section Coordinate Header -->
-      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
-        <div class="col-span-8 sm:col-span-6 px-4 py-1.5 swiss-border-r">
-          SEC_04 // STUDIO_PRESS_PASS (ĐĂNG KÝ NHẬN TRỌN BỘ 120+ BĂNG SKILL.MD)
-        </div>
-        <div class="col-span-4 sm:col-span-6 px-4 py-1.5 flex items-center justify-between">
-          <span class="hidden sm:inline">MIỄN PHÍ 100% CHO CỘNG ĐỒNG SÁNG TẠO VIỆT NAM</span>
-          <span class="font-bold text-[var(--accent-green)]">SLOTS REMAINING: 412 / 5,000</span>
+        <!-- Terminal Output Log -->
+        <div class="p-3 bg-[#121212] min-h-[90px] max-h-[140px] overflow-y-auto space-y-1 text-[#CCCCCC] text-[11px]" id="terminal-body">
+          <div class="text-vscode-muted">CreativeTemplate Video Engine [Version 2.4.0-open-source]</div>
+          <div><span class="text-vscode-green">npdk1@studio</span>:<span class="text-vscode-blue">~/creativetemplate</span>$ <span class="text-white">npx remotion render Root ba-chi-dau-phu --props="./captions.json"</span></div>
+          <div class="text-[#858585]">[1/4] Loading skill: remotion-food-short-vn (Editorial VN style)...</div>
+          <div class="text-[#858585]">[2/4] Analyzing SRT: 18 timestamps parsed, 3 insight cards generated.</div>
+          <div class="text-[#858585]">[3/4] Composing frames 0 to 1800 at 60fps (9:16 vertical 1080x1920)...</div>
+          <div class="text-vscode-green">✔ Render complete in 14.2s! Output saved to: good-skills/remotion-food-short-vn/video_output/after.mp4</div>
+          <div class="flex items-center"><span class="text-vscode-green">npdk1@studio</span>:<span class="text-vscode-blue">~/creativetemplate</span>$&nbsp;<span class="term-cursor"></span></div>
         </div>
       </div>
 
-      <div class="p-6 sm:p-12 lg:p-16 bg-[var(--bg-stock)]">
-        <div class="max-w-5xl mx-auto">
+      <!-- 4. VS Code Status Bar (Footer) -->
+      <div class="h-6 bg-vscode-statusBar text-white flex items-center justify-between px-3 text-[11px] font-mono select-none">
+        <div class="flex items-center gap-3">
+          <a href="https://github.com/npdk1/creativetemplate" target="_blank" class="flex items-center gap-1 hover:underline">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+            <span>main*</span>
+          </a>
+          <span class="hidden sm:inline-flex items-center gap-1">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>0</span>
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <span>0</span>
+          </span>
+          <span class="text-white/80">creativetemplate (Remote: GitHub)</span>
+        </div>
 
-          <div class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <span class="font-mono text-xs uppercase text-[var(--accent-orange)] font-bold">
-                // CẤP THẺ TRUY CẬP PHÒNG DỰNG SỚM
-              </span>
-              <h2 class="font-display font-extrabold text-3xl sm:text-5xl uppercase tracking-tight mt-1">
-                Đóng Dấu Vé <span class="font-serif italic font-normal normal-case text-4xl sm:text-6xl">Early Access</span>
-              </h2>
+        <div class="flex items-center gap-4 text-white/90">
+          <span class="hidden sm:inline">Ln 14, Col 28</span>
+          <span class="hidden sm:inline">UTF-8</span>
+          <span class="hidden sm:inline">TypeScript React</span>
+          <a href="https://github.com/npdk1/creativetemplate" target="_blank" class="hover:underline flex items-center gap-1 font-semibold">
+            <span>github.com/npdk1/creativetemplate</span>
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       EXTENSIONS / SKILLS MARKETPLACE (VS Code Extensions Gallery Style)
+       ========================================================================= -->
+  <section id="marketplace" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-t border-vscode-border">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="text-xs font-mono uppercase tracking-wider text-vscode-accent flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          Skill Extensions Marketplace
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Các Băng Từ Skill.md Đóng Gói Sẵn</h2>
+        <p class="text-vscode-muted text-sm mt-1 max-w-xl">Mỗi skill là một file cấu hình markdown chuẩn chỉnh quy định thuật toán cắt gọt, chuyển động, typography và âm thanh.</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap items-center gap-2 font-mono text-xs" id="marketplace-filters">
+        <button type="button" data-filter="all" class="market-filter-btn px-3 py-1.5 rounded-md bg-vscode-blue text-white font-semibold transition-colors">All Skills (7)</button>
+        <button type="button" data-filter="food" class="market-filter-btn px-3 py-1.5 rounded-md bg-vscode-panel border border-vscode-border text-vscode-muted hover:text-white transition-colors">Food &amp; Dining</button>
+        <button type="button" data-filter="short" class="market-filter-btn px-3 py-1.5 rounded-md bg-vscode-panel border border-vscode-border text-vscode-muted hover:text-white transition-colors">Short-Form 9:16</button>
+        <button type="button" data-filter="talk" class="market-filter-btn px-3 py-1.5 rounded-md bg-vscode-panel border border-vscode-border text-vscode-muted hover:text-white transition-colors">Podcast &amp; Voice</button>
+        <button type="button" data-filter="essay" class="market-filter-btn px-3 py-1.5 rounded-md bg-vscode-panel border border-vscode-border text-vscode-muted hover:text-white transition-colors">Documentary &amp; UGC</button>
+      </div>
+    </div>
+
+    <!-- Extension Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="skills-catalog-grid">
+      
+      <!-- Flagship: Remotion Food Short VN -->
+      <div class="skill-card bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 rounded-xl p-5 flex flex-col justify-between transition-all group" data-category="food" data-id="remotion-food-short-vn">
+        <div>
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#21262D] border border-vscode-border flex items-center justify-center text-vscode-accent group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <div>
+                <h3 class="text-white font-bold text-sm group-hover:text-vscode-accent transition-colors">remotion-food-short-vn</h3>
+                <div class="text-[11px] font-mono text-vscode-muted">npdk1 • v2.4.0 • ★ 5.0 (Featured)</div>
+              </div>
             </div>
-            <p class="font-mono text-xs text-[var(--ink-muted)] max-w-xs">
-              Điền thông tin bên dưới để in thẻ thành viên trực tiếp và nhận ngay bộ Starter Pack khi mở kho.
-            </p>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-green/10 text-vscode-green border border-vscode-green/30">FLAGSHIP</span>
           </div>
 
-          <!-- PHYSICAL PERFORATED TICKET STUB -->
-          <div id="ticket-container" class="border-2 border-[var(--grid-strong)] bg-[var(--surface-card)] shadow-[6px_6px_0px_var(--grid-strong)] grid grid-cols-1 lg:grid-cols-12 relative overflow-hidden">
+          <p class="text-xs text-[#8B949E] mt-3 leading-relaxed">
+            Dựng video món ăn dọc bằng Remotion chuẩn editorial Việt Nam: phụ đề karaoke không nền, nhãn công đoạn gọn, auto popup insight món ăn.
+          </p>
 
-            <!-- Left 7 Cols: Input Form Side of the Ticket -->
-            <div class="lg:col-span-7 p-6 sm:p-8 perforated-divider space-y-5">
-              <div class="flex items-center justify-between swiss-border-b pb-3 font-mono text-xs">
-                <span class="font-bold uppercase">PHIẾU ĐĂNG KÝ // WORK ORDER #01</span>
-                <span class="px-2 py-0.5 bg-[var(--accent-orange)] text-white font-bold text-[10px]">PRIORITY ACCESS</span>
-              </div>
-
-              <form id="pass-form" class="space-y-4 font-mono" novalidate>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label for="pass-name" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
-                      01. TÊN HOẶC HANDLE (TELEGRAM / DISCORD)
-                    </label>
-                    <input
-                      id="pass-name"
-                      type="text"
-                      required
-                      placeholder="VD: @khoa_creator"
-                      class="w-full px-3.5 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
-                    />
-                  </div>
-                  <div>
-                    <label for="pass-email" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
-                      02. EMAIL NHẬN KHO SKILL.MD *
-                    </label>
-                    <input
-                      id="pass-email"
-                      type="email"
-                      required
-                      placeholder="creator@domain.vn"
-                      class="w-full px-3.5 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
-                    />
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label for="pass-cartridge" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
-                      03. BĂNG TỪ ƯU TIÊN NHẬN TRƯỚC
-                    </label>
-                    <select
-                      id="pass-cartridge"
-                      class="w-full px-3 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
-                    >
-                      <option value="CART-01 // RAZOR-TALK-VI">CART-01 // Podcast & Talking Head</option>
-                      <option value="CART-02 // KINETIC-HOOK-916">CART-02 // TikTok & Reels Viral</option>
-                      <option value="CART-03 // VOX-ARCHIVE-3D">CART-03 // Documentary Faceless</option>
-                      <option value="CART-04 // SHOP-UGC-CONVERTER">CART-04 // Shopee & TikTok Shop</option>
-                      <option value="ALL-120 // FULL STUDIO BUNDLE">FULL BUNDLE // Trọn bộ 120+ file .md</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label for="pass-agent" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
-                      04. CÔNG CỤ AI BẠN DÙNG
-                    </label>
-                    <select
-                      id="pass-agent"
-                      class="w-full px-3 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
-                    >
-                      <option value="CLAUDE CODE / DESKTOP">Claude Code / Desktop</option>
-                      <option value="CURSOR / WINDSURF">Cursor / Windsurf IDE</option>
-                      <option value="CHƯA BIẾT DÙNG (CẦN HƯỚNG DẪN 1-CLICK)">Người mới (Cần bản 1-Click GUI)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="pt-2">
-                  <button
-                    type="submit"
-                    id="pass-submit-btn"
-                    class="w-full te-btn-orange py-3.5 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-between"
-                  >
-                    <span id="pass-submit-label">[ĐÓNG DẤU XÁC NHẬN & GIỮ CHỖ SỚM]</span>
-                    <span>STAMP PASS ➔</span>
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            <!-- Right 5 Cols: Live-Stamped Detachable Ticket Stub -->
-            <div id="ticket-stub" class="lg:col-span-5 p-6 sm:p-8 bg-[var(--bg-putty)] flex flex-col justify-between font-mono relative">
-
-              <!-- Mechanical Rubber Stamp Overlay (Hidden until stamped) -->
-              <div
-                id="rubber-stamp-badge"
-                class="pointer-events-none opacity-0 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-4 border-[var(--accent-green)] text-[var(--accent-green)] px-4 py-2 font-display font-extrabold text-xl uppercase tracking-widest -rotate-12 bg-[var(--surface-card)]/95 z-20"
-              >
-                APPROVED // BATCH #01
-              </div>
-
-              <div class="space-y-4">
-                <div class="flex items-center justify-between border-b border-[var(--grid-strong)] pb-2 text-[11px]">
-                  <span class="font-bold">CUỐNG VÉ // STUB</span>
-                  <span id="stub-serial" class="font-bold text-[var(--accent-orange)]">SN-2026-4589</span>
-                </div>
-
-                <div class="space-y-2.5 text-xs">
-                  <div>
-                    <div class="text-[9px] text-[var(--ink-muted)]">NGƯỜI SỞ HỮU / HOLDER:</div>
-                    <div id="stub-holder" class="font-bold text-sm truncate">@CREATOR_GUEST</div>
-                  </div>
-                  <div>
-                    <div class="text-[9px] text-[var(--ink-muted)]">EMAIL NHẬN BĂNG TỪ:</div>
-                    <div id="stub-email" class="font-bold truncate">CHƯA NHẬP EMAIL</div>
-                  </div>
-                  <div>
-                    <div class="text-[9px] text-[var(--ink-muted)]">GÓI BĂNG TỪ ĐĂNG KÝ:</div>
-                    <div id="stub-cart" class="font-bold text-[var(--accent-orange)] truncate">CART-01 // RAZOR-TALK-VI</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ASCII Barcode & Date Footer -->
-              <div class="pt-5 mt-5 perforated-horizontal space-y-2">
-                <div class="flex items-center justify-between text-[10px] text-[var(--ink-muted)]">
-                  <span>ISSUED: HO CHI MINH CITY</span>
-                  <span id="stub-status" class="font-bold text-[var(--ink-primary)]">STATUS: PENDING</span>
-                </div>
-                <div class="font-mono text-[11px] tracking-[0.22em] font-bold bg-[var(--bg-stock)] p-2 border border-[var(--grid-strong)] text-center overflow-hidden">
-                  ||| |||| | ||| |||| || | |||| |||
-                </div>
-              </div>
-
-            </div>
-
+          <div class="mt-3 flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-accent">Remotion</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">SRT Analysis</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">9:16 Vertical</span>
           </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-vscode-border flex items-center justify-between font-mono text-xs">
+          <button type="button" class="btn-load-skill text-vscode-accent hover:underline flex items-center gap-1 font-semibold" data-skill="remotion-food-short-vn">
+            <span>Load to Editor</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <a href="https://github.com/npdk1/creativetemplate/tree/main/good-skills/remotion-food-short-vn" target="_blank" class="text-vscode-muted hover:text-white" title="View on GitHub">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Skill 2: razor-talk-vi -->
+      <div class="skill-card bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 rounded-xl p-5 flex flex-col justify-between transition-all group" data-category="talk" data-id="razor-talk-vi">
+        <div>
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#21262D] border border-vscode-border flex items-center justify-center text-vscode-orange group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/></svg>
+              </div>
+              <div>
+                <h3 class="text-white font-bold text-sm group-hover:text-vscode-accent transition-colors">razor-talk-vi</h3>
+                <div class="text-[11px] font-mono text-vscode-muted">creativetemplate • v2.4.0</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-borderLight text-vscode-muted">TALK</span>
+          </div>
+
+          <p class="text-xs text-[#8B949E] mt-3 leading-relaxed">
+            Tự động cắt sạch đoạn "ừm, à", khoảng lặng &gt;0.3s bằng VAD tiếng Việt, tự động đóng phụ đề nhảy từ khóa và punch-zoom giữ nhịp.
+          </p>
+
+          <div class="mt-3 flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-orange">FFmpeg VAD</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Whisper-VI</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Punch Zoom</span>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-vscode-border flex items-center justify-between font-mono text-xs">
+          <button type="button" class="btn-load-skill text-vscode-accent hover:underline flex items-center gap-1 font-semibold" data-skill="razor-talk-vi">
+            <span>Load to Editor</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <span class="text-vscode-muted text-[11px]">~35s / phút</span>
+        </div>
+      </div>
+
+      <!-- Skill 3: kinetic-hook-916 -->
+      <div class="skill-card bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 rounded-xl p-5 flex flex-col justify-between transition-all group" data-category="short" data-id="kinetic-hook-916">
+        <div>
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#21262D] border border-vscode-border flex items-center justify-center text-vscode-green group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <div>
+                <h3 class="text-white font-bold text-sm group-hover:text-vscode-accent transition-colors">kinetic-hook-916</h3>
+                <div class="text-[11px] font-mono text-vscode-muted">creativetemplate • v3.1.0</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-borderLight text-vscode-muted">SHORT</span>
+          </div>
+
+          <p class="text-xs text-[#8B949E] mt-3 leading-relaxed">
+            Đưa cảnh cao trào lên 3 giây đầu, chèn hiệu ứng âm thanh Whoosh/Tape Hit và phóng chữ Kinetic typography 60fps giữ chân người xem.
+          </p>
+
+          <div class="mt-3 flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-green">Pattern Interrupt</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">SFX Library</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Remotion CLI</span>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-vscode-border flex items-center justify-between font-mono text-xs">
+          <button type="button" class="btn-load-skill text-vscode-accent hover:underline flex items-center gap-1 font-semibold" data-skill="kinetic-hook-916">
+            <span>Load to Editor</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <span class="text-vscode-muted text-[11px]">~28s / phút</span>
+        </div>
+      </div>
+
+      <!-- Skill 4: vox-archive-3d -->
+      <div class="skill-card bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 rounded-xl p-5 flex flex-col justify-between transition-all group" data-category="essay" data-id="vox-archive-3d">
+        <div>
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#21262D] border border-vscode-border flex items-center justify-center text-vscode-yellow group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              </div>
+              <div>
+                <h3 class="text-white font-bold text-sm group-hover:text-vscode-accent transition-colors">vox-archive-3d</h3>
+                <div class="text-[11px] font-mono text-vscode-muted">creativetemplate • v1.8.5</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-borderLight text-vscode-muted">ESSAY</span>
+          </div>
+
+          <p class="text-xs text-[#8B949E] mt-3 leading-relaxed">
+            Biến file thu âm giọng đọc và thư mục ảnh tĩnh thành video tài liệu có chiều sâu 2.5D Parallax Camera và bút dạ quang quét highlight báo chí.
+          </p>
+
+          <div class="mt-3 flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-yellow">Parallax 3D</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Depth-V2</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Highlighter</span>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-vscode-border flex items-center justify-between font-mono text-xs">
+          <button type="button" class="btn-load-skill text-vscode-accent hover:underline flex items-center gap-1 font-semibold" data-skill="vox-archive-3d">
+            <span>Load to Editor</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <span class="text-vscode-muted text-[11px]">~55s / phút</span>
+        </div>
+      </div>
+
+      <!-- Skill 5: shop-ugc-converter -->
+      <div class="skill-card bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 rounded-xl p-5 flex flex-col justify-between transition-all group" data-category="essay" data-id="shop-ugc-converter">
+        <div>
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#21262D] border border-vscode-border flex items-center justify-center text-vscode-purple group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              </div>
+              <div>
+                <h3 class="text-white font-bold text-sm group-hover:text-vscode-accent transition-colors">shop-ugc-converter</h3>
+                <div class="text-[11px] font-mono text-vscode-muted">creativetemplate • v2.1.0</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-borderLight text-vscode-muted">COMMERCE</span>
+          </div>
+
+          <p class="text-xs text-[#8B949E] mt-3 leading-relaxed">
+            Ghép khung video cận cảnh sản phẩm (Picture-in-Picture), tự động nổi thẻ voucher, đánh giá 5 sao và hạ nhạc nền khi người nói đọc đến giá.
+          </p>
+
+          <div class="mt-3 flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-purple">PiP Video</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Auto-Ducking</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Clean Skin LUT</span>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-vscode-border flex items-center justify-between font-mono text-xs">
+          <button type="button" class="btn-load-skill text-vscode-accent hover:underline flex items-center gap-1 font-semibold" data-skill="shop-ugc-converter">
+            <span>Load to Editor</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <span class="text-vscode-muted text-[11px]">~25s / phút</span>
+        </div>
+      </div>
+
+      <!-- Skill 6: onset-beat-splicer -->
+      <div class="skill-card bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 rounded-xl p-5 flex flex-col justify-between transition-all group" data-category="short" data-id="onset-beat-splicer">
+        <div>
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-[#21262D] border border-vscode-border flex items-center justify-center text-vscode-green group-hover:scale-105 transition-transform">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+              </div>
+              <div>
+                <h3 class="text-white font-bold text-sm group-hover:text-vscode-accent transition-colors">onset-beat-splicer</h3>
+                <div class="text-[11px] font-mono text-vscode-muted">creativetemplate • v1.6.0</div>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-borderLight text-vscode-muted">MONTAGE</span>
+          </div>
+
+          <p class="text-xs text-[#8B949E] mt-3 leading-relaxed">
+            Phân tích tần số bass của nhạc MP3 và tự động cắt chuyển cảnh hàng chục video du lịch/sự kiện khớp chính xác từng nhịp trống.
+          </p>
+
+          <div class="mt-3 flex flex-wrap gap-1.5 font-mono text-[10px]">
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-green">Onset Detection</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Velocity Ramp</span>
+            <span class="px-2 py-0.5 rounded bg-vscode-borderLight text-vscode-muted">Librosa</span>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-vscode-border flex items-center justify-between font-mono text-xs">
+          <button type="button" class="btn-load-skill text-vscode-accent hover:underline flex items-center gap-1 font-semibold" data-skill="onset-beat-splicer">
+            <span>Load to Editor</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <span class="text-vscode-muted text-[11px]">~19s / phút</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       TASK RUNNER / WORKFLOW COMPOSER (VS Code Tasks / Settings JSON Style)
+       ========================================================================= -->
+  <section id="workflow-composer" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-t border-vscode-border">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Config Controls -->
+      <div class="lg:col-span-5 space-y-6">
+        <div>
+          <div class="text-xs font-mono uppercase tracking-wider text-vscode-accent flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+            Workflow Compiler
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Tự Phối Ghép Workflow</h2>
+          <p class="text-vscode-muted text-xs sm:text-sm mt-2">Bật tắt các module xử lý để compiler tự tạo file <code class="px-1 py-0.5 rounded bg-vscode-panel text-vscode-accent font-mono text-xs">custom-pipeline.skill.md</code> theo nhu cầu dự án của bạn.</p>
+        </div>
+
+        <div class="space-y-3 font-mono text-xs" id="composer-toggles">
+          
+          <label class="flex items-center justify-between p-3 rounded-lg bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 cursor-pointer transition-colors">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" checked class="composer-checkbox w-4 h-4 accent-vscode-blue rounded" data-id="vad" data-name="Silence Razor (-38dB VAD)" />
+              <div>
+                <div class="text-white font-semibold">1. Cắt Khoảng Lặng Tự Động (VAD)</div>
+                <div class="text-vscode-muted text-[11px]">Ngưỡng -38dB, giữ padding 0.08s tự nhiên</div>
+              </div>
+            </div>
+            <span class="text-vscode-green font-bold text-[11px]">ACTIVE</span>
+          </label>
+
+          <label class="flex items-center justify-between p-3 rounded-lg bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 cursor-pointer transition-colors">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" checked class="composer-checkbox w-4 h-4 accent-vscode-blue rounded" data-id="subs" data-name="Word-Level Vietnamese Karaoke" />
+              <div>
+                <div class="text-white font-semibold">2. Phụ Đề Động Không Nền</div>
+                <div class="text-vscode-muted text-[11px]">Nhấn màu từ đang đọc, không che chủ thể</div>
+              </div>
+            </div>
+            <span class="text-vscode-green font-bold text-[11px]">ACTIVE</span>
+          </label>
+
+          <label class="flex items-center justify-between p-3 rounded-lg bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 cursor-pointer transition-colors">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" checked class="composer-checkbox w-4 h-4 accent-vscode-blue rounded" data-id="popups" data-name="SRT Insight Cards & Badges" />
+              <div>
+                <div class="text-white font-semibold">3. Thẻ Công Đoạn & Insight Popups</div>
+                <div class="text-vscode-muted text-[11px]">Tự trích xuất gia vị, định lượng từ lời thoại</div>
+              </div>
+            </div>
+            <span class="text-vscode-green font-bold text-[11px]">ACTIVE</span>
+          </label>
+
+          <label class="flex items-center justify-between p-3 rounded-lg bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 cursor-pointer transition-colors">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" checked class="composer-checkbox w-4 h-4 accent-vscode-blue rounded" data-id="punchzoom" data-name="Dynamic Punch Zoom (1.16x)" />
+              <div>
+                <div class="text-white font-semibold">4. Dynamic Camera Punch Zoom</div>
+                <div class="text-vscode-muted text-[11px]">Đẩy nhẹ 1.12x tại các câu hỏi tu từ và điểm nhấn</div>
+              </div>
+            </div>
+            <span class="text-vscode-green font-bold text-[11px]">ACTIVE</span>
+          </label>
+
+          <label class="flex items-center justify-between p-3 rounded-lg bg-vscode-panel border border-vscode-border hover:border-vscode-accent/50 cursor-pointer transition-colors">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" class="composer-checkbox w-4 h-4 accent-vscode-blue rounded" data-id="lut" data-name="Food Editorial Color Grading" />
+              <div>
+                <div class="text-white font-semibold">5. Chỉnh Màu Món Ăn Tươi Sáng (LUT)</div>
+                <div class="text-vscode-muted text-[11px]">Tăng độ bão hòa ấm và chi tiết chảo chiên</div>
+              </div>
+            </div>
+            <span class="text-vscode-muted text-[11px]">OFF</span>
+          </label>
 
         </div>
       </div>
-    </section>
 
-    <!-- ========================================================================
-         TECHNICAL FOOTER
-         ======================================================================== -->
-    <footer class="max-w-[1440px] w-full mx-auto px-6 py-8 font-mono text-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-[var(--ink-muted)]">
+      <!-- Right Code Output & Execution -->
+      <div class="lg:col-span-7 bg-[#1E1E1E] border border-vscode-border rounded-xl overflow-hidden shadow-2xl flex flex-col">
+        <!-- Window titlebar -->
+        <div class="h-9 bg-[#181818] border-b border-[#2B2B2B] px-4 flex items-center justify-between select-none">
+          <div class="flex items-center gap-2 text-xs font-mono text-white">
+            <span class="text-[#CBCB41] font-bold">{}</span>
+            <span>custom-pipeline.skill.md</span>
+            <span class="text-vscode-muted text-[11px]">(Generated by Compiler)</span>
+          </div>
+
+          <button type="button" id="copy-composer-code-btn" class="px-2.5 py-1 rounded bg-vscode-blue hover:bg-vscode-blueHover text-white text-xs font-mono flex items-center gap-1 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span>Copy Skill</span>
+          </button>
+        </div>
+
+        <!-- Generated Skill Text -->
+        <div class="p-4 font-mono text-xs text-[#D4D4D4] max-h-[360px] overflow-y-auto leading-relaxed whitespace-pre" id="composer-code-output">
+---
+name: custom-creative-pipeline
+generator: creativetemplate-web-composer
+repository: https://github.com/npdk1/creativetemplate
+active_modules:
+  - Silence Razor (-38dB VAD)
+  - Word-Level Vietnamese Karaoke
+  - SRT Insight Cards & Badges
+  - Dynamic Punch Zoom (1.16x)
+---
+
+# QUY TRÌNH DỰNG TỰ ĐỘNG THEO SKILL ĐÃ CHỌN
+1. [VAD]: Quét file âm thanh, cắt sạch khoảng lặng >0.3s với padding 0.08s.
+2. [SUBTITLE]: Xuất lớp chữ không nền, highlight từ đang đọc bằng accent #FFA657.
+3. [POPUP]: Phân tích câu nói, tạo nhãn công đoạn canh trái và card thông tin.
+4. [CAMERA]: Punch-zoom 1.12x tại các câu hỏi tu từ và điểm nhấn cao trào.
+        </div>
+
+        <!-- Download Action footer -->
+        <div class="p-3 bg-[#161616] border-t border-[#2B2B2B] flex items-center justify-between text-xs font-mono">
+          <span class="text-vscode-muted">Sẵn sàng để nạp vào agent hoặc Remotion</span>
+          <button type="button" id="download-composer-skill-btn" class="px-3 py-1.5 rounded bg-vscode-panel border border-vscode-border hover:bg-vscode-border text-white transition-colors flex items-center gap-1.5 font-semibold">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Download .skill.md</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       COMMUNITY & GITHUB OPEN SOURCE SECTION
+       ========================================================================= -->
+  <section id="docs" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-t border-vscode-border">
+    <div class="bg-gradient-to-b from-vscode-panel to-[#0D1117] border border-vscode-border rounded-2xl p-8 sm:p-12 relative overflow-hidden">
+      
+      <div class="max-w-3xl">
+        <!-- Octocat Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-vscode-borderLight border border-vscode-border text-white mb-4">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>Open Source on GitHub</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Tham Gia Đóng Góp Vào <br class="hidden sm:inline" />
+          <span class="text-vscode-accent">npdk1/creativetemplate</span>
+        </h2>
+
+        <p class="mt-4 text-vscode-muted text-sm sm:text-base leading-relaxed">
+          Toàn bộ tài nguyên, source code Remotion, bộ quy chuẩn SRT và các skill.md đều được mở hoàn toàn theo giấy phép MIT. Hãy clone repo, gửi pull request hoặc tạo thêm các phong cách dựng mới cho cộng đồng creators Việt Nam.
+        </p>
+
+        <!-- Quick Steps -->
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
+          <div class="p-4 rounded-lg bg-[#181818] border border-vscode-border">
+            <div class="text-vscode-blue font-bold">01. FORK &amp; CLONE</div>
+            <div class="text-vscode-muted mt-1">Fork repo về GitHub cá nhân và chạy <code class="text-white">npm install</code></div>
+          </div>
+          <div class="p-4 rounded-lg bg-[#181818] border border-vscode-border">
+            <div class="text-vscode-green font-bold">02. CREATE SKILL</div>
+            <div class="text-vscode-muted mt-1">Viết file <code class="text-white">skill.md</code> mới trong thư mục <code class="text-white">good-skills/</code></div>
+          </div>
+          <div class="p-4 rounded-lg bg-[#181818] border border-vscode-border">
+            <div class="text-vscode-yellow font-bold">03. PULL REQUEST</div>
+            <div class="text-vscode-muted mt-1">Gửi PR để đóng góp bộ quy chuẩn mới lên nhánh main</div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="https://github.com/npdk1/creativetemplate" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-6 py-3 rounded-lg bg-vscode-blue hover:bg-vscode-blueHover text-white font-semibold text-sm transition-all shadow-lg">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <span>Mở Kho Mã Nguồn GitHub</span>
+          </a>
+
+          <a href="https://github.com/npdk1/creativetemplate/issues" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-lg bg-[#21262D] hover:bg-[#30363D] text-white font-medium text-sm border border-vscode-border transition-colors">
+            Báo Lỗi / Yêu Cầu Tính Năng
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       GLOBAL FOOTER
+       ========================================================================= -->
+  <footer class="border-t border-vscode-border bg-[#0A0D12] py-12 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs font-mono text-vscode-muted">
+      
       <div class="flex items-center gap-3">
-        <span class="w-3 h-3 bg-[var(--ink-primary)] inline-block"></span>
-        <span class="font-bold text-[var(--ink-primary)]">SPLICE.MD</span>
-        <span>— HỆ THỐNG COMBO SKILL.MD DỰNG VIDEO BẰNG AI CHO MỌI NGƯỜI.</span>
+        <!-- VS Code Logo Small -->
+        <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+          <path d="M23.15 2.587L18.21.21a1.49 1.49 0 0 0-1.705.29l-9.46 8.63-4.43-3.36a.93.93 0 0 0-1.12.02l-1.15.89a.925.925 0 0 0-.01 1.45l3.87 3.37-3.87 3.37a.925.925 0 0 0 .01 1.45l1.15.89c.33.25.79.26 1.12.02l4.43-3.36 9.46 8.63c.48.44 1.15.56 1.705.29l4.94-2.377c.52-.25.85-.77.85-1.35V3.937c0-.58-.33-1.1-.85-1.35zM18 17.5l-6.5-5.5L18 6.5v11z" fill="#0078D4"/>
+        </svg>
+        <div>
+          <span class="text-white font-semibold">CreativeTemplate</span> — Zero-GUI Video Editing Framework.
+          <div class="text-[11px] text-vscode-muted mt-0.5">Phát hành tự do dưới giấy phép MIT License.</div>
+        </div>
       </div>
-      <div class="flex items-center gap-6">
-        <span>SHORTCUTS: [SPACE] PLAY • [J/K/L] SCRUB • [M] RAW/AI</span>
-        <a href="#sec-bench" class="underline hover:text-[var(--accent-orange)]">TOP ↑</a>
-      </div>
-    </footer>
 
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/npdk1/creativetemplate" target="_blank" class="hover:text-white transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://remotion.dev" target="_blank" class="hover:text-white transition-colors">Remotion.dev</a>
+        <a href="#marketplace" class="hover:text-white transition-colors">Skill Marketplace</a>
+        <a href="#ide-simulator" class="hover:text-white transition-colors">Back to Top ↑</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       VS CODE COMMAND PALETTE MODAL (Ctrl+K / ⌘K)
+       ========================================================================= -->
+  <div id="cmd-palette-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-20 px-4">
+    <div class="w-full max-w-xl bg-vscode-panel border border-vscode-border rounded-xl shadow-2xl overflow-hidden font-mono text-xs">
+      
+      <!-- Search Input in Palette -->
+      <div class="p-3 border-b border-vscode-border flex items-center gap-2">
+        <span class="text-vscode-blue font-bold">&gt;</span>
+        <input 
+          type="text" 
+          id="cmd-palette-input" 
+          placeholder="Type a command or search skills (e.g. food, run, github, clone)..." 
+          class="bg-transparent flex-1 text-white outline-none placeholder-vscode-muted" />
+        <kbd class="px-1.5 py-0.5 rounded bg-vscode-borderLight text-[10px] text-vscode-muted">ESC</kbd>
+      </div>
+
+      <!-- Command List -->
+      <div class="max-h-72 overflow-y-auto p-1.5 space-y-0.5" id="cmd-palette-list">
+        <button type="button" class="cmd-item w-full text-left px-3 py-2 rounded flex items-center justify-between text-white hover:bg-vscode-blue transition-colors group" data-action="load-food">
+          <div class="flex items-center gap-2">
+            <span class="text-vscode-green font-bold">M↓</span>
+            <span>Load Skill: remotion-food-short-vn (Flagship)</span>
+          </div>
+          <span class="text-vscode-muted text-[10px] group-hover:text-white">Enter</span>
+        </button>
+
+        <button type="button" class="cmd-item w-full text-left px-3 py-2 rounded flex items-center justify-between text-white hover:bg-vscode-blue transition-colors group" data-action="load-talk">
+          <div class="flex items-center gap-2">
+            <span class="text-vscode-orange font-bold">M↓</span>
+            <span>Load Skill: razor-talk-vi (Silence Razor)</span>
+          </div>
+          <span class="text-vscode-muted text-[10px] group-hover:text-white">Enter</span>
+        </button>
+
+        <button type="button" class="cmd-item w-full text-left px-3 py-2 rounded flex items-center justify-between text-white hover:bg-vscode-blue transition-colors group" data-action="github-open">
+          <div class="flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>Open GitHub: npdk1/creativetemplate</span>
+          </div>
+          <span class="text-vscode-muted text-[10px] group-hover:text-white">Enter</span>
+        </button>
+
+        <button type="button" class="cmd-item w-full text-left px-3 py-2 rounded flex items-center justify-between text-white hover:bg-vscode-blue transition-colors group" data-action="toggle-audio">
+          <div class="flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+            <span>Toggle Video Speaker / Audio Mute</span>
+          </div>
+          <span class="text-vscode-muted text-[10px] group-hover:text-white">Enter</span>
+        </button>
+
+        <button type="button" class="cmd-item w-full text-left px-3 py-2 rounded flex items-center justify-between text-white hover:bg-vscode-blue transition-colors group" data-action="copy-clone">
+          <div class="flex items-center gap-2">
+            <span class="text-vscode-green font-bold">$</span>
+            <span>Copy Git Clone Command</span>
+          </div>
+          <span class="text-vscode-muted text-[10px] group-hover:text-white">Enter</span>
+        </button>
+      </div>
+
+    </div>
   </div>
 
-  <!-- ==========================================================================
-       TACTILE HARDWARE NOTIFICATION BANNER (NO ALERT / NO CONFIRM)
-       ========================================================================== -->
-  <div id="hw-toast-rack" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- ==========================================================================
-       APPLICATION LOGIC: NLE CANVAS ENGINE, CARTRIDGES, PATCHBAY & GSAP
-       ========================================================================== -->
+  <!-- =========================================================================
+       CORE INTERACTIVE JAVASCRIPT
+       ========================================================================= -->
   <script>
-    /* --------------------------------------------------------------------------
-       1. CARTRIDGE DATA REPOSITORY (6 AUTHENTIC SKILL.MD PRESETS)
-       -------------------------------------------------------------------------- */
-    const CARTRIDGES = [
-      {
-        id: "cart-01",
-        serial: "CART-01",
-        category: "talk",
-        filename: "razor-talk-vi.skill.md",
-        title: "Cắt Khoảng Thở & Phụ Đề Podcast",
-        useCase: "Tự động cắt sạch đoạn 'ừm, à', khoảng lặng >0.3s và đóng phụ đề nhảy từ khóa cho video nói chuyện / chuyên gia.",
-        engine: "FFmpeg + Whisper-VI",
-        speed: "~35s / phút video",
-        prompt: '"Áp dụng @razor-talk-vi.skill.md cho file_quay_tho.mp4"',
-        canvasTheme: {
-          tag: "PODCAST // AUTO JUMP-CUT",
-          speakerLabel: "SPEAKER_01 // CHUYÊN GIA AI",
-          subtitles: [
-            "Bạn không cần mở Premiere",
-            "Chỉ cần nạp 1 file skill.md",
-            "AI tự cắt sạch khoảng nghỉ thở",
-            "Xuất video 60fps trong 3 phút!"
-          ],
-          brollLabel: "B-ROLL: Sơ đồ quy trình tự động hóa",
-          accentHex: "#FF3E00"
-        },
-        markdown: `---
-name: razor-talk-vi
-serial: CART-01
-version: 2.4.0
-target: podcast_talking_head_vi
-requires: [ffmpeg, whisper-ctranslate2]
----
-
-# QUY TẮC DỰNG VIDEO NÓI CHUYỆN (ZERO-SKILL)
-
-## 1. Cắt Khoảng Lặng Tự Động (Silence Razor)
-- Chạy phân tích VAD tiếng Việt với ngưỡng \`-38dB\`, độ dài tối thiểu \`0.30s\`.
-- Giữ lại \`0.08s\` padding đầu/cuối mỗi câu để giọng nói tự nhiên, không bị cụt chữ.
-
-## 2. Dynamic Punch Zoom (Chống Nhàm Chán)
-- Mỗi khi phát hiện từ khóa nhấn mạnh hoặc câu hỏi tu từ:
-  \`ffmpeg -vf "zoompan=z='if(lte(on,1),1.0,1.16)':d=1"\`
-
-## 3. Phụ Đề Tiếng Việt Chuẩn Nhịp Đọc
-- Tối đa 4 chữ trên một khung hình.
-- Tự động tô màu Cam (#FF3E00) cho động từ mạnh và con số thống kê.
-
-## 4. Chuẩn Hóa Âm Thanh Phòng Thu
-- Áp dụng lọc tạp âm nền + chuẩn hóa âm lượng đạt chuẩn \`-14.0 LUFS\`.`
-      },
-      {
-        id: "cart-02",
-        serial: "CART-02",
-        category: "short",
-        filename: "kinetic-hook-916.skill.md",
-        title: "Reels / TikTok Hook 3 Giây Triệu View",
-        useCase: "Đưa cảnh cao trào lên 3 giây đầu, chèn hiệu ứng âm thanh Whoosh/Pop và phóng chữ Kinetic giữ chân người xem.",
-        engine: "Remotion + FFmpeg",
-        speed: "~28s / phút video",
-        prompt: '"Biến clip_review.mp4 thành Reels viral với @kinetic-hook-916.skill.md"',
-        canvasTheme: {
-          tag: "9:16 VIRAL // 3S HOOK ENGINE",
-          speakerLabel: "CREATOR // SHORT-FORM",
-          subtitles: [
-            "ĐỪNG EDIT THỦ CÔNG NỮA!",
-            "Đây là vũ khí bí mật mới:",
-            "Ghép băng từ skill.md vào AI",
-            "Tăng 300% tốc độ ra video!"
-          ],
-          brollLabel: "B-ROLL: Biểu đồ Retention 88%",
-          accentHex: "#00E676"
-        },
-        markdown: `---
-name: kinetic-hook-916
-serial: CART-02
-version: 3.1.0
-target: tiktok_reels_shorts_916
-requires: [ffmpeg, remotion-cli, whisper-timestamped]
----
-
-# QUY TẮC DỰNG SHORT-FORM GIỮ CHÂN 3 GIÂY ĐẦU
-
-## 1. Pattern Interrupt (00:00 -> 00:03)
-- Trích xuất câu nói có năng lượng cao nhất làm Hook mở đầu.
-- Áp dụng hiệu ứng Scale-In \`125% -> 100%\` trong 8 frames đầu kèm SFX \`tape_hit.wav\`.
-
-## 2. Kinetic Typography (Chữ Động)
-- Render lớp chữ Remotion 60fps bám sát từng âm tiết tiếng Việt.
-- Tự động chèn khung ảnh B-Roll minh họa góc trên khi nhắc đến công cụ/sản phẩm.
-
-## 3. Nhịp Cắt Nhanh (Fast Pacing)
-- Không để một góc hình tĩnh kéo dài quá \`2.2 giây\`.`
-      },
-      {
-        id: "cart-03",
-        serial: "CART-03",
-        category: "essay",
-        filename: "vox-archive-3d.skill.md",
-        title: "Phim Tài Liệu & Kể Chuyện Kiểu Vox",
-        useCase: "Biến file thu âm giọng đọc và thư mục ảnh tĩnh thành video tài liệu có chiều sâu 3D Parallax và bút dạ quang tô chữ.",
-        engine: "Depth-V2 + Remotion",
-        speed: "~55s / phút video",
-        prompt: '"Dựng bài thu âm voice.mp3 và thư mục /anh_tu_lieu bằng @vox-archive-3d.skill.md"',
-        canvasTheme: {
-          tag: "DOCUMENTARY // 2.5D PARALLAX",
-          speakerLabel: "NARRATOR // ARCHIVE ESSAY",
-          subtitles: [
-            "Năm 1924: Bàn cắt phim 16mm ra đời",
-            "Năm 2026: Ngôn ngữ tự nhiên lên ngôi",
-            "Mọi thao tác cắt dán phức tạp",
-            "Nay gói gọn trong tệp văn bản .md"
-          ],
-          brollLabel: "ARCHIVE: Tư liệu báo chí + Highlight vàng",
-          accentHex: "#FFB300"
-        },
-        markdown: `---
-name: vox-archive-3d
-serial: CART-03
-version: 1.8.5
-target: youtube_documentary_essay
-requires: [ffmpeg, remotion-three, depth-estimation]
----
-
-# QUY TẮC PHIM TÀI LIỆU KỂ CHUYỆN (ARCHIVE STYLE)
-
-## 1. Tách Lớp Chiều Sâu 2.5D (Parallax Camera)
-- Tự động tách tiền cảnh và hậu cảnh cho mọi bức ảnh tĩnh trong thư mục tư liệu.
-- Tạo chuyển động camera đẩy nhẹ trục Z (\`Z-Push 1.0 -> 1.12\`) kèm hạt nhiễu phim 16mm.
-
-## 2. Hiệu Ứng Bút Dạ Quang Trích Dẫn Báo Chí
-- Khi giọng đọc khớp với đoạn văn bản trên ảnh chụp bài báo, vẽ vệt màu vàng \`#FFB300\` quét ngang dòng chữ.
-
-## 3. Âm Thanh Không Gian
-- Trộn tiếng máy chiếu phim cổ nhẹ (-28dB) và tiếng lật trang giấy khi chuyển chương.`
-      },
-      {
-        id: "cart-04",
-        serial: "CART-04",
-        category: "essay",
-        filename: "shop-ugc-converter.skill.md",
-        title: "Video UGC Bán Hàng Shopee / TikTok Shop",
-        useCase: "Ghép khung video cận cảnh sản phẩm (PiP), tự động nổi thẻ ưu đãi, đánh giá 5 sao và hạ nhạc nền khi đọc giá.",
-        engine: "FFmpeg + Auto-Ducking",
-        speed: "~25s / phút video",
-        prompt: '"Tối ưu video review_my_pham.mp4 chốt đơn với @shop-ugc-converter.skill.md"',
-        canvasTheme: {
-          tag: "COMMERCE // UGC CONVERSION",
-          speakerLabel: "REVIEWER // TIKTOK SHOP",
-          subtitles: [
-            "Quay xong 10 clip review sản phẩm?",
-            "Đừng ngồi ghép chữ từng cái!",
-            "Chạy ngay băng từ UGC Converter",
-            "Tự chèn khung giá & nút chốt đơn!"
-          ],
-          brollLabel: "PIP: Cận cảnh chất liệu + Đánh giá 4.9★",
-          accentHex: "#FF3E00"
-        },
-        markdown: `---
-name: shop-ugc-converter
-serial: CART-04
-version: 2.1.0
-target: tiktok_shop_shopee_video
-requires: [ffmpeg, whisper-vi]
----
-
-# QUY TẮC VIDEO BÁN HÀNG CHUYỂN ĐỔI CAO
-
-## 1. Cửa Sổ Đôi Sản Phẩm (Picture-in-Picture)
-- Giây 00:02: Mở khung PiP bo viền 2px góc phải hiển thị video cận cảnh kết cấu sản phẩm.
-
-## 2. Tự Động Hạ Nhạc Nền (Audio Ducking)
-- Khi người review đọc đến từ khóa: "giá", "ưu đãi", "voucher", "giỏ hàng":
-  Tự động ép nhạc nền xuống \`-20dB\` và thêm âm báo \`cash_register_soft.wav\`.
-
-## 3. Chỉnh Màu Sáng Da Tự Nhiên
-- Áp dụng LUT \`clean_commercial.cube\` tăng độ tươi sáng vùng da thêm 12%.`
-      },
-      {
-        id: "cart-05",
-        serial: "CART-05",
-        category: "short",
-        filename: "onset-beat-splicer.skill.md",
-        title: "Tự Động Cắt Ghép Khớp Nhịp Trống (Beat-Sync)",
-        useCase: "Phân tích tần số bass của file nhạc MP3 và tự động cắt hàng chục video du lịch/sự kiện khớp chính xác từng nhịp trống.",
-        engine: "Librosa + FFmpeg",
-        speed: "~19s / phút video",
-        prompt: '"Ghép 15 clip trong /travel_clips khớp nhịp nhạc beat.mp3 bằng @onset-beat-splicer.skill.md"',
-        canvasTheme: {
-          tag: "MONTAGE // ONSET BEAT-SYNC",
-          speakerLabel: "BEAT DETECTOR // 128 BPM",
-          subtitles: [
-            "Bỏ 15 clip rời rạc vào thư mục",
-            "AI tự dò từng đỉnh sóng Bass",
-            "Cắt chuyển cảnh chính xác từng frame",
-            "Thêm Speed-Ramp mượt mà tức thì!"
-          ],
-          brollLabel: "ONSET: Đỉnh Bass #14 // Speed 240%",
-          accentHex: "#00E676"
-        },
-        markdown: `---
-name: onset-beat-splicer
-serial: CART-05
-version: 1.6.0
-target: travel_event_montage
-requires: [python-librosa, ffmpeg]
----
-
-# QUY TẮC CẮT VIDEO KHỚP NHẠC TỰ ĐỘNG
-
-## 1. Dò Tìm Đỉnh Nhịp Trống (Onset Detection)
-- Trích xuất mốc thời gian (timestamps) của toàn bộ nhịp Kick/Snare trong dải tần \`60Hz - 140Hz\`.
-
-## 2. Cắt & Ghép Đa Clip Thông Minh
-- Tự động lấy phần chuyển động đẹp nhất của mỗi clip trong thư mục đầu vào, cắt khớp đúng độ dài giữa 2 nhịp trống.
-
-## 3. Velocity Speed-Ramp
-- Tăng tốc độ khung hình lên \`240%\` ở 4 frames trước điểm cắt để tạo lực đẩy thị giác.`
-      },
-      {
-        id: "cart-06",
-        serial: "CART-06",
-        category: "talk",
-        filename: "multicam-diarization.skill.md",
-        title: "Tự Chuyển Góc Máy Podcast 2-3 Người",
-        useCase: "Nhận diện ai đang cất tiếng nói để tự động cắt sang góc máy cận của người đó, khi cả hai cùng cười tự chuyển sang góc toàn.",
-        engine: "Pyannote + FFmpeg XML",
-        speed: "~48s / phút video",
-        prompt: '"Đồng bộ và tự chuyển góc cam_A.mp4, cam_B.mp4, cam_wide.mp4 với @multicam-diarization.skill.md"',
-        canvasTheme: {
-          tag: "MULTI-CAM // SPEAKER SWITCH",
-          speakerLabel: "CAM_A ACTIVE // DIARIZATION",
-          subtitles: [
-            "Quay Podcast 2 máy cực nhàn:",
-            "Ai đang nói -> Tự bật Cam người đó",
-            "Cả hai cùng nói -> Tự mở Cam góc rộng",
-            "Xuất thẳng MP4 hoặc XML Premiere!"
-          ],
-          brollLabel: "SWITCH: CAM_A -> CAM_WIDE (Auto)",
-          accentHex: "#FFB300"
-        },
-        markdown: `---
-name: multicam-diarization
-serial: CART-06
-version: 2.0.0
-target: multicam_podcast_interview
-requires: [pyannote-audio, ffmpeg]
----
-
-# QUY TẮC Đạo Diễn Hình Tự Động Đa Góc Máy
-
-## 1. Phân Tách Người Nói (Speaker Diarization)
-- Đồng bộ âm thanh giữa \`cam_A.mp4\`, \`cam_B.mp4\` và \`cam_wide.mp4\`.
-- Xác định chính xác mốc thời gian người nói #1 và người nói #2.
-
-## 2. Luật Đạo Diễn Chuyển Cảnh
-- Khi 1 người nói liên tục > 1.5s: Chuyển sang góc máy cận tương ứng.
-- Khi có tiếng cười hoặc 2 người nói chồng lên nhau: Chuyển ngay sang \`cam_wide.mp4\`.
-- Xuất kèm file \`.xml\` nếu muốn tinh chỉnh lại trong DaVinci/Premiere.`
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // Toast notification helper
+      function showToast(message, type = "success") {
+        const toastContainer = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        toast.className = "flex items-center gap-2 px-3.5 py-2.5 bg-vscode-panel border border-vscode-border rounded-lg text-white font-mono text-xs shadow-xl animate-fade-in";
+        
+        const iconSvg = type === "success" 
+          ? `<svg class="w-4 h-4 text-vscode-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`
+          : `<svg class="w-4 h-4 text-vscode-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+        
+        toast.innerHTML = `${iconSvg}<span>${message}</span>`;
+        toastContainer.appendChild(toast);
+        
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.3s ease';
+          setTimeout(() => toast.remove(), 300);
+        }, 2500);
       }
-    ];
 
-    /* --------------------------------------------------------------------------
-       2. PATCHBAY ATOMIC MICRO-SKILLS DATA
-       -------------------------------------------------------------------------- */
-    const PATCH_MODULES = [
-      {
-        id: "mod-silence",
-        codeName: "razor-silence-38db.md",
-        title: "Cắt Khoảng Lặng & Tiếng Thở (-38dB)",
-        desc: "Tự động loại bỏ đoạn ngập ngừng dài quá 0.30s bằng VAD.",
-        tokens: 320,
-        seconds: 8,
-        active: true,
-        snippet: `  - module: razor-silence-38db
-    threshold: "-38dB"
-    min_silence_duration: 0.30
-    padding_ms: 80`
-      },
-      {
-        id: "mod-sub-vi",
-        codeName: "kinetic-vn-captions.md",
-        title: "Phụ Đề Động Tiếng Việt Highlight Từ Khóa",
-        desc: "Tách 3-4 từ/dòng, tự động đổi màu Cam cho động từ & con số.",
-        tokens: 410,
-        seconds: 12,
-        active: true,
-        snippet: `  - module: kinetic-vn-captions
-    font_family: "Space Grotesk Bold"
-    max_words_per_line: 4
-    highlight_color: "#FF3E00"`
-      },
-      {
-        id: "mod-zoom",
-        codeName: "auto-zoom-punch.md",
-        title: "Auto Punch-Zoom Nhấn Trọng Tâm (1.16x)",
-        desc: "Phóng nhẹ khung hình tại đầu mỗi luận điểm quan trọng.",
-        tokens: 260,
-        seconds: 6,
-        active: true,
-        snippet: `  - module: auto-zoom-punch
-    zoom_factor: 1.16
-    easing: "cubic-bezier(0.22, 1, 0.36, 1)"`
-      },
-      {
-        id: "mod-broll",
-        codeName: "semantic-broll-pip.md",
-        title: "Tự Động Chèn Cửa Sổ B-Roll Theo Ngữ Cảnh",
-        desc: "Hiển thị video/ảnh minh họa ở góc trên khi nhắc tới từ khóa.",
-        tokens: 490,
-        seconds: 14,
-        active: false,
-        snippet: `  - module: semantic-broll-pip
-    layout: "picture-in-picture-top-right"
-    border_px: 2`
-      },
-      {
-        id: "mod-ducking",
-        codeName: "lofi-ducking-audio.md",
-        title: "Chuẩn Hóa Giọng -14 LUFS & Tự Hạ Nhạc Nền",
-        desc: "Làm sạch tạp âm phòng và ép nhạc nền xuống -18dB khi có tiếng nói.",
-        tokens: 290,
-        seconds: 7,
-        active: false,
-        snippet: `  - module: lofi-ducking-audio
-    target_lufs: -14.0
-    bgm_ducking_db: -18`
-      },
-      {
-        id: "mod-grade",
-        codeName: "kodak-2383-film-grade.md",
-        title: "Màu Phim Điện Ảnh Kodak 2383 + Hạt Phim 16mm",
-        desc: "Áp LUT màu tương phản ấm và lớp grain nhẹ chống cảm giác video thô.",
-        tokens: 340,
-        seconds: 10,
-        active: true,
-        snippet: `  - module: kodak-2383-film-grade
-    lut_profile: "kodak_2383_warm.cube"
-    grain_intensity: 0.18`
-      }
-    ];
-
-    /* --------------------------------------------------------------------------
-       3. HARDWARE TOAST & CLIPBOARD / FILE EXPORT UTILITIES
-       -------------------------------------------------------------------------- */
-    function triggerHardwareToast(msg, tag = "SYSTEM // OK") {
-      const rack = document.getElementById("hw-toast-rack");
-      const item = document.createElement("div");
-      item.className = "pointer-events-auto bg-[var(--surface-card)] text-[var(--ink-primary)] border-2 border-[var(--grid-strong)] shadow-[4px_4px_0px_var(--grid-strong)] p-3.5 font-mono text-xs max-w-sm";
-      item.innerHTML = `
-        <div class="flex items-center justify-between border-b border-[var(--grid-line)] pb-1 mb-1.5 text-[10px]">
-          <span class="font-bold text-[var(--accent-orange)]">[${tag}]</span>
-          <span class="text-[var(--ink-muted)]">SPLICE.MD</span>
-        </div>
-        <div class="leading-snug">${msg}</div>
-      `;
-      rack.appendChild(item);
-
-      gsap.fromTo(item, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power2.out" });
-      setTimeout(() => {
-        gsap.to(item, {
-          opacity: 0,
-          x: 20,
-          duration: 0.2,
-          onComplete: () => item.remove()
+      // Copy to clipboard helper
+      function copyText(text, successMsg = "Đã copy vào bộ nhớ tạm!") {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMsg);
+        }).catch(() => {
+          showToast("Copy thất bại!", "error");
         });
-      }, 3400);
-    }
-
-    function copyTextSafe(text, filename) {
-      try {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        triggerHardwareToast(`Đã sao chép <strong>${filename}</strong> vào bộ nhớ tạm. Sẵn sàng dán vào Claude/Cursor!`, "CLIPBOARD // COPIED");
-      } catch (e) {
-        triggerHardwareToast(`Đã sao chép ${filename}!`, "CLIPBOARD");
-      }
-    }
-
-    function downloadMarkdownFile(filename, content) {
-      const blob = new Blob([content], { type: "text/markdown;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      triggerHardwareToast(`Đã xuất file <strong>${filename}</strong> về máy của bạn.`, "DISK // EXPORTED");
-    }
-
-    /* --------------------------------------------------------------------------
-       4. REAL KEYBOARD-DRIVEN NLE CANVAS MONITOR ENGINE
-       -------------------------------------------------------------------------- */
-    const canvas = document.getElementById("nle-monitor-canvas");
-    const ctx = canvas.getContext("2d");
-
-    let activeCartridge = CARTRIDGES[0];
-    let isPlaying = true;
-    let playbackRate = 1; // 1 = normal, 2 = fast-forward (L), -1 = rewind (J)
-    let currentFrame = 72;
-    const totalFrames = 360;
-    let isAiCutMode = true; // true = AI skill.md applied, false = Raw unedited footage
-
-    function formatFrameToSMPTE(frame) {
-      const f = Math.floor(frame % 24);
-      const s = Math.floor((frame / 24) % 60);
-      const m = Math.floor((frame / (24 * 60)) % 60);
-      return `00:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}:${String(f).padStart(2, "0")}`;
-    }
-
-    function renderNLEMonitorFrame() {
-      const w = canvas.width;
-      const h = canvas.height;
-      const theme = activeCartridge.canvasTheme;
-
-      // 1. Background Studio Frame
-      ctx.fillStyle = isAiCutMode ? "#121210" : "#1C1B18";
-      ctx.fillRect(0, 0, w, h);
-
-      // 2. Subtle Technical Grid inside Monitor
-      ctx.strokeStyle = isAiCutMode ? "rgba(234, 229, 217, 0.07)" : "rgba(234, 229, 217, 0.03)";
-      ctx.lineWidth = 1;
-      for (let x = 0; x < w; x += 50) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, h);
-        ctx.stroke();
-      }
-      for (let y = 0; y < h; y += 50) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(w, y);
-        ctx.stroke();
       }
 
-      // Check if current frame falls in a "Silence Zone" (frames 90-120 or 210-240)
-      const inSilenceGap = (currentFrame >= 90 && currentFrame <= 120) || (currentFrame >= 210 && currentFrame <= 240);
+      // 1. Copy git clone
+      const copyCloneBtn = document.getElementById("copy-clone-btn");
+      const gitCloneInput = document.getElementById("git-clone-input");
+      const copyCloneText = document.getElementById("copy-clone-text");
 
-      // Dynamic Zoom Factor when AI Cut is active
-      const punchZoom = (isAiCutMode && ((currentFrame > 40 && currentFrame < 85) || (currentFrame > 160 && currentFrame < 205))) ? 1.14 : 1.0;
+      copyCloneBtn?.addEventListener("click", () => {
+        copyText(gitCloneInput.value, "Đã copy lệnh git clone!");
+        copyCloneText.textContent = "Copied!";
+        setTimeout(() => copyCloneText.textContent = "Copy", 2000);
+      });
 
-      ctx.save();
-      ctx.translate(w / 2, h / 2);
-      ctx.scale(punchZoom, punchZoom);
-      ctx.translate(-w / 2, -h / 2);
+      // 2. Video Player & Audio Speaker Toggle Logic
+      const video = document.getElementById("main-preview-video");
+      const splitVideo = document.getElementById("split-secondary-video");
+      const splitOverlay = document.getElementById("split-overlay-container");
+      const btnToggleAudio = document.getElementById("btn-toggle-audio");
+      const iconMuted = document.getElementById("icon-muted");
+      const iconUnmuted = document.getElementById("icon-unmuted");
+      const audioLabel = document.getElementById("audio-label");
+      const btnPlayPause = document.getElementById("btn-play-pause");
+      const playIcon = document.getElementById("play-icon");
+      const pauseIcon = document.getElementById("pause-icon");
+      const playPauseText = document.getElementById("play-pause-text");
+      const timelineScrubber = document.getElementById("timeline-scrubber");
+      const timeCurrent = document.getElementById("time-current");
+      const timeDuration = document.getElementById("time-duration");
 
-      // 3. Draw Simulated Speaker / Subject Silhouette & Waveform Ring
-      const centerX = w * 0.36;
-      const centerY = h * 0.47;
+      const URL_AFTER = "https://github.com/user-attachments/assets/5c9b257f-e231-416c-8c22-bd231318a648";
+      const URL_ORIGINAL = "https://github.com/user-attachments/assets/97c8308d-15a9-43be-83d9-f1db0beb2747";
 
-      // Frame border around subject
-      ctx.strokeStyle = isAiCutMode ? theme.accentHex : "#6E6A63";
-      ctx.lineWidth = 2;
-      ctx.strokeRect(60, 58, 380, 250);
+      // Video audio toggle: Auto muted by default, user can click to unmute!
+      btnToggleAudio?.addEventListener("click", () => {
+        if (!video) return;
+        video.muted = !video.muted;
+        if (splitVideo) splitVideo.muted = true; // keep split muted to avoid echo
 
-      // Speaker Head & Shoulders Geometric Illustration
-      ctx.fillStyle = "#262522";
-      ctx.fillRect(62, 60, 376, 246);
-
-      // Animated Audio Waveform inside Speaker Frame
-      const bars = 28;
-      const barWidth = 9;
-      const startX = 88;
-      for (let i = 0; i < bars; i++) {
-        let amp = Math.abs(Math.sin((currentFrame * 0.18) + i * 0.55)) * 75 + 12;
-        if (!isAiCutMode && inSilenceGap) {
-          amp = 4; // Dead air silence in raw footage!
-        }
-        ctx.fillStyle = (!isAiCutMode && inSilenceGap) ? "#57534E" : theme.accentHex;
-        ctx.fillRect(startX + i * (barWidth + 3), centerY - amp / 2, barWidth, amp);
-      }
-
-      // Speaker Tag
-      ctx.fillStyle = "#EAE5D9";
-      ctx.font = "bold 12px 'JetBrains Mono', monospace";
-      ctx.fillText(theme.speakerLabel, 76, 84);
-
-      if (punchZoom > 1.01) {
-        ctx.fillStyle = theme.accentHex;
-        ctx.fillText("⚡ AUTO PUNCH-ZOOM 1.14x", 76, 292);
-      }
-
-      ctx.restore();
-
-      // 4. Right Side: Auto B-Roll Picture-in-Picture Window (Only in AI Mode)
-      if (isAiCutMode) {
-        ctx.fillStyle = "#1B1B18";
-        ctx.fillRect(475, 58, 270, 165);
-        ctx.strokeStyle = "#EAE5D9";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(475, 58, 270, 165);
-
-        // Header bar of PiP
-        ctx.fillStyle = theme.accentHex;
-        ctx.fillRect(475, 58, 270, 24);
-        ctx.fillStyle = "#111110";
-        ctx.font = "bold 11px 'JetBrains Mono', monospace";
-        ctx.fillText("AUTO B-ROLL // SKILL.MD", 485, 74);
-
-        // Animated chart bars inside B-Roll PiP
-        for (let c = 0; c < 6; c++) {
-          const bh = 25 + ((c * 17 + Math.floor(currentFrame * 0.6)) % 75);
-          ctx.fillStyle = c === 4 ? theme.accentHex : "#EAE5D9";
-          ctx.fillRect(500 + c * 38, 200 - bh, 24, bh);
-        }
-
-        ctx.fillStyle = "#EAE5D9";
-        ctx.font = "11px 'Space Grotesk', sans-serif";
-        ctx.fillText(theme.brollLabel, 485, 244);
-      } else {
-        // Raw mode notice on right
-        ctx.strokeStyle = "#57534E";
-        ctx.setLineDash([5, 5]);
-        ctx.strokeRect(475, 58, 270, 165);
-        ctx.setLineDash([]);
-        ctx.fillStyle = "#8C887E";
-        ctx.font = "12px 'JetBrains Mono', monospace";
-        ctx.fillText("[VIDEO THÔ CHƯA QUA SKILL.MD]", 495, 135);
-        ctx.fillText("- Chưa có B-Roll tự động", 495, 158);
-        ctx.fillText("- Còn nguyên khoảng ngập ngừng", 495, 178);
-      }
-
-      // 5. Kinetic Vietnamese Subtitle Bar at Bottom
-      const subIdx = Math.floor((currentFrame / totalFrames) * theme.subtitles.length) % theme.subtitles.length;
-      const activeSubText = (!isAiCutMode && inSilenceGap)
-        ? "... [Khoảng lặng ngập ngừng 1.4 giây] ..."
-        : theme.subtitles[subIdx];
-
-      // Subtitle Backdrop Box
-      ctx.fillStyle = "#0A0A09";
-      ctx.fillRect(60, 345, 685, 64);
-      ctx.strokeStyle = isAiCutMode ? theme.accentHex : "#57534E";
-      ctx.lineWidth = 2;
-      ctx.strokeRect(60, 345, 685, 64);
-
-      // Subtitle Text
-      ctx.fillStyle = (!isAiCutMode && inSilenceGap) ? "#FF3E00" : "#FFFFFF";
-      ctx.font = "bold 22px 'Space Grotesk', sans-serif";
-      ctx.fillText(activeSubText.toUpperCase(), 82, 385);
-
-      // Mode Tag Pill inside Canvas
-      ctx.fillStyle = isAiCutMode ? "#00E676" : "#FFB300";
-      ctx.font = "bold 11px 'JetBrains Mono', monospace";
-      ctx.fillText(isAiCutMode ? `● AI SKILL ACTIVE: ${activeCartridge.filename}` : "○ RAW UNEDITED FOOTAGE (BẤM [M] ĐỂ BẬT AI)", 60, 333);
-    }
-
-    function updateTimelineUI() {
-      const pct = (currentFrame / totalFrames) * 100;
-      const playhead = document.getElementById("nle-playhead");
-      if (playhead) playhead.style.left = `${Math.min(98, Math.max(2, pct))}%`;
-
-      const tc = formatFrameToSMPTE(currentFrame);
-      document.getElementById("monitor-tc-overlay").textContent = `TC ${tc}`;
-      document.getElementById("scrub-frame-info").textContent = `FRAME: ${String(Math.floor(currentFrame)).padStart(3, "0")} / ${totalFrames}`;
-
-      // Animate VU meters
-      const barL = document.getElementById("vu-bar-l");
-      const barR = document.getElementById("vu-bar-r");
-      if (isPlaying) {
-        const lVal = 45 + Math.floor(Math.abs(Math.sin(currentFrame * 0.35)) * 45);
-        const rVal = 40 + Math.floor(Math.abs(Math.cos(currentFrame * 0.28)) * 50);
-        barL.style.height = `${lVal}%`;
-        barR.style.height = `${rVal}%`;
-      } else {
-        barL.style.height = "12%";
-        barR.style.height = "12%";
-      }
-    }
-
-    function stepNLELoop() {
-      if (isPlaying) {
-        currentFrame += 0.45 * playbackRate;
-        // If AI Cut mode is active, automatically skip silence frames (90-120) to demonstrate auto-cut!
-        if (isAiCutMode && playbackRate > 0 && currentFrame >= 90 && currentFrame < 118) {
-          currentFrame = 120;
-        }
-        if (currentFrame >= totalFrames) currentFrame = 0;
-        if (currentFrame < 0) currentFrame = totalFrames - 1;
-        updateTimelineUI();
-      }
-      renderNLEMonitorFrame();
-      requestAnimationFrame(stepNLELoop);
-    }
-
-    function setTransportState(playing, rate = 1) {
-      isPlaying = playing;
-      playbackRate = rate;
-      const badge = document.getElementById("monitor-state-badge");
-      const dot = document.getElementById("monitor-rec-dot");
-
-      if (!isPlaying) {
-        badge.textContent = "PAUSED // FRAME HOLD";
-        dot.style.backgroundColor = "#FFB300";
-      } else if (playbackRate === 2) {
-        badge.textContent = "FAST FORWARD // 2.0X";
-        dot.style.backgroundColor = "#00E676";
-      } else if (playbackRate < 0) {
-        badge.textContent = "REWIND // -1.5X";
-        dot.style.backgroundColor = "#FF3E00";
-      } else {
-        badge.textContent = "PLAYING // 24FPS";
-        dot.style.backgroundColor = "#FF3E00";
-      }
-    }
-
-    // Transport Button Bindings
-    document.getElementById("btn-transport-space").addEventListener("click", () => {
-      setTransportState(!isPlaying, 1);
-    });
-    document.getElementById("btn-transport-k").addEventListener("click", () => {
-      setTransportState(false, 1);
-    });
-    document.getElementById("btn-transport-j").addEventListener("click", () => {
-      setTransportState(true, -1.5);
-    });
-    document.getElementById("btn-transport-l").addEventListener("click", () => {
-      setTransportState(true, 2);
-    });
-
-    // Toggle Before / After AI Cut Mode
-    document.getElementById("toggle-ab-mode-btn").addEventListener("click", () => {
-      isAiCutMode = !isAiCutMode;
-      const label = document.getElementById("ab-mode-text");
-      if (isAiCutMode) {
-        label.textContent = "SAU KHI CHẠY SKILL.MD (AI CUT)";
-        label.className = "text-[var(--accent-green)]";
-      } else {
-        label.textContent = "VIDEO GỐC CHƯA CẮT (RAW)";
-        label.className = "text-[var(--accent-orange)]";
-      }
-      renderNLEMonitorFrame();
-    });
-
-    // Interactive Timeline Mouse/Touch Scrubbing
-    const scrubTrack = document.getElementById("timeline-scrub-track");
-    let isScrubbing = false;
-
-    function scrubToEvent(e) {
-      const rect = scrubTrack.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
-      currentFrame = Math.floor(ratio * totalFrames);
-      updateTimelineUI();
-      renderNLEMonitorFrame();
-    }
-
-    scrubTrack.addEventListener("mousedown", (e) => {
-      isScrubbing = true;
-      setTransportState(false, 1);
-      scrubToEvent(e);
-    });
-    window.addEventListener("mousemove", (e) => {
-      if (isScrubbing) scrubToEvent(e);
-    });
-    window.addEventListener("mouseup", () => {
-      isScrubbing = false;
-    });
-
-    // Real Keyboard Shortcuts (Space, J, K, L, M) when not typing in form inputs
-    window.addEventListener("keydown", (e) => {
-      const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
-      if (tag === "input" || tag === "textarea" || tag === "select") return;
-
-      if (e.code === "Space") {
-        e.preventDefault();
-        setTransportState(!isPlaying, 1);
-      } else if (e.key.toLowerCase() === "k") {
-        setTransportState(false, 1);
-      } else if (e.key.toLowerCase() === "j") {
-        setTransportState(true, -1.5);
-      } else if (e.key.toLowerCase() === "l") {
-        setTransportState(true, 2);
-      } else if (e.key.toLowerCase() === "m") {
-        document.getElementById("toggle-ab-mode-btn").click();
-      }
-    });
-
-    /* --------------------------------------------------------------------------
-       5. CARTRIDGE RACK RENDERING & INSPECTOR SYNCHRONIZATION
-       -------------------------------------------------------------------------- */
-    function selectCartridge(cartId, scrollToMonitor = false) {
-      const found = CARTRIDGES.find(c => c.id === cartId);
-      if (!found) return;
-      activeCartridge = found;
-
-      // Highlight selected cartridge card
-      document.querySelectorAll(".cartridge-card").forEach(el => {
-        if (el.getAttribute("data-cart-id") === cartId) {
-          el.classList.add("selected-cart");
+        if (video.muted) {
+          iconMuted.classList.remove("hidden");
+          iconUnmuted.classList.add("hidden");
+          audioLabel.textContent = "Muted";
+          showToast("Đã tắt âm thanh video");
         } else {
-          el.classList.remove("selected-cart");
+          iconMuted.classList.add("hidden");
+          iconUnmuted.classList.remove("hidden");
+          audioLabel.textContent = "Loa Bật";
+          showToast("Đã bật loa video!");
         }
       });
 
-      // Update Inspector Panel
-      document.getElementById("inspector-filename").textContent = found.filename;
-      document.getElementById("inspector-serial").textContent = found.serial;
-      document.getElementById("inspector-engine").textContent = found.engine;
-      document.getElementById("inspector-speed").textContent = found.speed;
-      document.getElementById("inspector-code-view").textContent = found.markdown;
-      document.getElementById("inspector-prompt-example").textContent = found.prompt;
-
-      // Update NLE Monitor Deck Header
-      document.getElementById("deck-active-cart-label").textContent = `${found.serial}: ${found.filename}`;
-      document.getElementById("deck-cli-command").textContent = `claude ${found.prompt}`;
-
-      renderNLEMonitorFrame();
-
-      if (scrollToMonitor) {
-        document.getElementById("sec-bench").scrollIntoView({ behavior: "smooth" });
-        triggerHardwareToast(`Đã nạp băng từ <strong>${found.serial} (${found.filename})</strong> vào bàn dựng NLE.`, "DECK // LOADED");
+      // Video Play / Pause Toggle
+      function togglePlayPause() {
+        if (!video) return;
+        if (video.paused) {
+          video.play().catch(e => console.log("Autoplay caught:", e));
+          if (splitVideo && !splitOverlay.classList.contains("hidden")) {
+            splitVideo.play().catch(() => {});
+          }
+          playIcon.classList.add("hidden");
+          pauseIcon.classList.remove("hidden");
+          playPauseText.textContent = "Pause";
+        } else {
+          video.pause();
+          if (splitVideo) splitVideo.pause();
+          playIcon.classList.remove("hidden");
+          pauseIcon.classList.add("hidden");
+          playPauseText.textContent = "Play";
+        }
       }
-    }
 
-    function renderCartridgeRack(filter = "all") {
-      const grid = document.getElementById("cartridge-grid");
-      const list = filter === "all" ? CARTRIDGES : CARTRIDGES.filter(c => c.category === filter);
+      btnPlayPause?.addEventListener("click", togglePlayPause);
+      video?.addEventListener("click", togglePlayPause);
 
-      grid.innerHTML = list.map(c => {
-        const isSelected = c.id === activeCartridge.id ? "selected-cart" : "";
-        return `
-          <article
-            data-cart-id="${c.id}"
-            class="cartridge-card tape-notch p-5 flex flex-col justify-between cursor-pointer ${isSelected}"
-          >
-            <div>
-              <!-- Top Cartridge Spine -->
-              <div class="flex items-center justify-between border-b border-[var(--grid-strong)] pb-2 mb-3 font-mono text-[11px]">
-                <span class="px-2 py-0.5 bg-[var(--ink-primary)] text-[var(--bg-stock)] font-bold">${c.serial}</span>
-                <span class="text-[var(--ink-muted)] font-bold">${c.engine}</span>
-              </div>
+      // Timeline update
+      video?.addEventListener("timeupdate", () => {
+        if (!video.duration) return;
+        const pct = (video.currentTime / video.duration) * 100;
+        timelineScrubber.value = pct;
+        
+        const curM = Math.floor(video.currentTime / 60);
+        const curS = Math.floor(video.currentTime % 60);
+        timeCurrent.textContent = `${curM.toString().padStart(2, '0')}:${curS.toString().padStart(2, '0')}`;
+        
+        const durM = Math.floor(video.duration / 60);
+        const durS = Math.floor(video.duration % 60);
+        timeDuration.textContent = `${durM.toString().padStart(2, '0')}:${durS.toString().padStart(2, '0')}`;
+      });
 
-              <!-- Cartridge Title & File -->
-              <h3 class="font-display font-extrabold text-lg uppercase tracking-tight leading-snug">
-                ${c.title}
-              </h3>
-              <div class="mt-1.5 inline-block px-2 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-strong)] font-mono text-xs font-bold text-[var(--accent-
+      // Scrubbing
+      timelineScrubber?.addEventListener("input", (e) => {
+        if (!video || !video.duration) return;
+        const seek = (e.target.value / 100) * video.duration;
+        video.currentTime = seek;
+        if (splitVideo) splitVideo.currentTime = seek;
+      });
+
+      // A/B Video Modes
+      const btnModeAfter = document.getElementById("btn-mode-after");
+      const btnModeOriginal = document.getElementById("btn-mode-original");
+      const btnModeSplit = document.getElementById("btn-mode-split");
+      const videoStateBadge = document.getElementById("video-state-badge");
+
+      function setModeButtons(activeBtn) {
+        [btnModeAfter, btnModeOriginal, btnModeSplit].forEach(b => {
+          b.className = "px-2 py-0.5 rounded text-vscode-muted hover:text-white transition-colors";
+        });
+        activeBtn.className = "px-2 py-0.5 rounded bg-vscode-blue text-white font-semibold transition-colors";
+      }
+
+      btnModeAfter?.addEventListener("click", () => {
+        setModeButtons(btnModeAfter);
+        splitOverlay.classList.add("hidden");
+        video.src = URL_AFTER;
+        video.currentTime = 0;
+        video.play().catch(() => {});
+        videoStateBadge.textContent = "60 FPS • AFTER";
+        videoStateBadge.className = "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-green/90 text-black";
+        showToast("Đang phát: Sau khi chạy AI Skill (Remotion Cut)");
+      });
+
+      btnModeOriginal?.addEventListener("click", () => {
+        setModeButtons(btnModeOriginal);
+        splitOverlay.classList.add("hidden");
+        video.src = URL_ORIGINAL;
+        video.currentTime = 0;
+        video.play().catch(() => {});
+        videoStateBadge.textContent = "RAW FOOTAGE";
+        videoStateBadge.className = "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-orange/90 text-black";
+        showToast("Đang phát: Video gốc ban đầu (Raw Footage)");
+      });
+
+      btnModeSplit?.addEventListener("click", () => {
+        setModeButtons(btnModeSplit);
+        video.src = URL_AFTER;
+        splitVideo.src = URL_ORIGINAL;
+        splitOverlay.classList.remove("hidden");
+        video.currentTime = 0;
+        splitVideo.currentTime = 0;
+        video.play().catch(() => {});
+        splitVideo.play().catch(() => {});
+        videoStateBadge.textContent = "SPLIT: RAW vs AFTER";
+        videoStateBadge.className = "px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-vscode-accent text-black";
+        showToast("Chế độ so sánh Split A|B (Raw | After)");
+      });
+
+      // 3. Skill Data & IDE File Switching
+      const SKILLS_DATABASE = {
+        "remotion-food-short-vn": {
+          badge: "remotion-food-short-vn.skill.md",
+          tab: "SKILL.md",
+          titlebar: "remotion-food-short-vn",
+          prompt: '"Dựng ba_chi_dau_phu.mp4 theo chuẩn @remotion-food-short-vn"',
+          code: `<span class="text-[#6A9955]">---</span>
+<span class="text-[#9CDCFE]">name</span>: <span class="text-[#CE9178]">remotion-food-short-vn</span>
+<span class="text-[#9CDCFE]">description</span>: <span class="text-[#CE9178]">Dựng video món ăn dọc bằng Remotion theo phong cách editorial Việt Nam</span>
+<span class="text-[#9CDCFE]">repository</span>: <span class="text-[#CE9178]">https://github.com/npdk1/creativetemplate</span>
+<span class="text-[#6A9955]">---</span>
+
+<span class="text-[#569CD6]"># 1. HỆ THỐNG PHỤ ĐỀ KARAOKE KHÔNG NỀN (ZERO-GUI)</span>
+- Phụ đề nổi trực tiếp trên video: <span class="text-[#4EC9B0]">no-background</span>, <span class="text-[#4EC9B0]">no-pill-card</span>.
+- Nhấn từ đang đọc bằng accent <span class="text-[#DCDCAA]">#FFA657 (Vàng Mật Ong)</span>.
+- Giữ nguyên cỡ chữ để tránh hiện tượng dòng phụ đề nhảy giật.
+
+<span class="text-[#569CD6]"># 2. POPUP INSIGHT & STEP BADGE (CÔNG ĐOẠN)</span>
+- Nhãn công đoạn có số bước và vạch màu, canh trái né mặt nhân vật.
+- Phân tích SRT tự động tạo insight cards: lợi ích, gia vị, tỷ lệ.
+
+<span class="text-[#569CD6]"># 3. TRANSITION & RENDERING RULES</span>
+- Không dùng CSS animation/transition; dùng <span class="text-[#4EC9B0]">interpolate()</span> & <span class="text-[#4EC9B0]">spring()</span>.
+- Xuất 60fps chuẩn TikTok / Reels / Shorts 9:16.`
+        },
+        "razor-talk-vi": {
+          badge: "razor-talk-vi.skill.md",
+          tab: "razor-talk-vi.skill.md",
+          titlebar: "razor-talk-vi",
+          prompt: '"Áp dụng @razor-talk-vi.skill.md cắt sạch khoảng lặng file_quay_tho.mp4"',
+          code: `<span class="text-[#6A9955]">---</span>
+<span class="text-[#9CDCFE]">name</span>: <span class="text-[#CE9178]">razor-talk-vi</span>
+<span class="text-[#9CDCFE]">serial</span>: <span class="text-[#CE9178]">CART-01</span>
+<span class="text-[#9CDCFE]">engine</span>: <span class="text-[#CE9178]">FFmpeg + Whisper-VI</span>
+<span class="text-[#6A9955]">---</span>
+
+<span class="text-[#569CD6]"># 1. CẮT KHOẢNG LẶNG TỰ ĐỘNG (SILENCE RAZOR)</span>
+- VAD tiếng Việt ngưỡng <span class="text-[#4EC9B0]">-38dB</span>, độ dài tối thiểu <span class="text-[#4EC9B0]">0.30s</span>.
+- Giữ lại <span class="text-[#4EC9B0]">0.08s</span> padding đầu/cuối mỗi câu để giọng tự nhiên.
+
+<span class="text-[#569CD6]"># 2. DYNAMIC PUNCH ZOOM</span>
+- Tự động đẩy camera <span class="text-[#DCDCAA]">1.16x</span> khi gặp từ khóa nhấn mạnh hoặc câu hỏi tu từ.
+
+<span class="text-[#569CD6]"># 3. PHỤ ĐỀ TIẾNG VIỆT CHUẨN NHỊP ĐỌC</span>
+- Tối đa 4 chữ trên 1 khung hình, highlight màu Cam #FF3E00.`
+        },
+        "kinetic-hook-916": {
+          badge: "kinetic-hook-916.skill.md",
+          tab: "kinetic-hook-916.skill.md",
+          titlebar: "kinetic-hook-916",
+          prompt: '"Biến clip_review.mp4 thành Reels triệu view với @kinetic-hook-916.skill.md"',
+          code: `<span class="text-[#6A9955]">---</span>
+<span class="text-[#9CDCFE]">name</span>: <span class="text-[#CE9178]">kinetic-hook-916</span>
+<span class="text-[#9CDCFE]">serial</span>: <span class="text-[#CE9178]">CART-02</span>
+<span class="text-[#9CDCFE]">engine</span>: <span class="text-[#CE9178]">Remotion + Whisper</span>
+<span class="text-[#6A9955]">---</span>
+
+<span class="text-[#569CD6]"># 1. PATTERN INTERRUPT (3 GIÂY ĐẦU)</span>
+- Trích xuất câu nói năng lượng cao nhất làm Hook mở đầu.
+- Scale-In 125% -> 100% trong 8 frames đầu kèm SFX tape_hit.wav.
+
+<span class="text-[#569CD6]"># 2. KINETIC TYPOGRAPHY 60FPS</span>
+- Render lớp chữ bám sát từng âm tiết tiếng Việt.
+- Tự chèn khung B-Roll minh họa góc trên khi nhắc tên công cụ.`
+        },
+        "vox-archive-3d": {
+          badge: "vox-archive-3d.skill.md",
+          tab: "vox-archive-3d.skill.md",
+          titlebar: "vox-archive-3d",
+          prompt: '"Dựng voice.mp3 và ảnh tư liệu bằng @vox-archive-3d.skill.md"',
+          code: `<span class="text-[#6A9955]">---</span>
+<span class="text-[#9CDCFE]">name</span>: <span class="text-[#CE9178]">vox-archive-3d</span>
+<span class="text-[#9CDCFE]">serial</span>: <span class="text-[#CE9178]">CART-03</span>
+<span class="text-[#9CDCFE]">engine</span>: <span class="text-[#CE9178]">Depth-V2 + Remotion</span>
+<span class="text-[#6A9955]">---</span>
+
+<span class="text-[#569CD6]"># 1. PARALLAX 2.5D CAMERA</span>
+- Tách tiền cảnh và hậu cảnh cho ảnh tĩnh tư liệu.
+- Đẩy nhẹ trục Z (Z-Push 1.0 -> 1.12) kèm hạt nhiễu phim 16mm.
+
+<span class="text-[#569CD6]"># 2. BÚT DẠ QUANG HIGHLIGHT BÁO CHÍ</span>
+- Quét vệt màu vàng #FFB300 ngang dòng chữ khớp với giọng đọc.`
+        },
+        "Composition.tsx": {
+          badge: "Composition.tsx (Remotion)",
+          tab: "Composition.tsx",
+          titlebar: "remotion-edit/src/Composition.tsx",
+          prompt: '"Render composition với React & Remotion engine"',
+          code: `<span class="text-[#569CD6]">import</span> { <span class="text-[#4EC9B0]">AbsoluteFill</span>, <span class="text-[#4EC9B0]">useCurrentFrame</span>, <span class="text-[#4EC9B0]">interpolate</span> } <span class="text-[#569CD6]">from</span> <span class="text-[#CE9178]">'remotion'</span>;
+
+<span class="text-[#569CD6]">export const</span> <span class="text-[#DCDCAA]">FoodComposition</span> = () =&gt; {
+  <span class="text-[#569CD6]">const</span> frame = <span class="text-[#DCDCAA]">useCurrentFrame</span>();
+  <span class="text-[#569CD6]">const</span> opacity = <span class="text-[#DCDCAA]">interpolate</span>(frame, [<span class="text-[#B5CEA8]">0</span>, <span class="text-[#B5CEA8]">15</span>], [<span class="text-[#B5CEA8]">0</span>, <span class="text-[#B5CEA8]">1</span>]);
+
+  <span class="text-[#569CD6]">return</span> (
+    &lt;<span class="text-[#4EC9B0]">AbsoluteFill</span> className=<span class="text-[#CE9178]">"bg-black"</span>&gt;
+      &lt;<span class="text-[#4EC9B0]">div</span> style={{ opacity }} className=<span class="text-[#CE9178]">"subtitles-karaoke"</span>&gt;
+        {<span class="text-[#6A9955]">/* Remotion Food Editorial Vietnamese Subtitles */</span>}
+      &lt;/<span class="text-[#4EC9B0]">div</span>&gt;
+    &lt;/<span class="text-[#4EC9B0]">AbsoluteFill</span>&gt;
+  );
+};`
+        }
+      };
+
+      const editorCodeView = document.getElementById("editor-code-view");
+      const activeSkillBadge = document.getElementById("active-skill-badge");
+      const tabActiveTitle = document.getElementById("tab-active-title");
+      const titlebarActiveFile = document.getElementById("titlebar-active-file");
+      const activeSkillPrompt = document.getElementById("active-skill-prompt");
+
+      function loadSkillToEditor(skillId) {
+        const item = SKILLS_DATABASE[skillId];
+        if (!item) return;
+
+        editorCodeView.innerHTML = item.code;
+        activeSkillBadge.textContent = item.badge;
+        tabActiveTitle.textContent = item.tab;
+        titlebarActiveFile.textContent = item.titlebar;
+        activeSkillPrompt.textContent = item.prompt;
+
+        // Terminal animation log
+        const termBody = document.getElementById("terminal-body");
+        const log = document.createElement("div");
+        log.className = "text-[#CCCCCC]";
+        log.innerHTML = `<span class="text-vscode-green">npdk1@studio</span>:<span class="text-vscode-blue">~/creativetemplate</span>$ <span class="text-vscode-accent">code ${item.tab}</span>`;
+        termBody.insertBefore(log, termBody.lastElementChild);
+
+        showToast(`Đã mở ${item.tab} trong editor!`);
+      }
+
+      // Sidebar click listeners
+      document.querySelectorAll(".ide-file-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".ide-file-btn").forEach(b => {
+            b.className = "ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#8E8E8E] hover:text-white hover:bg-[#202020] transition-colors";
+          });
+          btn.className = "ide-file-btn w-full text-left flex items-center gap-1.5 px-2 py-1 rounded text-[#E0E0E0] bg-[#2A2D2E] text-vscode-accent font-medium";
+          
+          const fileId = btn.getAttribute("data-file");
+          loadSkillToEditor(fileId);
+        });
+      });
+
+      // Tab tsx switch
+      document.getElementById("btn-switch-tab-tsx")?.addEventListener("click", () => {
+        loadSkillToEditor("Composition.tsx");
+      });
+
+      // Catalog "Load to Editor" buttons
+      document.querySelectorAll(".btn-load-skill").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const skillId = btn.getAttribute("data-skill");
+          loadSkillToEditor(skillId);
+          document.getElementById("ide-simulator")?.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Copy Prompt button
+      document.getElementById("copy-skill-prompt-btn")?.addEventListener("click", () => {
+        copyText(activeSkillPrompt.textContent, "Đã copy skill prompt!");
+      });
+
+      // Copy Editor Code button
+      document.getElementById("copy-editor-code-btn")?.addEventListener("click", () => {
+        const plainText = editorCodeView.innerText;
+        copyText(plainText, "Đã copy mã nguồn skill!");
+      });
+
+      // 4. Marketplace Filter
+      const marketFilterBtns = document.querySelectorAll(".market-filter-btn");
+      const skillCards = document.querySelectorAll(".skill-card");
+
+      marketFilterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          marketFilterBtns.forEach(b => {
+            b.className = "market-filter-btn px-3 py-1.5 rounded-md bg-vscode-panel border border-vscode-border text-vscode-muted hover:text-white transition-colors";
+          });
+          btn.className = "market-filter-btn px-3 py-1.5 rounded-md bg-vscode-blue text-white font-semibold transition-colors";
+
+          const filter = btn.getAttribute("data-filter");
+          skillCards.forEach(card => {
+            const cat = card.getAttribute("data-category");
+            if (filter === "all" || cat === filter) {
+              card.style.display = "flex";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // 5. Workflow Composer Realtime Compiler
+      const composerCheckboxes = document.querySelectorAll(".composer-checkbox");
+      const composerCodeOutput = document.getElementById("composer-code-output");
+
+      function updateComposerOutput() {
+        const activeModules = [];
+        composerCheckboxes.forEach(cb => {
+          if (cb.checked) {
+            activeModules.push(cb.getAttribute("data-name"));
+          }
+        });
+
+        const yml = `---
+name: custom-creative-pipeline
+generator: creativetemplate-web-composer
+repository: https://github.com/npdk1/creativetemplate
+active_modules:
+${activeModules.map(m => `  - ${m}`).join('\n')}
+---
+
+# QUY TRÌNH DỰNG TỰ ĐỘNG THEO SKILL ĐÃ CHỌN
+${activeModules.map((m, idx) => `${idx + 1}. [${m.toUpperCase()}]: Kích hoạt và đồng bộ theo timeline video.`).join('\n')}`;
+
+        composerCodeOutput.textContent = yml;
+      }
+
+      composerCheckboxes.forEach(cb => {
+        cb.addEventListener("change", updateComposerOutput);
+      });
+
+      document.getElementById("copy-composer-code-btn")?.addEventListener("click", () => {
+        copyText(composerCodeOutput.textContent, "Đã copy workflow skill!");
+      });
+
+      document.getElementById("download-composer-skill-btn")?.addEventListener("click", () => {
+        const blob = new Blob([composerCodeOutput.textContent], { type: "text/markdown" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "custom-pipeline.skill.md";
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast("Đã tải xuống custom-pipeline.skill.md!");
+      });
+
+      // 6. Command Palette (Ctrl+K / ⌘K)
+      const cmdPaletteBackdrop = document.getElementById("cmd-palette-backdrop");
+      const cmdPaletteInput = document.getElementById("cmd-palette-input");
+      const openCmdPaletteBtn = document.getElementById("open-cmd-palette-btn");
+
+      function openCmdPalette() {
+        cmdPaletteBackdrop.classList.remove("hidden");
+        cmdPaletteInput.value = "";
+        cmdPaletteInput.focus();
+      }
+
+      function closeCmdPalette() {
+        cmdPaletteBackdrop.classList.add("hidden");
+      }
+
+      openCmdPaletteBtn?.addEventListener("click", openCmdPalette);
+
+      document.addEventListener("keydown", (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+          e.preventDefault();
+          if (cmdPaletteBackdrop.classList.contains("hidden")) {
+            openCmdPalette();
+          } else {
+            closeCmdPalette();
+          }
+        }
+        if (e.key === "Escape" && !cmdPaletteBackdrop.classList.contains("hidden")) {
+          closeCmdPalette();
+        }
+      });
+
+      cmdPaletteBackdrop?.addEventListener("click", (e) => {
+        if (e.target === cmdPaletteBackdrop) closeCmdPalette();
+      });
+
+      // Command Palette action buttons
+      document.querySelectorAll(".cmd-item").forEach(item => {
+        item.addEventListener("click", () => {
+          const action = item.getAttribute("data-action");
+          closeCmdPalette();
+
+          if (action === "load-food") {
+            loadSkillToEditor("remotion-food-short-vn");
+            document.getElementById("ide-simulator")?.scrollIntoView({ behavior: 'smooth' });
+          } else if (action === "load-talk") {
+            loadSkillToEditor("razor-talk-vi");
+            document.getElementById("ide-simulator")?.scrollIntoView({ behavior: 'smooth' });
+          } else if (action === "github-open") {
+            window.open("https://github.com/npdk1/creativetemplate", "_blank");
+          } else if (action === "toggle-audio") {
+            btnToggleAudio?.click();
+          } else if (action === "copy-clone") {
+            copyCloneBtn?.click();
+          }
+        });
+      });
+
+      // Clear terminal button
+      document.getElementById("clear-term-btn")?.addEventListener("click", () => {
+        const termBody = document.getElementById("terminal-body");
+        termBody.innerHTML = `
+          <div class="text-vscode-muted">Terminal cleared.</div>
+          <div class="flex items-center"><span class="text-vscode-green">npdk1@studio</span>:<span class="text-vscode-blue">~/creativetemplate</span>$&nbsp;<span class="term-cursor"></span></div>
+        `;
+        showToast("Terminal cleared");
+      });
+
+    });
+  </script>
+</body>
+</html>
