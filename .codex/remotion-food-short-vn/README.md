@@ -4,7 +4,7 @@ Skill dựng video món ăn dọc bằng Remotion theo phong cách editorial Vi�
 
 ## Showcase: Original vs After
 
-Hai preview động dưới đây cùng dài 10 giây. Bấm vào preview để mở MP4 có âm thanh.
+Hai video so sánh dưới đây cùng dài 10 giây (MP4 có âm thanh).
 
 <table>
   <tr>
@@ -13,17 +13,15 @@ Hai preview động dưới đây cùng dài 10 giây. Bấm vào preview để 
   </tr>
   <tr>
     <td align="center">
-      <a href="./video_output/original.mp4"><img src="./video_output/original.webp" width="288" alt="Original 10-second preview"></a><br>
+      <video src="./video_output/original.mp4" width="288" controls></video><br>
       <a href="./video_output/original.mp4">▶ Mở Original có tiếng</a>
     </td>
     <td align="center">
-      <a href="./video_output/after.mp4"><img src="./video_output/after.webp" width="288" alt="After 10-second preview"></a><br>
+      <video src="./video_output/after.mp4" width="288" controls></video><br>
       <a href="./video_output/after.mp4">▶ Mở After có tiếng</a>
     </td>
   </tr>
 </table>
-
-> GitHub loại bỏ thẻ HTML `<video>` trong README. Animated WebP được dùng làm preview tương thích; hai MP4 H.264/AAC trong `video_output/` giữ nguyên âm thanh.
 
 ## Thiết kế được áp dụng
 
@@ -41,9 +39,3 @@ Hai preview động dưới đây cùng dài 10 giây. Bấm vào preview để 
 - `references/srt-insight-popups.md`: cách phân tích SRT và chọn loại popup.
 - `video_output/original.mp4`: footage gốc 10 giây, có tiếng.
 - `video_output/after.mp4`: footage sau khi áp dụng skill, 10 giây, có tiếng.
-- `video_output/*.webp`: preview động dành cho GitHub README.
-- `scripts/build-github-readme.ps1`: tạo lại README tương thích GitHub.
-
-
-
-Khi upload GitHub, hãy commit toàn bộ thư mục skill, đặc biệt là `README.md` và `video_output/`.
