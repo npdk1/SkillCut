@@ -51,23 +51,9 @@
   </script>
 
   <style>
-    /* Custom Slider & Glow Effects */
+    /* Custom Slider & Focus Effects */
     .glow-brand {
-      box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.35);
-    }
-    .glow-cyan {
-      box-shadow: 0 0 40px -10px rgba(14, 165, 233, 0.35);
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, #10B981 0%, #0EA5E9 50%, #6366F1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .gradient-border {
-      position: relative;
-      border: 1px solid transparent;
-      background: linear-gradient(#151B28, #151B28) padding-box,
-                  linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(14, 165, 233, 0.4)) border-box;
+      box-shadow: 0 0 35px -8px rgba(16, 185, 129, 0.25);
     }
     
     /* Interactive Split Screen Slider */
@@ -85,15 +71,15 @@
       overflow: hidden;
       z-index: 10;
       border-right: 2px solid #10B981;
-      box-shadow: 2px 0 15px rgba(16, 185, 129, 0.5);
+      box-shadow: 2px 0 15px rgba(16, 185, 129, 0.35);
     }
     .slider-handle {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 9999px;
       background: #10B981;
       color: #07090E;
@@ -101,12 +87,12 @@
       align-items: center;
       justify-content: center;
       cursor: ew-resize;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
       z-index: 20;
       transition: transform 0.15s ease;
     }
     .slider-handle:hover {
-      transform: translate(-50%, -50%) scale(1.1);
+      transform: translate(-50%, -50%) scale(1.08);
     }
   </style>
 </head>
@@ -115,44 +101,42 @@
   <!-- =========================================================================
        1. NAVIGATION BAR
        ========================================================================= -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-dark-bg/80 border-b border-dark-border">
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-dark-bg/85 border-b border-dark-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 via-accent-500 to-indigo-600 p-[1.5px] shadow-lg group-hover:glow-brand transition-all">
-          <div class="w-full h-full bg-dark-surface rounded-[10px] flex items-center justify-center">
-            <!-- Modern Video-Cut Vector Mark -->
-            <svg class="w-5 h-5 text-brand-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />
-            </svg>
-          </div>
+        <div class="w-9 h-9 rounded-xl bg-dark-card border border-dark-borderLight flex items-center justify-center text-brand-400 group-hover:border-brand-500/50 transition-colors">
+          <!-- Video-Cut Lucide Vector Mark -->
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="3"></circle>
+            <circle cx="6" cy="18" r="3"></circle>
+            <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+            <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+            <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+          </svg>
         </div>
-        <div class="flex flex-col">
-          <span class="text-xl font-display font-extrabold tracking-tight text-white flex items-center gap-1.5">
-            SkillCut
-            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30">AI STUDIO</span>
-          </span>
-          <span class="text-[11px] text-slate-400 font-medium -mt-1">Video Automation Presets</span>
+        <div class="flex items-center gap-2">
+          <span class="text-lg font-display font-bold tracking-tight text-white">SkillCut</span>
+          <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-brand-500/10 text-brand-400 border border-brand-500/20 font-semibold">Studio</span>
         </div>
       </a>
 
       <!-- Desktop Nav Links -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#comparison" class="hover:text-brand-400 transition-colors flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
-          So Sánh Trước &amp; Sau
+        <a href="#comparison" class="hover:text-brand-400 transition-colors flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+          So Sánh Video
         </a>
-        <a href="#benefits" class="hover:text-white transition-colors">Lợi Ích Thực Tế</a>
+        <a href="#benefits" class="hover:text-white transition-colors">Hiệu Quả</a>
         <a href="#skills" class="hover:text-white transition-colors">Thư Viện Skill</a>
         <a href="#how-it-works" class="hover:text-white transition-colors">Quy Trình</a>
-        <a href="#pricing" class="hover:text-white transition-colors">Bảng Giá</a>
       </nav>
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-3">
         <!-- GitHub Star Badge -->
-        <a href="https://github.com/npdk1/SkillCut" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-dark-card border border-dark-border hover:border-slate-600 text-xs font-medium text-slate-300 hover:text-white transition-all">
+        <a href="https://github.com/npdk1/SkillCut" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-dark-card border border-dark-border hover:border-slate-500 text-xs font-medium text-slate-300 hover:text-white transition-colors">
           <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
@@ -161,9 +145,8 @@
         </a>
 
         <!-- Main CTA -->
-        <a href="#comparison" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-brand-500 to-accent-500 hover:from-brand-600 hover:to-accent-600 text-dark-bg font-bold text-xs sm:text-sm shadow-md hover:shadow-brand-500/25 transition-all">
-          <span>Xem Demo Trước &amp; Sau</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        <a href="#comparison" class="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-dark-bg font-bold text-xs sm:text-sm transition-colors">
+          <span>Xem So Sánh</span>
         </a>
       </div>
 
@@ -171,56 +154,55 @@
   </header>
 
   <!-- =========================================================================
-       2. HERO SECTION (Customer-Focused, Clean & Punchy)
+       2. HERO SECTION
        ========================================================================= -->
   <section class="relative pt-16 pb-12 overflow-hidden">
-    <!-- Subtle Background Glows -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-brand-500/10 via-accent-500/5 to-transparent blur-3xl pointer-events-none -z-10"></div>
-    
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-      
-      <!-- Top Pill Tag -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-6 shadow-sm">
-        <span class="flex h-2 w-2 rounded-full bg-brand-400 animate-ping"></span>
-        <span>Giải Pháp Dựng Video Ngắn Thông Minh Dành Cho Creator &amp; Doanh Nghiệp</span>
-      </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
 
-      <!-- Main Headline -->
+      <!-- Main Headline (No Eyebrow Kicker, Direct & Authoritative) -->
       <h1 class="text-4xl sm:text-6xl font-display font-extrabold tracking-tight text-white leading-tight">
         Biến Video Thô Thành Clip Triệu View <br />
-        <span class="gradient-text">Tự Động Với SkillCut</span>
+        <span class="text-brand-400">Tự Động Với SkillCut</span>
       </h1>
 
-      <!-- Customer Subheadline (Clear & Direct, No Confusing Code) -->
-      <p class="mt-6 text-base sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-        Không còn phải ngồi hàng giờ gõ phụ đề, cắt tỉa từng khoảng lặng hay chỉnh màu thủ công. SkillCut tự động phát hiện giọng nói, dọn sạch đoạn thừa, tạo chữ chạy karaoke động và xuất video chuẩn 9:16 sắc nét.
+      <!-- Customer Subheadline -->
+      <p class="mt-5 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        Không còn phải gõ phụ đề, cắt thủ công từng khoảng lặng hay canh chỉnh màu. SkillCut tự động phát hiện giọng nói, dọn sạch đoạn thừa, chạy karaoke động và xuất file chuẩn 9:16.
       </p>
 
-      <!-- Key Trust Proofs -->
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm font-medium text-slate-400">
+      <!-- Key Trust Proofs (Using Lucide Check Icons, Zero Emojis) -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm font-medium text-slate-300">
         <div class="flex items-center gap-2">
-          <div class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold">✓</div>
+          <div class="w-5 h-5 rounded-md bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
           <span>Tiết kiệm 85% thời gian dựng</span>
         </div>
         <div class="flex items-center gap-2">
-          <div class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold">✓</div>
+          <div class="w-5 h-5 rounded-md bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
           <span>Tăng 2.5x tỷ lệ giữ chân người xem</span>
         </div>
         <div class="flex items-center gap-2">
-          <div class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold">✓</div>
-          <span>Phụ đề động không che mất món ăn</span>
+          <div class="w-5 h-5 rounded-md bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <span>Phụ đề động không che mất nội dung</span>
         </div>
       </div>
 
       <!-- Hero Call To Actions -->
-      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-        <a href="#comparison" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 hover:from-brand-600 hover:to-accent-600 text-dark-bg font-bold text-sm sm:text-base shadow-xl hover:shadow-brand-500/25 transition-all flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <span>Trải Nghiệm So Sánh Trực Tiếp</span>
+      <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
+        <a href="#comparison" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-dark-bg font-bold text-sm transition-colors flex items-center gap-2 shadow-lg shadow-brand-500/15">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Xem So Sánh Thực Tế</span>
         </a>
-        <a href="https://github.com/npdk1/SkillCut" target="_blank" class="px-6 py-3.5 rounded-xl bg-dark-card border border-dark-border hover:border-slate-600 text-white font-semibold text-sm sm:text-base transition-all flex items-center gap-2">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>Khám Phá Dự Án (GitHub)</span>
+        <a href="https://github.com/npdk1/SkillCut" target="_blank" class="px-6 py-3 rounded-xl bg-dark-card border border-dark-border hover:border-slate-500 text-white font-semibold text-sm transition-colors flex items-center gap-2">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>Khám Phá GitHub</span>
         </a>
       </div>
 
@@ -250,32 +232,33 @@
       
       <!-- Studio Header Controls -->
       <div class="flex flex-wrap items-center justify-between pb-4 mb-4 border-b border-dark-border gap-3">
-        <!-- View Mode Selector -->
+        <!-- View Mode Selector (Only Split & Side-by-Side) -->
         <div class="flex items-center gap-1.5 p-1 bg-dark-card border border-dark-border rounded-xl text-xs font-semibold" id="view-mode-selector">
-          <button type="button" id="btn-mode-split" class="px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+          <button type="button" id="btn-mode-split" class="px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="18" rx="2"/><path d="M12 3v18"/>
+            </svg>
             <span>So Sánh Kéo Trượt (Split)</span>
           </button>
-          <button type="button" id="btn-mode-side" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+          <button type="button" id="btn-mode-side" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="9" height="16" rx="1"/><rect x="13" y="4" width="9" height="16" rx="1"/>
+            </svg>
             <span>Song Song (Side-by-Side)</span>
-          </button>
-          <button type="button" id="btn-mode-after" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">
-            <span>Chỉ Xem SkillCut</span>
-          </button>
-          <button type="button" id="btn-mode-orig" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">
-            <span>Chỉ Xem Bản Gốc</span>
           </button>
         </div>
 
-        <!-- Audio Sound Toggle Button (Vital for listening to sound without auto-block) -->
-        <button type="button" id="toggle-audio-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-card hover:bg-dark-border border border-dark-border text-xs font-semibold text-slate-300 transition-colors">
-          <svg id="audio-icon-muted" class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+        <!-- Audio Sound Toggle Button -->
+        <button type="button" id="toggle-audio-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-card hover:bg-dark-border border border-dark-border text-xs font-medium text-slate-300 transition-colors">
+          <svg id="audio-icon-muted" class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="1" y1="1" x2="23" y2="23"/>
+            <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/>
+            <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/>
+            <line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
           </svg>
-          <svg id="audio-icon-unmuted" class="w-4 h-4 text-brand-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+          <svg id="audio-icon-unmuted" class="w-4 h-4 text-brand-400 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
           </svg>
           <span id="audio-status-text">Bật Loa / Âm Thanh</span>
         </button>
@@ -291,8 +274,9 @@
           <source src="./assets/after.mp4" type="video/mp4" />
           <source src="https://github.com/user-attachments/assets/5c9b257f-e231-416c-8c22-bd231318a648" type="video/mp4" />
         </video>
-        <div class="absolute top-4 right-4 z-10 px-2.5 py-1 rounded-md bg-brand-500/90 text-dark-bg text-xs font-bold tracking-wider shadow">
-          ✨ ĐÃ QUA SKILLCUT
+        <div class="absolute top-4 right-4 z-10 px-2.5 py-1 rounded-md bg-brand-500/90 text-dark-bg text-xs font-bold tracking-wider shadow flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>ĐÃ QUA SKILLCUT</span>
         </div>
 
         <!-- Foreground Overlay Video: ORIGINAL (Gốc) -->
@@ -301,8 +285,9 @@
             <source src="./assets/original.mp4" type="video/mp4" />
             <source src="https://github.com/user-attachments/assets/97c8308d-15a9-43be-83d9-f1db0beb2747" type="video/mp4" />
           </video>
-          <div class="absolute top-4 left-4 z-10 px-2.5 py-1 rounded-md bg-dark-bg/90 border border-slate-600 text-slate-300 text-xs font-semibold tracking-wider">
-            📹 BẢN GỐC CHƯA DỰNG
+          <div class="absolute top-4 left-4 z-10 px-2.5 py-1 rounded-md bg-dark-bg/90 border border-slate-600 text-slate-300 text-xs font-semibold tracking-wider flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            <span>BẢN GỐC CHƯA DỰNG</span>
           </div>
         </div>
 
@@ -328,8 +313,11 @@
         <!-- Original Side Card -->
         <div class="bg-dark-card border border-dark-border rounded-xl p-3 flex flex-col items-center">
           <div class="w-full flex items-center justify-between pb-2 mb-2 border-b border-dark-border text-xs">
-            <span class="font-bold text-slate-400">📹 Video Thô Ban Đầu (Original)</span>
-            <span class="px-2 py-0.5 rounded bg-dark-surface text-slate-400 font-mono">30 giây • Nhiều ngắt quãng</span>
+            <span class="font-bold text-slate-300 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              <span>Video Thô Ban Đầu (Original)</span>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-dark-surface text-slate-400 font-mono">30s • Nhiều ngắt quãng</span>
           </div>
           <div class="relative w-full aspect-[9/16] rounded-lg overflow-hidden bg-black">
             <video id="video-side-orig" class="w-full h-full object-cover" loop playsinline muted preload="auto">
@@ -346,8 +334,8 @@
         <div class="bg-dark-card border border-brand-500/40 rounded-xl p-3 flex flex-col items-center shadow-lg shadow-brand-500/5">
           <div class="w-full flex items-center justify-between pb-2 mb-2 border-b border-brand-500/20 text-xs">
             <span class="font-bold text-brand-400 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-brand-400"></span>
-              ✨ Sau Khi Xử Lý Bằng SkillCut
+              <svg class="w-3.5 h-3.5 text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>Sau Khi Xử Lý Bằng SkillCut</span>
             </span>
             <span class="px-2 py-0.5 rounded bg-brand-500/10 text-brand-400 font-mono font-bold">18s • Tinh gọn 100%</span>
           </div>
@@ -398,7 +386,9 @@
       
       <div class="bg-dark-surface border border-dark-border rounded-xl p-4 hover:border-brand-500/40 transition-colors">
         <div class="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-400 flex items-center justify-center font-bold mb-3">
-          ✂️
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>
+          </svg>
         </div>
         <h3 class="font-bold text-white text-sm">Cắt Khoảng Lặng Tự Động</h3>
         <p class="text-xs text-slate-400 mt-1 leading-relaxed">
@@ -408,7 +398,9 @@
 
       <div class="bg-dark-surface border border-dark-border rounded-xl p-4 hover:border-accent-500/40 transition-colors">
         <div class="w-8 h-8 rounded-lg bg-accent-500/10 text-accent-500 flex items-center justify-center font-bold mb-3">
-          🔤
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>
+          </svg>
         </div>
         <h3 class="font-bold text-white text-sm">Phụ Đề Karaoke Không Nền</h3>
         <p class="text-xs text-slate-400 mt-1 leading-relaxed">
@@ -418,7 +410,9 @@
 
       <div class="bg-dark-surface border border-dark-border rounded-xl p-4 hover:border-indigo-500/40 transition-colors">
         <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold mb-3">
-          🏷️
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
         </div>
         <h3 class="font-bold text-white text-sm">Nhãn Công Đoạn &amp; Insight</h3>
         <p class="text-xs text-slate-400 mt-1 leading-relaxed">
@@ -428,7 +422,9 @@
 
       <div class="bg-dark-surface border border-dark-border rounded-xl p-4 hover:border-emerald-500/40 transition-colors">
         <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold mb-3">
-          ⚡
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
         </div>
         <h3 class="font-bold text-white text-sm">Xuất File 4K 60fps Tức Thì</h3>
         <p class="text-xs text-slate-400 mt-1 leading-relaxed">
@@ -467,30 +463,48 @@
         </thead>
         <tbody class="divide-y divide-dark-border">
           <tr class="hover:bg-dark-surface/50 transition-colors">
-            <td class="py-4 px-4 font-semibold text-white">⏱️ Thời gian tạo 1 video ngắn</td>
+            <td class="py-4 px-4 font-semibold text-white flex items-center gap-2">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Thời gian tạo 1 video ngắn</span>
+            </td>
             <td class="py-4 px-4 text-slate-400 bg-dark-card/50">2 – 4 tiếng (cắt từng frame, canh chỉnh)</td>
             <td class="py-4 px-4 font-bold text-brand-400 bg-brand-500/10 border-x border-brand-500/30">Chỉ 30 giây (render tự động)</td>
           </tr>
           <tr class="hover:bg-dark-surface/50 transition-colors">
-            <td class="py-4 px-4 font-semibold text-white">🔤 Gõ phụ đề &amp; hiệu ứng chữ</td>
+            <td class="py-4 px-4 font-semibold text-white flex items-center gap-2">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+              <span>Gõ phụ đề &amp; hiệu ứng chữ</span>
+            </td>
             <td class="py-4 px-4 text-slate-400 bg-dark-card/50">Nghe từng câu, gõ tay dễ sai chính tả</td>
             <td class="py-4 px-4 font-bold text-brand-400 bg-brand-500/10 border-x border-brand-500/30">Tự bóc băng Whisper, karaoke từng từ</td>
           </tr>
           <tr class="hover:bg-dark-surface/50 transition-colors">
-            <td class="py-4 px-4 font-semibold text-white">✂️ Cắt khoảng dừng &amp; ngắc ngứ</td>
+            <td class="py-4 px-4 font-semibold text-white flex items-center gap-2">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+              <span>Cắt khoảng dừng &amp; ngắc ngứ</span>
+            </td>
             <td class="py-4 px-4 text-slate-400 bg-dark-card/50">Phải nghe toàn bộ file, zoom timeline cắt tay</td>
             <td class="py-4 px-4 font-bold text-brand-400 bg-brand-500/10 border-x border-brand-500/30">Thuật toán VAD loại bỏ tự động 100%</td>
           </tr>
           <tr class="hover:bg-dark-surface/50 transition-colors">
-            <td class="py-4 px-4 font-semibold text-white">🎯 Tính nhất quán phong cách</td>
+            <td class="py-4 px-4 font-semibold text-white flex items-center gap-2">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <span>Tính nhất quán phong cách</span>
+            </td>
             <td class="py-4 px-4 text-slate-400 bg-dark-card/50">Mỗi clip một kiểu tùy tâm trạng người dựng</td>
             <td class="py-4 px-4 font-bold text-brand-400 bg-brand-500/10 border-x border-brand-500/30">Chuẩn hóa theo Preset Skill thương hiệu</td>
           </tr>
           <tr class="hover:bg-dark-surface/50 transition-colors">
-            <td class="py-4 px-4 font-semibold text-white">💰 Chi phí sản xuất hàng tháng</td>
+            <td class="py-4 px-4 font-semibold text-white flex items-center gap-2">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span>Chi phí sản xuất hàng tháng</span>
+            </td>
             <td class="py-4 px-4 text-slate-400 bg-dark-card/50">15.000.000đ – 25.000.000đ / nhân sự</td>
             <td class="py-4 px-4 font-bold text-brand-400 bg-brand-500/10 border-x border-b border-brand-500/30 rounded-b-xl">Tiết kiệm đến 80% ngân sách</td>
           </tr>
+        </tbody>
+      </table>
+    </div>
         </tbody>
       </table>
     </div>
@@ -504,9 +518,6 @@
     
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-2">
-          <span>THƯ VIỆN PRESETS CHUYÊN BIỆT</span>
-        </div>
         <h2 class="text-3xl font-display font-extrabold text-white">
           Kho Preset Skill Đa Dạng Theo Ngành
         </h2>
@@ -527,8 +538,10 @@
         <div class="absolute -top-3 right-5 px-2.5 py-0.5 rounded-full bg-brand-500 text-dark-bg text-[10px] font-extrabold tracking-wider">
           ĐANG DEMO
         </div>
-        <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-          🍜
+        <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>
         </div>
         <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">Food Short Editorial</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
@@ -542,8 +555,10 @@
 
       <!-- Skill 2: Podcast & Talkshow -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-accent-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-accent-500/10 text-accent-500 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-          🎙️
+        <div class="w-12 h-12 rounded-xl bg-accent-500/10 text-accent-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
         </div>
         <h3 class="text-lg font-bold text-white group-hover:text-accent-500 transition-colors">Podcast &amp; Talkshow Master</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
@@ -557,8 +572,10 @@
 
       <!-- Skill 3: Viral Hook 3S -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-indigo-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-          🚀
+        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
         </div>
         <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">Kinetic Viral Hook</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
@@ -572,8 +589,10 @@
 
       <!-- Skill 4: E-commerce & UGC -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-emerald-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-          🛍️
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
         </div>
         <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">UGC &amp; Product Review</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
@@ -587,8 +606,10 @@
 
       <!-- Skill 5: Document & Vox Parallax -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-amber-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-          📰
+        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+          </svg>
         </div>
         <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">Vox 2.5D Parallax Essay</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
@@ -602,8 +623,10 @@
 
       <!-- Skill 6: Beat Sync Montage -->
       <div class="bg-dark-surface border border-dark-border rounded-2xl p-6 group hover:border-rose-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-          🎵
+        <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          </svg>
         </div>
         <h3 class="text-lg font-bold text-white group-hover:text-rose-400 transition-colors">Beat-Snap Travel Montage</h3>
         <p class="text-xs text-slate-400 mt-2 leading-relaxed">
@@ -680,17 +703,12 @@
     <div class="bg-gradient-to-br from-dark-surface via-dark-card to-dark-surface border border-dark-border rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
       
       <div class="max-w-2xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 mb-4">
-          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>DỰ ÁN NGUỒN MỞ MIT</span>
-        </div>
-
         <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-white">
           Minh Bạch 100% Trên GitHub
         </h2>
         
         <p class="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">
-          Dành cho các Studio và Developer muốn tự lưu trữ (self-host), tùy biến hoặc đóng góp thêm các Preset Skill mới cho cộng đồng sáng tạo nội dung Việt Nam.
+          Dành cho các Studio và Creator muốn tự lưu trữ (self-host), tùy biến hoặc đóng góp thêm các Preset Skill mới cho cộng đồng sáng tạo nội dung Việt Nam.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -924,21 +942,19 @@
         });
       });
 
-      // 5. VIEW MODE SWITCHER
+      // 5. VIEW MODE SWITCHER (Split & Side-by-Side only)
       const btnSplit = document.getElementById('btn-mode-split');
       const btnSide = document.getElementById('btn-mode-side');
-      const btnAfter = document.getElementById('btn-mode-after');
-      const btnOrig = document.getElementById('btn-mode-orig');
 
       function resetModeButtons() {
-        [btnSplit, btnSide, btnAfter, btnOrig].forEach(btn => {
-          btn.className = 'px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-1.5';
+        [btnSplit, btnSide].forEach(btn => {
+          btn.className = 'px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2';
         });
       }
 
       btnSplit.addEventListener('click', () => {
         resetModeButtons();
-        btnSplit.className = 'px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-1.5';
+        btnSplit.className = 'px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-2';
         containerSplit.classList.remove('hidden');
         containerSide.classList.add('hidden');
         containerSide.classList.remove('grid');
@@ -950,33 +966,10 @@
 
       btnSide.addEventListener('click', () => {
         resetModeButtons();
-        btnSide.className = 'px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-1.5';
+        btnSide.className = 'px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-2';
         containerSplit.classList.add('hidden');
         containerSide.classList.remove('hidden');
         containerSide.classList.add('grid');
-      });
-
-      btnAfter.addEventListener('click', () => {
-        resetModeButtons();
-        btnAfter.className = 'px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-1.5';
-        containerSplit.classList.remove('hidden');
-        containerSide.classList.add('hidden');
-        containerSide.classList.remove('grid');
-        // Slide to 0% so only After is visible
-        splitOverlay.style.width = '0%';
-        splitHandle.classList.add('hidden');
-      });
-
-      btnOrig.addEventListener('click', () => {
-        resetModeButtons();
-        btnOrig.className = 'px-3.5 py-1.5 rounded-lg bg-brand-500 text-dark-bg font-bold transition-all flex items-center gap-1.5';
-        containerSplit.classList.remove('hidden');
-        containerSide.classList.add('hidden');
-        containerSide.classList.remove('grid');
-        // Slide to 100% so only Original is visible
-        splitOverlay.style.width = '100%';
-        splitHandle.classList.add('hidden');
-        handleResize();
       });
 
       // Auto start video smoothly in muted state
