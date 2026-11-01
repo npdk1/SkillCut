@@ -13,12 +13,10 @@ Hai video so sánh dưới đây cùng dài 10 giây (MP4 có âm thanh).
   </tr>
   <tr>
     <td align="center">
-      <video src="./video_output/original.mp4" width="288" controls></video><br>
-      <a href="./video_output/original.mp4">▶ Mở Original có tiếng</a>
+      <video src="https://github.com/user-attachments/assets/97c8308d-15a9-43be-83d9-f1db0beb2747" controls></video>
     </td>
     <td align="center">
-      <video src="./video_output/after.mp4" width="288" controls></video><br>
-      <a href="./video_output/after.mp4">▶ Mở After có tiếng</a>
+      <video src="https://github.com/user-attachments/assets/5c9b257f-e231-416c-8c22-bd231318a648" controls></video>
     </td>
   </tr>
 </table>
