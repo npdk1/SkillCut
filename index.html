@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -94,6 +94,70 @@
     .slider-handle:hover {
       transform: translate(-50%, -50%) scale(1.08);
     }
+
+    /* ============================================================
+       LIGHT THEME — same structure, inverted surface + ink contrast
+       ============================================================ */
+    html { color-scheme: dark; }
+    html.light { color-scheme: light; }
+
+    html.light body { background-color: #F7F8FA; color: #0F172A; }
+
+    /* Surfaces */
+    html.light .bg-dark-bg { background-color: #F7F8FA; }
+    html.light .bg-dark-bg\/85 { background-color: rgba(247, 248, 250, 0.85); }
+    html.light .bg-dark-bg\/90 { background-color: rgba(255, 255, 255, 0.92); }
+    html.light .bg-dark-surface { background-color: #FFFFFF; }
+    html.light .bg-dark-surface\/50 { background-color: rgba(255, 255, 255, 0.65); }
+    html.light .bg-dark-card { background-color: #FFFFFF; }
+    html.light .bg-dark-card\/50 { background-color: #F1F5F9; }
+    html.light .bg-dark-border { background-color: #E2E8F0; }
+    html.light .hover\:bg-dark-border:hover { background-color: #CBD5E1; }
+    html.light .hover\:bg-dark-surface\/50:hover { background-color: #F1F5F9; }
+    html.light .bg-white\/5 { background-color: rgba(15, 23, 42, 0.04); }
+
+    /* Borders */
+    html.light .border-dark-border { border-color: #E2E8F0; }
+    html.light .border-dark-borderLight { border-color: #CBD5E1; }
+    html.light .border-slate-600 { border-color: #CBD5E1; }
+    html.light .divide-dark-border > :not([hidden]) ~ :not([hidden]) { border-color: #E2E8F0; }
+    html.light .hover\:border-slate-500:hover { border-color: #94A3B8; }
+
+    /* Ink */
+    html.light .text-white { color: #0F172A; }
+    html.light .hover\:text-white:hover { color: #0F172A; }
+    html.light .text-slate-100 { color: #0F172A; }
+    html.light .text-slate-300 { color: #334155; }
+    html.light .text-slate-400 { color: #475569; }
+    html.light .text-slate-500 { color: #64748B; }
+    html.light .text-brand-400 { color: #047857; }
+    html.light .text-accent-500 { color: #0369A1; }
+    html.light .text-sky-400 { color: #0284C7; }
+    html.light .text-violet-400 { color: #6D28D9; }
+    html.light .text-cyan-400 { color: #0E7490; }
+    html.light .text-amber-400 { color: #B45309; }
+    html.light .text-emerald-400 { color: #047857; }
+    html.light .text-rose-400 { color: #BE123C; }
+
+    /* Gradients used on the open-source card */
+    html.light .from-dark-surface { --tw-gradient-from: #FFFFFF var(--tw-gradient-from-position); }
+    html.light .via-dark-card { --tw-gradient-via: #FFFFFF var(--tw-gradient-via-position); }
+    html.light .to-dark-surface { --tw-gradient-to: #FFFFFF var(--tw-gradient-to-position); }
+
+    /* Solid-white CTA flips to ink so it stays visible on light */
+    html.light .cta-invert { background-color: #0F172A; color: #FFFFFF; }
+    html.light .cta-invert:hover { background-color: #1E293B; }
+    html.light .cta-invert svg { color: #FFFFFF; }
+
+    /* Open-source card: kill the dark gradient wash on light */
+    html.light .oss-card {
+      background-image: none;
+      background-color: #FFFFFF;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 32px -12px rgba(15, 23, 42, 0.12);
+    }
+
+    /* Header icon buttons */
+    .theme-toggle-icon { transition: opacity .15s ease, transform .2s ease; }
   </style>
 </head>
 <body class="bg-dark-bg text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
@@ -142,9 +206,28 @@
       </nav>
 
       <!-- Action Buttons -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
+
+        <!-- Theme Toggle -->
+        <button id="btn-theme" type="button" aria-label="Toggle light / dark theme" class="w-9 h-9 rounded-lg bg-dark-card border border-dark-border hover:border-slate-500 text-slate-300 hover:text-white flex items-center justify-center transition-colors" title="Light / Dark">
+          <svg id="icon-theme-sun" class="w-4 h-4 theme-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+          <svg id="icon-theme-moon" class="w-4 h-4 theme-toggle-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          </svg>
+        </button>
+
+        <!-- Language Toggle -->
+        <button id="btn-lang" type="button" aria-label="Switch language" class="h-9 px-2.5 rounded-lg bg-dark-card border border-dark-border hover:border-slate-500 text-slate-300 hover:text-white flex items-center gap-1.5 text-[11px] font-mono font-bold transition-colors" title="English / Tiếng Việt">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/>
+          </svg>
+          <span id="lang-label">EN</span>
+        </button>
+
         <!-- GitHub Star Badge -->
-        <a href="https://github.com/npdk1/SkillCut" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-dark-card border border-dark-border hover:border-slate-500 text-xs font-medium text-slate-300 hover:text-white transition-colors">
+        <a href="https://github.com/npdk1/SkillCut" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-dark-card border border-dark-border hover:border-slate-500 text-xs font-medium text-slate-300 hover:text-white transition-colors">
           <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
@@ -153,7 +236,7 @@
         </a>
 
         <!-- Main CTA -->
-        <a href="#comparison" class="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-dark-bg font-bold text-xs sm:text-sm transition-colors">
+        <a href="#comparison" class="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-dark-bg font-bold text-xs sm:text-sm transition-colors">
           <span>Xem So Sánh</span>
         </a>
       </div>
@@ -174,7 +257,7 @@
       </h1>
 
       <!-- Customer Subheadline -->
-      <p class="mt-5 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+      <p class="mt-5 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed" data-i18n="hero.sub">
         SkillCut là kho <strong class="text-white font-semibold">template và skill dựng video</strong> để giao cho A.I làm thay bạn. Chọn phong cách, đưa video thô cùng file phụ đề — nhận lại clip 9:16 hoàn chỉnh.
       </p>
 
@@ -379,13 +462,7 @@
           <input type="range" id="video-scrubber" min="0" max="100" value="0" step="0.1" class="w-full h-1.5 bg-dark-border rounded-lg appearance-none cursor-pointer accent-brand-500" />
         </div>
 
-        <!-- Quick Status -->
-        <div class="text-xs text-slate-400 flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-brand-400"></span>
-          <span>FPS: 60 • Chuẩn 9:16 Shorts/TikTok</span>
         </div>
-
-      </div>
 
     </div>
 
@@ -811,7 +888,7 @@
        8. OPEN SOURCE & GITHUB REPOSITORY (Transparent & Community-Driven)
        ========================================================================= -->
   <section class="py-16 px-4 sm:px-6 max-w-5xl mx-auto border-t border-dark-border">
-    <div class="bg-gradient-to-br from-dark-surface via-dark-card to-dark-surface border border-dark-border rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+    <div class="oss-card bg-gradient-to-br from-dark-surface via-dark-card to-dark-surface border border-dark-border rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
       
       <div class="max-w-2xl mx-auto">
         <h2 class="text-3xl sm:text-4xl font-display font-extrabold text-white">
@@ -823,7 +900,7 @@
         </p>
 
         <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a href="https://github.com/npdk1/SkillCut" target="_blank" class="px-6 py-3 rounded-xl bg-white hover:bg-slate-200 text-dark-bg font-bold text-sm transition-all flex items-center gap-2 shadow-lg">
+          <a href="https://github.com/npdk1/SkillCut" target="_blank" class="cta-invert px-6 py-3 rounded-xl bg-white hover:bg-slate-200 text-dark-bg font-bold text-sm transition-all flex items-center gap-2 shadow-lg">
             <svg class="w-5 h-5 text-dark-bg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             <span>Ghé Thăm npdk1/SkillCut</span>
           </a>
@@ -877,6 +954,227 @@
 
     </div>
   </footer>
+
+  <!-- =========================================================================
+       THEME (dark / light) + LANGUAGE (EN default / VI)
+       ========================================================================= -->
+  <script>
+    (function () {
+      var EN = {
+        /* Nav */
+        "So Sánh Video": "Compare",
+        "Hiệu Quả": "Why SkillCut",
+        "Kho Skill": "Skill Library",
+        "Quy Trình": "How It Works",
+        "Công Cụ AI": "AI Tools",
+        "Xem So Sánh": "See Comparison",
+        /* Hero */
+        "Biến Video Thô Thành Clip Triệu View": "Turn Raw Footage Into Million-View Clips",
+        "Tự Động Với SkillCut": "Automatically, With SkillCut",
+        "Tiết kiệm 85% thời gian dựng": "Save 85% of editing time",
+        "Tăng 2.5x tỷ lệ giữ chân người xem": "2.5x better viewer retention",
+        "Phụ đề động không che mất nội dung": "Captions that never cover the shot",
+        "Xem So Sánh Thực Tế": "See Real Comparison",
+        "Khám Phá GitHub": "Explore on GitHub",
+        /* Comparison */
+        "KẾT QUẢ THỰC TẾ TRÊN VIDEO ẨM THỰC": "REAL RESULT ON A FOOD VIDEO",
+        "Xem Sự Khác Biệt:": "See the Difference:",
+        "Gốc vs. SkillCut": "Raw vs. SkillCut",
+        "Cùng một đoạn video quay thô ban đầu, hãy xem SkillCut xử lý nhịp độ cắt, tạo phụ đề động và bật thẻ công đoạn hấp dẫn như thế nào.": "Same raw footage. Watch how SkillCut reworks the pacing, adds animated captions and pops in step tags.",
+        "So Sánh Kéo Trượt (Split)": "Drag to Compare (Split)",
+        "Song Song (Side-by-Side)": "Side-by-Side",
+        "Bật Loa / Âm Thanh": "Turn Sound On",
+        "Đang Bật Âm Thanh": "Sound On",
+        "BẢN GỐC CHƯA DỰNG": "RAW, UNEDITED",
+        "ĐÃ QUA SKILLCUT": "AFTER SKILLCUT",
+        "Video Thô Ban Đầu (Original)": "Raw Footage (Original)",
+        "30s • Nhiều ngắt quãng": "30s • Full of pauses",
+        "Chưa cắt khoảng lặng, âm lượng chênh lệch, không có phụ đề.": "No silence trimmed, uneven audio, no captions.",
+        "Sau Khi Xử Lý Bằng SkillCut": "After SkillCut",
+        "18s • Tinh gọn 100%": "18s • Fully tightened",
+        "Gọt sạch 8.5s lặng, phụ đề karaoke động không nền, thẻ công đoạn bật nảy.": "8.5s of silence gone, animated karaoke captions, bouncing step tags.",
+        "Phát Video": "Play Video",
+        "Tạm Dừng": "Pause",
+        /* Value cards */
+        "Cắt Khoảng Lặng Tự Động": "Automatic Silence Cutting",
+        "Thuật toán Voice Activity Detection tự dò và cắt sạch các đoạn ngập ngừng, giữ nhịp nói nhanh và cuốn hút.": "Voice Activity Detection finds and trims every pause, keeping the delivery fast and gripping.",
+        "Phụ Đề Karaoke Không Nền": "Bare Karaoke Captions",
+        "Chữ chạy từng từ khớp 100% khẩu hình, viền nổi rõ trên mọi nền video và hoàn toàn không che khuất món ăn.": "Words light up in sync with the speaker, clearly outlined on any background and never covering the dish.",
+        "Nhãn Công Đoạn & Insight": "Step Tags & Insights",
+        "Tự động đánh dấu bước nấu (\"Bước 1: Sơ chế\", \"Mẹo nhỏ...\") xuất hiện đúng thời điểm để kích thích tương tác.": "Cooking steps (\"Step 1: Prep\", \"Pro tip...\") are tagged automatically and appear right on cue to drive engagement.",
+        "Xuất File 4K 60fps Tức Thì": "Instant 4K 60fps Export",
+        "Render 4K 60fps, độ trễ thấp. Tải file về là đăng ngay, không phải chỉnh sửa lại.": "Rendered at 4K 60fps with low latency. Download and post — no re-editing needed.",
+        /* Benefits */
+        "Tại Sao SkillCut Đánh Bại": "Why SkillCut Beats",
+        "Cách Dựng Video Truyền Thống?": "Traditional Video Editing",
+        "So sánh hiệu quả giữa việc thuê dựng thủ công tốn kém và áp dụng tự động hóa thông minh với SkillCut.": "Manual editing is slow and expensive. Here is what changes when SkillCut takes over.",
+        "Tiêu Chí So Sánh": "Criteria",
+        "Cách Dựng Thủ Công Cũ": "Old Manual Way",
+        "SkillCut Tự Động": "SkillCut",
+        "Thời gian tạo 1 video ngắn": "Time to make one short clip",
+        "2 – 4 tiếng (cắt từng frame, canh chỉnh)": "2–4 hours (frame by frame, manual sync)",
+        "Chỉ 30 giây (render tự động)": "30 seconds (fully automated)",
+        "Gõ phụ đề & hiệu ứng chữ": "Typing captions & text effects",
+        "Nghe từng câu, gõ tay dễ sai chính tả": "Replay every line, typos guaranteed",
+        "Tự bóc băng Whisper, karaoke từng từ": "Whisper transcription, word-level karaoke",
+        "Cắt khoảng dừng & ngắc ngứ": "Cutting pauses and stumbles",
+        "Phải nghe toàn bộ file, zoom timeline cắt tay": "Listen to the whole file, zoom and cut by hand",
+        "Thuật toán VAD loại bỏ tự động 100%": "VAD removes 100% automatically",
+        "Tính nhất quán phong cách": "Style consistency",
+        "Mỗi clip một kiểu tùy tâm trạng người dựng": "Every clip differs, depends on the editor's mood",
+        "Chuẩn hóa theo Preset Skill thương hiệu": "Standardised by your brand skill preset",
+        "Chi phí sản xuất hàng tháng": "Monthly production cost",
+        "15.000.000đ – 25.000.000đ / nhân sự": "$600 – $1,000 / editor",
+        "Tiết kiệm đến 80% ngân sách": "Saves up to 80% of the budget",
+        /* Skills */
+        "Kho Template & Skill Cho Từng Ngành": "Templates & Skills by Industry",
+        "Mỗi ngành một bộ template riêng — motion, nhịp cắt và typography đều khác nhau. Chọn đúng ngành là A.I biết phải dựng thế nào.": "Every industry gets its own template — different motion, pacing and typography. Pick the industry and the AI knows exactly how to cut.",
+        "Du lịch • Học tập • Kiến trúc • Bất động sản • Công nghệ": "Travel • Study • Architecture • Real Estate • Tech",
+        "ĐANG DEMO": "LIVE DEMO",
+        "Ẩm Thực & F&B": "Food & F&B",
+        "Phụ đề chữ vàng không nền, macro cận món ăn ở khoảnh khắc hấp dẫn nhất, tự bắt các bước nấu và chèn thẻ lưu ý bắt mắt.": "Bare yellow captions, macro shots at the most appetising moment, automatic step detection and eye-catching tip tags.",
+        "Motion: Macro + Nhịp cắt nhanh": "Motion: Macro + fast cuts",
+        "Giữ chân 88%": "88% retention",
+        "Du Lịch & Trải Nghiệm": "Travel & Experiences",
+        "Speed-ramp tăng tốc chuyển cảnh theo nhịp bass, whip-pan mượt giữa các địa điểm, punch-in nhấn vào khoảnh khắc đẹp. Overlay toạ độ GPS + tên địa danh trôi nhẹ, phụ đề trắng viền mảnh.": "Speed-ramp transitions on the bass, smooth whip-pans between locations, punch-ins on the best moments. GPS coordinates and place names drift in over thin white captions.",
+        "Motion: Speed-ramp + Whip-pan": "Motion: Speed-ramp + whip-pan",
+        "Khớp nhịp bass": "On-beat cuts",
+        "Học Tập & Tập Trung": "Study & Focus",
+        "Đồng hồ Pomodoro đếm ngược động ở góc khung, split-screen \"tài liệu + người nói\", highlighter quét sáng từng từ khoá. Nhạc lofi tự giảm âm lượng khi có giọng nói.": "An animated Pomodoro timer in the corner, a document-and-speaker split screen, a highlighter sweeping each keyword. Lofi ducks automatically under the voice.",
+        "Motion: Split-screen + Highlighter": "Motion: Split-screen + highlighter",
+        "Nhạc tự duck": "Auto-ducked music",
+        "Giáo Dục & Bài Giảng": "Education & Lectures",
+        "Kinetic diagram và mindmap tự vẽ nét, auto-zoom vào vùng kiến thức đang giảng, cắt sạch khoảng ngập ngừng. Phụ đề karaoke từng từ + banner \"Điểm chính\" cuối mỗi ý.": "Kinetic diagrams and mind maps draw themselves, the camera zooms into whatever is being taught, every stumble is cut. Word-level karaoke plus a \"Key point\" banner.",
+        "Motion: Diagram vẽ nét + Auto-zoom": "Motion: Line-drawn diagram + auto-zoom",
+        "Cắt sạch khoảng lặng": "Clean silence removal",
+        "Kiến Trúc & Nội Thất": "Architecture & Interiors",
+        "Dolly camera trôi chậm tạo chiều sâu, lưới tỉ lệ vàng và đường kích thước CAD tự vẽ theo nét kiến trúc. Tag vật liệu (gỗ, đá, kính) trôi theo cử động, tông màu trung tính cao cấp.": "A slow dolly for depth, golden-ratio grids and CAD dimension lines tracing the architecture. Material tags (wood, stone, glass) drift with the motion, in a warm neutral grade.",
+        "Motion: Dolly chậm + CAD line": "Motion: Slow dolly + CAD lines",
+        "Tông màu tạp chí": "Editorial grade",
+        "Bất Động Sản & Tour Nhà": "Real Estate & House Tours",
+        "Flycam chuyển phòng liền mạch không cắt cứng, sơ đồ mặt bằng 3D radar xoay theo hướng di chuyển. HUD thông số hiện dần: diện tích, số phòng, giá, pháp lý.": "Seamless fly-throughs between rooms, a 3D radar floor plan rotating with the walk. A spec HUD fades in: area, bedrooms, price, paperwork.",
+        "Motion: Flycam + Floor-plan 3D": "Motion: Flycam + 3D floor plan",
+        "HUD thông số": "Spec HUD",
+        "Công Nghệ & Review": "Tech & Reviews",
+        "Spec-sheet kính mờ viền neon, zoom crop cận chi tiết sản phẩm 4K, split so sánh thông số trước/sau. Phụ đề dạng bảng thông số chạy dọc, SFX whoosh kim loại tạo cảm giác công nghệ.": "Frosted spec sheets with neon edges, 4K detail crops, before-and-after spec splits. Captions run as a data column with metallic whooshes for the tech feel.",
+        "Motion: Zoom crop + Split thông số": "Motion: Zoom crop + spec split",
+        "Spec-sheet neon": "Neon spec sheet",
+        /* How it works */
+        "Dựng Video Triệu View": "Make Million-View Clips",
+        "Chỉ Với 3 Bước Đơn Giản": "In 3 Simple Steps",
+        "Không cần học sử dụng phần mềm phức tạp. Bạn chỉ cần tập trung sáng tạo nội dung.": "No editing software to learn. Just focus on creating.",
+        "Gửi Video Thô + File Phụ Đề": "Send Raw Video + Subtitle File",
+        "Tải lên video gốc quay bằng điện thoại hoặc máy ảnh, kèm file phụ đề (.srt / .txt). Cứ nói tự nhiên, không cần lo vấp hay ngập ngừng.": "Upload footage shot on a phone or camera plus a subtitle file (.srt / .txt). Speak naturally — stumbles are fine.",
+        "Chọn Phong Cách": "Pick a Style",
+        "Chọn preset theo ngành: Ẩm thực, Du lịch, Học tập, Kiến trúc, Bất động sản, Công nghệ... Thuật toán tự gọt dũa, thêm motion và phối nhạc.": "Choose an industry preset: food, travel, study, architecture, real estate, tech... The engine trims, adds motion and scores the music.",
+        "Nhận Video Hoàn Thiện": "Get the Finished Video",
+        "Nhận ngay video chuẩn dọc 9:16 độ phân giải 4K 60fps mượt mà, sẵn sàng đăng tải lên mọi nền tảng.": "Receive a vertical 9:16 clip at 4K 60fps, ready to post on any platform.",
+        /* Integrations */
+        "Giao Skill Cho Trợ Lý A.I Bạn Đang Dùng": "Hand the Skill to the AI You Already Use",
+        "Mỗi template trong SkillCut là một file skill — nạp vào trợ lý A.I là dùng được, không cần phần mềm dựng phim nào khác.": "Every SkillCut template is a skill file — load it into your AI assistant and it just works. No editing software needed.",
+        "Nạp bộ skill vào phiên làm việc, giao video thô kèm file phụ đề. Claude tự cắt khoảng lặng, đặt phụ đề và dựng theo template bạn chọn.": "Load the skill into your session, hand over the raw footage and subtitle file. Claude trims the silence, places captions and cuts to your chosen template.",
+        "Trợ lý A.I của Google. Chọn template theo ngành, đưa video thô và phụ đề — nhận về clip đã dựng xong, không phải kéo thả thủ công.": "Google's AI assistant. Pick an industry template, send raw footage and subtitles — get back a finished clip, no manual timeline work.",
+        "Trợ lý của OpenAI. Đọc skill, dựng timeline theo template, xử lý file phụ đề và xuất video theo preset bạn chọn.": "OpenAI's assistant. Reads the skill, builds the timeline to your template, handles the subtitle file and exports with your preset.",
+        "Dùng được với mọi trợ lý A.I đọc hiểu file skill • Không cần cài phần mềm dựng phim": "Works with any AI assistant that can read a skill file • No editing software required",
+        /* Open source */
+        "Minh Bạch 100% Trên GitHub": "100% Open on GitHub",
+        "Dành cho các Studio và Creator muốn tự lưu trữ (self-host), tùy biến hoặc đóng góp thêm các Preset Skill mới cho cộng đồng sáng tạo nội dung Việt Nam.": "For studios and creators who want to self-host, customise, or contribute new skill presets to the Vietnamese creator community.",
+        "Ghé Thăm npdk1/SkillCut": "Visit npdk1/SkillCut",
+        "Xem Lại So Sánh Video": "Back to the Comparison",
+        /* Footer */
+        "© 2026 npdk1. Giấy phép mã nguồn mở MIT.": "© 2026 npdk1. Released under the MIT License."
+      };
+
+      var EN_HTML = {
+        "hero.sub": 'SkillCut is a library of <strong class="text-white font-semibold">video-editing templates and skills</strong> you hand off to AI. Pick a style, drop in raw footage and a subtitle file — get back a finished 9:16 clip.'
+      };
+
+      var TITLES = {
+        en: "SkillCut — Turn Raw Footage Into Million-View Clips",
+        vi: "SkillCut — Biến Video Thô Thành Clip Triệu View Tự Động"
+      };
+
+      var lang = 'en';
+      var snapshot = new Map(); // textNode -> original Vietnamese
+      var i18nNodes = new Map(); // element -> original Vietnamese innerHTML
+
+      function collect() {
+        var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            var p = n.parentElement;
+            if (!p || p.closest('script, style')) return NodeFilter.FILTER_REJECT;
+            return n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          }
+        });
+        var n;
+        while ((n = walker.nextNode())) snapshot.set(n, n.nodeValue);
+
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          i18nNodes.set(el, el.innerHTML);
+        });
+      }
+
+      function applyText() {
+        snapshot.forEach(function (vi, node) {
+          var trimmed = vi.trim();
+          var next = trimmed;
+          if (lang === 'en') next = Object.prototype.hasOwnProperty.call(EN, trimmed) ? EN[trimmed] : trimmed;
+          node.nodeValue = vi.replace(trimmed, function () { return next; });
+        });
+
+        i18nNodes.forEach(function (viHtml, el) {
+          var key = el.getAttribute('data-i18n');
+          el.innerHTML = (lang === 'en' && EN_HTML[key]) ? EN_HTML[key] : viHtml;
+        });
+
+        document.documentElement.lang = lang;
+        document.title = TITLES[lang];
+        document.getElementById('lang-label').textContent = lang === 'en' ? 'EN' : 'VI';
+        if (window.SC_syncPlayerLabels) window.SC_syncPlayerLabels();
+      }
+
+      /** Translate a runtime string (used by the player script). */
+      window.SC_T = function (vi) {
+        return (lang === 'en' && Object.prototype.hasOwnProperty.call(EN, vi)) ? EN[vi] : vi;
+      };
+
+      function setLang(next) {
+        lang = next;
+        try { localStorage.setItem('sc-lang', next); } catch (e) {}
+        applyText();
+      }
+
+      /* ---------- Theme ---------- */
+      var root = document.documentElement;
+
+      function setTheme(theme) {
+        root.classList.toggle('light', theme === 'light');
+        root.classList.toggle('dark', theme !== 'light');
+        document.getElementById('icon-theme-sun').classList.toggle('hidden', theme === 'light');
+        document.getElementById('icon-theme-moon').classList.toggle('hidden', theme !== 'light');
+        try { localStorage.setItem('sc-theme', theme); } catch (e) {}
+      }
+
+      collect();
+
+      var savedLang = null, savedTheme = 'dark';
+      try {
+        savedLang = localStorage.getItem('sc-lang');
+        savedTheme = localStorage.getItem('sc-theme') || 'dark';
+      } catch (e) {}
+
+      setTheme(savedTheme);
+      setLang(savedLang === 'vi' ? 'vi' : 'en');
+
+      document.getElementById('btn-theme').addEventListener('click', function () {
+        setTheme(root.classList.contains('light') ? 'dark' : 'light');
+      });
+
+      document.getElementById('btn-lang').addEventListener('click', function () {
+        setLang(lang === 'en' ? 'vi' : 'en');
+      });
+    })();
+  </script>
 
   <!-- =========================================================================
        JAVASCRIPT: SYNCHRONIZED BEFORE & AFTER VIDEO PLAYER WITH SLIDER
@@ -977,7 +1275,7 @@
         
         masterBtnIconPlay.classList.add('hidden');
         masterBtnIconPause.classList.remove('hidden');
-        masterBtnText.textContent = 'Tạm Dừng';
+        masterBtnText.textContent = SC_T('Tạm Dừng');
       }
 
       function pauseAll() {
@@ -991,7 +1289,7 @@
 
         masterBtnIconPlay.classList.remove('hidden');
         masterBtnIconPause.classList.add('hidden');
-        masterBtnText.textContent = 'Phát Video';
+        masterBtnText.textContent = SC_T('Phát Video');
       }
 
       function togglePlay() {
@@ -1022,13 +1320,19 @@
         if (isMuted) {
           audioIconMuted.classList.remove('hidden');
           audioIconUnmuted.classList.add('hidden');
-          audioStatusText.textContent = 'Bật Loa / Âm Thanh';
+          audioStatusText.textContent = SC_T('Bật Loa / Âm Thanh');
         } else {
           audioIconMuted.classList.add('hidden');
           audioIconUnmuted.classList.remove('hidden');
-          audioStatusText.textContent = 'Đang Bật Âm Thanh';
+          audioStatusText.textContent = SC_T('Đang Bật Âm Thanh');
         }
       });
+
+      // Keep runtime labels in the current language when the user switches
+      window.SC_syncPlayerLabels = function () {
+        masterBtnText.textContent = SC_T(isPlaying ? 'Tạm Dừng' : 'Phát Video');
+        audioStatusText.textContent = SC_T(isMuted ? 'Bật Loa / Âm Thanh' : 'Đang Bật Âm Thanh');
+      };
 
       // 4. SCRUBBER & TIMECODE SYNC
       function formatTime(seconds) {
