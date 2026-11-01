@@ -1,54 +1,35 @@
 # Remotion House Review VN
 
-Skill dựng video review nhà ở dọc bằng Remotion theo chuẩn Luxury Realtor: kỹ thuật Text-Behind-Reviewer (chữ 3D depth matting), B-Roll Photo Showcase thay thế cảnh đi bộ thô khi vào khúc phụ, bộ 3 phông chữ đẳng cấp (Serif + Script vàng + Modern Sans), phụ đề karaoke động không nền và hệ thống đồ họa 4 dạng chống template slop.
+Skill dựng video review nhà ở dọc bằng Remotion theo phong cách Luxury Realtor: Text-Behind-Reviewer (chữ 3D depth matting), B-Roll Photo Showcase minh họa khúc phụ, bộ 3 phông chữ đẳng cấp, phụ đề karaoke không nền và hệ thống đồ họa 4 dạng chống template slop.
 
 ## Showcase: Original vs After
 
-Hai video so sánh dưới đây cùng dài 10 giây (**đầy đủ track âm thanh giọng nói của reviewer**).  
-*Nhấp vào ảnh preview hoặc đường dẫn bên dưới để mở phát trực tiếp video có âm thanh trên trình duyệt:*
+Hai video so sánh dưới đây cùng dài 10 giây (MP4 có âm thanh).
 
 <table>
   <tr>
-    <th width="50%">Original (Footage Gốc)</th>
-    <th width="50%">After · New Skill (Bản Edit Mới)</th>
+    <th width="50%">Original</th>
+    <th width="50%">After · New Skill</th>
   </tr>
   <tr>
     <td align="center">
-      <a href="https://github.com/npdk1/SkillCut/raw/main/.codex/remotion-house-review-vn/video_output/original.mp4">
-        <img src="./video_output/original-preview.webp" alt="Original — raw footage" width="300">
-      </a>
-      <br><br>
-      <a href="https://github.com/npdk1/SkillCut/raw/main/.codex/remotion-house-review-vn/video_output/original.mp4">
-        🔊 <b>Bấm Xem / Tải Original (10s MP4)</b>
-      </a>
+      <video src="https://github.com/user-attachments/assets/5c0b4726-e5b5-44db-84c7-f70f66267285" controls></video>
     </td>
     <td align="center">
-      <a href="https://github.com/npdk1/SkillCut/raw/main/.codex/remotion-house-review-vn/video_output/after.mp4">
-        <img src="./video_output/after-preview.webp" alt="After SkillCut — Luxury Realtor" width="300">
-      </a>
-      <br><br>
-      <a href="https://github.com/npdk1/SkillCut/raw/main/.codex/remotion-house-review-vn/video_output/after.mp4">
-        🔊 <b>Bấm Xem / Tải After (10s MP4)</b>
-      </a>
+      <video src="https://github.com/user-attachments/assets/df04d1e5-1c7a-4784-ae17-efd12f452124" controls></video>
     </td>
   </tr>
 </table>
 
-> 📦 **File video gốc đính kèm**: Cả 2 clip có sẵn trong thư mục [`video_output/`](./video_output/) và đính kèm tại [Releases v1.0.0](https://github.com/npdk1/SkillCut/releases/tag/v1.0.0).
-
----
-
 ## Thiết kế được áp dụng
 
-- **Text Behind Reviewer (Depth Occlusion)**: Chữ 3D khổng lồ neo sâu trong không gian hành lang sau lưng reviewer; reviewer bước tới che khuất một phần chữ tạo cảm giác không gian chân thực.
-- **B-Roll Photo Showcase Cutaways**: Nhận diện Khúc Phụ (mô tả tiện nghi, chém gió) để cắt sang ảnh/footage kiến trúc đẹp nhất (phòng ngủ master, gương sóng nghệ thuật, quầy bar, sân thượng sky garden) với Ken Burns zoom chậm, trong khi âm thanh thoại gốc vẫn phát liên tục bên dưới.
-- **Subtitle Karaoke Động**: Chữ trắng viền đen nổi trực tiếp trên hình, từ đang nói phóng to nhẹ (kinetic pop 1.08x) và chuyển sang vàng hoàng kim `#FFD21C`, tuyệt đối không dùng panel xám hay hộp mờ che cảnh.
-- **Bộ 3 Phông Chữ Đẳng Cấp (Font Triad)**: Phối hợp Luxury Serif (`Playfair Display`), Handwritten Cursive Script vàng chanh (`Dancing Script`) và Modern Sans (`Be Vietnam Pro`).
-- **4 Hình Thức Đồ Họa Riêng Biệt**: Hook mở đầu 3D, Stat Rail (diện tích/số tầng), Hero Price (chữ số vàng kim 3D + camera punch zoom), Minimal Chip (full nội thất, xây mới).
-- **Khoảng Thở & Nhịp Sóng Điện Ảnh**: Luân chuyển A-Roll $\leftrightarrow$ B-Roll nhịp nhàng, chừa khoảng nghỉ 3–6s để người xem ngắm nhà thật; loại bỏ toàn bộ popup cho câu cảm thán sáo rỗng.
-- **Tự Động Bắt Lỗi Va Chạm**: Component `LayoutCollisionGuard` giám sát bounding box ở render time để loại bỏ hoàn toàn tình trạng đè chữ hoặc lấn phụ đề.
-
----
+- Text Behind Reviewer (Depth Occlusion): Chữ 3D khổng lồ neo sâu trong không gian hành lang sau lưng reviewer; reviewer bước tới che khuất một phần chữ tạo cảm giác không gian chân thực.
+- B-Roll Photo Showcase Cutaways: Nhận diện Khúc Phụ (mô tả tiện nghi, chém gió) để cắt sang ảnh/footage kiến trúc đẹp nhất với Ken Burns zoom chậm, trong khi âm thanh thoại gốc vẫn phát liên tục bên dưới.
+- Subtitle Karaoke Động: Chữ trắng viền đen nổi trực tiếp trên hình, từ đang nói phóng to nhẹ (kinetic pop 1.08x) và chuyển sang vàng hoàng kim, tuyệt đối không có background che cảnh.
+- Bộ 3 Phông Chữ Đẳng Cấp: Phối hợp Luxury Serif (`Playfair Display`), Handwritten Cursive Script vàng chanh (`Dancing Script`) và Modern Sans (`Be Vietnam Pro`).
+- 4 Hình Thức Đồ Họa Riêng Biệt: Hook mở đầu 3D, Stat Rail (diện tích/số tầng), Hero Price (chữ số vàng kim 3D) và Minimal Chip (nội thất/tiện ích).
+- Khoảng Thở & Nhịp Sóng Điện Ảnh: Luân chuyển A-Roll / B-Roll nhịp nhàng, chừa khoảng nghỉ 3–6s để người xem ngắm nhà thật; loại bỏ toàn bộ popup sáo rỗng.
+- Tự Động Bắt Lỗi Va Chạm: LayoutCollisionGuard giám sát bounding box ở render time để loại bỏ hoàn toàn tình trạng đè chữ hoặc lấn phụ đề.
 
 ## Cấu trúc skill
 
@@ -58,8 +39,6 @@ Hai video so sánh dưới đây cùng dài 10 giây (**đầy đủ track âm t
 - `references/property-insights.md`: cách đọc SRT phân tích thông số và quy tắc anti-slop pruning.
 - `references/quality-control.md`: kiểm tra FPS, độ phân giải, độ lệch A/V dưới 0,1s và tự kiểm tra layout.
 - `references/feedback-learning.md`: bài học chuẩn hóa chống template slop và nâng cấp chuẩn Luxury Realtor.
-- `assets/`: các component React/Remotion dùng chung (`BehindHostText.tsx`, `HostCutout.tsx`, `PhotoShowcase.tsx`, `LayoutCollisionGuard.tsx`, `font.ts`).
-- `video_output/original.mp4`: footage gốc 10 giây, có tiếng AAC stereo.
-- `video_output/after.mp4`: footage sau khi áp dụng skill, 10 giây, có tiếng AAC stereo.
-- `video_output/original-preview.webp`: ảnh động WebP xem trước của video gốc.
-- `video_output/after-preview.webp`: ảnh động WebP xem trước của video đã edit.
+- `assets/`: các component React/Remotion dùng chung (BehindHostText, HostCutout, PhotoShowcase, LayoutCollisionGuard, font).
+- `video_output/original.mp4`: footage gốc 10 giây, có tiếng.
+- `video_output/after.mp4`: footage sau khi áp dụng skill, 10 giây, có tiếng.
