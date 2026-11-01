@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark scroll-smooth">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkillCut.ai — Cộng Đồng Combo skill.md Dựng Video Bằng AI Cho Mọi Người</title>
+  <title>SPLICE.MD — Thư Viện Băng Từ skill.md Dựng Video Bằng AI (Zero-GUI)</title>
 
-  <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+  <!-- Google Fonts: Syne, Instrument Serif, Space Grotesk, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- GSAP & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -22,36 +19,13 @@
 
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            obsidian: {
-              950: '#07070b',
-              900: '#0f1018',
-              800: '#161824',
-              700: '#222538'
-            },
-            violet: {
-              DEFAULT: '#8b5cf6',
-              glow: '#a78bfa'
-            },
-            cyan: {
-              DEFAULT: '#06b6d4',
-              glow: '#22d3ee'
-            },
-            coral: {
-              DEFAULT: '#f43f5e'
-            }
-          },
           fontFamily: {
-            display: ['Syne', 'Plus Jakarta Sans', 'sans-serif'],
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+            serif: ['Instrument Serif', 'serif'],
+            sans: ['Space Grotesk', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace']
-          },
-          backgroundImage: {
-            'gradient-signature': 'linear-gradient(135deg, #8b5cf6 0%, #06b6d4 50%, #f43f5e 100%)',
-            'grid-pattern': 'linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)'
           }
         }
       }
@@ -59,615 +33,1703 @@
   </script>
 
   <style>
+    /* ==========================================================================
+       SWISS EDITORIAL × TEENAGE ENGINEERING × 16MM CUTTING ROOM TOKENS
+       ZERO PURPLE / ZERO CYAN GLOW / ZERO GLASSMORPHISM SLOP
+       ========================================================================== */
     :root {
-      --bg-primary: #07070b;
-      --bg-secondary: #0f1018;
-      --accent-violet: #8b5cf6;
-      --accent-cyan: #06b6d4;
-      --accent-coral: #f43f5e;
+      --bg-stock: #F3EFE6;       /* Warm 16mm archival paper stock */
+      --bg-putty: #E7E2D5;       /* Teenage Engineering anodized putty */
+      --bg-well: #DDD7C8;        /* Recessed hardware bay */
+      --bg-monitor: #111110;     /* CRT / NLE field monitor bezel */
+      --ink-primary: #141413;    /* Deep carbon printer ink */
+      --ink-muted: #5C5952;      /* Technical specification gray */
+      --ink-faint: #8C887E;      /* Ruler markings */
+      --grid-line: rgba(20, 20, 19, 0.16);
+      --grid-strong: #141413;
+      --accent-orange: #FF3E00;  /* International Signal Orange */
+      --accent-amber: #D98A00;   /* Phosphor Amber */
+      --accent-green: #007A4D;   /* Splice Tape Green */
+      --surface-card: #FAF7F0;
+      --shadow-hard: 3px 3px 0px #141413;
+      --shadow-hard-sm: 2px 2px 0px #141413;
+    }
+
+    html.darkroom {
+      --bg-stock: #0E0E0D;       /* Matte carbon darkroom */
+      --bg-putty: #171715;       /* Dark anodized chassis */
+      --bg-well: #1F1F1C;        /* Recessed dark bay */
+      --bg-monitor: #070706;
+      --ink-primary: #EAE5D9;    /* Warm bone ink */
+      --ink-muted: #9E998E;      /* Muted warm technical gray */
+      --ink-faint: #5E5B54;
+      --grid-line: rgba(234, 229, 217, 0.14);
+      --grid-strong: #EAE5D9;
+      --accent-orange: #FF4800;  /* Tungsten Orange */
+      --accent-amber: #FFB300;   /* Amber Timecode LED */
+      --accent-green: #00E676;   /* Terminal Phosphor Green */
+      --surface-card: #141412;
+      --shadow-hard: 3px 3px 0px #000000;
+      --shadow-hard-sm: 2px 2px 0px #000000;
     }
 
     * {
       box-sizing: border-box;
-      selection-background-color: #8b5cf6;
+      border-color: var(--grid-line);
     }
 
     ::selection {
-      background: rgba(139, 92, 246, 0.35);
-      color: #ffffff;
+      background: var(--accent-orange);
+      color: #FFFFFF;
     }
 
     body {
-      background-color: #07070b;
-      color: #f8fafc;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-stock);
+      color: var(--ink-primary);
+      font-family: 'Space Grotesk', sans-serif;
       overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* Subtle Film Noise Overlay */
-    .noise-overlay {
+    /* Subtle tactile paper / film grain texture */
+    .paper-grain {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 45;
-      opacity: 0.028;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      z-index: 90;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Mouse-Tracking Spotlight Card */
-    .spotlight-card {
+    /* Exposed Swiss Grid Lines & Crosshairs */
+    .swiss-border-b { border-bottom: 1px solid var(--grid-line); }
+    .swiss-border-t { border-top: 1px solid var(--grid-line); }
+    .swiss-border-r { border-right: 1px solid var(--grid-line); }
+    .swiss-border-l { border-left: 1px solid var(--grid-line); }
+    .swiss-box {
+      border: 1px solid var(--grid-line);
+      background-color: var(--bg-stock);
+    }
+
+    /* Crosshair corner marker */
+    .crosshair {
       position: relative;
-      background: rgba(15, 16, 24, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .spotlight-card::before {
-      content: "";
+    .crosshair::after {
+      content: "+";
       position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        600px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-        rgba(139, 92, 246, 0.14),
-        rgba(6, 182, 212, 0.05) 40%,
-        transparent 70%
-      );
+      bottom: -8px;
+      right: -5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      line-height: 1;
+      color: var(--ink-faint);
       pointer-events: none;
-      z-index: 1;
-      transition: opacity 0.3s ease;
+      z-index: 10;
     }
 
-    .spotlight-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: radial-gradient(
-        350px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
-        rgba(139, 92, 246, 0.65),
-        rgba(6, 182, 212, 0.4) 50%,
-        transparent 100%
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      z-index: 2;
+    /* Teenage Engineering Tactile Mechanical Key / Button */
+    .te-btn {
+      background-color: var(--surface-card);
+      color: var(--ink-primary);
+      border: 1.5px solid var(--grid-strong);
+      box-shadow: var(--shadow-hard-sm);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.12s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .te-btn:hover {
+      background-color: var(--bg-putty);
+    }
+    .te-btn:active, .te-btn.active-pressed {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px var(--grid-strong);
     }
 
-    .spotlight-card > * {
+    .te-btn-orange {
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      border: 1.5px solid var(--grid-strong);
+      box-shadow: var(--shadow-hard);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.12s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .te-btn-orange:hover {
+      filter: brightness(1.06);
+    }
+    .te-btn-orange:active {
+      transform: translate(3px, 3px);
+      box-shadow: 0px 0px 0px var(--grid-strong);
+    }
+
+    /* Tape Cartridge Card */
+    .cartridge-card {
+      background-color: var(--surface-card);
+      border: 1.5px solid var(--grid-strong);
+      box-shadow: var(--shadow-hard);
+      transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.16s ease, background-color 0.16s ease;
       position: relative;
-      z-index: 3;
+    }
+    .cartridge-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--grid-strong);
+    }
+    .cartridge-card.selected-cart {
+      outline: 2px solid var(--accent-orange);
+      background-color: var(--bg-putty);
     }
 
-    /* Gradient Text Utility */
-    .text-gradient-pro {
-      background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 35%, #22d3ee 75%, #fb7185 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* Notched tape corner */
+    .tape-notch {
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
     }
 
-    .text-gradient-accent {
-      background: linear-gradient(135deg, #a78bfa 0%, #22d3ee 55%, #f43f5e 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* Film Sprocket Holes on Left Rail */
+    .sprocket-pattern {
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 14px,
+        var(--ink-faint) 14px,
+        var(--ink-faint) 22px,
+        transparent 22px,
+        transparent 36px
+      );
+      background-size: 8px 36px;
+      background-position: center;
+      background-repeat: repeat-y;
+    }
+
+    /* Perforated Ticket Edge */
+    .perforated-divider {
+      background-image: linear-gradient(to bottom, var(--grid-strong) 45%, transparent 0%);
+      background-position: right;
+      background-size: 1.5px 10px;
+      background-repeat: repeat-y;
+    }
+    .perforated-horizontal {
+      background-image: linear-gradient(to right, var(--grid-strong) 45%, transparent 0%);
+      background-position: top;
+      background-size: 10px 1.5px;
+      background-repeat: repeat-x;
     }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #07070b;
+      background: var(--bg-putty);
     }
     ::-webkit-scrollbar-thumb {
-      background: #222538;
-      border-radius: 9999px;
-      border: 2px solid #07070b;
+      background: var(--ink-primary);
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #8b5cf6;
+      background: var(--accent-orange);
     }
 
-    /* Timeline Playhead Glow */
-    .playhead-line {
-      box-shadow: 0 0 15px 2px rgba(244, 63, 94, 0.85);
-    }
-
-    /* Animated Waveform Bars */
-    @keyframes wavePulse {
-      0%, 100% { transform: scaleY(0.35); }
-      50% { transform: scaleY(1); }
-    }
-    .wave-bar {
-      animation: wavePulse 1.2s ease-in-out infinite;
-      transform-origin: bottom;
-    }
-
-    /* Shimmer effect on CTA */
-    @keyframes shimmerSweep {
-      0% { transform: translateX(-120%) skewX(-15deg); }
-      100% { transform: translateX(220%) skewX(-15deg); }
-    }
-    .btn-shimmer::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 45%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
-      animation: shimmerSweep 3.5s infinite;
+    /* Diagonal Hazard Stripe Bar */
+    .hazard-stripe {
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--accent-orange),
+        var(--accent-orange) 6px,
+        transparent 6px,
+        transparent 12px
+      );
     }
   </style>
 </head>
-<body class="antialiased selection:bg-violet-500/30 selection:text-white">
+<body class="antialiased">
 
-  <!-- Film Grain Noise Overlay -->
-  <div class="noise-overlay"></div>
+  <!-- Archival Film Grain -->
+  <div class="paper-grain"></div>
 
-  <!-- Ambient Radial Background Glows -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div id="ambient-orb-1" class="absolute -top-40 -left-32 w-[520px] h-[520px] rounded-full bg-violet-600/20 blur-[135px]"></div>
-    <div id="ambient-orb-2" class="absolute top-1/4 -right-40 w-[480px] h-[480px] rounded-full bg-cyan-500/15 blur-[140px]"></div>
-    <div id="ambient-orb-3" class="absolute bottom-0 left-1/3 w-[550px] h-[420px] rounded-full bg-rose-500/10 blur-[150px]"></div>
-    <div class="absolute inset-0 bg-grid-pattern bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_25%,#000_60%,transparent_100%)]"></div>
-  </div>
+  <!-- ==========================================================================
+       LEFT VERTICAL 16MM SPROCKET & LIVE FRAME RULER RAIL (FIXED DESKTOP)
+       ========================================================================== -->
+  <aside class="fixed top-0 left-0 bottom-0 w-9 swiss-border-r z-40 hidden lg:flex flex-col justify-between items-center py-3 bg-[var(--bg-putty)] select-none">
+    <div class="font-mono text-[9px] tracking-widest uppercase [writing-mode:vertical-rl] rotate-180 text-[var(--ink-muted)]">
+      16MM // KODAK-EASTMAN // SPLICE.MD
+    </div>
 
-  <!-- ==========================================
-       FLOATING GLASSMORPHIC NAVBAR
-  =========================================== -->
-  <header class="fixed top-4 inset-x-0 z-40 px-4 sm:px-6 lg:px-8">
-    <nav class="max-w-7xl mx-auto rounded-2xl bg-obsidian-900/75 backdrop-blur-xl border border-white/10 px-4 sm:px-6 py-3 flex items-center justify-between shadow-2xl shadow-black/60">
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 via-cyan-500 to-rose-500 p-[1px] shadow-lg shadow-violet-500/25">
-          <div class="w-full h-full bg-obsidian-950 rounded-[11px] flex items-center justify-center group-hover:bg-obsidian-900 transition">
-            <i data-lucide="clapperboard" class="w-5 h-5 text-cyan-400 group-hover:rotate-6 transition-transform"></i>
-          </div>
+    <!-- Sprocket Track + Live Scroll Indicator -->
+    <div class="relative flex-1 w-full my-3 flex justify-center">
+      <div class="w-2.5 h-full sprocket-pattern opacity-40"></div>
+      <div id="sprocket-playhead" class="absolute top-0 left-0 right-0 h-5 bg-[var(--accent-orange)] flex items-center justify-center font-mono text-[8px] font-bold text-white">
+        ▶
+      </div>
+    </div>
+
+    <div id="rail-frame-counter" class="font-mono text-[9px] font-bold [writing-mode:vertical-rl] rotate-180 text-[var(--accent-orange)]">
+      FRM 0000
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MAIN ARCHITECTURAL WRAPPER (OFFSET FOR LEFT SPROCKET RAIL)
+       ========================================================================== -->
+  <div class="lg:pl-9 min-h-screen flex flex-col">
+
+    <!-- ========================================================================
+         TOP HARDWARE STATUS RAIL & DARKROOM SWITCH
+         ======================================================================== -->
+    <header class="sticky top-0 z-40 swiss-border-b bg-[var(--bg-stock)]/95 backdrop-blur-xs">
+      <div class="max-w-[1440px] mx-auto grid grid-cols-12 items-center text-xs font-mono">
+
+        <!-- Brand Unit -->
+        <div class="col-span-6 sm:col-span-3 px-4 py-3 swiss-border-r flex items-center justify-between">
+          <a href="#" class="flex items-center gap-2.5 group">
+            <span class="inline-block w-3.5 h-3.5 bg-[var(--accent-orange)] border border-[var(--grid-strong)]"></span>
+            <span class="font-display font-extrabold text-sm tracking-tight">SPLICE.MD</span>
+          </a>
+          <span class="text-[10px] px-1.5 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-line)] text-[var(--ink-muted)]">
+            REV 2.6
+          </span>
         </div>
-        <div class="flex flex-col">
+
+        <!-- Live Running SMPTE Timecode & Engine Telemetry -->
+        <div class="hidden md:flex md:col-span-4 px-4 py-3 swiss-border-r items-center justify-between text-[11px]">
           <div class="flex items-center gap-2">
-            <span class="font-display font-extrabold text-lg tracking-tight text-white">SkillCut<span class="text-cyan-400">.ai</span></span>
-            <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-300 border border-violet-500/30">
-              SKILL.MD HUB
-            </span>
+            <span class="w-2 h-2 rounded-full bg-[var(--accent-green)] animate-pulse"></span>
+            <span class="text-[var(--ink-muted)]">TC:</span>
+            <span id="live-smpte-clock" class="font-bold tracking-wider">01:14:22:08</span>
           </div>
-          <span class="text-[11px] text-slate-400 hidden sm:inline">AI Video Editing Cho Mọi Người</span>
+          <span class="text-[var(--ink-faint)]">24.00 FPS // ZERO-GUI</span>
         </div>
-      </a>
 
-      <!-- Center Navigation Links -->
-      <div class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
-        <a href="#simulator" class="hover:text-white transition flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
-          Mô Phỏng AI Studio
-        </a>
-        <a href="#combo-library" class="hover:text-white transition">Kho Combo skill.md</a>
-        <a href="#bento-features" class="hover:text-white transition">Tại Sao Khác Biệt?</a>
-        <a href="#roadmap" class="hover:text-white transition">Lộ Trình Ra Mắt</a>
+        <!-- Quick Section Jump Coordinates -->
+        <nav class="hidden xl:flex xl:col-span-3 px-4 py-3 swiss-border-r items-center justify-between text-[11px]">
+          <a href="#sec-bench" class="hover:text-[var(--accent-orange)] transition">[01. BÀN DỰNG]</a>
+          <a href="#sec-rack" class="hover:text-[var(--accent-orange)] transition">[02. BĂNG TỪ]</a>
+          <a href="#sec-patchbay" class="hover:text-[var(--accent-orange)] transition">[03. PATCHBAY]</a>
+          <a href="#sec-pass" class="hover:text-[var(--accent-orange)] transition font-bold text-[var(--accent-orange)]">[04. NHẬN VÉ]</a>
+        </nav>
+
+        <!-- Physical Darkroom Toggle Switch -->
+        <div class="col-span-6 sm:col-span-9 md:col-span-5 xl:col-span-2 px-4 py-2.5 flex items-center justify-end gap-3">
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="te-btn px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider flex items-center gap-2"
+            title="Chuyển đổi chế độ Phòng Cắt Phim Sáng / Phòng Tối"
+          >
+            <span id="theme-indicator-dot" class="w-2 h-2 bg-[var(--accent-orange)]"></span>
+            <span id="theme-label">DAYLIGHT</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         SEC_01 & SEC_02: ASYMMETRIC EDITORIAL MANIFESTO + LIVE NLE BENCH
+         ======================================================================== -->
+    <section id="sec-bench" class="max-w-[1440px] w-full mx-auto swiss-border-b">
+
+      <!-- Section Index Coordinate Bar -->
+      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
+        <div class="col-span-6 sm:col-span-4 px-4 py-1.5 swiss-border-r flex items-center justify-between">
+          <span>SEC_01 // MANIFESTO & LIVE_NLE_BENCH</span>
+          <span>[A1]</span>
+        </div>
+        <div class="col-span-6 sm:col-span-4 px-4 py-1.5 swiss-border-r hidden sm:flex items-center justify-between">
+          <span>TARGET: NON-EDITORS / CREATORS</span>
+          <span>100% PROMPT-DRIVEN</span>
+        </div>
+        <div class="col-span-6 sm:col-span-4 px-4 py-1.5 flex items-center justify-between">
+          <span>BATCH #01 STATUS:</span>
+          <span class="text-[var(--accent-orange)] font-bold">COMING SOON // 84% FULL</span>
+        </div>
       </div>
 
-      <!-- Right Status + CTA -->
-      <div class="flex items-center gap-3">
-        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-mono">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="nav-waitlist-count">2,847</span> Creators đang chờ
-        </div>
-        <a href="#waitlist-box" class="relative overflow-hidden btn-shimmer px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-violet-600/30 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98] transition flex items-center gap-2">
-          <span>Nhận Early Access</span>
-          <i data-lucide="sparkles" class="w-4 h-4"></i>
-        </a>
-      </div>
-    </nav>
-  </header>
+      <!-- Main Hero 12-Col Swiss Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-12">
 
-  <!-- ==========================================
-       MAIN CONTENT CONTAINER
-  =========================================== -->
-  <main class="relative z-10 pt-28 sm:pt-32 pb-24">
+        <!-- LEFT 5 COLS: Editorial Manifesto & Value Proposition -->
+        <div class="lg:col-span-5 p-6 sm:p-10 swiss-border-r flex flex-col justify-between crosshair">
+          <div class="space-y-6">
 
-    <!-- ==========================================
-         HERO SECTION + INTERACTIVE AI SIMULATOR
-    =========================================== -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-20">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+            <!-- Technical Spec Stamp -->
+            <div class="gsap-reveal inline-flex items-center gap-2 border border-[var(--grid-strong)] bg-[var(--bg-putty)] px-2.5 py-1 font-mono text-[11px] uppercase">
+              <span class="px-1.5 py-0.2 bg-[var(--accent-orange)] text-white font-bold">ZERO-GUI</span>
+              <span>CỘNG ĐỒNG COMBO SKILL.MD DỰNG VIDEO BẰNG AI</span>
+            </div>
 
-        <!-- Left Column: Copywriting, Countdown & Waitlist (6 cols) -->
-        <div class="lg:col-span-6 space-y-6 pt-2">
-
-          <!-- Top Coming Soon Badge -->
-          <div class="gsap-hero-item inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-obsidian-900/90 border border-violet-500/30 shadow-inner">
-            <span class="px-2 py-0.5 text-[10px] font-mono font-bold uppercase rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white">
-              COMING SOON
-            </span>
-            <span class="text-xs sm:text-sm text-slate-300 font-medium">
-              Không cần biết Premiere • Chỉ cần 1 file <code class="font-mono text-cyan-300">skill.md</code>
-            </span>
-          </div>
-
-          <!-- Hero Main Display Title -->
-          <h1 class="gsap-hero-item font-display font-extrabold text-3xl sm:text-5xl lg:text-[52px] leading-[1.12] tracking-tight text-white">
-            Ai Cũng Có Thể Edit Video Triệu View Bằng
-            <span class="text-gradient-pro block mt-1">Combo skill.md Dựng Sẵn.</span>
-          </h1>
-
-          <!-- Hero Description -->
-          <p class="gsap-hero-item text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
-            Quên hàng chục giờ học cắt ghép, keyframe hay chỉnh màu phức tạp đi. <strong class="text-white font-semibold">SkillCut.ai</strong> là thư viện cộng đồng đầu tiên tại Việt Nam tổng hợp các bộ <code class="font-mono text-xs px-1.5 py-0.5 rounded bg-violet-500/15 text-violet-300 border border-violet-500/30">skill.md</code> chuẩn hóa — giúp AI Agent tự động cắt khoảng lặng, đóng phụ đề động, chèn B-Roll và khớp beat nhạc chỉ qua 1 dòng lệnh tiếng Việt.
-          </p>
-
-          <!-- Live Launch Countdown Timer -->
-          <div class="gsap-hero-item pt-1">
-            <div class="flex items-center justify-between max-w-md mb-2">
-              <span class="font-mono text-[11px] uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <i data-lucide="timer" class="w-3.5 h-3.5 text-cyan-400"></i>
-                Đếm ngược mở kho 120+ Combo miễn phí:
+            <!-- Brutalist Editorial Headline -->
+            <h1 class="gsap-reveal font-display font-extrabold text-4xl sm:text-5xl xl:text-[54px] leading-[0.98] tracking-tight uppercase">
+              Dựng Video Không Cần Mở Phần Mềm.
+              <span class="font-serif italic font-normal normal-case text-5xl sm:text-6xl xl:text-[64px] block mt-1 text-[var(--accent-orange)]">
+                Chỉ cần nạp một băng skill.md.
               </span>
-              <span class="font-mono text-[11px] text-emerald-400">Batch #01 • Giới hạn 5,000 slot</span>
-            </div>
-            <div class="grid grid-cols-4 gap-2.5 max-w-md">
-              <div class="spotlight-card rounded-2xl p-3 text-center border border-white/10">
-                <div id="cd-days" class="font-mono font-bold text-2xl sm:text-3xl text-white">14</div>
-                <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">Ngày</div>
+            </h1>
+
+            <!-- Editorial Copy -->
+            <p class="gsap-reveal text-base sm:text-lg leading-relaxed text-[var(--ink-muted)] font-normal">
+              Bạn không cần biết timeline Premiere, không cần học keyframe After Effects hay ngồi cắt tay từng đoạn ngập ngừng.
+              <strong class="text-[var(--ink-primary)] font-semibold">SPLICE.MD</strong> là kho lưu trữ mở các bộ <code class="font-mono text-xs px-1.5 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-strong)] text-[var(--ink-primary)]">skill.md</code> được đóng gói sẵn — biến Claude Code, Cursor hoặc AI Agent thành thợ dựng phim chuyên nghiệp chỉ bằng một câu lệnh tiếng Việt.
+            </p>
+
+            <!-- 3-Column Technical Telemetry Strip -->
+            <div class="gsap-reveal grid grid-cols-3 border border-[var(--grid-strong)] bg-[var(--surface-card)] font-mono">
+              <div class="p-3 swiss-border-r">
+                <div class="text-[10px] text-[var(--ink-muted)] uppercase">KỸ NĂNG DỰNG PHIM</div>
+                <div class="text-xl sm:text-2xl font-bold mt-0.5">0.0%</div>
+                <div class="text-[10px] text-[var(--accent-green)]">Ai cũng làm được</div>
               </div>
-              <div class="spotlight-card rounded-2xl p-3 text-center border border-white/10">
-                <div id="cd-hours" class="font-mono font-bold text-2xl sm:text-3xl text-white">08</div>
-                <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">Giờ</div>
+              <div class="p-3 swiss-border-r">
+                <div class="text-[10px] text-[var(--ink-muted)] uppercase">COMBO DỰNG SẴN</div>
+                <div class="text-xl sm:text-2xl font-bold mt-0.5">120+</div>
+                <div class="text-[10px] text-[var(--ink-muted)]">Chuẩn hóa tiếng Việt</div>
               </div>
-              <div class="spotlight-card rounded-2xl p-3 text-center border border-white/10">
-                <div id="cd-mins" class="font-mono font-bold text-2xl sm:text-3xl text-cyan-400">42</div>
-                <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">Phút</div>
-              </div>
-              <div class="spotlight-card rounded-2xl p-3 text-center border border-white/10">
-                <div id="cd-secs" class="font-mono font-bold text-2xl sm:text-3xl text-rose-400">19</div>
-                <div class="text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">Giây</div>
+              <div class="p-3">
+                <div class="text-[10px] text-[var(--ink-muted)] uppercase">THỜI GIAN DỰNG</div>
+                <div class="text-xl sm:text-2xl font-bold mt-0.5 text-[var(--accent-orange)]">-94%</div>
+                <div class="text-[10px] text-[var(--ink-muted)]">Từ 4 giờ → 3 phút</div>
               </div>
             </div>
           </div>
 
-          <!-- Early Access Waitlist Box -->
-          <div id="waitlist-box" class="gsap-hero-item spotlight-card rounded-3xl p-5 sm:p-6 border border-violet-500/30 shadow-2xl shadow-violet-950/30 max-w-xl">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-                <span class="font-semibold text-sm text-white">Đăng ký nhận sớm trọn bộ Starter Pack (15 file .md)</span>
-              </div>
-              <span class="font-mono text-xs text-violet-300 bg-violet-500/15 px-2.5 py-0.5 rounded-full border border-violet-500/30">
-                Miễn phí 100%
+          <!-- Bottom Action Bar & Countdown -->
+          <div class="gsap-reveal pt-8 mt-8 swiss-border-t space-y-4">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="uppercase text-[var(--ink-muted)]">ĐẾM NGƯỢC PHÁT HÀNH KHO BĂNG #01:</span>
+              <span id="countdown-readout" class="font-bold px-2 py-0.5 bg-[var(--ink-primary)] text-[var(--bg-stock)]">
+                14D : 08H : 41M : 19S
               </span>
             </div>
 
-            <form id="waitlist-form" class="space-y-3" novalidate>
-              <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-                <div class="sm:col-span-7 relative">
-                  <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                  <input
-                    id="waitlist-email"
-                    type="email"
-                    required
-                    placeholder="Nhập email của bạn (vd: creator@gmail.com)..."
-                    class="w-full pl-10 pr-4 py-3 rounded-xl bg-obsidian-950/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition"
-                  />
-                </div>
-                <div class="sm:col-span-5">
-                  <select
-                    id="waitlist-role"
-                    aria-label="Vai trò của bạn"
-                    class="w-full px-3.5 py-3 rounded-xl bg-obsidian-950/90 border border-white/15 text-sm text-slate-200 focus:outline-none focus:border-violet-400 transition"
-                  >
-                    <option value="TikTok / Reels Creator">🎬 TikTok / Reels Creator</option>
-                    <option value="Người mới (Không biết Edit)">🌱 Người mới (Chưa biết Edit)</option>
-                    <option value="Marketer / Chủ Shop">🛍️ Marketer / Chủ Shop</option>
-                    <option value="AI Builder / Developer">⚡ AI Builder / Developer</option>
-                  </select>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                id="waitlist-submit-btn"
-                class="w-full relative overflow-hidden btn-shimmer py-3.5 px-6 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-500 to-cyan-500 text-white font-bold text-sm sm:text-base shadow-xl shadow-violet-600/25 hover:shadow-cyan-500/30 hover:scale-[1.01] active:scale-[0.99] transition flex items-center justify-center gap-2.5 cursor-pointer"
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <a
+                href="#sec-pass"
+                class="te-btn-orange py-3.5 px-5 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-between"
               >
-                <i data-lucide="wand-2" class="w-4 h-4"></i>
-                <span id="waitlist-btn-text">Giữ Chỗ Sớm & Mở Khóa Ngay 1 Combo Mẫu</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-              </button>
-            </form>
+                <span>Lấy Vé Early Access</span>
+                <span>[BATCH_01 →]</span>
+              </a>
+              <a
+                href="#sec-rack"
+                class="te-btn py-3.5 px-5 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-between"
+              >
+                <span>Thử 6 Băng skill.md</span>
+                <span>[INSPECT ↓]</span>
+              </a>
+            </div>
+          </div>
+        </div>
 
-            <!-- Instant Reward Unlock Banner (Hidden until submit) -->
-            <div id="waitlist-reward-box" class="hidden mt-4 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="font-semibold flex items-center gap-1.5 text-emerald-300">
-                  <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-                  Đã giữ chỗ thành công! Quà tặng mở khóa sớm cho bạn:
-                </span>
-                <button type="button" id="open-starter-modal-btn" class="underline font-mono text-cyan-300 hover:text-white">
-                  Xem & Copy file .md →
-                </button>
+        <!-- RIGHT 7 COLS: REAL KEYBOARD-DRIVEN NLE PREVIEW DECK (CANVAS + TRANSPORT) -->
+        <div class="lg:col-span-7 bg-[var(--bg-putty)] flex flex-col justify-between">
+
+          <!-- Deck Top Technical Header -->
+          <div class="px-5 py-3 swiss-border-b flex flex-wrap items-center justify-between gap-2 font-mono text-xs bg-[var(--surface-card)]">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-0.5 bg-[var(--ink-primary)] text-[var(--bg-stock)] font-bold text-[10px]">
+                NLE DECK // FIELD MONITOR
+              </span>
+              <span id="deck-active-cart-label" class="font-bold text-[var(--accent-orange)]">
+                CART-01: razor-talk-vi.skill.md
+              </span>
+            </div>
+            <div class="flex items-center gap-3 text-[11px]">
+              <button
+                type="button"
+                id="toggle-ab-mode-btn"
+                class="te-btn px-2.5 py-0.5 text-[10px] font-bold uppercase"
+                title="Phím tắt: M"
+              >
+                CHẾ ĐỘ: <span id="ab-mode-text" class="text-[var(--accent-green)]">SAU KHI CHẠY SKILL.MD (AI CUT)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Canvas Monitor Viewport + VU Meter Bay -->
+          <div class="p-4 sm:p-6 grid grid-cols-12 gap-3 items-stretch">
+
+            <!-- Main Procedural Video Canvas (10 cols) -->
+            <div class="col-span-12 sm:col-span-10 bg-[var(--bg-monitor)] border-2 border-[var(--grid-strong)] relative overflow-hidden aspect-video flex items-center justify-center">
+              <canvas id="nle-monitor-canvas" width="800" height="450" class="w-full h-full block"></canvas>
+
+              <!-- Overlay Corner Crop Marks -->
+              <div class="absolute top-2.5 left-3 font-mono text-[10px] text-[#EAE5D9]/80 flex items-center gap-2 pointer-events-none">
+                <span id="monitor-rec-dot" class="w-2 h-2 rounded-full bg-[#FF3E00]"></span>
+                <span id="monitor-state-badge">PLAYING // 24FPS</span>
+              </div>
+              <div class="absolute top-2.5 right-3 font-mono text-[10px] text-[#FFB300] pointer-events-none" id="monitor-tc-overlay">
+                TC 00:00:04:12
               </div>
             </div>
 
-            <!-- Social Proof Avatars -->
-            <div class="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
-              <div class="flex items-center gap-2.5">
-                <div class="flex -space-x-2">
-                  <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 flex items-center justify-center text-[10px] font-bold text-white ring-2 ring-obsidian-900">H</span>
-                  <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-500 flex items-center justify-center text-[10px] font-bold text-white ring-2 ring-obsidian-900">M</span>
-                  <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-rose-500 to-orange-500 flex items-center justify-center text-[10px] font-bold text-white ring-2 ring-obsidian-900">L</span>
-                  <span class="w-6 h-6 rounded-full bg-obsidian-800 border border-white/20 flex items-center justify-center text-[9px] font-mono text-cyan-300 ring-2 ring-obsidian-900">+2.8k</span>
-                </div>
-                <span>Tham gia cùng cộng đồng AI Video Editor không chuyên</span>
+            <!-- Right Vertical Audio VU Meter & Telemetry (2 cols) -->
+            <div class="col-span-12 sm:col-span-2 bg-[var(--bg-monitor)] border-2 border-[var(--grid-strong)] p-2.5 flex sm:flex-col justify-between items-center font-mono text-[9px] text-[#EAE5D9]">
+              <div class="text-center w-full border-b border-white/15 pb-1">
+                <div class="text-[8px] text-neutral-400">LUFS</div>
+                <div id="vu-lufs-readout" class="text-[11px] font-bold text-[#00E676]">-14.0</div>
               </div>
-              <span class="font-mono text-[11px] text-slate-400 flex items-center gap-1">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Không spam
-              </span>
+
+              <!-- Stereo Bar Graph -->
+              <div class="flex-1 flex items-end justify-center gap-2 py-2 w-full h-24 sm:h-auto">
+                <div class="w-3 h-full bg-neutral-800 relative overflow-hidden flex flex-col justify-end">
+                  <div id="vu-bar-l" class="w-full bg-gradient-to-t from-[#00E676] via-[#FFB300] to-[#FF3E00] transition-all duration-75" style="height: 68%;"></div>
+                </div>
+                <div class="w-3 h-full bg-neutral-800 relative overflow-hidden flex flex-col justify-end">
+                  <div id="vu-bar-r" class="w-full bg-gradient-to-t from-[#00E676] via-[#FFB300] to-[#FF3E00] transition-all duration-75" style="height: 74%;"></div>
+                </div>
+              </div>
+
+              <div class="text-center w-full border-t border-white/15 pt-1">
+                <div class="text-[8px] text-neutral-400">SILENCE</div>
+                <div id="vu-cut-status" class="text-[10px] font-bold text-[#FF3E00]">CUT -40dB</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Multi-Track Timeline Scrubbing & Silence Cut Map -->
+          <div class="px-4 sm:px-6 pb-4 space-y-2">
+            <div class="flex items-center justify-between font-mono text-[10px] text-[var(--ink-muted)]">
+              <span>TIMELINE SCRUBBER (KÉO THANH ĐỎ HOẶC BẤM PHÍM J / K / L / SPACE)</span>
+              <span id="scrub-frame-info" class="text-[var(--ink-primary)] font-bold">FRAME: 108 / 360</span>
+            </div>
+
+            <!-- Interactive Scrubbing Track Container -->
+            <div
+              id="timeline-scrub-track"
+              class="relative h-20 bg-[var(--surface-card)] border-2 border-[var(--grid-strong)] cursor-ew-resize select-none overflow-hidden p-1.5 space-y-1"
+            >
+              <!-- Playhead Vertical Needle -->
+              <div id="nle-playhead" class="absolute top-0 bottom-0 left-[30%] w-[2px] bg-[var(--accent-orange)] z-20 pointer-events-none">
+                <div class="w-3.5 h-3.5 -ml-[6px] bg-[var(--accent-orange)] text-white font-mono text-[8px] flex items-center justify-center font-bold">
+                  ▼
+                </div>
+              </div>
+
+              <!-- Track 1: Dialogue & Silence Removal Blocks -->
+              <div class="grid grid-cols-12 gap-1 h-5 items-center font-mono text-[9px]">
+                <div class="col-span-2 px-1.5 font-bold truncate bg-[var(--bg-putty)] h-full flex items-center">V1 // VOICE</div>
+                <div class="col-span-10 grid grid-cols-12 gap-0.5 h-full">
+                  <div class="col-span-3 bg-[var(--ink-primary)] text-[var(--bg-stock)] flex items-center px-1.5 truncate">HOOK_OPEN</div>
+                  <div class="col-span-1 hazard-stripe opacity-75 flex items-center justify-center text-[8px] font-bold" title="Đã cắt khoảng thở">CUT</div>
+                  <div class="col-span-4 bg-[var(--ink-primary)] text-[var(--bg-stock)] flex items-center px-1.5 truncate">CORE_VALUE_VI</div>
+                  <div class="col-span-1 hazard-stripe opacity-75 flex items-center justify-center text-[8px] font-bold">CUT</div>
+                  <div class="col-span-3 bg-[var(--ink-primary)] text-[var(--bg-stock)] flex items-center px-1.5 truncate">CTA_CLOSE</div>
+                </div>
+              </div>
+
+              <!-- Track 2: Kinetic Vietnamese Captions -->
+              <div class="grid grid-cols-12 gap-1 h-5 items-center font-mono text-[9px]">
+                <div class="col-span-2 px-1.5 font-bold truncate bg-[var(--bg-putty)] h-full flex items-center">T1 // SUB_VI</div>
+                <div class="col-span-10 grid grid-cols-10 gap-1 h-full">
+                  <div class="col-span-3 bg-[var(--accent-amber)]/30 border border-[var(--accent-amber)] flex items-center px-1 truncate">"Dựng video..."</div>
+                  <div class="col-span-4 bg-[var(--accent-amber)]/30 border border-[var(--accent-amber)] flex items-center px-1 truncate">"...chỉ bằng 1 file skill.md"</div>
+                  <div class="col-span-3 bg-[var(--accent-amber)]/30 border border-[var(--accent-amber)] flex items-center px-1 truncate">"...không cần biết edit!"</div>
+                </div>
+              </div>
+
+              <!-- Track 3: Auto B-Roll & Punch Zoom Triggers -->
+              <div class="grid grid-cols-12 gap-1 h-5 items-center font-mono text-[9px]">
+                <div class="col-span-2 px-1.5 font-bold truncate bg-[var(--bg-putty)] h-full flex items-center">FX // AGENT</div>
+                <div class="col-span-10 grid grid-cols-12 gap-1 h-full">
+                  <div class="col-span-2 bg-[var(--accent-green)]/25 border border-[var(--accent-green)] flex items-center px-1 truncate">ZOOM 1.18x</div>
+                  <div class="col-span-5 bg-[var(--accent-orange)]/20 border border-[var(--accent-orange)] flex items-center px-1 truncate">PIP_BROLL: terminal_demo.mp4</div>
+                  <div class="col-span-5 bg-[var(--accent-green)]/25 border border-[var(--accent-green)] flex items-center px-1 truncate">LUT: KODAK_2383 + WHOOSH.WAV</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tactile Hardware Transport Keys (J / K / L / SPACE / PRESET) -->
+          <div class="px-4 sm:px-6 py-3.5 swiss-border-t bg-[var(--surface-card)] flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+            <div class="flex items-center gap-2">
+              <button type="button" id="btn-transport-j" class="te-btn px-3 py-1.5 text-[11px] font-bold">
+                [J] ◀◀ TUA LÙI
+              </button>
+              <button type="button" id="btn-transport-k" class="te-btn px-3 py-1.5 text-[11px] font-bold">
+                [K] ■ DỪNG
+              </button>
+              <button type="button" id="btn-transport-space" class="te-btn-orange px-4 py-1.5 text-[11px] font-bold">
+                [SPACE] ▶ PLAY / PAUSE
+              </button>
+              <button type="button" id="btn-transport-l" class="te-btn px-3 py-1.5 text-[11px] font-bold">
+                [L] ▶▶ TUA NHANH 2X
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2 text-[11px]">
+              <span class="text-[var(--ink-muted)] hidden sm:inline">CLI COMMAND:</span>
+              <code id="deck-cli-command" class="px-2.5 py-1 bg-[var(--bg-putty)] border border-[var(--grid-strong)] font-bold">
+                claude "Dựng raw.mp4 với @razor-talk-vi.skill.md"
+              </code>
             </div>
           </div>
 
         </div>
+      </div>
+    </section>
 
-        <!-- Right Column: Interactive AI Video + skill.md Combo Simulator (6 cols) -->
-        <div id="simulator" class="lg:col-span-6 gsap-hero-item">
-          <div class="spotlight-card rounded-3xl border border-white/15 shadow-2xl shadow-black/80 overflow-hidden">
+    <!-- ========================================================================
+         SEC_03: HORIZONTAL / GRID CARTRIDGE RACK (SKILL.MD COMBO LIBRARY)
+         ======================================================================== -->
+    <section id="sec-rack" class="max-w-[1440px] w-full mx-auto swiss-border-b">
 
-            <!-- Top Window Bar -->
-            <div class="px-4 py-3 bg-obsidian-950/90 border-b border-white/10 flex items-center justify-between">
+      <!-- Section Coordinate Header -->
+      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
+        <div class="col-span-8 sm:col-span-6 px-4 py-1.5 swiss-border-r">
+          SEC_02 // CARTRIDGE_RACK (THƯ VIỆN BĂNG TỪ SKILL.MD DỰNG SẴN)
+        </div>
+        <div class="col-span-4 sm:col-span-6 px-4 py-1.5 flex items-center justify-between">
+          <span class="hidden sm:inline">CLICK BẤT KỲ BĂNG TỪ NÀO ĐỂ NẠP VÀO BÀN DỰNG & XEM MÃ NGUỒN</span>
+          <span class="font-bold text-[var(--ink-primary)]">[6 CARTRIDGES LOADED]</span>
+        </div>
+      </div>
+
+      <!-- Editorial Section Title + Category Filter Switches -->
+      <div class="p-6 sm:p-10 swiss-border-b flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div>
+          <div class="font-mono text-xs uppercase text-[var(--accent-orange)] font-bold mb-2">
+            // OPEN-SOURCE VIDEO SKILL CARTRIDGES
+          </div>
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl uppercase tracking-tight leading-none">
+            Khay Băng Kỹ Năng <span class="font-serif italic font-normal normal-case text-4xl sm:text-6xl">skill.md</span>
+          </h2>
+          <p class="text-[var(--ink-muted)] text-sm sm:text-base mt-2 max-w-2xl">
+            Mỗi cuộn băng là một file Markdown chứa đầy đủ thông số cắt FFmpeg, luật nhịp điệu, cấu hình Whisper tiếng Việt và template Remotion. Tải về máy hoặc nạp trực tiếp vào AI Agent của bạn.
+          </p>
+        </div>
+
+        <!-- Tactile Filter Switches -->
+        <div class="flex flex-wrap gap-2 font-mono text-xs" id="rack-filters">
+          <button type="button" data-filter="all" class="rack-filter-btn te-btn-orange px-3.5 py-2 font-bold uppercase">
+            TẤT CẢ [06]
+          </button>
+          <button type="button" data-filter="short" class="rack-filter-btn te-btn px-3.5 py-2 font-bold uppercase">
+            REELS / TIKTOK [02]
+          </button>
+          <button type="button" data-filter="talk" class="rack-filter-btn te-btn px-3.5 py-2 font-bold uppercase">
+            PODCAST / TALK [02]
+          </button>
+          <button type="button" data-filter="essay" class="rack-filter-btn te-btn px-3.5 py-2 font-bold uppercase">
+            DOCUMENTARY / SHOP [02]
+          </button>
+        </div>
+      </div>
+
+      <!-- Master-Detail Split: Left = 6 Cartridges Grid (7 cols), Right = Live Code Inspector Drawer (5 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+
+        <!-- Left 7 Cols: Physical Tape Cartridges Grid -->
+        <div class="lg:col-span-7 p-6 sm:p-8 swiss-border-r bg-[var(--bg-stock)]">
+          <div id="cartridge-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Live Cartridge Inspector & Direct .MD Exporter -->
+        <div class="lg:col-span-5 bg-[var(--bg-putty)] flex flex-col justify-between">
+          <div>
+            <!-- Inspector Top Bar -->
+            <div class="px-5 py-3.5 swiss-border-b bg-[var(--surface-card)] flex items-center justify-between font-mono text-xs">
               <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
-                <span class="w-3 h-3 rounded-full bg-amber-400/80"></span>
-                <span class="w-3 h-3 rounded-full bg-emerald-400/80"></span>
-                <span class="ml-2 font-mono text-xs text-slate-300 flex items-center gap-1.5">
-                  <i data-lucide="terminal" class="w-3.5 h-3.5 text-violet-400"></i>
-                  SkillCut Studio • Trình Mô Phỏng Combo <span class="text-cyan-400">Trực Tiếp</span>
-                </span>
+                <span class="w-2.5 h-2.5 bg-[var(--accent-green)]"></span>
+                <span id="inspector-filename" class="font-bold">razor-talk-vi.skill.md</span>
               </div>
-              <div class="flex items-center gap-2">
-                <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                  ● AI AGENT READY
-                </span>
+              <span id="inspector-serial" class="px-2 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-strong)] text-[10px] font-bold">
+                CART-01
+              </span>
+            </div>
+
+            <!-- Cartridge Metadata Spec Table -->
+            <div class="grid grid-cols-3 swiss-border-b font-mono text-[11px] bg-[var(--bg-stock)]">
+              <div class="p-3 swiss-border-r">
+                <div class="text-[9px] text-[var(--ink-muted)]">ENGINE STACK</div>
+                <div id="inspector-engine" class="font-bold mt-0.5 truncate">FFmpeg + Whisper</div>
+              </div>
+              <div class="p-3 swiss-border-r">
+                <div class="text-[9px] text-[var(--ink-muted)]">ĐỘ KHÓ KỸ THUẬT</div>
+                <div class="font-bold mt-0.5 text-[var(--accent-green)]">0% NLE SKILL</div>
+              </div>
+              <div class="p-3">
+                <div class="text-[9px] text-[var(--ink-muted)]">TỐC ĐỘ XỬ LÝ</div>
+                <div id="inspector-speed" class="font-bold mt-0.5 text-[var(--accent-orange)]">~42s / phút video</div>
               </div>
             </div>
 
-            <!-- Combo Selector Tabs (Interactive) -->
-            <div class="p-3 bg-obsidian-900/90 border-b border-white/10">
-              <div class="text-[11px] font-mono text-slate-400 mb-2 flex items-center justify-between">
-                <span>👇 BẤM CHỌN THỬ 1 BỘ COMBO SKILL.MD DƯỚI ĐÂY:</span>
-                <span id="sim-time-saved" class="text-cyan-300">⚡ Tự động hóa 95% thao tác</span>
+            <!-- Raw skill.md Source Code Viewer -->
+            <div class="p-5">
+              <div class="flex items-center justify-between font-mono text-[10px] text-[var(--ink-muted)] mb-2">
+                <span>NỘI DUNG FILE SKILL.MD CHUẨN HÓA:</span>
+                <span>UTF-8 // MARKDOWN + YAML</span>
               </div>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5" id="combo-tabs">
-                <button
-                  type="button"
-                  data-combo="viral"
-                  class="combo-tab-btn active px-2.5 py-2 rounded-xl text-left border transition-all bg-violet-600/25 border-violet-400/60 text-white"
-                >
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold truncate">🔥 Viral Reels</span>
-                    <span class="font-mono text-[9px] text-cyan-300">.md</span>
-                  </div>
-                  <div class="text-[10px] text-slate-300 truncate mt-0.5">Sub động + Cắt thở</div>
-                </button>
+              <pre
+                id="inspector-code-view"
+                class="font-mono text-xs leading-relaxed p-4 bg-[var(--bg-monitor)] text-[#EAE5D9] border-2 border-[var(--grid-strong)] overflow-x-auto max-h-[380px]"
+              ></pre>
+            </div>
+          </div>
 
-                <button
-                  type="button"
-                  data-combo="beatsync"
-                  class="combo-tab-btn px-2.5 py-2 rounded-xl text-left border transition-all bg-obsidian-950/60 border-white/10 text-slate-300 hover:border-white/25"
-                >
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold truncate">🎵 Beat-Sync</span>
-                    <span class="font-mono text-[9px] text-cyan-300">.md</span>
-                  </div>
-                  <div class="text-[10px] text-slate-400 truncate mt-0.5">Khớp trống + Zoom</div>
-                </button>
-
-                <button
-                  type="button"
-                  data-combo="docu"
-                  class="combo-tab-btn px-2.5 py-2 rounded-xl text-left border transition-all bg-obsidian-950/60 border-white/10 text-slate-300 hover:border-white/25"
-                >
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold truncate">🎬 Documentary</span>
-                    <span class="font-mono text-[9px] text-cyan-300">.md</span>
-                  </div>
-                  <div class="text-[10px] text-slate-400 truncate mt-0.5">3D Pan + B-Roll</div>
-                </button>
-
-                <button
-                  type="button"
-                  data-combo="ugc"
-                  class="combo-tab-btn px-2.5 py-2 rounded-xl text-left border transition-all bg-obsidian-950/60 border-white/10 text-slate-300 hover:border-white/25"
-                >
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold truncate">🛒 UGC Bán Hàng</span>
-                    <span class="font-mono text-[9px] text-cyan-300">.md</span>
-                  </div>
-                  <div class="text-[10px] text-slate-400 truncate mt-0.5">Hook 3s + CTA</div>
-                </button>
-              </div>
+          <!-- Inspector Action Footer (Copy, Download .md, Load to NLE Monitor) -->
+          <div class="p-5 swiss-border-t bg-[var(--surface-card)] space-y-3">
+            <div class="font-mono text-[11px] text-[var(--ink-muted)]">
+              LỆNH GỌI TRONG CLAUDE CODE / CURSOR:
+              <code id="inspector-prompt-example" class="block mt-1 p-2 bg-[var(--bg-putty)] border border-[var(--grid-strong)] text-[var(--ink-primary)] font-bold">
+                "Áp dụng @razor-talk-vi.skill.md cho file_quay_tho.mp4"
+              </code>
             </div>
 
-            <!-- Split View: Left = skill.md Code, Right = Simulated AI Video Output -->
-            <div class="grid grid-cols-1 sm:grid-cols-12 bg-obsidian-950/70">
-
-              <!-- Left: Live skill.md Code Preview (7 cols) -->
-              <div class="sm:col-span-7 p-4 border-b sm:border-b-0 sm:border-r border-white/10 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between mb-2.5">
-                    <div class="flex items-center gap-1.5">
-                      <i data-lucide="file-code-2" class="w-4 h-4 text-violet-400"></i>
-                      <span id="sim-filename" class="font-mono text-xs font-semibold text-white">viral-hormozi-sub.skill.md</span>
-                    </div>
-                    <button
-                      type="button"
-                      id="copy-sim-skill-btn"
-                      class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 font-mono text-[11px] text-cyan-300 flex items-center gap-1 transition cursor-pointer"
-                    >
-                      <i data-lucide="copy" class="w-3 h-3"></i>
-                      <span>Copy .md</span>
-                    </button>
-                  </div>
-
-                  <!-- Markdown Code Block -->
-                  <pre id="sim-code-block" class="font-mono text-[11px] leading-[1.55] text-slate-300 bg-obsidian-900/95 p-3.5 rounded-2xl border border-white/10 overflow-x-auto max-h-[235px]"></pre>
-                </div>
-
-                <!-- Natural Language Prompt Bar -->
-                <div class="mt-3 p-2.5 rounded-xl bg-violet-500/10 border border-violet-500/25 flex items-center justify-between gap-2">
-                  <div class="flex items-center gap-2 min-w-0">
-                    <span class="px-1.5 py-0.5 rounded bg-violet-600 text-[10px] font-mono font-bold text-white shrink-0">PROMPT</span>
-                    <p id="sim-user-prompt" class="text-xs text-slate-200 truncate italic">
-                      "Áp dụng @viral-hormozi-sub cho video_tho.mp4, giữ giọng tự nhiên"
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    id="run-sim-btn"
-                    class="shrink-0 px-2.5 py-1 rounded-lg bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-mono text-[11px] font-semibold hover:opacity-95 transition flex items-center gap-1 cursor-pointer"
-                  >
-                    <i data-lucide="play" class="w-3 h-3 fill-current"></i>
-                    <span>Chạy AI</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Right: Simulated Vertical 9:16 Video Output Monitor (5 cols) -->
-              <div class="sm:col-span-5 p-4 flex flex-col justify-between bg-obsidian-900/40">
-                <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-2">
-                  <span>OUTPUT: 1080x1920 (60FPS)</span>
-                  <span id="sim-lut-badge" class="text-rose-400">LUT: CyberClean</span>
-                </div>
-
-                <!-- Simulated Video Screen -->
-                <div id="sim-video-stage" class="relative rounded-2xl overflow-hidden aspect-[16/11] sm:aspect-[4/4.2] bg-gradient-to-br from-indigo-950 via-obsidian-900 to-slate-950 border border-white/15 flex flex-col justify-between p-3.5 shadow-inner">
-                  <!-- Animated Visual Backdrop Inside Video Preview -->
-                  <div id="sim-video-bg-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(139,92,246,0.35),transparent_70%)] transition-all duration-500"></div>
-
-                  <!-- Top HUD Inside Video -->
-                  <div class="relative z-10 flex items-center justify-between">
-                    <span id="sim-hook-pill" class="px-2 py-0.5 rounded-md bg-rose-500/90 text-white font-mono text-[10px] font-bold shadow">
-                      ⚡ HOOK 0:00 - 0:03
-                    </span>
-                    <span id="sim-zoom-indicator" class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-black/50 text-cyan-300 border border-white/10">
-                      Zoom: 1.18x
-                    </span>
-                  </div>
-
-                  <!-- Center Simulated Subject + B-Roll Floating Card -->
-                  <div class="relative z-10 my-auto flex flex-col items-center text-center py-2">
-                    <div id="sim-avatar-ring" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-violet-600 to-cyan-400 p-[2px] shadow-lg shadow-violet-500/30 mb-2 flex items-center justify-center">
-                      <div class="w-full h-full bg-obsidian-950 rounded-[14px] flex items-center justify-center">
-                        <i id="sim-stage-icon" data-lucide="flame" class="w-6 h-6 text-cyan-300"></i>
-                      </div>
-                    </div>
-
-                    <!-- Auto B-Roll Overlay Pop -->
-                    <div id="sim-broll-tag" class="px-2.5 py-0.5 rounded-full bg-obsidian-950/85 border border-cyan-400/40 text-[10px] font-mono text-cyan-300 mb-2">
-                      + Auto B-Roll: Màn hình tăng trưởng
-                    </div>
-
-                    <!-- Kinetic Subtitle Preview -->
-                    <div id="sim-caption-box" class="px-2.5 py-1.5 rounded-xl bg-black/75 border border-white/15 shadow-lg">
-                      <p id="sim-caption-text" class="font-display font-extrabold text-xs sm:text-sm tracking-wide uppercase text-white">
-                        EDIT VIDEO BẰNG <span class="text-amber-300 underline">SKILL.MD</span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Bottom Audio Waveform & Timecode -->
-                  <div class="relative z-10 flex items-end justify-between pt-1 border-t border-white/10">
-                    <div class="flex items-end gap-0.5 h-4">
-                      <span class="w-1 bg-cyan-400 rounded-full h-3 wave-bar" style="animation-delay:0.1s"></span>
-                      <span class="w-1 bg-violet-400 rounded-full h-4 wave-bar" style="animation-delay:0.25s"></span>
-                      <span class="w-1 bg-rose-400 rounded-full h-2.5 wave-bar" style="animation-delay:0.4s"></span>
-                      <span class="w-1 bg-cyan-400 rounded-full h-4 wave-bar" style="animation-delay:0.15s"></span>
-                      <span class="w-1 bg-violet-400 rounded-full h-3 wave-bar" style="animation-delay:0.35s"></span>
-                      <span class="w-1 bg-emerald-400 rounded-full h-3.5 wave-bar" style="animation-delay:0.05s"></span>
-                    </div>
-                    <span id="sim-timecode" class="font-mono text-[10px] text-slate-300">00:02:14 / 00:45:00</span>
-                  </div>
-                </div>
-
-                <!-- AI Execution Status Log -->
-                <div class="mt-2.5 flex items-center justify-between text-[11px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1.5 rounded-xl">
-                  <span id="sim-status-log" class="truncate">✓ Đã cắt 14 khoảng nghỉ thở (>0.35s)</span>
-                  <span class="text-[10px] text-slate-400 shrink-0 ml-1">1.8s</span>
-                </div>
-              </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 font-mono text-xs">
+              <button
+                type="button"
+                id="btn-copy-cart-md"
+                class="te-btn py-2.5 px-3 font-bold uppercase flex items-center justify-center gap-1.5"
+              >
+                <span>[COPY .MD]</span>
+              </button>
+              <button
+                type="button"
+                id="btn-download-cart-md"
+                class="te-btn py-2.5 px-3 font-bold uppercase flex items-center justify-center gap-1.5"
+              >
+                <span>[TẢI FILE .MD ↓]</span>
+              </button>
+              <button
+                type="button"
+                id="btn-load-to-monitor"
+                class="te-btn-orange py-2.5 px-3 font-bold uppercase flex items-center justify-center gap-1.5"
+              >
+                <span>[NẠP LÊN MONITOR ▲]</span>
+              </button>
             </div>
-
-            <!-- Bottom Multi-Track AI Timeline Scrubbing Area -->
-            <div class="p-3.5 bg-obsidian-950 border-t border-white/10">
-              <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 mb-2">
-                <span class="flex items-center gap-1.5">
-                  <i data-lucide="Sliders" class="w-3 h-3 text-violet-400"></i>
-                  TIMELINE TỰ ĐỘNG HÓA BỞI SKILL.MD
-                </span>
-                <div class="flex items-center gap-3">
-                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-violet-500 inline-block"></span> Auto-Cut</span>
-                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-cyan-400 inline-block"></span> Phụ đề động</span>
-                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-rose-500 inline-block"></span> SFX & B-Roll</span>
-                </div>
-              </div>
-
-              <!-- Timeline Tracks Container -->
-              <div class="relative py-2 px-2 rounded-xl bg-obsidian-900 border border-white/10 overflow-hidden space-y-1.5">
-                <!-- Moving Playhead Line -->
-                <div id="timeline-playhead" class="absolute top-0 bottom-0 left-[18%] w-[2px] bg-rose-500 playhead-line z-20 pointer-events-none">
-                  <div class="w-2.5 h-2.5 rounded-full bg-rose-500 -translate-x-[4px] -translate-y-0.5"></div>
-                </div>
-
-                <!-- Track 1: Voice & Silence Cut -->
-                <div class="grid grid-cols-12 gap-1 items-center">
-                  <span class="col-span-2 font-mono text-[9px] text-slate-400 truncate">V1 • Giọng nói</span>
-                  <div class="col-span-10 flex gap-1 h-4">
-                    <div class="timeline-clip flex-1 rounded bg-violet-600/40 border border-violet-400/50 flex items-center px-1.5 font-mono text-[9px] text-violet-200 truncate">Hook_Cut_01</div>
-                    <div class="timeline-clip w-1/4 rounded bg-violet-600/40 border border-violet-400/50 flex items-center px-1.5 font-mono text-[9px] text-violet-200 truncate">JumpCut_02</div>
-                    <div class="timeline-clip flex-1 rounded bg-violet-600/40 border border-violet-400/50 flex items-center px-1.5 font-mono text-[9px] text-violet-200 truncate">Main_Story_03</div>
-                    <div class="timeline-clip w-1/5 rounded bg-violet-600/40 border border-violet-400/50 flex items-center px-1.5 font-mono text-[9px] text-violet-200 truncate">CTA_Out</div>
-                  </div>
-                </div>
-
-                <!-- Track 2: Kinetic Captions -->
-                <div class="grid grid-cols-12 gap-1 items-center">
-                  <span class="col-span-2 font-mono text-[9px] text-slate-400 truncate">T1 • Phụ đề AI</span>
-                  <div class="col-span-10 flex gap-1.5 h-3.5">
-                    <div class="timeline-clip w-1/3 rounded bg-cyan-500/35 border border-cyan-400/50"></div>
-                    <div class="timeline-clip w-1/4 rounded bg-cyan-500/35 border border-cyan-400/50"></div>
-                    <div class="timeline-clip flex-1 rounded bg-cyan-500/35 border border-cyan-400/50"></div>
-                  </div>
-                </div>
-
-                <!-- Track 3: B-Roll & Sound FX -->
-                <div class="grid grid-cols-12 gap-1 items-center">
-                  <span class="col-span-2 font-mono text-[9px] text-slate-400 truncate">FX • B-Roll/SFX</span>
-                  <div class="col-span-10 flex gap-2 h-3.5">
-                    <div class="timeline-clip w-1/5 rounded bg-rose-500/35 border border-rose-400/50 font-mono text-[8px] text-rose-200 px-1 truncate">Whoosh.wav</div>
-                    <div class="timeline-clip w-1/3 rounded bg-amber-500/30 border border-amber-400/50 font-mono text-[8px] text-amber-200 px-1 truncate">B-Roll_Chart.mp4</div>
-                    <div class="timeline-clip flex-1 rounded bg-rose-500/35 border border-rose-400/50 font-mono text-[8px] text-rose-200 px-1 truncate">Bass_Drop_Hit</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ==========================================
-         COMPATIBLE AI ECOSYSTEM BAR
-    =========================================== -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-      <div class="spotlight-card rounded-2xl p-5 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-violet-400"></span>
-          Tương thích tức thì với các công cụ AI bạn đang dùng:
+    <!-- ========================================================================
+         SEC_04: INTERACTIVE COMBO PATCHBAY (STACK & COMPILE CUSTOM SKILL.MD)
+         ======================================================================== -->
+    <section id="sec-patchbay" class="max-w-[1440px] w-full mx-auto swiss-border-b">
+
+      <!-- Section Coordinate Header -->
+      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
+        <div class="col-span-8 sm:col-span-6 px-4 py-1.5 swiss-border-r">
+          SEC_03 // PATCHBAY_COMPILER (BỘ GHÉP MẠCH COMBO SKILL.MD TÙY CHỈNH)
         </div>
+        <div class="col-span-4 sm:col-span-6 px-4 py-1.5 flex items-center justify-between">
+          <span class="hidden sm:inline">BẬT/TẮT CÁC CÔNG TẮC ĐỂ TỰ ĐỘNG BIÊN DỊCH FILE COMBO-SKILL.MD</span>
+          <span id="patchbay-active-count" class="font-bold text-[var(--accent-orange)]">4 / 6 MODULES ACTIVE</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+
+        <!-- Left 6 Cols: Tactile Toggle Switches for Atomic Micro-Skills -->
+        <div class="lg:col-span-6 p-6 sm:p-10 swiss-border-r space-y-6">
+          <div>
+            <div class="font-mono text-xs uppercase text-[var(--accent-green)] font-bold mb-1">
+              // MODULAR SKILL COMPOSER
+            </div>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl uppercase tracking-tight">
+              Tự Ghép Mạch <span class="font-serif italic font-normal normal-case text-4xl sm:text-5xl text-[var(--accent-orange)]">Combo skill.md</span> Của Riêng Bạn
+            </h2>
+            <p class="text-sm text-[var(--ink-muted)] mt-2">
+              Không cần biết viết code. Chỉ cần gạt công tắc chọn các thao tác hậu kỳ bạn muốn, hệ thống sẽ tự động đóng gói thành một file <code class="font-mono font-bold text-[var(--ink-primary)]">custom-combo.skill.md</code> duy nhất.
+            </p>
+          </div>
+
+          <!-- Atomic Micro-Skill Toggle List -->
+          <div id="patchbay-switches" class="space-y-3">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Telemetry Summary Bar -->
+          <div class="grid grid-cols-3 border-2 border-[var(--grid-strong)] bg-[var(--surface-card)] font-mono text-xs">
+            <div class="p-3 swiss-border-r">
+              <div class="text-[10px] text-[var(--ink-muted)]">ƯỚC TÍNH TOKEN</div>
+              <div id="patch-tokens" class="text-lg font-bold mt-0.5">~1,420 tok</div>
+            </div>
+            <div class="p-3 swiss-border-r">
+              <div class="text-[10px] text-[var(--ink-muted)]">THỜI GIAN RENDER</div>
+              <div id="patch-render-time" class="text-lg font-bold mt-0.5 text-[var(--accent-orange)]">~38 giây</div>
+            </div>
+            <div class="p-3">
+              <div class="text-[10px] text-[var(--ink-muted)]">ĐẦU RA HỖ TRỢ</div>
+              <div class="text-sm font-bold mt-1 text-[var(--accent-green)]">MP4 / XML / JSON</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Live Compiled combo-skill.md Output -->
+        <div class="lg:col-span-6 p-6 sm:p-10 bg-[var(--bg-putty)] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono text-xs mb-3">
+              <span class="px-2.5 py-1 bg-[var(--ink-primary)] text-[var(--bg-stock)] font-bold">
+                LIVE COMPILER OUTPUT // custom-combo.skill.md
+              </span>
+              <span class="text-[var(--ink-muted)]">AUTO-UPDATED</span>
+            </div>
+
+            <pre
+              id="patchbay-compiled-code"
+              class="font-mono text-xs leading-relaxed p-5 bg-[var(--bg-monitor)] text-[#00E676] border-2 border-[var(--grid-strong)] overflow-x-auto h-[390px]"
+            ></pre>
+          </div>
+
+          <div class="pt-5 mt-5 swiss-border-t flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+            <span class="text-[var(--ink-muted)]">
+              Dán file này vào thư mục <code class="text-[var(--ink-primary)] font-bold">.claude/skills/</code> hoặc <code class="text-[var(--ink-primary)] font-bold">.cursor/rules/</code>
+            </span>
+            <div class="flex items-center gap-2.5">
+              <button type="button" id="btn-copy-compiled" class="te-btn px-4 py-2.5 font-bold uppercase">
+                [COPY COMBO .MD]
+              </button>
+              <button type="button" id="btn-download-compiled" class="te-btn-orange px-4 py-2.5 font-bold uppercase">
+                [XUẤT FILE CUSTOM-COMBO.MD ↓]
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SEC_05: PERFORATED STUDIO WAITLIST PASS (EARLY ACCESS TICKET)
+         ======================================================================== -->
+    <section id="sec-pass" class="max-w-[1440px] w-full mx-auto swiss-border-b">
+
+      <!-- Section Coordinate Header -->
+      <div class="grid grid-cols-12 swiss-border-b bg-[var(--bg-putty)] font-mono text-[10px] uppercase tracking-widest text-[var(--ink-muted)]">
+        <div class="col-span-8 sm:col-span-6 px-4 py-1.5 swiss-border-r">
+          SEC_04 // STUDIO_PRESS_PASS (ĐĂNG KÝ NHẬN TRỌN BỘ 120+ BĂNG SKILL.MD)
+        </div>
+        <div class="col-span-4 sm:col-span-6 px-4 py-1.5 flex items-center justify-between">
+          <span class="hidden sm:inline">MIỄN PHÍ 100% CHO CỘNG ĐỒNG SÁNG TẠO VIỆT NAM</span>
+          <span class="font-bold text-[var(--accent-green)]">SLOTS REMAINING: 412 / 5,000</span>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-12 lg:p-16 bg-[var(--bg-stock)]">
+        <div class="max-w-5xl mx-auto">
+
+          <div class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span class="font-mono text-xs uppercase text-[var(--accent-orange)] font-bold">
+                // CẤP THẺ TRUY CẬP PHÒNG DỰNG SỚM
+              </span>
+              <h2 class="font-display font-extrabold text-3xl sm:text-5xl uppercase tracking-tight mt-1">
+                Đóng Dấu Vé <span class="font-serif italic font-normal normal-case text-4xl sm:text-6xl">Early Access</span>
+              </h2>
+            </div>
+            <p class="font-mono text-xs text-[var(--ink-muted)] max-w-xs">
+              Điền thông tin bên dưới để in thẻ thành viên trực tiếp và nhận ngay bộ Starter Pack khi mở kho.
+            </p>
+          </div>
+
+          <!-- PHYSICAL PERFORATED TICKET STUB -->
+          <div id="ticket-container" class="border-2 border-[var(--grid-strong)] bg-[var(--surface-card)] shadow-[6px_6px_0px_var(--grid-strong)] grid grid-cols-1 lg:grid-cols-12 relative overflow-hidden">
+
+            <!-- Left 7 Cols: Input Form Side of the Ticket -->
+            <div class="lg:col-span-7 p-6 sm:p-8 perforated-divider space-y-5">
+              <div class="flex items-center justify-between swiss-border-b pb-3 font-mono text-xs">
+                <span class="font-bold uppercase">PHIẾU ĐĂNG KÝ // WORK ORDER #01</span>
+                <span class="px-2 py-0.5 bg-[var(--accent-orange)] text-white font-bold text-[10px]">PRIORITY ACCESS</span>
+              </div>
+
+              <form id="pass-form" class="space-y-4 font-mono" novalidate>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="pass-name" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
+                      01. TÊN HOẶC HANDLE (TELEGRAM / DISCORD)
+                    </label>
+                    <input
+                      id="pass-name"
+                      type="text"
+                      required
+                      placeholder="VD: @khoa_creator"
+                      class="w-full px-3.5 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
+                    />
+                  </div>
+                  <div>
+                    <label for="pass-email" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
+                      02. EMAIL NHẬN KHO SKILL.MD *
+                    </label>
+                    <input
+                      id="pass-email"
+                      type="email"
+                      required
+                      placeholder="creator@domain.vn"
+                      class="w-full px-3.5 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="pass-cartridge" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
+                      03. BĂNG TỪ ƯU TIÊN NHẬN TRƯỚC
+                    </label>
+                    <select
+                      id="pass-cartridge"
+                      class="w-full px-3 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
+                    >
+                      <option value="CART-01 // RAZOR-TALK-VI">CART-01 // Podcast & Talking Head</option>
+                      <option value="CART-02 // KINETIC-HOOK-916">CART-02 // TikTok & Reels Viral</option>
+                      <option value="CART-03 // VOX-ARCHIVE-3D">CART-03 // Documentary Faceless</option>
+                      <option value="CART-04 // SHOP-UGC-CONVERTER">CART-04 // Shopee & TikTok Shop</option>
+                      <option value="ALL-120 // FULL STUDIO BUNDLE">FULL BUNDLE // Trọn bộ 120+ file .md</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="pass-agent" class="block text-[10px] uppercase text-[var(--ink-muted)] mb-1">
+                      04. CÔNG CỤ AI BẠN DÙNG
+                    </label>
+                    <select
+                      id="pass-agent"
+                      class="w-full px-3 py-2.5 bg-[var(--bg-stock)] border-2 border-[var(--grid-strong)] text-xs font-bold text-[var(--ink-primary)] focus:outline-none focus:border-[var(--accent-orange)]"
+                    >
+                      <option value="CLAUDE CODE / DESKTOP">Claude Code / Desktop</option>
+                      <option value="CURSOR / WINDSURF">Cursor / Windsurf IDE</option>
+                      <option value="CHƯA BIẾT DÙNG (CẦN HƯỚNG DẪN 1-CLICK)">Người mới (Cần bản 1-Click GUI)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="pt-2">
+                  <button
+                    type="submit"
+                    id="pass-submit-btn"
+                    class="w-full te-btn-orange py-3.5 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-between"
+                  >
+                    <span id="pass-submit-label">[ĐÓNG DẤU XÁC NHẬN & GIỮ CHỖ SỚM]</span>
+                    <span>STAMP PASS ➔</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right 5 Cols: Live-Stamped Detachable Ticket Stub -->
+            <div id="ticket-stub" class="lg:col-span-5 p-6 sm:p-8 bg-[var(--bg-putty)] flex flex-col justify-between font-mono relative">
+
+              <!-- Mechanical Rubber Stamp Overlay (Hidden until stamped) -->
+              <div
+                id="rubber-stamp-badge"
+                class="pointer-events-none opacity-0 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-4 border-[var(--accent-green)] text-[var(--accent-green)] px-4 py-2 font-display font-extrabold text-xl uppercase tracking-widest -rotate-12 bg-[var(--surface-card)]/95 z-20"
+              >
+                APPROVED // BATCH #01
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex items-center justify-between border-b border-[var(--grid-strong)] pb-2 text-[11px]">
+                  <span class="font-bold">CUỐNG VÉ // STUB</span>
+                  <span id="stub-serial" class="font-bold text-[var(--accent-orange)]">SN-2026-4589</span>
+                </div>
+
+                <div class="space-y-2.5 text-xs">
+                  <div>
+                    <div class="text-[9px] text-[var(--ink-muted)]">NGƯỜI SỞ HỮU / HOLDER:</div>
+                    <div id="stub-holder" class="font-bold text-sm truncate">@CREATOR_GUEST</div>
+                  </div>
+                  <div>
+                    <div class="text-[9px] text-[var(--ink-muted)]">EMAIL NHẬN BĂNG TỪ:</div>
+                    <div id="stub-email" class="font-bold truncate">CHƯA NHẬP EMAIL</div>
+                  </div>
+                  <div>
+                    <div class="text-[9px] text-[var(--ink-muted)]">GÓI BĂNG TỪ ĐĂNG KÝ:</div>
+                    <div id="stub-cart" class="font-bold text-[var(--accent-orange)] truncate">CART-01 // RAZOR-TALK-VI</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ASCII Barcode & Date Footer -->
+              <div class="pt-5 mt-5 perforated-horizontal space-y-2">
+                <div class="flex items-center justify-between text-[10px] text-[var(--ink-muted)]">
+                  <span>ISSUED: HO CHI MINH CITY</span>
+                  <span id="stub-status" class="font-bold text-[var(--ink-primary)]">STATUS: PENDING</span>
+                </div>
+                <div class="font-mono text-[11px] tracking-[0.22em] font-bold bg-[var(--bg-stock)] p-2 border border-[var(--grid-strong)] text-center overflow-hidden">
+                  ||| |||| | ||| |||| || | |||| |||
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         TECHNICAL FOOTER
+         ======================================================================== -->
+    <footer class="max-w-[1440px] w-full mx-auto px-6 py-8 font-mono text-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-[var(--ink-muted)]">
+      <div class="flex items-center gap-3">
+        <span class="w-3 h-3 bg-[var(--ink-primary)] inline-block"></span>
+        <span class="font-bold text-[var(--ink-primary)]">SPLICE.MD</span>
+        <span>— HỆ THỐNG COMBO SKILL.MD DỰNG VIDEO BẰNG AI CHO MỌI NGƯỜI.</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <span>SHORTCUTS: [SPACE] PLAY • [J/K/L] SCRUB • [M] RAW/AI</span>
+        <a href="#sec-bench" class="underline hover:text-[var(--accent-orange)]">TOP ↑</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==========================================================================
+       TACTILE HARDWARE NOTIFICATION BANNER (NO ALERT / NO CONFIRM)
+       ========================================================================== -->
+  <div id="hw-toast-rack" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==========================================================================
+       APPLICATION LOGIC: NLE CANVAS ENGINE, CARTRIDGES, PATCHBAY & GSAP
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. CARTRIDGE DATA REPOSITORY (6 AUTHENTIC SKILL.MD PRESETS)
+       -------------------------------------------------------------------------- */
+    const CARTRIDGES = [
+      {
+        id: "cart-01",
+        serial: "CART-01",
+        category: "talk",
+        filename: "razor-talk-vi.skill.md",
+        title: "Cắt Khoảng Thở & Phụ Đề Podcast",
+        useCase: "Tự động cắt sạch đoạn 'ừm, à', khoảng lặng >0.3s và đóng phụ đề nhảy từ khóa cho video nói chuyện / chuyên gia.",
+        engine: "FFmpeg + Whisper-VI",
+        speed: "~35s / phút video",
+        prompt: '"Áp dụng @razor-talk-vi.skill.md cho file_quay_tho.mp4"',
+        canvasTheme: {
+          tag: "PODCAST // AUTO JUMP-CUT",
+          speakerLabel: "SPEAKER_01 // CHUYÊN GIA AI",
+          subtitles: [
+            "Bạn không cần mở Premiere",
+            "Chỉ cần nạp 1 file skill.md",
+            "AI tự cắt sạch khoảng nghỉ thở",
+            "Xuất video 60fps trong 3 phút!"
+          ],
+          brollLabel: "B-ROLL: Sơ đồ quy trình tự động hóa",
+          accentHex: "#FF3E00"
+        },
+        markdown: `---
+name: razor-talk-vi
+serial: CART-01
+version: 2.4.0
+target: podcast_talking_head_vi
+requires: [ffmpeg, whisper-ctranslate2]
+---
+
+# QUY TẮC DỰNG VIDEO NÓI CHUYỆN (ZERO-SKILL)
+
+## 1. Cắt Khoảng Lặng Tự Động (Silence Razor)
+- Chạy phân tích VAD tiếng Việt với ngưỡng \`-38dB\`, độ dài tối thiểu \`0.30s\`.
+- Giữ lại \`0.08s\` padding đầu/cuối mỗi câu để giọng nói tự nhiên, không bị cụt chữ.
+
+## 2. Dynamic Punch Zoom (Chống Nhàm Chán)
+- Mỗi khi phát hiện từ khóa nhấn mạnh hoặc câu hỏi tu từ:
+  \`ffmpeg -vf "zoompan=z='if(lte(on,1),1.0,1.16)':d=1"\`
+
+## 3. Phụ Đề Tiếng Việt Chuẩn Nhịp Đọc
+- Tối đa 4 chữ trên một khung hình.
+- Tự động tô màu Cam (#FF3E00) cho động từ mạnh và con số thống kê.
+
+## 4. Chuẩn Hóa Âm Thanh Phòng Thu
+- Áp dụng lọc tạp âm nền + chuẩn hóa âm lượng đạt chuẩn \`-14.0 LUFS\`.`
+      },
+      {
+        id: "cart-02",
+        serial: "CART-02",
+        category: "short",
+        filename: "kinetic-hook-916.skill.md",
+        title: "Reels / TikTok Hook 3 Giây Triệu View",
+        useCase: "Đưa cảnh cao trào lên 3 giây đầu, chèn hiệu ứng âm thanh Whoosh/Pop và phóng chữ Kinetic giữ chân người xem.",
+        engine: "Remotion + FFmpeg",
+        speed: "~28s / phút video",
+        prompt: '"Biến clip_review.mp4 thành Reels viral với @kinetic-hook-916.skill.md"',
+        canvasTheme: {
+          tag: "9:16 VIRAL // 3S HOOK ENGINE",
+          speakerLabel: "CREATOR // SHORT-FORM",
+          subtitles: [
+            "ĐỪNG EDIT THỦ CÔNG NỮA!",
+            "Đây là vũ khí bí mật mới:",
+            "Ghép băng từ skill.md vào AI",
+            "Tăng 300% tốc độ ra video!"
+          ],
+          brollLabel: "B-ROLL: Biểu đồ Retention 88%",
+          accentHex: "#00E676"
+        },
+        markdown: `---
+name: kinetic-hook-916
+serial: CART-02
+version: 3.1.0
+target: tiktok_reels_shorts_916
+requires: [ffmpeg, remotion-cli, whisper-timestamped]
+---
+
+# QUY TẮC DỰNG SHORT-FORM GIỮ CHÂN 3 GIÂY ĐẦU
+
+## 1. Pattern Interrupt (00:00 -> 00:03)
+- Trích xuất câu nói có năng lượng cao nhất làm Hook mở đầu.
+- Áp dụng hiệu ứng Scale-In \`125% -> 100%\` trong 8 frames đầu kèm SFX \`tape_hit.wav\`.
+
+## 2. Kinetic Typography (Chữ Động)
+- Render lớp chữ Remotion 60fps bám sát từng âm tiết tiếng Việt.
+- Tự động chèn khung ảnh B-Roll minh họa góc trên khi nhắc đến công cụ/sản phẩm.
+
+## 3. Nhịp Cắt Nhanh (Fast Pacing)
+- Không để một góc hình tĩnh kéo dài quá \`2.2 giây\`.`
+      },
+      {
+        id: "cart-03",
+        serial: "CART-03",
+        category: "essay",
+        filename: "vox-archive-3d.skill.md",
+        title: "Phim Tài Liệu & Kể Chuyện Kiểu Vox",
+        useCase: "Biến file thu âm giọng đọc và thư mục ảnh tĩnh thành video tài liệu có chiều sâu 3D Parallax và bút dạ quang tô chữ.",
+        engine: "Depth-V2 + Remotion",
+        speed: "~55s / phút video",
+        prompt: '"Dựng bài thu âm voice.mp3 và thư mục /anh_tu_lieu bằng @vox-archive-3d.skill.md"',
+        canvasTheme: {
+          tag: "DOCUMENTARY // 2.5D PARALLAX",
+          speakerLabel: "NARRATOR // ARCHIVE ESSAY",
+          subtitles: [
+            "Năm 1924: Bàn cắt phim 16mm ra đời",
+            "Năm 2026: Ngôn ngữ tự nhiên lên ngôi",
+            "Mọi thao tác cắt dán phức tạp",
+            "Nay gói gọn trong tệp văn bản .md"
+          ],
+          brollLabel: "ARCHIVE: Tư liệu báo chí + Highlight vàng",
+          accentHex: "#FFB300"
+        },
+        markdown: `---
+name: vox-archive-3d
+serial: CART-03
+version: 1.8.5
+target: youtube_documentary_essay
+requires: [ffmpeg, remotion-three, depth-estimation]
+---
+
+# QUY TẮC PHIM TÀI LIỆU KỂ CHUYỆN (ARCHIVE STYLE)
+
+## 1. Tách Lớp Chiều Sâu 2.5D (Parallax Camera)
+- Tự động tách tiền cảnh và hậu cảnh cho mọi bức ảnh tĩnh trong thư mục tư liệu.
+- Tạo chuyển động camera đẩy nhẹ trục Z (\`Z-Push 1.0 -> 1.12\`) kèm hạt nhiễu phim 16mm.
+
+## 2. Hiệu Ứng Bút Dạ Quang Trích Dẫn Báo Chí
+- Khi giọng đọc khớp với đoạn văn bản trên ảnh chụp bài báo, vẽ vệt màu vàng \`#FFB300\` quét ngang dòng chữ.
+
+## 3. Âm Thanh Không Gian
+- Trộn tiếng máy chiếu phim cổ nhẹ (-28dB) và tiếng lật trang giấy khi chuyển chương.`
+      },
+      {
+        id: "cart-04",
+        serial: "CART-04",
+        category: "essay",
+        filename: "shop-ugc-converter.skill.md",
+        title: "Video UGC Bán Hàng Shopee / TikTok Shop",
+        useCase: "Ghép khung video cận cảnh sản phẩm (PiP), tự động nổi thẻ ưu đãi, đánh giá 5 sao và hạ nhạc nền khi đọc giá.",
+        engine: "FFmpeg + Auto-Ducking",
+        speed: "~25s / phút video",
+        prompt: '"Tối ưu video review_my_pham.mp4 chốt đơn với @shop-ugc-converter.skill.md"',
+        canvasTheme: {
+          tag: "COMMERCE // UGC CONVERSION",
+          speakerLabel: "REVIEWER // TIKTOK SHOP",
+          subtitles: [
+            "Quay xong 10 clip review sản phẩm?",
+            "Đừng ngồi ghép chữ từng cái!",
+            "Chạy ngay băng từ UGC Converter",
+            "Tự chèn khung giá & nút chốt đơn!"
+          ],
+          brollLabel: "PIP: Cận cảnh chất liệu + Đánh giá 4.9★",
+          accentHex: "#FF3E00"
+        },
+        markdown: `---
+name: shop-ugc-converter
+serial: CART-04
+version: 2.1.0
+target: tiktok_shop_shopee_video
+requires: [ffmpeg, whisper-vi]
+---
+
+# QUY TẮC VIDEO BÁN HÀNG CHUYỂN ĐỔI CAO
+
+## 1. Cửa Sổ Đôi Sản Phẩm (Picture-in-Picture)
+- Giây 00:02: Mở khung PiP bo viền 2px góc phải hiển thị video cận cảnh kết cấu sản phẩm.
+
+## 2. Tự Động Hạ Nhạc Nền (Audio Ducking)
+- Khi người review đọc đến từ khóa: "giá", "ưu đãi", "voucher", "giỏ hàng":
+  Tự động ép nhạc nền xuống \`-20dB\` và thêm âm báo \`cash_register_soft.wav\`.
+
+## 3. Chỉnh Màu Sáng Da Tự Nhiên
+- Áp dụng LUT \`clean_commercial.cube\` tăng độ tươi sáng vùng da thêm 12%.`
+      },
+      {
+        id: "cart-05",
+        serial: "CART-05",
+        category: "short",
+        filename: "onset-beat-splicer.skill.md",
+        title: "Tự Động Cắt Ghép Khớp Nhịp Trống (Beat-Sync)",
+        useCase: "Phân tích tần số bass của file nhạc MP3 và tự động cắt hàng chục video du lịch/sự kiện khớp chính xác từng nhịp trống.",
+        engine: "Librosa + FFmpeg",
+        speed: "~19s / phút video",
+        prompt: '"Ghép 15 clip trong /travel_clips khớp nhịp nhạc beat.mp3 bằng @onset-beat-splicer.skill.md"',
+        canvasTheme: {
+          tag: "MONTAGE // ONSET BEAT-SYNC",
+          speakerLabel: "BEAT DETECTOR // 128 BPM",
+          subtitles: [
+            "Bỏ 15 clip rời rạc vào thư mục",
+            "AI tự dò từng đỉnh sóng Bass",
+            "Cắt chuyển cảnh chính xác từng frame",
+            "Thêm Speed-Ramp mượt mà tức thì!"
+          ],
+          brollLabel: "ONSET: Đỉnh Bass #14 // Speed 240%",
+          accentHex: "#00E676"
+        },
+        markdown: `---
+name: onset-beat-splicer
+serial: CART-05
+version: 1.6.0
+target: travel_event_montage
+requires: [python-librosa, ffmpeg]
+---
+
+# QUY TẮC CẮT VIDEO KHỚP NHẠC TỰ ĐỘNG
+
+## 1. Dò Tìm Đỉnh Nhịp Trống (Onset Detection)
+- Trích xuất mốc thời gian (timestamps) của toàn bộ nhịp Kick/Snare trong dải tần \`60Hz - 140Hz\`.
+
+## 2. Cắt & Ghép Đa Clip Thông Minh
+- Tự động lấy phần chuyển động đẹp nhất của mỗi clip trong thư mục đầu vào, cắt khớp đúng độ dài giữa 2 nhịp trống.
+
+## 3. Velocity Speed-Ramp
+- Tăng tốc độ khung hình lên \`240%\` ở 4 frames trước điểm cắt để tạo lực đẩy thị giác.`
+      },
+      {
+        id: "cart-06",
+        serial: "CART-06",
+        category: "talk",
+        filename: "multicam-diarization.skill.md",
+        title: "Tự Chuyển Góc Máy Podcast 2-3 Người",
+        useCase: "Nhận diện ai đang cất tiếng nói để tự động cắt sang góc máy cận của người đó, khi cả hai cùng cười tự chuyển sang góc toàn.",
+        engine: "Pyannote + FFmpeg XML",
+        speed: "~48s / phút video",
+        prompt: '"Đồng bộ và tự chuyển góc cam_A.mp4, cam_B.mp4, cam_wide.mp4 với @multicam-diarization.skill.md"',
+        canvasTheme: {
+          tag: "MULTI-CAM // SPEAKER SWITCH",
+          speakerLabel: "CAM_A ACTIVE // DIARIZATION",
+          subtitles: [
+            "Quay Podcast 2 máy cực nhàn:",
+            "Ai đang nói -> Tự bật Cam người đó",
+            "Cả hai cùng nói -> Tự mở Cam góc rộng",
+            "Xuất thẳng MP4 hoặc XML Premiere!"
+          ],
+          brollLabel: "SWITCH: CAM_A -> CAM_WIDE (Auto)",
+          accentHex: "#FFB300"
+        },
+        markdown: `---
+name: multicam-diarization
+serial: CART-06
+version: 2.0.0
+target: multicam_podcast_interview
+requires: [pyannote-audio, ffmpeg]
+---
+
+# QUY TẮC Đạo Diễn Hình Tự Động Đa Góc Máy
+
+## 1. Phân Tách Người Nói (Speaker Diarization)
+- Đồng bộ âm thanh giữa \`cam_A.mp4\`, \`cam_B.mp4\` và \`cam_wide.mp4\`.
+- Xác định chính xác mốc thời gian người nói #1 và người nói #2.
+
+## 2. Luật Đạo Diễn Chuyển Cảnh
+- Khi 1 người nói liên tục > 1.5s: Chuyển sang góc máy cận tương ứng.
+- Khi có tiếng cười hoặc 2 người nói chồng lên nhau: Chuyển ngay sang \`cam_wide.mp4\`.
+- Xuất kèm file \`.xml\` nếu muốn tinh chỉnh lại trong DaVinci/Premiere.`
+      }
+    ];
+
+    /* --------------------------------------------------------------------------
+       2. PATCHBAY ATOMIC MICRO-SKILLS DATA
+       -------------------------------------------------------------------------- */
+    const PATCH_MODULES = [
+      {
+        id: "mod-silence",
+        codeName: "razor-silence-38db.md",
+        title: "Cắt Khoảng Lặng & Tiếng Thở (-38dB)",
+        desc: "Tự động loại bỏ đoạn ngập ngừng dài quá 0.30s bằng VAD.",
+        tokens: 320,
+        seconds: 8,
+        active: true,
+        snippet: `  - module: razor-silence-38db
+    threshold: "-38dB"
+    min_silence_duration: 0.30
+    padding_ms: 80`
+      },
+      {
+        id: "mod-sub-vi",
+        codeName: "kinetic-vn-captions.md",
+        title: "Phụ Đề Động Tiếng Việt Highlight Từ Khóa",
+        desc: "Tách 3-4 từ/dòng, tự động đổi màu Cam cho động từ & con số.",
+        tokens: 410,
+        seconds: 12,
+        active: true,
+        snippet: `  - module: kinetic-vn-captions
+    font_family: "Space Grotesk Bold"
+    max_words_per_line: 4
+    highlight_color: "#FF3E00"`
+      },
+      {
+        id: "mod-zoom",
+        codeName: "auto-zoom-punch.md",
+        title: "Auto Punch-Zoom Nhấn Trọng Tâm (1.16x)",
+        desc: "Phóng nhẹ khung hình tại đầu mỗi luận điểm quan trọng.",
+        tokens: 260,
+        seconds: 6,
+        active: true,
+        snippet: `  - module: auto-zoom-punch
+    zoom_factor: 1.16
+    easing: "cubic-bezier(0.22, 1, 0.36, 1)"`
+      },
+      {
+        id: "mod-broll",
+        codeName: "semantic-broll-pip.md",
+        title: "Tự Động Chèn Cửa Sổ B-Roll Theo Ngữ Cảnh",
+        desc: "Hiển thị video/ảnh minh họa ở góc trên khi nhắc tới từ khóa.",
+        tokens: 490,
+        seconds: 14,
+        active: false,
+        snippet: `  - module: semantic-broll-pip
+    layout: "picture-in-picture-top-right"
+    border_px: 2`
+      },
+      {
+        id: "mod-ducking",
+        codeName: "lofi-ducking-audio.md",
+        title: "Chuẩn Hóa Giọng -14 LUFS & Tự Hạ Nhạc Nền",
+        desc: "Làm sạch tạp âm phòng và ép nhạc nền xuống -18dB khi có tiếng nói.",
+        tokens: 290,
+        seconds: 7,
+        active: false,
+        snippet: `  - module: lofi-ducking-audio
+    target_lufs: -14.0
+    bgm_ducking_db: -18`
+      },
+      {
+        id: "mod-grade",
+        codeName: "kodak-2383-film-grade.md",
+        title: "Màu Phim Điện Ảnh Kodak 2383 + Hạt Phim 16mm",
+        desc: "Áp LUT màu tương phản ấm và lớp grain nhẹ chống cảm giác video thô.",
+        tokens: 340,
+        seconds: 10,
+        active: true,
+        snippet: `  - module: kodak-2383-film-grade
+    lut_profile: "kodak_2383_warm.cube"
+    grain_intensity: 0.18`
+      }
+    ];
+
+    /* --------------------------------------------------------------------------
+       3. HARDWARE TOAST & CLIPBOARD / FILE EXPORT UTILITIES
+       -------------------------------------------------------------------------- */
+    function triggerHardwareToast(msg, tag = "SYSTEM // OK") {
+      const rack = document.getElementById("hw-toast-rack");
+      const item = document.createElement("div");
+      item.className = "pointer-events-auto bg-[var(--surface-card)] text-[var(--ink-primary)] border-2 border-[var(--grid-strong)] shadow-[4px_4px_0px_var(--grid-strong)] p-3.5 font-mono text-xs max-w-sm";
+      item.innerHTML = `
+        <div class="flex items-center justify-between border-b border-[var(--grid-line)] pb-1 mb-1.5 text-[10px]">
+          <span class="font-bold text-[var(--accent-orange)]">[${tag}]</span>
+          <span class="text-[var(--ink-muted)]">SPLICE.MD</span>
+        </div>
+        <div class="leading-snug">${msg}</div>
+      `;
+      rack.appendChild(item);
+
+      gsap.fromTo(item, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, ease: "power2.out" });
+      setTimeout(() => {
+        gsap.to(item, {
+          opacity: 0,
+          x: 20,
+          duration: 0.2,
+          onComplete: () => item.remove()
+        });
+      }, 3400);
+    }
+
+    function copyTextSafe(text, filename) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        triggerHardwareToast(`Đã sao chép <strong>${filename}</strong> vào bộ nhớ tạm. Sẵn sàng dán vào Claude/Cursor!`, "CLIPBOARD // COPIED");
+      } catch (e) {
+        triggerHardwareToast(`Đã sao chép ${filename}!`, "CLIPBOARD");
+      }
+    }
+
+    function downloadMarkdownFile(filename, content) {
+      const blob = new Blob([content], { type: "text/markdown;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      triggerHardwareToast(`Đã xuất file <strong>${filename}</strong> về máy của bạn.`, "DISK // EXPORTED");
+    }
+
+    /* --------------------------------------------------------------------------
+       4. REAL KEYBOARD-DRIVEN NLE CANVAS MONITOR ENGINE
+       -------------------------------------------------------------------------- */
+    const canvas = document.getElementById("nle-monitor-canvas");
+    const ctx = canvas.getContext("2d");
+
+    let activeCartridge = CARTRIDGES[0];
+    let isPlaying = true;
+    let playbackRate = 1; // 1 = normal, 2 = fast-forward (L), -1 = rewind (J)
+    let currentFrame = 72;
+    const totalFrames = 360;
+    let isAiCutMode = true; // true = AI skill.md applied, false = Raw unedited footage
+
+    function formatFrameToSMPTE(frame) {
+      const f = Math.floor(frame % 24);
+      const s = Math.floor((frame / 24) % 60);
+      const m = Math.floor((frame / (24 * 60)) % 60);
+      return `00:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}:${String(f).padStart(2, "0")}`;
+    }
+
+    function renderNLEMonitorFrame() {
+      const w = canvas.width;
+      const h = canvas.height;
+      const theme = activeCartridge.canvasTheme;
+
+      // 1. Background Studio Frame
+      ctx.fillStyle = isAiCutMode ? "#121210" : "#1C1B18";
+      ctx.fillRect(0, 0, w, h);
+
+      // 2. Subtle Technical Grid inside Monitor
+      ctx.strokeStyle = isAiCutMode ? "rgba(234, 229, 217, 0.07)" : "rgba(234, 229, 217, 0.03)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < w; x += 50) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 0; y < h; y += 50) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Check if current frame falls in a "Silence Zone" (frames 90-120 or 210-240)
+      const inSilenceGap = (currentFrame >= 90 && currentFrame <= 120) || (currentFrame >= 210 && currentFrame <= 240);
+
+      // Dynamic Zoom Factor when AI Cut is active
+      const punchZoom = (isAiCutMode && ((currentFrame > 40 && currentFrame < 85) || (currentFrame > 160 && currentFrame < 205))) ? 1.14 : 1.0;
+
+      ctx.save();
+      ctx.translate(w / 2, h / 2);
+      ctx.scale(punchZoom, punchZoom);
+      ctx.translate(-w / 2, -h / 2);
+
+      // 3. Draw Simulated Speaker / Subject Silhouette & Waveform Ring
+      const centerX = w * 0.36;
+      const centerY = h * 0.47;
+
+      // Frame border around subject
+      ctx.strokeStyle = isAiCutMode ? theme.accentHex : "#6E6A63";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(60, 58, 380, 250);
+
+      // Speaker Head & Shoulders Geometric Illustration
+      ctx.fillStyle = "#262522";
+      ctx.fillRect(62, 60, 376, 246);
+
+      // Animated Audio Waveform inside Speaker Frame
+      const bars = 28;
+      const barWidth = 9;
+      const startX = 88;
+      for (let i = 0; i < bars; i++) {
+        let amp = Math.abs(Math.sin((currentFrame * 0.18) + i * 0.55)) * 75 + 12;
+        if (!isAiCutMode && inSilenceGap) {
+          amp = 4; // Dead air silence in raw footage!
+        }
+        ctx.fillStyle = (!isAiCutMode && inSilenceGap) ? "#57534E" : theme.accentHex;
+        ctx.fillRect(startX + i * (barWidth + 3), centerY - amp / 2, barWidth, amp);
+      }
+
+      // Speaker Tag
+      ctx.fillStyle = "#EAE5D9";
+      ctx.font = "bold 12px 'JetBrains Mono', monospace";
+      ctx.fillText(theme.speakerLabel, 76, 84);
+
+      if (punchZoom > 1.01) {
+        ctx.fillStyle = theme.accentHex;
+        ctx.fillText("⚡ AUTO PUNCH-ZOOM 1.14x", 76, 292);
+      }
+
+      ctx.restore();
+
+      // 4. Right Side: Auto B-Roll Picture-in-Picture Window (Only in AI Mode)
+      if (isAiCutMode) {
+        ctx.fillStyle = "#1B1B18";
+        ctx.fillRect(475, 58, 270, 165);
+        ctx.strokeStyle = "#EAE5D9";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(475, 58, 270, 165);
+
+        // Header bar of PiP
+        ctx.fillStyle = theme.accentHex;
+        ctx.fillRect(475, 58, 270, 24);
+        ctx.fillStyle = "#111110";
+        ctx.font = "bold 11px 'JetBrains Mono', monospace";
+        ctx.fillText("AUTO B-ROLL // SKILL.MD", 485, 74);
+
+        // Animated chart bars inside B-Roll PiP
+        for (let c = 0; c < 6; c++) {
+          const bh = 25 + ((c * 17 + Math.floor(currentFrame * 0.6)) % 75);
+          ctx.fillStyle = c === 4 ? theme.accentHex : "#EAE5D9";
+          ctx.fillRect(500 + c * 38, 200 - bh, 24, bh);
+        }
+
+        ctx.fillStyle = "#EAE5D9";
+        ctx.font = "11px 'Space Grotesk', sans-serif";
+        ctx.fillText(theme.brollLabel, 485, 244);
+      } else {
+        // Raw mode notice on right
+        ctx.strokeStyle = "#57534E";
+        ctx.setLineDash([5, 5]);
+        ctx.strokeRect(475, 58, 270, 165);
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#8C887E";
+        ctx.font = "12px 'JetBrains Mono', monospace";
+        ctx.fillText("[VIDEO THÔ CHƯA QUA SKILL.MD]", 495, 135);
+        ctx.fillText("- Chưa có B-Roll tự động", 495, 158);
+        ctx.fillText("- Còn nguyên khoảng ngập ngừng", 495, 178);
+      }
+
+      // 5. Kinetic Vietnamese Subtitle Bar at Bottom
+      const subIdx = Math.floor((currentFrame / totalFrames) * theme.subtitles.length) % theme.subtitles.length;
+      const activeSubText = (!isAiCutMode && inSilenceGap)
+        ? "... [Khoảng lặng ngập ngừng 1.4 giây] ..."
+        : theme.subtitles[subIdx];
+
+      // Subtitle Backdrop Box
+      ctx.fillStyle = "#0A0A09";
+      ctx.fillRect(60, 345, 685, 64);
+      ctx.strokeStyle = isAiCutMode ? theme.accentHex : "#57534E";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(60, 345, 685, 64);
+
+      // Subtitle Text
+      ctx.fillStyle = (!isAiCutMode && inSilenceGap) ? "#FF3E00" : "#FFFFFF";
+      ctx.font = "bold 22px 'Space Grotesk', sans-serif";
+      ctx.fillText(activeSubText.toUpperCase(), 82, 385);
+
+      // Mode Tag Pill inside Canvas
+      ctx.fillStyle = isAiCutMode ? "#00E676" : "#FFB300";
+      ctx.font = "bold 11px 'JetBrains Mono', monospace";
+      ctx.fillText(isAiCutMode ? `● AI SKILL ACTIVE: ${activeCartridge.filename}` : "○ RAW UNEDITED FOOTAGE (BẤM [M] ĐỂ BẬT AI)", 60, 333);
+    }
+
+    function updateTimelineUI() {
+      const pct = (currentFrame / totalFrames) * 100;
+      const playhead = document.getElementById("nle-playhead");
+      if (playhead) playhead.style.left = `${Math.min(98, Math.max(2, pct))}%`;
+
+      const tc = formatFrameToSMPTE(currentFrame);
+      document.getElementById("monitor-tc-overlay").textContent = `TC ${tc}`;
+      document.getElementById("scrub-frame-info").textContent = `FRAME: ${String(Math.floor(currentFrame)).padStart(3, "0")} / ${totalFrames}`;
+
+      // Animate VU meters
+      const barL = document.getElementById("vu-bar-l");
+      const barR = document.getElementById("vu-bar-r");
+      if (isPlaying) {
+        const lVal = 45 + Math.floor(Math.abs(Math.sin(currentFrame * 0.35)) * 45);
+        const rVal = 40 + Math.floor(Math.abs(Math.cos(currentFrame * 0.28)) * 50);
+        barL.style.height = `${lVal}%`;
+        barR.style.height = `${rVal}%`;
+      } else {
+        barL.style.height = "12%";
+        barR.style.height = "12%";
+      }
+    }
+
+    function stepNLELoop() {
+      if (isPlaying) {
+        currentFrame += 0.45 * playbackRate;
+        // If AI Cut mode is active, automatically skip silence frames (90-120) to demonstrate auto-cut!
+        if (isAiCutMode && playbackRate > 0 && currentFrame >= 90 && currentFrame < 118) {
+          currentFrame = 120;
+        }
+        if (currentFrame >= totalFrames) currentFrame = 0;
+        if (currentFrame < 0) currentFrame = totalFrames - 1;
+        updateTimelineUI();
+      }
+      renderNLEMonitorFrame();
+      requestAnimationFrame(stepNLELoop);
+    }
+
+    function setTransportState(playing, rate = 1) {
+      isPlaying = playing;
+      playbackRate = rate;
+      const badge = document.getElementById("monitor-state-badge");
+      const dot = document.getElementById("monitor-rec-dot");
+
+      if (!isPlaying) {
+        badge.textContent = "PAUSED // FRAME HOLD";
+        dot.style.backgroundColor = "#FFB300";
+      } else if (playbackRate === 2) {
+        badge.textContent = "FAST FORWARD // 2.0X";
+        dot.style.backgroundColor = "#00E676";
+      } else if (playbackRate < 0) {
+        badge.textContent = "REWIND // -1.5X";
+        dot.style.backgroundColor = "#FF3E00";
+      } else {
+        badge.textContent = "PLAYING // 24FPS";
+        dot.style.backgroundColor = "#FF3E00";
+      }
+    }
+
+    // Transport Button Bindings
+    document.getElementById("btn-transport-space").addEventListener("click", () => {
+      setTransportState(!isPlaying, 1);
+    });
+    document.getElementById("btn-transport-k").addEventListener("click", () => {
+      setTransportState(false, 1);
+    });
+    document.getElementById("btn-transport-j").addEventListener("click", () => {
+      setTransportState(true, -1.5);
+    });
+    document.getElementById("btn-transport-l").addEventListener("click", () => {
+      setTransportState(true, 2);
+    });
+
+    // Toggle Before / After AI Cut Mode
+    document.getElementById("toggle-ab-mode-btn").addEventListener("click", () => {
+      isAiCutMode = !isAiCutMode;
+      const label = document.getElementById("ab-mode-text");
+      if (isAiCutMode) {
+        label.textContent = "SAU KHI CHẠY SKILL.MD (AI CUT)";
+        label.className = "text-[var(--accent-green)]";
+      } else {
+        label.textContent = "VIDEO GỐC CHƯA CẮT (RAW)";
+        label.className = "text-[var(--accent-orange)]";
+      }
+      renderNLEMonitorFrame();
+    });
+
+    // Interactive Timeline Mouse/Touch Scrubbing
+    const scrubTrack = document.getElementById("timeline-scrub-track");
+    let isScrubbing = false;
+
+    function scrubToEvent(e) {
+      const rect = scrubTrack.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+      currentFrame = Math.floor(ratio * totalFrames);
+      updateTimelineUI();
+      renderNLEMonitorFrame();
+    }
+
+    scrubTrack.addEventListener("mousedown", (e) => {
+      isScrubbing = true;
+      setTransportState(false, 1);
+      scrubToEvent(e);
+    });
+    window.addEventListener("mousemove", (e) => {
+      if (isScrubbing) scrubToEvent(e);
+    });
+    window.addEventListener("mouseup", () => {
+      isScrubbing = false;
+    });
+
+    // Real Keyboard Shortcuts (Space, J, K, L, M) when not typing in form inputs
+    window.addEventListener("keydown", (e) => {
+      const tag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+
+      if (e.code === "Space") {
+        e.preventDefault();
+        setTransportState(!isPlaying, 1);
+      } else if (e.key.toLowerCase() === "k") {
+        setTransportState(false, 1);
+      } else if (e.key.toLowerCase() === "j") {
+        setTransportState(true, -1.5);
+      } else if (e.key.toLowerCase() === "l") {
+        setTransportState(true, 2);
+      } else if (e.key.toLowerCase() === "m") {
+        document.getElementById("toggle-ab-mode-btn").click();
+      }
+    });
+
+    /* --------------------------------------------------------------------------
+       5. CARTRIDGE RACK RENDERING & INSPECTOR SYNCHRONIZATION
+       -------------------------------------------------------------------------- */
+    function selectCartridge(cartId, scrollToMonitor = false) {
+      const found = CARTRIDGES.find(c => c.id === cartId);
+      if (!found) return;
+      activeCartridge = found;
+
+      // Highlight selected cartridge card
+      document.querySelectorAll(".cartridge-card").forEach(el => {
+        if (el.getAttribute("data-cart-id") === cartId) {
+          el.classList.add("selected-cart");
+        } else {
+          el.classList.remove("selected-cart");
+        }
+      });
+
+      // Update Inspector Panel
+      document.getElementById("inspector-filename").textContent = found.filename;
+      document.getElementById("inspector-serial").textContent = found.serial;
+      document.getElementById("inspector-engine").textContent = found.engine;
+      document.getElementById("inspector-speed").textContent = found.speed;
+      document.getElementById("inspector-code-view").textContent = found.markdown;
+      document.getElementById("inspector-prompt-example").textContent = found.prompt;
+
+      // Update NLE Monitor Deck Header
+      document.getElementById("deck-active-cart-label").textContent = `${found.serial}: ${found.filename}`;
+      document.getElementById("deck-cli-command").textContent = `claude ${found.prompt}`;
+
+      renderNLEMonitorFrame();
+
+      if (scrollToMonitor) {
+        document.getElementById("sec-bench").scrollIntoView({ behavior: "smooth" });
+        triggerHardwareToast(`Đã nạp băng từ <strong>${found.serial} (${found.filename})</strong> vào bàn dựng NLE.`, "DECK // LOADED");
+      }
+    }
+
+    function renderCartridgeRack(filter = "all") {
+      const grid = document.getElementById("cartridge-grid");
+      const list = filter === "all" ? CARTRIDGES : CARTRIDGES.filter(c => c.category === filter);
+
+      grid.innerHTML = list.map(c => {
+        const isSelected = c.id === activeCartridge.id ? "selected-cart" : "";
+        return `
+          <article
+            data-cart-id="${c.id}"
+            class="cartridge-card tape-notch p-5 flex flex-col justify-between cursor-pointer ${isSelected}"
+          >
+            <div>
+              <!-- Top Cartridge Spine -->
+              <div class="flex items-center justify-between border-b border-[var(--grid-strong)] pb-2 mb-3 font-mono text-[11px]">
+                <span class="px-2 py-0.5 bg-[var(--ink-primary)] text-[var(--bg-stock)] font-bold">${c.serial}</span>
+                <span class="text-[var(--ink-muted)] font-bold">${c.engine}</span>
+              </div>
+
+              <!-- Cartridge Title & File -->
+              <h3 class="font-display font-extrabold text-lg uppercase tracking-tight leading-snug">
+                ${c.title}
+              </h3>
+              <div class="mt-1.5 inline-block px-2 py-0.5 bg-[var(--bg-putty)] border border-[var(--grid-strong)] font-mono text-xs font-bold text-[var(--accent-
