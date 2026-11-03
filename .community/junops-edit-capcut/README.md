@@ -1,5 +1,7 @@
 # JunOps Edit CapCut
 
+> Skill cộng đồng được đóng góp từ kênh YouTube **[JunOps](https://www.youtube.com/@junops17)** — nơi chia sẻ kiến thức về AI và tự động hoá doanh nghiệp vừa và nhỏ.
+
 Skill giúp AI (Claude Code, Codex, Antigravity...) **edit video trực tiếp trong dự án CapCut bản máy tính trên Windows** — cả video ngắn dọc (TikTok / Shorts / Reels) lẫn video ngang dài (YouTube 16:9).
 
 Mọi thứ được ghi thẳng vào file dự án CapCut thật, nên sau khi AI làm xong bạn vẫn mở CapCut lên kéo, cắt, đổi chữ, xoá như một video bình thường.
@@ -57,6 +59,13 @@ Hai việc bạn phải làm tay trong CapCut: **tạo dự án mới và kéo v
 - `cat` chỉ cắt track video chính; track lồng tiếng/B-roll không tự cắt theo.
 - Motion graphic chỉ có 4 mẫu đơn giản; hiệu ứng phức tạp vẫn làm tay trong CapCut.
 - AI không nghe được âm thanh — mọi quyết định về lời nói dựa trên bản chép lời.
+
+## Nguồn & ghi công
+
+- Kênh gốc: **[youtube.com/@junops17](https://www.youtube.com/@junops17)**
+- Nội dung kênh: chia sẻ kiến thức về AI, hỗ trợ tự động hoá doanh nghiệp vừa và nhỏ.
+- Liên hệ: [contact@jiameibeauty.com](mailto:contact@jiameibeauty.com) · [jiameibeauty.com](https://jiameibeauty.com)
+- Skill này được đóng góp vào SkillCut từ kênh trên.
 
 ## License
 
