@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "gate": "passed",
+  "file": "project/raw.mp4",
+  "normalized": true,
+  "original": {
+    "codec": "hevc",
+    "hasAudio": true,
+    "durationSec": 48.6,
+    "fps": 30.0,
+    "fpsIsVariable": false,
+    "stored": {
+      "width": 1080,
+      "height": 1920
+    },
+    "rotationDeg": 0,
+    "sar": 1.0,
+    "effective": {
+      "width": 1080,
+      "height": 1920
+    },
+    "aspect": 0.5625,
+    "orientation": "portrait",
+    "dar": "9:16",
+    "pixFmt": "yuv420p"
+  },
+  "codec": "h264",
+  "hasAudio": true,
+  "durationSec": 48.6,
+  "fps": 30.0,
+  "fpsIsVariable": false,
+  "stored": {
+    "width": 1080,
+    "height": 1920
+  },
+  "rotationDeg": 0,
+  "sar": 1.0,
+  "effective": {
+    "width": 1080,
+    "height": 1920
+  },
+  "aspect": 0.5625,
+  "orientation": "portrait",
+  "needsNormalize": false,
+  "reframe": "none",
+  "cropFocusX": 0.5,
+  "layoutKey": "vertical"
+}

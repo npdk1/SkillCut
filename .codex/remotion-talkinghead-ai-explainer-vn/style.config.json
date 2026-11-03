@@ -1,0 +1,3023 @@
+{
+  "_readme": "THE ONE STYLE FILE. Every style number lives here. A new video only swaps raw footage + transcript + edl.json + beats.json. Keys starting with _ are notes. Fields tagged [M]=measured from reference frames, [E]=estimate (not exactly measurable), [U]=unmeasured/inconclusive (safe default). Reference = TikTok 7702817920237210898, 1080x1920, 30fps, 48.6s.",
+  "reference": {
+    "file": "7702817920237210898.mp4",
+    "w": 1080,
+    "h": 1920,
+    "fps": 30,
+    "durationSec": 48.6,
+    "speechWordsPerSec": 3.2,
+    "_speech": "[E] ~156 Vietnamese syllables-words / 48.6s by whisper-small transcript"
+  },
+  "fonts": {
+    "family": "Be Vietnam Pro",
+    "weights": {
+      "heavy": 800,
+      "bold": 700,
+      "medium": 500
+    },
+    "letterSpacingEm": -0.02,
+    "_note": "[E] The glyphs look like Be Vietnam Pro ExtraBold (width-calibrated with PIL) but cannot be proven pixel-exact. Fallback chain: Be Vietnam Pro > Inter > sans-serif."
+  },
+  "colors": {
+    "highlight": "#F8E277",
+    "_highlight": "[M] caption pill + yellow keyword text",
+    "pillText": "#0D0F0F",
+    "white": "#FFFFFF",
+    "chipBg": "#1F2021",
+    "chipStroke": "#F8E277",
+    "chipStrokeAlpha": 0.75,
+    "infoCard": "#241F1B",
+    "infoCardStroke": "#FFFFFF",
+    "infoCardStrokeAlpha": 0.1,
+    "darkScene": "#050505",
+    "darkGlow": "#26211C",
+    "dotGrid": "#FFFFFF",
+    "dotGridAlpha": 0.04,
+    "strike": "#F5E7A7",
+    "strikeRed": "#E5384F",
+    "_strikeRed": "[E] prompt-box strike line is red-pink; info-card strike is pale yellow [M]",
+    "claudeOrange": "#D97757",
+    "claudeCream": "#F4EFE6",
+    "_claude": "[E] sampled by eye from key frames; swap to your own brand icon through beats.json icons",
+    "heart": "#FF2D55",
+    "link": "#2F6BFF",
+    "windowBg": "#E7EEF9",
+    "boxStroke": "#F8E277"
+  },
+  "caption": {
+    "pageRules": {
+      "maxLinesPerPage": 2,
+      "maxWordsPerLine": 4,
+      "maxCharsPerLine": 22,
+      "minPageSec": 0.8,
+      "maxPageSec": 3.4,
+      "breakOnGapSec": 0.25,
+      "line1Style": "white",
+      "line2Style": "yellow",
+      "pillStyleForKeyword": true,
+      "_rule": "[M] reference never shows more than 2 lines / 4 words per line. Line 1 white, line 2 = the punch phrase in yellow (text or pill). A single short page may be pill (e.g. 'quá đẳng cấp', 'motion thì mượt mà').",
+      "minWordsPerLine": 2,
+      "functionWordsStartLine": [
+        "và",
+        "thì",
+        "là",
+        "của",
+        "để",
+        "mà",
+        "nhưng",
+        "hoặc",
+        "với",
+        "ở",
+        "trong",
+        "rồi",
+        "sau",
+        "khi",
+        "nếu",
+        "vì",
+        "nên",
+        "cho",
+        "từ",
+        "đến",
+        "ra",
+        "về"
+      ],
+      "_merge_note": "make_edl.py captions: natural chunks (punctuation / pause >= breakOnGapSec), chunks < minWordsPerLine merged into a neighbour, then balanced lines of minWordsPerLine..maxWordsPerLine words, preferring a break BEFORE a function word; never an orphan 1-word line/page (except a 1-word sentence). mergeGapMaxSec: never join chunks/pages across a silence longer than this; chunkMaxSec caps a merged chunk's duration.",
+      "mergeGapMaxSec": 0.6,
+      "chunkMaxSec": 3.4
+    },
+    "sizes": {
+      "normal": 58,
+      "hero": 100,
+      "sub": 44,
+      "_note": "[M] px at 1080 wide; hero used for first page (0-1.3s)"
+    },
+    "weight": 800,
+    "lineHeight": 1.12,
+    "anim": {
+      "mode": "word-rise",
+      "staggerFrames": 2,
+      "durFrames": 5,
+      "risePxEm": 0.4,
+      "fadeFrames": 3,
+      "clipBottom": true,
+      "pageOutMode": "cut",
+      "pageOutFadeFrames": 2,
+      "_note": "[E ±1 frame] 30fps frame-by-frame crops (6.83-7.03s, 19.6-19.83s, 43.87-44.1s): each word slides up ~0.4em out of a bottom clip, words start 2 frames apart, each word takes ~5 frames; the previous page disappears within 1-2 frames (pill was ~40% opacity one frame before removal). No pop/scale overshoot on captions."
+    },
+    "shadow": {
+      "blur": 10,
+      "offsetY": 4,
+      "alpha": 0.55,
+      "color": "#000000"
+    },
+    "stroke": {
+      "widthPx": 8,
+      "color": "#000000",
+      "_note": "v4.4: outline made of a ring of text-shadows (Captions.tsx outline()); widthPx >= 6 required by V05"
+    },
+    "pill": {
+      "bg": "#F8E277",
+      "text": "#0D0F0F",
+      "radiusPx": 16,
+      "padXPx": 28,
+      "padYPx": 8,
+      "shadowAlpha": 0.25
+    },
+    "positions": {
+      "bottomYr": 0.655,
+      "topYr": 0.147,
+      "_note": "[M] caption line-1 centre 65.5% of H when over host; 14.7% of H when graphics/chips occupy the lower third (see beats.captionAnchor)"
+    },
+    "dark": {
+      "_note": "[M] 1024px-wide frame crops 1.9-4.8s of the reference. Variant 'dark' = caption over a bright screen b-roll / any page whose captionAnchor entry has variant:'dark' or that overlaps a broll beat. Line style white -> dark pill (white text), yellow -> yellow pill (dark text, normal size). Line 1 is drawn UNDER line 2 (yellow pill overlaps its bottom edge). Block is top-anchored (line-1 centre 14.2% H, line-2 centre 19.4% H) and shifted right (centre x 0.58 W) when a tile sticker occupies the top-left.",
+      "bg": "rgba(32,32,34,0.94)",
+      "text": "#FFFFFF",
+      "fontPx": 40,
+      "padXPx": 20,
+      "padYPx": 7,
+      "radiusPx": 14,
+      "overlapPx": 16,
+      "shadowAlpha": 0.3,
+      "line1CentreYr": 0.142,
+      "shiftedCentreXr": 0.58,
+      "unshiftedCentreXr": 0.5,
+      "outMode": "line1-drops-first-then-line2-greys",
+      "pageOutFadeFrames": 3
+    },
+    "background": {
+      "enabled": false,
+      "_note": "v4.4: NO background of any kind behind captions (no pill, dark box, frosted/blurred/white panel). Readability = stroke + soft shadow only. verified.md V05."
+    }
+  },
+  "framing": {
+    "levels": {
+      "wide": 1.0,
+      "mid": 1.18,
+      "tight": 1.42
+    },
+    "_levels": "[M] ORB-feature scale vs first wide shot: wide 1.00, mid 1.15-1.25 (9.8-14.2 =1.15-1.2; 21.4-25.3 =1.21-1.3), tight 1.40-1.43 (42.9-43.7). Zoom is a FRAMING per shot, not a slow push: within a shot the background drifts <=+-2%.",
+    "punch": {
+      "overshoot": 1.12,
+      "settleFrames": 8,
+      "ease": "easeOutCubic",
+      "_note": "[M] on every framing change the new shot STARTS ~12% bigger and settles in 6-9 frames: 42.9s 1.62->1.42 in 8f; 21.43s 1.36->1.21 in 6f; 9.8s 1.20->1.15 in ~10f."
+    },
+    "drift": {
+      "enabled": false,
+      "maxPct": 0.0,
+      "_note": "[M] no continuous push-in in reference"
+    },
+    "cycle": [
+      "wide",
+      "mid",
+      "wide",
+      "mid",
+      "wide",
+      "tight",
+      "wide"
+    ],
+    "_cycle": "[M] reference order: wide(0-2.1) -> [broll] -> mid(9.8) -> tight-finger(14.3) -> wide(16.1) -> mid(21.4) -> [dark scene] -> wide(30.8) -> [phone/dark] -> tight(42.9) -> wide(43.9)",
+    "minShotSec": 2.0,
+    "avgShotSec": 3.7,
+    "framingChangeEverySec": [
+      4.5,
+      9.0
+    ],
+    "shake": {
+      "enabled": false,
+      "_note": "[M] none detected: frame-to-frame translation of room background <1px outside cuts"
+    },
+    "visualCuts": {
+      "enabled": true,
+      "everySec": 3.7,
+      "triggerSec": 5.0,
+      "minPieceSec": 2.0,
+      "searchSec": 0.9,
+      "_note": "[M] reference avg shot 3.7 s (framing.avgShotSec). Long kept segments get contiguous sub-segments with a new framing + punch-in at a word boundary (prefers pauses/punctuation); speech is never dropped. Set enabled:false for the old behaviour."
+    }
+  },
+  "cuts": {
+    "transition": "hard-cut",
+    "flashFrames": 0,
+    "_note": "[M] 12 cuts, all hard (0-1 frame). Dense 30fps sheets show no wipe/fade/whip. Dark info scenes fade in over blurred last A-roll frame (~8 frames, 25.4s).",
+    "darkSceneFadeFrames": 8,
+    "targetPacing": {
+      "newTreatmentEverySec": 3.0,
+      "avgShotSec": 3.7,
+      "maxStaticSec": 4.0,
+      "maxPauseKeepSec": 0.2,
+      "_pause": "[M] gaps between speech phrases in the reference are 0.1-0.2s (the speaker was already tightened)",
+      "wordsPerSecTarget": 3.2
+    }
+  },
+  "beats": {
+    "common": {
+      "inFrames": 7,
+      "outFrames": 5,
+      "ease": "easeOutBack",
+      "popScaleFrom": 0.82,
+      "slideEm": 0.5
+    },
+    "stars": {
+      "count": 5,
+      "perStarFrames": 5,
+      "startStaggerFrames": 6,
+      "size": 70,
+      "y": 0.0,
+      "xs": [
+        0.14,
+        0.3,
+        0.5,
+        0.7,
+        0.86
+      ],
+      "yRatio": 0.2,
+      "spin": true
+    },
+    "chipStack": {
+      "enterFrames": 8,
+      "ease": "easeOutBack",
+      "highlightLatest": true,
+      "stagger": 0
+    },
+    "avatarChain": {
+      "drawFrames": 12,
+      "lineAlpha": 0.8
+    },
+    "promptBox": {
+      "typeCharsPerSec": 18,
+      "strikeFrames": 8,
+      "strikeColor": "#E5384F",
+      "bg": "#FFFFFF",
+      "text": "#222222",
+      "radius": 50
+    },
+    "titleBurst": {
+      "inFrames": 8,
+      "rec": {
+        "dot": "#F8E277",
+        "font": 24,
+        "blinkFrames": 15
+      },
+      "timeline": {
+        "rows": 4,
+        "barRadius": 6,
+        "fill": "#F8E277",
+        "playheadAlpha": 0.9,
+        "growFrames": 36
+      }
+    },
+    "bigWord": {
+      "inFrames": 6,
+      "sparkles": 6,
+      "sparkleSize": 28
+    },
+    "selectionBox": {
+      "stroke": "#F8E277",
+      "handle": 14,
+      "labelBg": "#F8E277",
+      "drawFrames": 10
+    },
+    "infoScene": {
+      "headerFont": 42,
+      "cardEnterFrames": 8,
+      "strikeFrames": 10,
+      "pillFont": 40,
+      "pillFilled": false,
+      "_pillFilled": "v4.4 (verified.md V05): the framed-focus headline is yellow text with a black stroke + soft shadow, NOT a filled yellow pill (the V05 pixel check flags any pill-colour mass). Set true to restore the v4.3 filled pill.",
+      "mediaEnterFrames": 10,
+      "blurBgPx": 40,
+      "blurBgDim": 0.35,
+      "cardExitFrames": 5,
+      "cardExitBlurPx": 8,
+      "cardExitScaleY": 0.8,
+      "cardExitStaggerFrames": 1,
+      "headlineBlurPx": 8,
+      "headlineInFrames": 4,
+      "headlineSlidePx": 0,
+      "_exit_note": "[M] 28.2-29.0s dense frames: when the headline text appears, the stacked cards leave in ~5f (blur 0->8px, squash scaleY->0.8, fade) and the headline/pill takes over the slot. Triggered by info-scene.headline.t (or cardsExitAt).",
+      "headlineScale": 2.05,
+      "headlineTrackingEm": -0.035,
+      "headlineLeadSec": 0.1,
+      "headlineMinAfterHeaderSec": 0.3,
+      "_headline_note": "[M] ref 28.4s: no headline; 28.6s: headline fading in (blur) while the 3rd card leaves; 40.5-40.7s same in the amount scene. Headline = ~2.05x header size, yellow, tight tracking (-0.035em), blur-in over 4f, sits right under the header (headlineYR). Rule (make_beats.py hl_time): headline.t = first headline word start - headlineLeadSec, never earlier than scene t0 + headlineMinAfterHeaderSec. NOTE: in the reference the amount scene starts ~0.7s AFTER the spoken 'chi mat' because a phone topic-card is held to 40.3s (hand-edit in examples/reference.beats.json); auto plans start the scene at the word.",
+      "struckTextOpacity": 0.82,
+      "strikeThickness": 6,
+      "_struck_note": "Task C item 6: the struck-through cards rendered fainter than the reference (text 0.45, 4px line). Now text 0.82 + shadow, 6px line with dark halo, brighter X badge."
+    },
+    "commentBox": {
+      "typeCharsPerSec": 10,
+      "bubbleBg": "#1F2021",
+      "_pos": "[M] 47.3-48.3s @1024px: input pill L .094W w .80W, centre y .229H while typing -> .257H once the reply bubble (centre .19H, h .056H, dark, avatar 'B' + small 'bạn' + bold text + red heart) appears above; chat icon (dark rounded square, ~.115W) at x .764W, y .60H appears with it."
+    },
+    "sticker": {
+      "popFrames": 7,
+      "sparkles": 3,
+      "variants": {
+        "_note": "[M] reference shows 3 sticker looks. tile = brand tile only (over b-roll, top-left, caption shifts right). label-above = tile with a dark label pill ABOVE it (14.7-16.9s, centred on the pointing hand). label-right = tile + dark yellow-outlined card to the RIGHT joined by a thin connector (44.7-46.8s, top-left, sub-line small + main line big, yellow highlight words).",
+        "labelAbove": {
+          "gapPx": 14,
+          "labelFont": 55,
+          "hlColor": "#F8E277",
+          "tileScale": 2.0,
+          "strokePx": 0,
+          "bg": "rgba(30,30,34,0.96)"
+        },
+        "labelRight": {
+          "connectorPx": 40,
+          "connectorWidthPx": 3,
+          "cardPadXPx": 24,
+          "cardPadYPx": 12,
+          "subFontScale": 0.55,
+          "mainFontScale": 1.35,
+          "tileScale": 1.2,
+          "cardMinWr": 0.547,
+          "cardXr": 0.14
+        }
+      },
+      "autoPlacement": {
+        "_note": "no per-video tuning: beats.json may carry only {type:'sticker',t0,t1,label,sub?}. Rule: variant = sub?'label-right': label?'label-above':'tile'. anchor = (a top-anchored caption page overlaps this beat or a broll beat is active)?'top-left' : variant=='label-above'?'center-top' : 'top-left'. y comes from the layout.<profile>.sticker.{topYr,centerTopYr,cardYr}. x/y/anchor in the beat override.",
+        "captionClearancePx": 24
+      }
+    },
+    "framedFocus": {
+      "_note": "[E] 11. framed-focus: the speaker footage shrunk into a device frame (phone with notch + 9:41 status bar, or macOS window with traffic lights) centred on a blurred, darkened full-frame copy of itself; white bold header + yellow lines (pill or text) above. Spoken captions are suppressed while it plays.",
+      "popFrames": 8,
+      "scaleInFrames": 12,
+      "scaleFrom": 0.93,
+      "lineInFrames": 8,
+      "blurPx": 38,
+      "dim": 0.38,
+      "headScale": 1.75,
+      "lineScale": 0.9,
+      "gapPx": 34,
+      "bottomPadPx": 10,
+      "videoZoom": 1.0,
+      "phone": {
+        "bezelPx": 13,
+        "radiusPx": 70,
+        "maxWidthR": 0.74
+      },
+      "window": {
+        "bezelPx": 0,
+        "radiusPx": 30,
+        "widthR": 0.9,
+        "aspect": 1.05,
+        "barPx": 58
+      },
+      "lineMaxDelaySec": 0.7
+    },
+    "textBehind": {
+      "_note": "[E] 12. text-behind-speaker: layers = footage -> big uppercase headline -> person cut-out (CSS mask from public/project/masks/<id>/mask_%05d.png, made by scripts/make_masks.py via person_mask.py). anim: slide | type | marquee.",
+      "fontPx": 250,
+      "maxWidthR": 0.97,
+      "glyphEm": 0.587,
+      "lineHeight": 0.98,
+      "fadeFrames": 6,
+      "slideFrames": 14,
+      "lineStaggerFrames": 6,
+      "typeCharsPerSec": 14,
+      "marqueePxPerFrame": 9,
+      "shadowPx": 34,
+      "_calib": "glyphEm calibrated on a render: 'LĨNH VỰC' measured 0.89 W at nominal 0.94 W -> 0.62*0.947"
+    }
+  },
+  "grade": {
+    "applyTo": "host-footage",
+    "_note": "[M] OUTPUT stats of the reference host footage: mean luma ~75/255 (low-key), p1=0 (crushed blacks), p99~225, mean saturation ~65/255, warm cast R-B ≈ +13, vignette weak (corner/centre luma 0.85-1.0). The ungraded source is unknown, so the filter below is [E]: a gentle warm low-key look.",
+    "brightness": 0.96,
+    "contrast": 1.06,
+    "saturate": 1.05,
+    "sepia": 0.06,
+    "vignette": 0.12,
+    "enabled": true
+  },
+  "overlayLayers": {
+    "order": [
+      "footage",
+      "behindText",
+      "cutout",
+      "broll",
+      "vignette",
+      "beats",
+      "captions",
+      "guard"
+    ],
+    "_note": "same 7-layer stack as remotion-house-review-vn"
+  },
+  "audio": {
+    "music": {
+      "enabled": false,
+      "file": "sfx/music.mp3",
+      "volume": 0.0,
+      "duckTo": 0.0,
+      "_note": "[M] Re-tested with Demucs htdemucs (2026-11-02): the no_vocals stem floor is ~-39 dBFS, ~21 dB under the voice and structureless -> NO music bed in the reference. Music stays OFF. If you add music: volume 0.08, duck to 0.04 under speech (typical, NOT measured)."
+    },
+    "sfx": {
+      "enabled": false,
+      "_note": "[U] Demucs separation: the non-voice stem contains only ambiguous short transients <= -25 dBFS, probably vocal sibilant bleed. Candidate times (s): 0.85, 2.4, 5.05, 14.95 (~sticker 14.7), 16.3, 28.5 (~info-scene card shift), 37.25, 38.45, 40.55 (~info-scene 40.5). Not reliable enough to claim SFX -> sfx.enabled=false. Cue types below are placed by rule if you enable them, NOT measured.",
+      "volume": 0.35,
+      "cues": {
+        "whoosh": {
+          "file": "sfx/whoosh.mp3",
+          "on": "framing-change",
+          "offsetFrames": -3
+        },
+        "pop": {
+          "file": "sfx/pop.mp3",
+          "on": "beat-in",
+          "offsetFrames": 0
+        },
+        "ping": {
+          "file": "sfx/ping.mp3",
+          "on": [
+            "stars",
+            "sticker",
+            "big-word"
+          ],
+          "offsetFrames": 0
+        },
+        "type": {
+          "file": "sfx/type.mp3",
+          "on": [
+            "prompt-box",
+            "comment-box"
+          ],
+          "offsetFrames": 0
+        }
+      }
+    },
+    "voice": {
+      "volume": 1.0
+    }
+  },
+  "tighten": {
+    "conceptBonus": 0.35,
+    "_note": "Raw footage -> kept segments. Used by scripts/make_edl.py. Weights sum to 1.",
+    "silence": {
+      "noiseDb": -34,
+      "minSilenceSec": 0.35,
+      "keepPadSec": 0.12,
+      "dropAbove": 0.35
+    },
+    "jumpCut": {
+      "padInSec": 0.04,
+      "padOutSec": 0.08,
+      "minSegmentSec": 0.7,
+      "maxSegmentSec": 7.0,
+      "mergeGapSec": 0.18
+    },
+    "fillers": [
+      "ờ",
+      "ừm",
+      "ừ",
+      "ê",
+      "à",
+      "ừ thì",
+      "kiểu",
+      "um",
+      "uh",
+      "ờm",
+      "hmm",
+      "thì là"
+    ],
+    "repeat": {
+      "similarity": 0.72,
+      "keep": "last",
+      "mode": "words",
+      "_note": "similarity is computed on WORD tokens (difflib) - char-level 0.72 flagged 'lựa chọn thứ nhất ... cao tốc' vs 'lựa chọn thứ hai ... quốc lộ 1' as a repeat take. Overridden by the preset's repeatSimilarity."
+    },
+    "rubric": {
+      "weights": {
+        "hookiness": 0.22,
+        "information": 0.2,
+        "energy": 0.16,
+        "clarity": 0.14,
+        "emotion": 0.1,
+        "novelty": 0.1,
+        "payoff": 0.08
+      },
+      "keepAbove": 0.42,
+      "hookAbove": 0.7,
+      "dropBelow": 0.3,
+      "hookKeywords": [
+        "bí mật",
+        "không ngờ",
+        "sốc",
+        "đỉnh",
+        "đẳng cấp",
+        "lần đầu",
+        "nhanh",
+        "miễn phí",
+        "sai lầm",
+        "đừng",
+        "ai cũng",
+        "tuyệt",
+        "hay nhất"
+      ],
+      "payoffKeywords": [
+        "kết quả",
+        "cuối cùng",
+        "tóm lại",
+        "quá tiện",
+        "thế là",
+        "comment",
+        "theo dõi",
+        "follow",
+        "link"
+      ]
+    },
+    "hook": {
+      "allowReorder": true,
+      "maxHookSec": 3.0,
+      "minHookScore": 0.7,
+      "repeatHookInBody": false
+    },
+    "target": {
+      "minSec": 20,
+      "maxSec": 75,
+      "ratioOfRaw": [
+        0.35,
+        0.8
+      ],
+      "_note": "output length is a RESULT of the rubric; it is clamped only by this soft window and never forced to equal raw or reference length"
+    },
+    "speed": {
+      "max": 1.08,
+      "_note": "speech may be sped up at most 8% (only when a kept segment is >maxSegmentSec of low energy)"
+    },
+    "preset": "normal",
+    "presets": {
+      "_note": "--preset light|normal|tight (default tighten.preset). retention = kept speech / raw duration. After the rubric, whole SENTENCES (never mid-sentence) are re-added (best score first) until retention >= min, or removed (worst score first) until retention <= max. Speech that is energetic with confident words is never 'off-topic'-dropped below the light/normal floor.",
+      "light": {
+        "keepAbove": 0.25,
+        "dropBelow": 0.15,
+        "repeatSimilarity": 0.9,
+        "retention": [
+          0.85,
+          1.0
+        ]
+      },
+      "normal": {
+        "keepAbove": 0.32,
+        "dropBelow": 0.2,
+        "repeatSimilarity": 0.85,
+        "retention": [
+          0.7,
+          0.85
+        ]
+      },
+      "tight": {
+        "keepAbove": 0.42,
+        "dropBelow": 0.3,
+        "repeatSimilarity": 0.72,
+        "retention": [
+          0.55,
+          0.7
+        ]
+      }
+    }
+  },
+  "layout": {
+    "vertical": {
+      "caption": {
+        "normal": 58,
+        "hero": 100,
+        "lineGap": 10,
+        "maxWidthR": 0.88,
+        "padX": 28,
+        "padY": 8,
+        "radius": 16,
+        "bottomYr": 0.655,
+        "topYr": 0.147,
+        "centerYr": 0.5
+      },
+      "title": {
+        "xR": 0.04,
+        "yR": 0.19,
+        "font": 112,
+        "subFont": 44,
+        "recYR": 0.143,
+        "timelineYR": 0.65,
+        "timelineWR": 0.81,
+        "timelineH": 205
+      },
+      "chips": {
+        "xR": 0.06,
+        "yR": 0.13,
+        "w": 431,
+        "h": 160,
+        "gapX": 14,
+        "gapY": 14,
+        "cols": 2,
+        "titleFont": 42,
+        "subFont": 24
+      },
+      "info": {
+        "headerYR": 0.135,
+        "headerFont": 42,
+        "listYR": 0.38,
+        "cardWR": 0.78,
+        "cardH": 122,
+        "cardGap": 28,
+        "cardFont": 46,
+        "mediaYR": 0.62,
+        "mediaWR": 0.88,
+        "titleYR": 0.28,
+        "topicWinYR": 0.245,
+        "topicPhoneYR": 0.285,
+        "topicBottomYR": 0.6,
+        "topicLineFont": 54,
+        "headlineYR": 0.18
+      },
+      "prompt": {
+        "xR": 0.09,
+        "yR": 0.24,
+        "wR": 0.81,
+        "h": 100,
+        "font": 36
+      },
+      "bigWord": {
+        "yR": 0.11,
+        "font": 170
+      },
+      "sticker": {
+        "xR": 0.1,
+        "yR": 0.26,
+        "size": 130,
+        "labelFont": 40,
+        "topYr": 0.129,
+        "centerTopYr": 0.215,
+        "cardYr": 0.165,
+        "centerXr": 0.5,
+        "topXr": 0.107,
+        "chatXr": 0.764,
+        "chatYr": 0.6,
+        "commentYr": 0.165
+      },
+      "comment": {
+        "xR": 0.094,
+        "yR": 0.203,
+        "wR": 0.8,
+        "h": 110,
+        "font": 38,
+        "bubbleDyR": -0.042,
+        "bubbleHR": 0.056,
+        "pillShiftYr": 0.028,
+        "pillHR": 0.051
+      },
+      "safe": {
+        "topR": 0.085,
+        "bottomR": 0.17,
+        "leftR": 0.06,
+        "rightR": 0.11
+      },
+      "maxZoom": 1.45,
+      "defaultPunch": 1.3,
+      "logo": {
+        "yR": 0.22,
+        "size": 250,
+        "nameFont": 54
+      }
+    },
+    "horizontal": {
+      "caption": {
+        "normal": 54,
+        "hero": 88,
+        "lineGap": 8,
+        "maxWidthR": 0.72,
+        "padX": 26,
+        "padY": 8,
+        "radius": 14,
+        "bottomYr": 0.82,
+        "topYr": 0.12,
+        "centerYr": 0.5
+      },
+      "title": {
+        "xR": 0.05,
+        "yR": 0.2,
+        "font": 104,
+        "subFont": 40,
+        "recYR": 0.12,
+        "timelineYR": 0.7,
+        "timelineWR": 0.38,
+        "timelineH": 150
+      },
+      "chips": {
+        "xR": 0.05,
+        "yR": 0.13,
+        "wR": 0.2,
+        "h": 160,
+        "gapX": 14,
+        "gapY": 14,
+        "cols": 4,
+        "titleFont": 42,
+        "subFont": 24
+      },
+      "info": {
+        "headerYR": 0.135,
+        "headerFont": 42,
+        "listYR": 0.38,
+        "cardWR": 0.5,
+        "cardH": 122,
+        "cardGap": 28,
+        "cardFont": 46,
+        "mediaYR": 0.62,
+        "mediaWR": 0.5,
+        "titleYR": 0.28,
+        "topicWinYR": 0.24,
+        "topicPhoneYR": 0.2,
+        "topicBottomYR": 0.8,
+        "topicLineFont": 46,
+        "headlineYR": 0.18
+      },
+      "prompt": {
+        "xR": 0.25,
+        "yR": 0.14,
+        "wR": 0.5,
+        "h": 100,
+        "font": 36
+      },
+      "bigWord": {
+        "yR": 0.2,
+        "font": 150
+      },
+      "sticker": {
+        "xR": 0.12,
+        "yR": 0.14,
+        "size": 130,
+        "labelFont": 40,
+        "topYr": 0.1,
+        "centerTopYr": 0.25,
+        "cardYr": 0.12,
+        "centerXr": 0.5,
+        "topXr": 0.08,
+        "chatXr": 0.86,
+        "chatYr": 0.58,
+        "commentYr": 0.1
+      },
+      "comment": {
+        "xR": 0.25,
+        "yR": 0.12,
+        "wR": 0.5,
+        "h": 110,
+        "font": 38,
+        "bubbleDyR": -0.06,
+        "bubbleHR": 0.08,
+        "pillShiftYr": 0.04,
+        "pillHR": 0.075
+      },
+      "safe": {
+        "topR": 0.06,
+        "bottomR": 0.08,
+        "leftR": 0.05,
+        "rightR": 0.05
+      },
+      "maxZoom": 1.25,
+      "defaultPunch": 1.18,
+      "logo": {
+        "yR": 0.2,
+        "size": 220,
+        "nameFont": 44
+      }
+    },
+    "square": {
+      "caption": {
+        "normal": 54,
+        "hero": 92,
+        "lineGap": 8,
+        "maxWidthR": 0.86,
+        "padX": 26,
+        "padY": 8,
+        "radius": 16,
+        "bottomYr": 0.78,
+        "topYr": 0.12,
+        "centerYr": 0.5
+      },
+      "title": {
+        "xR": 0.05,
+        "yR": 0.2,
+        "font": 100,
+        "subFont": 40,
+        "recYR": 0.12,
+        "timelineYR": 0.7,
+        "timelineWR": 0.8,
+        "timelineH": 170
+      },
+      "chips": {
+        "xR": 0.05,
+        "yR": 0.13,
+        "wR": 0.43,
+        "h": 150,
+        "gapX": 14,
+        "gapY": 14,
+        "cols": 2,
+        "titleFont": 40,
+        "subFont": 24
+      },
+      "info": {
+        "headerYR": 0.135,
+        "headerFont": 40,
+        "listYR": 0.38,
+        "cardWR": 0.78,
+        "cardH": 118,
+        "cardGap": 26,
+        "cardFont": 44,
+        "mediaYR": 0.6,
+        "mediaWR": 0.8,
+        "titleYR": 0.28,
+        "topicWinYR": 0.25,
+        "topicPhoneYR": 0.22,
+        "topicBottomYR": 0.7,
+        "topicLineFont": 50,
+        "headlineYR": 0.18
+      },
+      "prompt": {
+        "xR": 0.09,
+        "yR": 0.2,
+        "wR": 0.82,
+        "h": 96,
+        "font": 34
+      },
+      "bigWord": {
+        "yR": 0.14,
+        "font": 150
+      },
+      "sticker": {
+        "xR": 0.1,
+        "yR": 0.2,
+        "size": 120,
+        "labelFont": 38,
+        "topYr": 0.11,
+        "centerTopYr": 0.27,
+        "cardYr": 0.14,
+        "centerXr": 0.5,
+        "topXr": 0.09,
+        "chatXr": 0.84,
+        "chatYr": 0.6,
+        "commentYr": 0.12
+      },
+      "comment": {
+        "xR": 0.06,
+        "yR": 0.05,
+        "wR": 0.88,
+        "h": 104,
+        "font": 36,
+        "bubbleDyR": -0.06,
+        "bubbleHR": 0.08,
+        "pillShiftYr": 0.04,
+        "pillHR": 0.075
+      },
+      "safe": {
+        "topR": 0.06,
+        "bottomR": 0.1,
+        "leftR": 0.06,
+        "rightR": 0.06
+      },
+      "maxZoom": 1.3,
+      "defaultPunch": 1.2,
+      "logo": {
+        "yR": 0.24,
+        "size": 220,
+        "nameFont": 46
+      }
+    },
+    "reframe": {
+      "fgYShiftR": -0.04,
+      "blurPx": 46,
+      "dim": 0.5,
+      "qualityCap": 1.8,
+      "_note": "QUALITY_CAP: canvas px per source px * zoom must stay <= 1.8"
+    }
+  },
+  "gaps": [
+    "Letter-spacing and exact font file not provable (estimate -0.02em Be Vietnam Pro ExtraBold).",
+    "SFX and music: Demucs found NO music bed and only ambiguous transients (see audio notes); both OFF by default. Cues, if enabled, are rule-placed.",
+    "Caption word-rise animation is an estimate +-1 frame (video has frame-blend ghosting).",
+    "Colour grade: output stats only, original ungraded source unknown.",
+    "Claude/brand icon colours estimated by eye; tile shapes are drawn in SVG, not traced.",
+    "ASR: faster-whisper medium still garbles some tech words ('hiển th', 'âmap'); text_cleanup + the brand dictionary (textCleanup.brand) fixes the known ones, new brand names need a dictionary entry. Review captions.json once.",
+    "RESOLVED: dark pill caption (caption.dark) + rule 'caption anchored to the top while a broll/screen-recording beat is active' is implemented and matched at 1024px (1.8-4.9s).",
+    "RESOLVED: info-scene card shift to make room for the headline is animated.",
+    "RESOLVED: sticker looks (tile / label-above / label-right) and the CTA comment-box (typed pill + reply bubble + chat icon) are data-driven from beats.json with autoPlacement defaults; matched at 1024px.",
+    "Beat plan is generated by scripts/make_beats.py from keyword/position rules derived from ONE reference (autoBeats in style.config.json). It reproduces all reference beat types on AI/tech-explainer talk; on other genres only generic beats (stars hook, big-word, chip-stack if lexicon words appear, CTA if the speaker says 'comment') fire. Review beats.json (each beat carries a _why).",
+    "Reference b-roll windows (editor screenshot, phone mock-up) are the author's own assets: make_placeholders.py draws neutral placeholders (editor.png/phone.png); supply real screenshots for real videos.",
+    "The like/thumbs-up at the payoff in the reference is the host's real hand gesture, not a graphic: nothing to template.",
+    "Graphics burned into the reference video cannot be removed: the recreation plate is the reference re-encoded with feathered blur bands where graphics sit, so the recreation shows soft blurred smears at those places (plate artefact, not template).",
+    "Framing punch-ins, EDL tightening and orientation conversion are not exercised by the reference recreation (it uses --keep-all, wide only); they were tested separately on the dry-run clip."
+  ],
+  "textCleanup": {
+    "_note": "Applied by scripts/transcribe.py (and scripts/text_cleanup.py on any words.json). Whisper hallucinates tags and mis-hears brand words. ADD YOUR OWN brand/term fixes per channel; entries below were verified against the on-screen text of the reference video.",
+    "dropTokens": [
+      "LAUGHS",
+      "LAUGHTER",
+      "LAUGHING",
+      "APPLAUSE",
+      "MUSIC",
+      "SILENCE",
+      "NOISE",
+      "BLANK_AUDIO",
+      "INAUDIBLE",
+      "CROSSTALK",
+      "SIGHS",
+      "COUGHS",
+      "Subtitles",
+      "Amara.org"
+    ],
+    "dropBracketed": true,
+    "dropScripts": [
+      "CJK",
+      "Hangul",
+      "Kana",
+      "Thai",
+      "Arabic",
+      "Cyrillic"
+    ],
+    "dropSymbols": "♪♫♬#*_~`|<>{}�​‌‍﻿",
+    "dropHallucinations": [],
+    "collapseRepeats": 3,
+    "brand": {
+      "Overse": "Opus",
+      "Opis": "Opus",
+      "Opuss": "Opus",
+      "Claud": "Claude",
+      "Cloud Opus": "Claude Opus",
+      "Clawd": "Claude",
+      "Pography": "typography",
+      "thai Pography": "typography",
+      "true editor": "tool Editor",
+      "trăm lai": "timeline",
+      "đầy đủ leo": "đầy đủ layer",
+      "prom bắt": "prompt bắt",
+      "đừng prom": "đừng prompt",
+      "cốt gia": "code",
+      "vàng Claude": "bằng Claude",
+      "Cloud Overs": "Claude Opus",
+      "Overs": "Opus",
+      "đầy đủ layout": "đầy đủ layer",
+      "True Editor": "tool Editor",
+      "Tool Editor": "tool Editor",
+      "Cốt": "code",
+      "Cloud vừa": "Claude vừa",
+      "bằng clock": "bằng Claude",
+      "clock với": "Claude với",
+      "claw làm": "Claude làm",
+      "công bộ": "công cụ",
+      "thực thu": "thực thụ",
+      "tự xửa": "tự sửa",
+      "âmap từng": "âm thanh khớp từng"
+    },
+    "brandCaseKeep": [
+      "Claude",
+      "Opus",
+      "Editor",
+      "TikTok",
+      "AI",
+      "token",
+      "layer",
+      "timeline",
+      "prompt",
+      "skill",
+      "render",
+      "typography"
+    ],
+    "dropAllCapsNoise": {
+      "_note": "whisper hallucinates ALL-CAPS Latin gibberish over music/low-level speech (seen: 'RICHARDI', 'DAVID HON', 'BÂM T.V.VÔÔA'). A word with >=4 letters, all upper-case, not in keepCaps, is dropped.",
+      "minLetters": 4,
+      "keepCaps": [
+        "TIKTOK",
+        "CLAUDE",
+        "OPUS",
+        "AI",
+        "API",
+        "CTA",
+        "UI",
+        "SKILL"
+      ]
+    },
+    "minWordProb": 0.06,
+    "dropPunctOnly": true,
+    "_review": "Whisper-medium Vietnamese still garbles rare words (e.g. 'đng cấpp', 'hiển th'). Cleanup is rule-based; run `node scripts/review-transcript.mjs` (prints low-confidence words) and add fixes to `brand` per channel.",
+    "_hallucination_note": "Phrase-only dropping removed: outro phrases are now judged in transcribe.py with audio evidence (config transcribe.hallucination). text_cleanup only drops a phrase-matching segment that carries low-confidence metadata (ns/lp/cr) and is not flagged energetic.",
+    "glossaryFile": "public/project/glossary.txt",
+    "_glossary_note": "Per-video glossary: one 'wrong => Right' per line (# comments ok), or JSON {\"wrong\":\"Right\"}. Auto-loaded from this path (or --glossary FILE); entries override textCleanup.brand and properNouns.",
+    "sentenceCase": true,
+    "allCapsToSentence": {
+      "minLetters": 2,
+      "keepCaps": [
+        "AI",
+        "API",
+        "CTA",
+        "UI",
+        "TV",
+        "VTV",
+        "GPS",
+        "USB",
+        "CPU",
+        "GPU",
+        "SUV",
+        "VIP",
+        "OK",
+        "HD",
+        "4K",
+        "TP",
+        "HCM",
+        "QL",
+        "CT",
+        "DJ",
+        "PC",
+        "SEO",
+        "PDF",
+        "TikTok"
+      ]
+    },
+    "dedupeAdjacentProper": true,
+    "properNouns": [
+      "Hà Nội",
+      "Sài Gòn",
+      "Thành phố Hồ Chí Minh",
+      "TP Hồ Chí Minh",
+      "Hồ Chí Minh",
+      "Đà Nẵng",
+      "Hải Phòng",
+      "Cần Thơ",
+      "Huế",
+      "Nha Trang",
+      "Phan Thiết",
+      "Phan Rang",
+      "Vĩnh Hảo",
+      "Cam Lâm",
+      "Cam Ranh",
+      "Quy Nhơn",
+      "Quảng Nam",
+      "Quảng Ngãi",
+      "Quảng Bình",
+      "Quảng Trị",
+      "Quảng Ninh",
+      "Đà Lạt",
+      "Vũng Tàu",
+      "Biên Hòa",
+      "Long Thành",
+      "Dầu Giây",
+      "Giao Dây",
+      "Bình Thuận",
+      "Ninh Thuận",
+      "Khánh Hòa",
+      "Bình Định",
+      "Phú Yên",
+      "Nghệ An",
+      "Hà Tĩnh",
+      "Thanh Hóa",
+      "Ninh Bình",
+      "Nam Định",
+      "Hà Nam",
+      "Phủ Lý",
+      "Pháp Vân",
+      "Cầu Giẽ",
+      "Lào Cai",
+      "Sa Pa",
+      "Hạ Long",
+      "Hội An",
+      "Phú Quốc",
+      "Việt Nam",
+      "Quốc lộ 1",
+      "Hà Giang",
+      "Cao Bằng",
+      "Lạng Sơn",
+      "Tây Ninh",
+      "Bình Dương",
+      "Bình Phước",
+      "Đồng Nai",
+      "Long An",
+      "Tiền Giang",
+      "Bến Tre",
+      "Vĩnh Long",
+      "Đồng Tháp",
+      "An Giang",
+      "Kiên Giang",
+      "Cà Mau",
+      "Bạc Liêu",
+      "Sóc Trăng",
+      "Trà Vinh",
+      "Gia Lai",
+      "Kon Tum",
+      "Đắk Lắk",
+      "Đắk Nông",
+      "Lâm Đồng",
+      "Buôn Ma Thuột",
+      "Pleiku",
+      "Tuy Hòa",
+      "Đồng Hới",
+      "Đông Hà",
+      "Phan Thiết",
+      "Mũi Né",
+      "Trung Lương",
+      "Mỹ Thuận",
+      "Cần Giờ",
+      "Thủ Đức",
+      "Bắc Giang",
+      "Bắc Ninh",
+      "Hải Dương",
+      "Hưng Yên",
+      "Thái Bình",
+      "Vĩnh Phúc",
+      "Phú Thọ",
+      "Thái Nguyên",
+      "Tuyên Quang",
+      "Yên Bái",
+      "Sơn La",
+      "Điện Biên",
+      "Hòa Bình",
+      "Hà Đông",
+      "Tân Sơn Nhất",
+      "Nội Bài",
+      "Việt Nam",
+      "YouTube",
+      "Facebook",
+      "TikTok",
+      "Google",
+      "Instagram",
+      "Zalo"
+    ],
+    "properAliases": {
+      "Saigon": "Sài Gòn",
+      "Sai Gon": "Sài Gòn",
+      "Sài gòn": "Sài Gòn",
+      "Hanoi": "Hà Nội",
+      "Ha Noi": "Hà Nội",
+      "Da Nang": "Đà Nẵng",
+      "Nha trang": "Nha Trang",
+      "Vietnam": "Việt Nam",
+      "Viet Nam": "Việt Nam",
+      "vắt triển": "phát triển"
+    },
+    "asrFixes": {
+      "xửa từng": "sửa từng",
+      "xửa": "sửa",
+      "vắt triển": "phát triển",
+      "vật triển": "phát triển"
+    },
+    "ambiguousWords": {
+      "_note": "v4.3: glossary/alias entries for COMMON Vietnamese words ('mai' = tomorrow, also a given name) only fire in an AI-tool/name context: capitalised token + a near word + not followed by notNext. Add a per-video glossary line 'Mai => Mike' and it is gated by this rule; lower-case 'mai' (mai sau, ngày mai) is never touched.",
+      "mai": {
+        "requireCap": true,
+        "within": 12,
+        "near": [
+          "claude",
+          "opus",
+          "sonnet",
+          "anthropic",
+          "chatgpt",
+          "gpt",
+          "gemini",
+          "ai",
+          "code",
+          "model",
+          "prompt",
+          "agent",
+          "skill",
+          "cursor",
+          "mike"
+        ],
+        "notNext": [
+          "sau",
+          "này",
+          "kia",
+          "nữa",
+          "nhé"
+        ],
+        "nameVote": {
+          "enabled": true,
+          "minHits": 2,
+          "markers": [
+            "sẽ",
+            "đã",
+            "đang",
+            "hoàn",
+            "là",
+            "vừa",
+            "cũng",
+            "vẫn",
+            "không",
+            "chính",
+            "tự"
+          ],
+          "_note": "v4.4: no AI-tool word near? then a capitalised 'Mai' followed by a subject marker >= minHits times in the transcript is a NAME (speaker / tool), so the glossary line 'Mai => Mike' applies. A single hit is never enough."
+        }
+      }
+    },
+    "contextFixes": [
+      {
+        "w": "hấp",
+        "to": "khớp",
+        "prev": [
+          "thanh",
+          "hình",
+          "nhịp",
+          "lời"
+        ],
+        "next": [
+          "đến",
+          "với",
+          "từng"
+        ],
+        "_note": "'âm thanh hấp đến từng khung' = 'âm thanh khớp đến từng khung' (verify against the audio; fixes only this exact context)"
+      },
+      {
+        "w": "claw",
+        "to": "Claude",
+        "near": [
+          "code",
+          "anthropic",
+          "prompt",
+          "agent",
+          "model",
+          "ai",
+          "chatgpt",
+          "gemini",
+          "skill",
+          "edit",
+          "claude",
+          "opus",
+          "bộ",
+          "dựng",
+          "bằng"
+        ],
+        "within": 6,
+        "keepCase": true
+      },
+      {
+        "w": "hấp",
+        "to": "hợp",
+        "prev": [
+          "kết",
+          "phù",
+          "tích",
+          "liên",
+          "hòa",
+          "kêt",
+          "tổng"
+        ],
+        "_note": "'kết hấp' -> 'kết hợp'"
+      },
+      {
+        "w": "hấp",
+        "to": "hợp",
+        "next": [
+          "lý",
+          "lí",
+          "tác",
+          "đồng"
+        ],
+        "_note": "'hấp lý' -> 'hợp lý'"
+      }
+    ],
+    "_asr_note": "v4.2: asrFixes = unconditional ASR corrections (single-word keys match lower-case exactly, multi-word keys accent-folded); contextFixes = only when the neighbouring words fit (near/prev/next). Applied to words.json AND captions.json by reapply_glossary / apply_glossary.py, so captions never keep a known mis-hearing."
+  },
+  "autoBeats": {
+    "_note": "Rules for scripts/make_beats.py (transcript + edl -> beats.json). Derived from the reference's 16-beat timeline (0.33 beats/s, 3 stickers, 1 chip-stack, 2 big-words, 2 info-scenes, 2 topic-cards, 1 CTA). All matching is accent-insensitive on word tokens. Everything here is [E] unless noted; edit per channel.",
+    "hook": {
+      "starsSec": 1.7,
+      "_ref": "[M] stars 0-1.8s over the first sentence"
+    },
+    "spacing": {
+      "minGapSec": 0.25,
+      "maxConcurrentOverlays": 2,
+      "minBeatSec": 1.0,
+      "maxBeatsPerMin": 26,
+      "_ref": "[M] reference 16 beats / 48.6 s = 20/min"
+    },
+    "brand": {
+      "terms": [
+        "claude opus",
+        "claude",
+        "chatgpt",
+        "gpt",
+        "gemini",
+        "capcut",
+        "midjourney",
+        "cursor",
+        "remotion",
+        "sora",
+        "veo",
+        "notion"
+      ],
+      "stickerSec": 2.2,
+      "firstOnly": true,
+      "labelAboveMinSec": 8,
+      "_rule": "first mention of a brand term after labelAboveMinSec -> label-above sticker (version digits appended); earlier first mention -> bare tile sticker (reference: tile at 1.9s over b-roll)"
+    },
+    "chips": {
+      "minItems": 3,
+      "windowSec": 8,
+      "holdSec": 1.4,
+      "lexicon": [
+        {
+          "keys": [
+            "typography"
+          ],
+          "title": "Typography",
+          "icon": "aa"
+        },
+        {
+          "keys": [
+            "graphic",
+            "do hoa"
+          ],
+          "title": "Graphic",
+          "icon": "shapes"
+        },
+        {
+          "keys": [
+            "motion",
+            "chuyen dong"
+          ],
+          "title": "Motion",
+          "icon": "motion"
+        },
+        {
+          "keys": [
+            "am thanh",
+            "sound",
+            "nhac"
+          ],
+          "title": "Âm thanh",
+          "icon": "sound"
+        },
+        {
+          "keys": [
+            "phu de",
+            "caption"
+          ],
+          "title": "Phụ đề",
+          "icon": "aa"
+        }
+      ],
+      "subWords": 2,
+      "subSkip": [
+        "thi",
+        "va",
+        "la",
+        "rat",
+        "duoc"
+      ]
+    },
+    "promptBox": {
+      "triggers": [
+        "prompt"
+      ],
+      "negators": [
+        "dung",
+        "khong nen",
+        "thay vi"
+      ],
+      "holdAfterSec": 0.6,
+      "fallbackText": "Sửa giúp mình chỗ này...",
+      "strikeOffsetSec": -1.2
+    },
+    "infoNegative": {
+      "terms": [
+        [
+          "ton",
+          "thoi gian"
+        ],
+        [
+          "mat",
+          "thoi gian"
+        ],
+        [
+          "ton",
+          "token"
+        ],
+        [
+          "ton",
+          "cong"
+        ],
+        [
+          "ton",
+          "tien"
+        ],
+        [
+          "cham"
+        ],
+        [
+          "met"
+        ],
+        [
+          "kho"
+        ],
+        [
+          "loi"
+        ]
+      ],
+      "minTerms": 2,
+      "headerWords": 4,
+      "cardGapSec": 0.9,
+      "headlineAfter": [
+        "tao cho ban",
+        "tao ra",
+        "thay vao do",
+        "hay bao no"
+      ],
+      "headlineWords": 3,
+      "pillAfter": [
+        "tu sua"
+      ],
+      "pillWords": 4,
+      "mediaKind": "window",
+      "andContinuation": [
+        "va"
+      ]
+    },
+    "infoAmount": {
+      "_note": "sentence containing 'chi/chỉ mất|chỉ cần' + a duration -> info-scene with 2 cards",
+      "triggers": [
+        "chi mat",
+        "chi can",
+        "mat het"
+      ],
+      "headerWords": 2,
+      "cardMax": 2
+    },
+    "titleBurst": {
+      "triggers": [
+        "render",
+        "xuat video",
+        "export"
+      ],
+      "titleWords": 3,
+      "subWords": 4,
+      "holdSec": 3.0,
+      "recFromOutput": true
+    },
+    "bigWord": {
+      "emphasis": [
+        "tiện",
+        "đỉnh",
+        "xịn",
+        "tuyệt vời",
+        "bất ngờ",
+        "ghê"
+      ],
+      "keyNouns": [
+        "token"
+      ],
+      "holdSec": 1.4,
+      "selectionBoxForKeyNoun": true,
+      "selectionSize": "457 × 237",
+      "_size_note": "[E] placeholder; the reference label is a fake design-tool selection size",
+      "_emphasis_note": "matched on the accented lowercase word (accent-folded matching confused 'tiện' with 'tiên')"
+    },
+    "topicCard": {
+      "triggers": [
+        "mo them",
+        "giao dien",
+        "cong cu",
+        "tool",
+        "kenh tiktok",
+        "video ngan",
+        "dien thoai",
+        "app"
+      ],
+      "maxCount": 2,
+      "minGapSec": 3.0,
+      "phoneKeys": [
+        "tiktok",
+        "dien thoai",
+        "video ngan",
+        "reels",
+        "shorts",
+        "app"
+      ],
+      "headerWords": 3,
+      "lineWords": 4,
+      "maxLines": 5,
+      "minSec": 3.0,
+      "maxSec": 4.8
+    },
+    "avatarChain": {
+      "triggers": [
+        "thay minh",
+        "thay the",
+        "giao cho ai"
+      ],
+      "left": "Bạn",
+      "right": "AI",
+      "chipWords": 2,
+      "badgeKeys": [
+        "chat luong cao",
+        "chuyen nghiep",
+        "dinh cao"
+      ],
+      "holdSec": 2.2,
+      "contextRequired": true,
+      "_context": "v4.1: a bare keyword is not enough. The sentence (or the one before/after within contextSec) must name the AI side as a capitalised 'AI' token / a brand from autoBeats.brand.terms / 'trí tuệ nhân tạo', and the trigger must not be negated by the lowercase 'ai' (= nobody: 'không ai có thể thay thế được mình'). Chip = the spoken verb phrase (thay thế / thay mình) or the complete 1-2 content words that follow it.",
+      "contextSec": 4.0,
+      "aiTokens": [
+        "AI",
+        "A.I",
+        "A.I."
+      ],
+      "negatingLower": [
+        "ai"
+      ],
+      "negationWindow": 4
+    },
+    "skillSticker": {
+      "terms": [
+        "bo skill",
+        "skill",
+        "template",
+        "preset",
+        "plugin",
+        "extension"
+      ],
+      "subWords": 2,
+      "holdSec": 2.2,
+      "avoidAfterEndSec": 0
+    },
+    "cta": {
+      "triggers": [
+        "comment",
+        "binh luan",
+        "nhan tin",
+        "dm"
+      ],
+      "typedFrom": [
+        "tham khao",
+        "link",
+        "skill",
+        "template",
+        "code"
+      ],
+      "typedFallback": "tham khảo",
+      "holdFromSentenceStart": true
+    },
+    "captionAnchorTopDuring": [
+      "chip-stack",
+      "prompt-box"
+    ],
+    "dropIfUncertain": true,
+    "generic": {
+      "_note": "Genre-agnostic fallback (runs in addition to the keyword rules; any rule that already fired keeps its beat). Candidate phrases are scored from the transcript only: numbers/amounts/units, superlatives, proper nouns (capitalised mid-sentence, place/person names), exclamations, word probability. All lists editable per channel.",
+      "enabled": true,
+      "superlatives": [
+        "nhất",
+        "đỉnh",
+        "siêu",
+        "cực kỳ",
+        "tuyệt vời",
+        "xịn",
+        "khủng",
+        "bất ngờ",
+        "không ngờ",
+        "kinh khủng",
+        "thần thánh",
+        "miễn phí",
+        "hàng đầu",
+        "vô cùng",
+        "đỉnh cao",
+        "số một",
+        "số 1"
+      ],
+      "units": [
+        "km",
+        "kilomet",
+        "kí",
+        "kg",
+        "phút",
+        "giờ",
+        "tiếng",
+        "ngày",
+        "tuần",
+        "tháng",
+        "năm",
+        "triệu",
+        "nghìn",
+        "ngàn",
+        "tỷ",
+        "đồng",
+        "k",
+        "%",
+        "phần trăm",
+        "lít",
+        "mét",
+        "m",
+        "tiền",
+        "người",
+        "lần"
+      ],
+      "keywordSec": 1.4,
+      "bigWordEverySec": [
+        8,
+        12
+      ],
+      "bigWordMaxChars": 16,
+      "bigWordMaxWords": 3,
+      "bigWordMinScore": 1.5,
+      "avoidNearSec": 1.2,
+      "groupGapSec": 0.9,
+      "groupMinSec": 6,
+      "topicCardMinSec": 3.0,
+      "topicCardMaxSec": 4.5,
+      "topicCardMax": 3,
+      "topicCardFirstAfterSec": 6,
+      "topicCardUseVideoStill": true,
+      "titleBurst": {
+        "enabled": true,
+        "minVideoSec": 15,
+        "sub": true
+      },
+      "cta": {
+        "alwaysAtEnd": true,
+        "holdSec": 2.2,
+        "typed": "theo dõi kênh",
+        "bubble": "theo dõi",
+        "skipIfSpeechTail": false
+      },
+      "bigWordMinP": 0.6,
+      "bigWordMinChars": 4,
+      "bigWordMinProperChars": 7,
+      "_bigWordGuard": "A big-word must be a number(+unit), a superlative/exclaim, or a multi-syllable proper noun (>=2 capitalised words or >=bigWordMinProperChars letters). 1-syllable fragments ('Nội','Hành','Mai'), spans < bigWordMinChars letters and any word with p<bigWordMinP are rejected.",
+      "superlativeAdj": [
+        "nhanh",
+        "rẻ",
+        "tốt",
+        "hay",
+        "đẹp",
+        "mạnh",
+        "dễ",
+        "ngon",
+        "xịn",
+        "chất",
+        "đỉnh",
+        "khó",
+        "lớn",
+        "nhẹ",
+        "mượt",
+        "ổn",
+        "thông minh",
+        "tiện",
+        "cao",
+        "thấp",
+        "tệ",
+        "dở",
+        "vui",
+        "nhiều",
+        "ít",
+        "sâu",
+        "xa",
+        "gần",
+        "chậm",
+        "tiết kiệm"
+      ],
+      "comparatives": [
+        "hơn"
+      ],
+      "multipliers": [
+        "gấp"
+      ],
+      "_superlativesNote": "v4.1: matched with DIACRITICS (strict NFC), never accent-folded: folded matching made 'nhật' (cập nhật) = 'nhất', 'đang' = 'đáng', 'chat' = 'chất', 'qua' = 'quá'. Weak adjectives (superlativeAdj) only count when paired: '<adj> nhất', '<adj> quá', 'hơn <adj>' (comparatives), 'gấp N lần'. Numbers/% (+unit, 'x lần') are handled by the number rule + units. Superlative list is editable per channel.",
+      "topicCardMinLines": 1
+    },
+    "captionAnchorDefaults": {
+      "topDuring": [
+        "chip-stack",
+        "prompt-box"
+      ],
+      "darkDuring": [
+        "broll"
+      ],
+      "autoDetectScreenBroll": true
+    },
+    "collision": {
+      "protected": [
+        "comment-box"
+      ],
+      "_protected": "v4.3: beats listed here (the closing CTA) are NEVER dropped by autofix_overlaps.py: the caption is pinned to the top or the CTA is moved (dy). Only comment-box/prompt-box/chip-stack/title-burst can move; an unresolvable overlap -> exit 2, render aborted.",
+      "enabled": true,
+      "minZoneOverlap": 0.02,
+      "priority": [
+        "comment-box",
+        "info-scene",
+        "topic-card",
+        "framed-focus",
+        "title-burst",
+        "text-behind-speaker",
+        "prompt-box",
+        "chip-stack",
+        "big-word",
+        "selection-box",
+        "brand-logo",
+        "illustration",
+        "sticker",
+        "avatar-chain"
+      ],
+      "ignorePairs": [
+        [
+          "big-word",
+          "selection-box"
+        ]
+      ],
+      "_note": "[E] zones are fractions of the canvas height derived from layout.<orientation>.* (title block incl. subline, timeline, big-word, prompt, chips, comment...). Two overlay beats that overlap in time AND zone: the lower priority one is delayed until the other ends, or cut short before it starts, or dropped (_dropped in beats.report). CTA comment-box also trims a topic-card/info-scene underneath. Scenes (info-scene/topic-card/broll) keep their own rule. Runtime guard: LayoutCollisionGuard (Studio) + verify-video.mjs collision samples.",
+      "_ignore": "big-word + selection-box are one composite (the box is drawn around the word) so they intentionally share a zone",
+      "exclusive": [
+        "title-burst",
+        "avatar-chain",
+        "chip-stack",
+        "prompt-box",
+        "comment-box"
+      ],
+      "maxShiftSec": 1.2,
+      "allowOverScene": [
+        "stars"
+      ],
+      "_exclusive": "v4.1 STRICT: beats listed in `exclusive` are 'hero' overlays: at most ONE of them may be on screen at any time (interval check, regardless of zone). Everything else is checked by exact screen rectangles (x and y) over time, including full-screen scenes (info-scene/topic-card = whole canvas, only `allowOverScene` types may sit on top). The lower-priority beat is shifted (max maxShiftSec from its trigger word), trimmed, or dropped. A final validation pass re-checks every pair and prints `collision check: N violations`."
+    },
+    "phrases": {
+      "_note": "v4.1: on-screen titles / topic-card text are built from COMPLETE key phrases (minWords..maxWords syllable-words, default 2-5), never from a mid-sentence chunk. Words are Vietnamese WORDS (pyvi segmentation when installed: 'trình bày', 'hệ thống' are one unit; fallback = built-in compound list). A phrase starts and ends on a content word, never contains a stop/pronoun/negation/aux word inside (only `link` words such as 'của','và','trong' once, and `droppable` classifiers 'một','cái','những','các' which are skipped in the displayed text), never crosses punctuation / a pause > pauseSec, and every word must have ASR p >= minP. No good phrase -> NO beat (nothing is invented).",
+      "minWords": 2,
+      "maxWords": 5,
+      "maxChars": 26,
+      "minP": 0.6,
+      "pauseSec": 0.45,
+      "searchSec": 8.0,
+      "stop": [
+        "nói",
+        "rằng",
+        "là",
+        "thì",
+        "mà",
+        "tại",
+        "vì",
+        "bởi",
+        "nên",
+        "nhưng",
+        "còn",
+        "và",
+        "hoặc",
+        "hay",
+        "rồi",
+        "sau",
+        "khi",
+        "nếu",
+        "để",
+        "cho",
+        "từ",
+        "đến",
+        "ra",
+        "vào",
+        "lên",
+        "xuống",
+        "về",
+        "với",
+        "ở",
+        "trong",
+        "của",
+        "cũng",
+        "đã",
+        "sẽ",
+        "đang",
+        "vẫn",
+        "có",
+        "không",
+        "chưa",
+        "chẳng",
+        "rất",
+        "quá",
+        "lắm",
+        "như",
+        "này",
+        "đó",
+        "kia",
+        "ấy",
+        "nào",
+        "gì",
+        "thế",
+        "vậy",
+        "nữa",
+        "lại",
+        "đi",
+        "luôn",
+        "thôi",
+        "nhé",
+        "nha",
+        "ạ",
+        "ơi",
+        "đây",
+        "được",
+        "bị",
+        "thể",
+        "chắc",
+        "chắn",
+        "bạn",
+        "các",
+        "những",
+        "mình",
+        "chúng",
+        "ta",
+        "tôi",
+        "em",
+        "anh",
+        "chị",
+        "ông",
+        "bà",
+        "nó",
+        "họ",
+        "ai",
+        "đâu",
+        "sao",
+        "thật",
+        "hơn",
+        "nhất",
+        "bao",
+        "nhiêu",
+        "cái",
+        "một",
+        "mọi",
+        "mỗi",
+        "bất",
+        "cứ",
+        "tất",
+        "cả",
+        "kể",
+        "bên",
+        "cạnh",
+        "hãy",
+        "phải",
+        "cần",
+        "nên",
+        "muốn",
+        "biết",
+        "thấy",
+        "nghĩ",
+        "bảo",
+        "làm",
+        "giờ",
+        "ngay",
+        "chỉ",
+        "mới",
+        "đều",
+        "cùng",
+        "tự",
+        "khá",
+        "hơi",
+        "gần",
+        "trên",
+        "dưới",
+        "sẽ",
+        "đấy",
+        "chính",
+        "lúc",
+        "thời",
+        "thực",
+        "sự",
+        "thậm",
+        "chí",
+        "tức",
+        "liệu",
+        "thông",
+        "qua",
+        "mãi",
+        "thứ",
+        "nhiều",
+        "từng"
+      ],
+      "light": [
+        "làm",
+        "có",
+        "được",
+        "bị",
+        "biết",
+        "thấy",
+        "nghĩ",
+        "bảo",
+        "cần",
+        "phải",
+        "muốn",
+        "hãy",
+        "đi",
+        "lấy",
+        "cho",
+        "ra",
+        "vào",
+        "lên",
+        "xuống",
+        "tại",
+        "thời",
+        "nói"
+      ],
+      "link": [
+        "của",
+        "và",
+        "trong",
+        "ra"
+      ],
+      "droppable": [
+        "một",
+        "cái",
+        "những",
+        "các",
+        "con",
+        "chiếc",
+        "mọi"
+      ],
+      "compounds": [
+        "trình bày",
+        "hệ thống",
+        "xây dựng",
+        "kỹ năng",
+        "giao tiếp",
+        "làm việc",
+        "khách hàng",
+        "cập nhật",
+        "kiến thức",
+        "công nghệ",
+        "phát triển",
+        "cơ hội",
+        "thời điểm",
+        "hoàn chỉnh",
+        "sản phẩm",
+        "tài liệu",
+        "bản thân",
+        "trau dồi",
+        "liên quan",
+        "công việc",
+        "thành phẩm",
+        "chất lượng",
+        "giao diện",
+        "công cụ",
+        "trực tiếp",
+        "toàn bộ",
+        "chỉnh sửa",
+        "thực thụ",
+        "hiệu ứng",
+        "âm thanh",
+        "khung hình",
+        "thương hiệu",
+        "video ngắn",
+        "cuộc sống",
+        "thông tin",
+        "dữ liệu",
+        "ứng dụng",
+        "phần mềm",
+        "trí tuệ",
+        "nhân tạo",
+        "tự động",
+        "hiệu quả",
+        "vấn đề",
+        "giải pháp",
+        "kinh nghiệm",
+        "người dùng",
+        "nội dung",
+        "sáng tạo",
+        "thiết kế",
+        "lập trình",
+        "doanh nghiệp",
+        "thị trường",
+        "khách sạn",
+        "du lịch",
+        "sức khỏe",
+        "tài chính",
+        "đầu tư",
+        "ngân hàng"
+      ],
+      "noEnd": [
+        "gây",
+        "làm",
+        "biết",
+        "xin",
+        "bị",
+        "phải",
+        "cần",
+        "muốn",
+        "giúp",
+        "tạo",
+        "mất",
+        "đi",
+        "đến",
+        "nói",
+        "thấy",
+        "nghĩ",
+        "tự",
+        "đang",
+        "sẽ",
+        "đã",
+        "vẫn",
+        "còn",
+        "cứ",
+        "hay",
+        "hoặc",
+        "nên",
+        "thể",
+        "được"
+      ],
+      "titleMinScore": 3.6,
+      "negators": [
+        "không",
+        "chưa",
+        "chẳng",
+        "đừng",
+        "khỏi"
+      ]
+    },
+    "facePlacement": {
+      "enabled": true,
+      "types": [
+        "title-burst",
+        "chip-stack",
+        "prompt-box",
+        "comment-box"
+      ],
+      "expand": {
+        "x": 0.06,
+        "up": 0.3,
+        "down": 0.05
+      },
+      "captionReserveR": 0.11,
+      "_rule": "v4.1: a title / chip-stack / prompt / comment that would cover the speaker's face (faces.json, incl. framing zoom) gets a vertical shift `dy` (fraction of H) to the nearest clean slot; the caption then moves below it (assets/zones.ts)."
+    },
+    "framedFocus": {
+      "_note": "v4.1: topic-cards whose media would only be a placeholder / a still of the footage become framed-focus (speaker inside a phone / macOS-window mock-up on a blurred copy of himself, white header + yellow lines). Real screenshots in public/project keep the classic topic-card.",
+      "enabled": true,
+      "convertTopicCards": true,
+      "devices": [
+        "phone",
+        "window"
+      ],
+      "firstLinePill": false,
+      "extraEverySec": [
+        22,
+        30
+      ],
+      "firstAfterSec": 14,
+      "holdSec": 3.4,
+      "perSec": 30,
+      "maxPerPeriod": 1,
+      "minGapSec": 15,
+      "_cap": "v4.4 (verified.md V14): at most max(1, floor(output_sec/perSec))*maxPerPeriod phone/window frames per video (30s => 1, 60s => 2), never back-to-back (gap between END of one and START of next >= minGapSec). make_beats drops the extra ones and logs the reason in _skips."
+    },
+    "textBehind": {
+      "_note": "v4.1: ~1 per everySec seconds at the best-scoring complete key phrase (1-3 words, <= maxChars); needs faces.json (placement) and person_mask.py (scripts/make_masks.py). Never over another overlay / scene (collision pass).",
+      "enabled": true,
+      "everySec": [
+        20,
+        28
+      ],
+      "minScore": 2.0,
+      "maxWords": 3,
+      "maxChars": 16,
+      "holdSec": 2.2,
+      "firstAfterSec": 6,
+      "minVideoSec": 15,
+      "anims": [
+        "slide",
+        "type"
+      ],
+      "padBeforeSec": 0.15,
+      "padAfterSec": 0.3,
+      "tool": "/workspace/render-env/bin/person_mask.py",
+      "centerAboveFaceTopFaceH": 0.1,
+      "tuneMinReadable": 0.9,
+      "tuneWorstFrameMin": 0.9,
+      "tuneGlyphMinVisible": 0.7,
+      "_glyph": "v4.3.2 PER-GLYPH RULE: every glyph of a text-behind item must stay >= 0.70 visible on EVERY frame (no letter more than 30 % covered), checked per character raster in tbs_place.search (pre-filter), make_masks.verify_tracked and the render gate (tbs_place.py --check). Total-pixel occlusion alone hides a swallowed letter. 0 disables.",
+      "tuneMinTopR": 0.045,
+      "tuneStepR": 0.005,
+      "tuneFont": "BeVietnamPro-ExtraBold.ttf",
+      "_tune": "v4.2: placement search (scripts/tbs_place.py) + canonical gate bin/text_occlusion.py on composition-space masks. Pass = mean readable >= tuneMinReadable AND worst frame >= tuneWorstFrameMin (0.90 = the shared 10 % occlusion gate). Nothing passes -> beat.fallback=\"headline\".",
+      "tuneMaxBottomR": 0.58,
+      "tuneSafeX": [
+        0.02,
+        0.98
+      ],
+      "tuneMaxWidthR": 0.97,
+      "tuneSizesR": [
+        0.3,
+        0.26,
+        0.23,
+        0.2,
+        0.18,
+        0.16,
+        0.145,
+        0.13,
+        0.12,
+        0.11,
+        0.1,
+        0.09
+      ],
+      "tuneTopK": 25,
+      "wCentre": 0.5,
+      "wHead": 1.0,
+      "wHigh": 0.2,
+      "tuneVerify": 14,
+      "tuneMinOcclusion": 0.03,
+      "tuneTargetOcclusion": 0.06,
+      "tbsMinHoldSec": 0.8,
+      "tbsMaxCutGapSec": 0.6,
+      "_tbsHold": "v4.3.1: a text-behind window needs only tbsMinHoldSec (0.8s) of one constant framing (minHoldSec stays the default elsewhere) and may SPAN a jump cut (kept gap <= tbsMaxCutGapSec) when the next EDL segment has the same framing, no zoom ramp and no punch.",
+      "trackEnabled": true,
+      "trackMinMotionPx": 20,
+      "trackMaxVelR": 0.012,
+      "trackEma": 0.4,
+      "trackClampR": 0.1,
+      "_track": "v4.3 CROWN TRACKING: when the head moves >= trackMinMotionPx (canvas px) during the beat, make_masks.py computes crown_y per mask frame (top-most person row near the head columns, composition space incl. zoom), smooths it (5-frame median, zero-phase EMA trackEma, velocity cap trackMaxVelR*H per frame, clamp trackClampR*H) and stores beat.track[maskIndex] = dy/H; Scenes.tsx adds track[maskIndex]*H to every item y. Gate = text_occlusion.py --track on the moving boxes (<=10 % worst frame, readable >= 90 % mean) + --track on the person-only masks (mean >= tuneMinOcclusion). Fallback: tracked -> less-moving window of the same beat -> skip (plain headline) + log. Track files: public/project/tbs_track_<id>.json",
+      "wOcc": 2.0,
+      "_minOcclusion": "v4.3: the text must sit PARTLY behind the crown like the reference TikTok: mean occlusion >= tuneMinOcclusion (3 %) while readable stays >= tuneMinReadable (90 %) on the mean AND >= tuneWorstFrameMin (90 %) on the worst frame (=> 3-10 % band). tbs_place.py --check [--min-occlusion X] enforces it; the same flag name exists in bin/text_occlusion.py. Only when no spot can reach it (speaker never reaches the text zone) the beat falls back to 0 % occlusion with a loud warning (beat._minOcc = 0).",
+      "_glyphGate": "v4.3.2: passed to text_occlusion.py as --max-glyph (1 - tuneGlyphMinVisible = 0.30)",
+      "allowShortPhase": false,
+      "completeSingleWords": [
+        "AI",
+        "SALE",
+        "TIỀN",
+        "SKILL",
+        "AGENT",
+        "PROMPT",
+        "CODE",
+        "CLAUDE",
+        "CHATGPT",
+        "MARKETING",
+        "CHATBOT"
+      ],
+      "badEdgeWords": [
+        "VÀ",
+        "THÌ",
+        "LÀ",
+        "CỦA",
+        "ĐỂ",
+        "MÀ",
+        "NHƯNG",
+        "HOẶC",
+        "VỚI",
+        "Ở",
+        "TRONG",
+        "RỒI",
+        "NẾU",
+        "VÌ",
+        "NÊN",
+        "CHO",
+        "TỪ",
+        "ĐẾN",
+        "RA",
+        "VỀ",
+        "NHỮNG",
+        "CÁC",
+        "MỘT",
+        "CÁI",
+        "CÒN",
+        "CŨNG",
+        "ĐÃ",
+        "SẼ",
+        "ĐANG",
+        "ĐƯỢC",
+        "BỊ"
+      ],
+      "badFragments": [
+        "TRIỂN",
+        "NGƯỜI",
+        "ĐẦU",
+        "TIÊN",
+        "KHAI",
+        "LIỆU",
+        "HỘI",
+        "THÂN",
+        "BẢN"
+      ],
+      "_complete": "v4.4: a text-behind phrase must be complete in meaning. Lone fragments (badFragments) and single words not in completeSingleWords are rejected (tbs_place.lint_phrase); phrases starting/ending on badEdgeWords are rejected. Overflow words wrap to line 2 (layout wrap/stack), never truncated.",
+      "wrapPenalty": 0.02,
+      "tuneComfortSizeR": 0.13,
+      "comfortPenalty": 2.0
+    },
+    "illustration": {
+      "_rule": "v4.2 MANDATORY: whenever the speech names a pictureable concept, an icon pops in (assets/types.ts 'illustration', src/components/Illustration.tsx). Source order: a REAL open-license icon via scripts/fetch_icon.sh (Lucide -> Tabler -> Phosphor -> Material Symbols/Iconify), else a hand-drawn SVG composition (assets/illustrations/); never a blank placeholder. Face-aware placement with the brand-logo card model; the beat must pass the overlap gate. Unknown concept: add a row to `concepts` (keywords are accent-folded, matched as whole words). | v4.5.1: concept `priority` (customer-talk, sales = 10) outranks `strength`; density.gapMode start-to-start.",
+      "enabled": true,
+      "maxPerVideo": 8,
+      "holdSec": 2.0,
+      "minHoldSec": 1.2,
+      "leadSec": 0.1,
+      "minGapSec": 5.0,
+      "sameConceptGapSec": 15,
+      "iconColor": "#ffffff",
+      "color": "#ffd400",
+      "placement": {
+        "scales": [
+          1.12,
+          1.03,
+          0.95,
+          0.9
+        ],
+        "ladder": {
+          "enabled": true,
+          "smallScales": [
+            0.8,
+            0.72,
+            0.686
+          ],
+          "pill": true,
+          "reframe": true,
+          "_note": "v4.3 fallback ladder, in order, never dropping an icon only because the big size does not fit: (1) big icon in a face-free slot beside the face (scales above) -> (2) slot beside the shoulder / left-right edge below the safe area / above the captions -> (3) smaller icon down to ~120px (0.686 x 250 x 0.70) -> (4) compact icon+label pill -> (5) widen the framing of that one segment (tight/mid -> wide) so the face shrinks, then retry 1-4. Always face-free (0 overlap) and clear of other overlays."
+        },
+        "_scales": "v4.3: relative to layout.logo.size (250px on the 1080 canvas). 1.12 = 280px card = ~196px icon (iconRatio 0.70), 0.95 = 238px card = ~167px icon, 0.90 = ~157px (last resort), so the icon never drops below ~160px on a phone (v4.2 shrank to 0.6 = 96px icons). Nothing fits face-free at 0.95 -> retry another time/slot, then drop",
+        "faceExpand": {
+          "x": 0.05,
+          "up": 0.08,
+          "down": 0.04
+        },
+        "prefer": [
+          "left",
+          "right",
+          "above",
+          "below"
+        ],
+        "marginPx": 20,
+        "maskSlots": true,
+        "maskClearPx": 6,
+        "_maskSlots": "v4.4.1 / V22: side + slot are chosen from the per-frame PERSON matte over the icon whole window (corner beside/above head, edge, shoulder-hug; both sides; sizes down to ~120px). Alternates sides; the reason is recorded in _sideReason; never forced over the person."
+      },
+      "concepts": [
+        {
+          "id": "customer-talk",
+          "label": "Giao tiếp",
+          "keywords": [
+            "giao tiếp với khách hàng",
+            "khách hàng",
+            "nói chuyện",
+            "trao đổi",
+            "trò chuyện"
+          ],
+          "icons": [
+            "ph:chats-circle",
+            "lucide:messages-square"
+          ],
+          "hand": "two-people-talking.svg",
+          "handFirst": true,
+          "color": "#6fe3ff",
+          "strength": 8,
+          "priority": 10
+        },
+        {
+          "id": "sales",
+          "label": "Bán hàng",
+          "keywords": [
+            "sale",
+            "bán hàng",
+            "chốt đơn",
+            "doanh số",
+            "bán sản phẩm"
+          ],
+          "icons": [
+            "lucide:shopping-cart",
+            "tabler:shopping-cart",
+            "ph:shopping-cart"
+          ],
+          "color": "#ff7a59",
+          "strength": 9,
+          "priority": 10
+        },
+        {
+          "id": "money",
+          "label": "Tiền",
+          "keywords": [
+            "tiền",
+            "thu nhập",
+            "lương",
+            "doanh thu",
+            "lợi nhuận",
+            "kiếm tiền"
+          ],
+          "icons": [
+            "lucide:banknote",
+            "lucide:circle-dollar-sign",
+            "ph:money"
+          ],
+          "color": "#5ee38a",
+          "strength": 9
+        },
+        {
+          "id": "growth",
+          "label": "Phát triển",
+          "keywords": [
+            "phát triển",
+            "tăng trưởng",
+            "cơ hội để phát triển",
+            "thăng tiến"
+          ],
+          "icons": [
+            "lucide:trending-up",
+            "tabler:trending-up",
+            "ph:trend-up"
+          ],
+          "color": "#5ee38a",
+          "strength": 8
+        },
+        {
+          "id": "time",
+          "label": "Thời gian",
+          "keywords": [
+            "thời gian",
+            "tiết kiệm thời gian",
+            "mỗi ngày",
+            "giờ làm"
+          ],
+          "icons": [
+            "lucide:clock",
+            "tabler:clock",
+            "ph:clock"
+          ],
+          "color": "#ffd400",
+          "strength": 7
+        },
+        {
+          "id": "ai",
+          "label": "AI",
+          "keywords": [
+            "AI",
+            "trí tuệ nhân tạo",
+            "chatgpt",
+            "trợ lý ảo"
+          ],
+          "icons": [
+            "lucide:bot",
+            "lucide:sparkles",
+            "ph:robot"
+          ],
+          "color": "#b48cff",
+          "strength": 10
+        },
+        {
+          "id": "learning",
+          "label": "Học tập",
+          "keywords": [
+            "kiến thức",
+            "đào tạo",
+            "khóa học",
+            "học tập"
+          ],
+          "icons": [
+            "lucide:graduation-cap",
+            "tabler:school",
+            "ph:graduation-cap"
+          ],
+          "color": "#6fe3ff",
+          "strength": 6
+        },
+        {
+          "id": "documents",
+          "label": "Tài liệu",
+          "keywords": [
+            "tài liệu",
+            "văn bản",
+            "báo cáo",
+            "hợp đồng",
+            "hồ sơ"
+          ],
+          "icons": [
+            "lucide:file-text",
+            "tabler:file-text",
+            "ph:file-text"
+          ],
+          "color": "#ffd400",
+          "strength": 3
+        },
+        {
+          "id": "jobs",
+          "label": "Công việc",
+          "keywords": [
+            "công việc",
+            "việc làm",
+            "nghề nghiệp",
+            "văn phòng",
+            "nhân viên"
+          ],
+          "icons": [
+            "lucide:briefcase",
+            "tabler:briefcase",
+            "ph:briefcase"
+          ],
+          "color": "#ff7a59",
+          "strength": 3
+        },
+        {
+          "id": "idea",
+          "label": "Ý tưởng",
+          "keywords": [
+            "ý tưởng",
+            "sáng tạo",
+            "giải pháp"
+          ],
+          "icons": [
+            "lucide:lightbulb",
+            "tabler:bulb",
+            "ph:lightbulb"
+          ],
+          "color": "#ffd400",
+          "strength": 4
+        },
+        {
+          "id": "goal",
+          "label": "Mục tiêu",
+          "keywords": [
+            "mục tiêu",
+            "hiệu quả",
+            "kết quả"
+          ],
+          "icons": [
+            "lucide:target",
+            "tabler:target",
+            "ph:target"
+          ],
+          "color": "#ff5d73",
+          "strength": 4
+        },
+        {
+          "id": "team",
+          "label": "Họp nhóm",
+          "keywords": [
+            "họp",
+            "meeting",
+            "đồng nghiệp",
+            "đội nhóm",
+            "cuộc họp"
+          ],
+          "icons": [
+            "lucide:users",
+            "tabler:users",
+            "ph:users-three"
+          ],
+          "color": "#6fe3ff",
+          "strength": 5
+        },
+        {
+          "id": "data",
+          "label": "Dữ liệu",
+          "keywords": [
+            "dữ liệu",
+            "data",
+            "thống kê",
+            "số liệu"
+          ],
+          "icons": [
+            "lucide:database",
+            "tabler:database",
+            "ph:database"
+          ],
+          "color": "#b48cff",
+          "strength": 6
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "keywords": [
+            "email",
+            "thư điện tử",
+            "gửi mail"
+          ],
+          "icons": [
+            "lucide:mail",
+            "tabler:mail",
+            "ph:envelope"
+          ],
+          "color": "#6fe3ff",
+          "strength": 5
+        }
+      ],
+      "tbsConceptWindowSec": 8,
+      "tbsPadSec": 0.25,
+      "density": {
+        "_rule": "v4.5.1 / verified.md V21: at most 1 icon per secPerIcon seconds of OUTPUT time (<= 4 in 30 s, <= 8 in 60 s). GAP SEMANTICS (gapMode 'start-to-start', default): the START of an icon is >= minGapSec (5 s) after the START of the previous icon (holdSec 2 s -> ~3 s clear between them); 'end-to-start' = minGapSec of clear time after the previous icon ENDS. The same concept never twice within sameConceptGapSec (15 s). PRIORITY: competing hits are ranked by concept `priority` first (customer-talk and sales = 10: the user's own example concepts; others 0), then `strength`, then earlier time - so generic concepts (ai, learning duplicates) never push them out.",
+        "enabled": true,
+        "secPerIcon": 7.5,
+        "minGapSec": 5.0,
+        "sameConceptGapSec": 15,
+        "gapMode": "start-to-start"
+      }
+    }
+  },
+  "transcribe": {
+    "_note": "Used by scripts/transcribe.py. Pass 1 = VAD ON (tuned) ; pass 2 = NO-VAD re-listen ONLY on voiced regions pass 1 left empty (recovers dropped head/tail/gaps); hallucination filter is gated on audio evidence and never deletes an energetic/voiced region (it re-transcribes it, else keeps it flagged suspect:true). [M] on the 30 s 480p dashcam dry-run: no-VAD hallucinated 'Hãy subscribe cho kênh...' over the real last 6 s (no_speech_prob 0.70); VAD thr 0.35/500ms/300ms transcribed everything; VAD thr 0.5 default also fine; VAD OFF drops/garbles. cpu_threads > physical cores (e.g. 48 on an 8-core box) gave garbage + 10x slower: capped at 8.",
+    "model": "medium",
+    "beam": 5,
+    "maxThreads": 8,
+    "vad": {
+      "threshold": 0.35,
+      "minSilenceMs": 500,
+      "speechPadMs": 300
+    },
+    "recovery": {
+      "vadThreshold": 0.2,
+      "minRegionSec": 0.6,
+      "maxCoverage": 0.4,
+      "padSec": 0.5,
+      "edgeGapSec": 1.0,
+      "minMeanWordProb": 0.55,
+      "maxNoSpeech": 0.5,
+      "minAvgLogprob": -0.9,
+      "_note": "a recovered segment must itself look like speech (mean word probability / no_speech / avg_logprob) or it is discarded: the sensitive VAD also fires on road/wind noise and no-VAD whisper then invents outro text.",
+      "innerGapSec": 3.0
+    },
+    "hallucination": {
+      "phrases": [
+        "đăng ký kênh",
+        "ủng hộ kênh",
+        "đăng ký để ủng hộ",
+        "subscribe cho kênh",
+        "hãy subscribe",
+        "đừng quên đăng ký",
+        "ghiền mì gõ",
+        "cảm ơn các bạn đã xem",
+        "cảm ơn các bạn đã theo dõi",
+        "cảm ơn đã xem",
+        "hẹn gặp lại các bạn",
+        "like và share",
+        "thanks for watching",
+        "please subscribe",
+        "subtitles by",
+        "amara.org",
+        "phụ đề bởi",
+        "vietsub",
+        "hẹn lại",
+        "hẹn gặp lại",
+        "video tiếp theo",
+        "video tiếp",
+        "video sau",
+        "xem video của mình",
+        "ơn các bạn"
+      ],
+      "maxNoSpeech": 0.6,
+      "minAvgLogprob": -1.0,
+      "maxCompression": 2.4,
+      "energetic": {
+        "dbAboveFloor": 8,
+        "vadCoverage": 0.5
+      },
+      "_rule": "suspect = known outro phrase OR no_speech_prob>=maxNoSpeech OR avg_logprob<=minAvgLogprob OR compression_ratio>=maxCompression. Suspect segment: retry once (other VAD mode, beam 8, previous text as prompt); keep the best candidate. Still suspect -> DROP only if the region is NOT energetic (rms < floor+dbAboveFloor AND VAD coverage < vadCoverage); otherwise keep it with suspect:true.",
+      "nsMinLogprob": -0.6
+    },
+    "computeType": "float32",
+    "_determinism": "[M] on this box int8/int8_float32 CTranslate2 CPU kernels are NOT reproducible (same file+params: 0 segments / garbage / Japanese chars / different text per run, worse with more threads or CPU load). float32 gave the identical transcript hash in 4 of 4 trials at 4 and 8 threads. Do not switch back to int8 for reproducible output; the ~2x slowdown is the price. Temperature fixed 0.0 (no fallback ladder)."
+  },
+  "screenBroll": {
+    "_note": "scripts/detect_screen_broll.py -> public/project/screen_broll.json. Heuristic [E] (no ML): frames sampled at fps; a window is 'screen' when most 8x8 blocks are flat (UI chrome / documents) AND gradient energy is axis-aligned (text/boxes) AND (bright OR very flat). make_beats.py turns every window into captionAnchor {anchor:'top',variant:'dark'}. Calibrated on the reference (laptop-screen b-roll 0-4.9 s detected, host shots not) - see analysis.md.",
+    "fps": 2,
+    "width": 192,
+    "flatStd": 3.0,
+    "minFlat": 0.5,
+    "minAxis": 0.58,
+    "minLuma": 0.55,
+    "minFlatDark": 0.75,
+    "minWindowSec": 1.0,
+    "mergeGapSec": 0.6,
+    "minFlatBright": 0.27,
+    "minLumaBright": 0.5,
+    "minAxisBright": 0.58,
+    "_calibration": "[M] reference 7702817920237210898 @2fps: bright laptop-screen shot 2.0-4.5 s (flat .27-.34, axis .60-.62, luma .55-.61) -> detected; host/wall shots 5-9.5 s (luma <=.49) and road dashcam 30 s (flat <=.25) -> not detected; fully dark flat graphics scenes (25.5-28.5, 40.5-43 s) are detected too (they are overlays in the reference, so make_beats ignores windows that overlap its own info-scene/topic-card beats). Hand-labelled reference anchor: 1.5-4.9 s. [E]: three body-shot examples only - tune per channel."
+  },
+  "brandLogos": {
+    "retryOffsetsSec": [
+      0.4,
+      0.8,
+      1.2,
+      1.6,
+      2.0,
+      2.5,
+      -0.15
+    ],
+    "relocateMaxSec": 2.6,
+    "_retry": "v4.3: on a collision try these later/earlier times (and the alternative slots) before dropping; a logo is deduped against a sticker/same-brand element at the same time.",
+    "_note": "Used by make_beats (brand-logo beat). A beat is emitted ONLY for brands whose logo file exists at public/project/logos/<slug>.svg|png (the agent running the template must fetch the real logo first - see SKILL.md 'BRAND LOGOS (MANDATORY)' and references/brand-logos.md). Aliases: ASCII aliases match accent-folded ('chat gpt' also matches the ASR output 'chát GPT'); aliases with Vietnamese diacritics (e.g. 'cớt') match STRICT diacritics only (never matches the common word 'cột'). 'color' = glow hint only [E]; if logos.json has a color for the slug it wins.",
+    "enabled": true,
+    "holdSec": 2.0,
+    "minGapSec": 4.0,
+    "leadSec": 0.1,
+    "maxPerVideo": 12,
+    "brands": [
+      {
+        "name": "ChatGPT",
+        "slug": "chatgpt",
+        "aliases": [
+          "chat g p t",
+          "chat gi pi ti",
+          "chat gpt",
+          "chat jipiti",
+          "ChatGPT",
+          "chát gi pi ti",
+          "chát gpt",
+          "chát gờ pê tê",
+          "gpt",
+          "gờ pê tê"
+        ],
+        "color": "#10A37F"
+      },
+      {
+        "name": "OpenAI",
+        "slug": "openai",
+        "aliases": [
+          "open a i",
+          "open ai",
+          "OpenAI",
+          "ô pần ai",
+          "ôpen ai",
+          "ốp pần ai"
+        ],
+        "color": "#74AA9C"
+      },
+      {
+        "name": "Claude",
+        "slug": "claude",
+        "aliases": [
+          "claud",
+          "Claude",
+          "claude code",
+          "clawd",
+          "clod",
+          "clôt",
+          "clốt",
+          "cớt",
+          "cờ lốt",
+          "claw"
+        ],
+        "color": "#D97757"
+      },
+      {
+        "name": "Anthropic",
+        "slug": "anthropic",
+        "aliases": [
+          "an thờ rốp ích",
+          "Anthropic",
+          "anthropik",
+          "antropic"
+        ],
+        "color": "#D97757"
+      },
+      {
+        "name": "Gemini",
+        "slug": "gemini",
+        "aliases": [
+          "gem mi nai",
+          "gemeni",
+          "Gemini",
+          "giêm mi nai"
+        ],
+        "color": "#8E75B2"
+      },
+      {
+        "name": "Stripe",
+        "slug": "stripe",
+        "aliases": [
+          "strip",
+          "Stripe",
+          "sờ trai"
+        ],
+        "color": "#635BFF"
+      },
+      {
+        "name": "SQLite",
+        "slug": "sqlite",
+        "aliases": [
+          "es kiu lai",
+          "es quy lai",
+          "sequel light",
+          "sequel lite",
+          "sql lite",
+          "SQLite",
+          "sê quy lai",
+          "sờ quy lai"
+        ],
+        "color": "#0F80CC"
+      },
+      {
+        "name": "GitHub",
+        "slug": "github",
+        "aliases": [
+          "gi hấp",
+          "git hub",
+          "GitHub",
+          "gít hấp",
+          "gít hắp"
+        ],
+        "color": "#8B949E"
+      },
+      {
+        "name": "Cursor",
+        "slug": "cursor",
+        "aliases": [
+          "Cursor",
+          "cơ sơ",
+          "cờ sơ",
+          "kơ sơ"
+        ],
+        "color": "#9AA0A6"
+      },
+      {
+        "name": "Notion",
+        "slug": "notion",
+        "aliases": [
+          "Notion",
+          "nô sần",
+          "nôn sần"
+        ],
+        "color": "#9AA0A6"
+      },
+      {
+        "name": "Figma",
+        "slug": "figma",
+        "aliases": [
+          "fig ma",
+          "Figma",
+          "fích ma",
+          "phi ma",
+          "phít ma"
+        ],
+        "color": "#F24E1E"
+      },
+      {
+        "name": "YouTube",
+        "slug": "youtube",
+        "aliases": [
+          "diu túp",
+          "du tup",
+          "du túp",
+          "dú túp",
+          "you tube",
+          "YouTube"
+        ],
+        "color": "#FF0000"
+      },
+      {
+        "name": "TikTok",
+        "slug": "tiktok",
+        "aliases": [
+          "tic toc",
+          "tik tok",
+          "TikTok",
+          "tích tóc",
+          "tích tốc",
+          "tít tóc"
+        ],
+        "color": "#FE2C55"
+      },
+      {
+        "name": "Remotion",
+        "slug": "remotion",
+        "aliases": [
+          "re motion",
+          "Remotion",
+          "ri mâu sần",
+          "ri mô sần"
+        ],
+        "color": "#0B84F3"
+      },
+      {
+        "name": "Python",
+        "slug": "python",
+        "aliases": [
+          "pai thon",
+          "pai-thon",
+          "Python",
+          "pái thơn"
+        ],
+        "color": "#3776AB"
+      },
+      {
+        "name": "Node.js",
+        "slug": "nodejs",
+        "aliases": [
+          "node",
+          "node js",
+          "Node.js",
+          "nodejs",
+          "nốt",
+          "nốt js"
+        ],
+        "color": "#5FA04E",
+        "si": "nodedotjs"
+      },
+      {
+        "name": "Google",
+        "slug": "google",
+        "aliases": [
+          "Google",
+          "gu gồ",
+          "gu gờ",
+          "gúc gồ"
+        ],
+        "color": "#4285F4"
+      },
+      {
+        "name": "Facebook",
+        "slug": "facebook",
+        "aliases": [
+          "face book",
+          "Facebook",
+          "fây búc",
+          "phây búc"
+        ],
+        "color": "#1877F2"
+      },
+      {
+        "name": "Instagram",
+        "slug": "instagram",
+        "aliases": [
+          "in sờ ta gram",
+          "insta",
+          "Instagram"
+        ],
+        "color": "#E4405F"
+      },
+      {
+        "name": "Zalo",
+        "slug": "zalo",
+        "aliases": [
+          "Zalo"
+        ],
+        "color": "#0068FF"
+      },
+      {
+        "name": "Shopee",
+        "slug": "shopee",
+        "aliases": [
+          "Shopee"
+        ],
+        "color": "#EE4D2D"
+      },
+      {
+        "name": "Vercel",
+        "slug": "vercel",
+        "aliases": [
+          "Vercel"
+        ],
+        "color": "#9AA0A6"
+      },
+      {
+        "name": "Supabase",
+        "slug": "supabase",
+        "aliases": [
+          "Supabase"
+        ],
+        "color": "#3ECF8E"
+      },
+      {
+        "name": "Docker",
+        "slug": "docker",
+        "aliases": [
+          "Docker"
+        ],
+        "color": "#2496ED"
+      },
+      {
+        "name": "Canva",
+        "slug": "canva",
+        "aliases": [
+          "Canva"
+        ],
+        "color": "#00C4CC"
+      },
+      {
+        "name": "CapCut",
+        "slug": "capcut",
+        "aliases": [
+          "cap cut",
+          "capcut",
+          "CapCut",
+          "cáp cắt"
+        ],
+        "color": "#9AA0A6"
+      },
+      {
+        "name": "DeepSeek",
+        "slug": "deepseek",
+        "aliases": [
+          "deep seek",
+          "DeepSeek",
+          "đip sích",
+          "đíp síc"
+        ],
+        "color": "#4D6BFE"
+      },
+      {
+        "name": "Midjourney",
+        "slug": "midjourney",
+        "aliases": [
+          "mid journey",
+          "Midjourney",
+          "mít giơ ni"
+        ],
+        "color": "#9AA0A6"
+      },
+      {
+        "name": "Perplexity",
+        "slug": "perplexity",
+        "aliases": [
+          "per plex ity",
+          "Perplexity"
+        ],
+        "color": "#20B8CD"
+      },
+      {
+        "name": "Telegram",
+        "slug": "telegram",
+        "aliases": [
+          "te le gram",
+          "telegram",
+          "Telegram"
+        ],
+        "color": "#26A5E4"
+      },
+      {
+        "name": "Discord",
+        "slug": "discord",
+        "aliases": [
+          "Discord"
+        ],
+        "color": "#5865F2"
+      },
+      {
+        "name": "Slack",
+        "slug": "slack",
+        "aliases": [
+          "Slack"
+        ],
+        "color": "#4A154B"
+      }
+    ],
+    "maxDelaySec": 2.0,
+    "placement": {
+      "enabled": true,
+      "every": 0.25,
+      "faceExpand": {
+        "x": 0.2,
+        "up": 0.45,
+        "down": 0.2
+      },
+      "marginPx": 24,
+      "topLimitR": 0.095,
+      "scales": [
+        1.0,
+        0.85,
+        0.72,
+        0.6
+      ],
+      "prefer": [
+        "above",
+        "right",
+        "left",
+        "below"
+      ],
+      "fallbackCorner": "top-right",
+      "_note": "v4.1: the card never covers the speaker's face. scripts/detect_faces.py -> public/project/faces.json (YuNet, Haar fallback, source-time samples). make_beats maps the face box through the segment framing (wide/mid/tight zoom incl. punch overshoot) to canvas pixels, expands it (hair/chin), and puts the card in the first free slot: above the head (below the title zone), right, left, or below the chin (above the caption zone), shrinking the card down to the smallest `scales` entry. Nothing free -> `fallbackCorner` at the smallest scale; no faces.json / no face found -> the same corner. Beat gets x,y (fractions: card centre x, card top y) and scale.",
+      "captionGapR": 0.045,
+      "relaxedFaceExpand": {
+        "x": 0.08,
+        "up": 0.2,
+        "down": 0.08
+      },
+      "ladder": {
+        "enabled": true,
+        "smallScales": [
+          0.55,
+          0.46,
+          0.4
+        ],
+        "pill": false,
+        "_note": "v4.4 (v4.3 check: TikTok logo dropped for no slot): before dropping, try the shoulder/edge slots (ladder rung 2), smaller cards down to 0.4 x 250 px, and a second pass with relaxedFaceExpand; only then drop (logged in _skips)."
+      }
+    },
+    "autoFetch": true
+  },
+  "_version": "4.4",
+  "verify": {
+    "_note": "v4.4 single place for the thresholds of references/verified.md (scripts/verify_all.py reads this).",
+    "targetSec": 30,
+    "tolSec": 2,
+    "fps": 30,
+    "overlapPx": 6,
+    "faceMaxOverlap": 0.1,
+    "captionBackgroundEnabled": false,
+    "captionStrokeMinPx": 6,
+    "textBehind": {
+      "minOcclusion": 0.03,
+      "maxOcclusion": 0.1,
+      "minReadable": 0.9,
+      "maxGlyphOcclusion": 0.3,
+      "minPerWindow": 1,
+      "perSec": 30
+    },
+    "icons": {
+      "minPx": 120,
+      "minPer30s": 2,
+      "maxSameSideInARow": 2
+    },
+    "framedFocus": {
+      "perSec": 30,
+      "maxPerPeriod": 1,
+      "minGapSec": 15
+    },
+    "captionFace": {
+      "everyFrame": true,
+      "maxFaceOverlap": 0.1,
+      "foreheadPadR": 0.12
+    },
+    "maxRounds": 3
+  }
+}

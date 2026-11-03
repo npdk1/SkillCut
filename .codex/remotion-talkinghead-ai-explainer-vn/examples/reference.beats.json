@@ -1,0 +1,247 @@
+{
+ "captionAnchor": [
+  {
+   "t0": 1.5,
+   "t1": 4.9,
+   "anchor": "top",
+   "variant": "dark"
+  }
+ ],
+ "beats": [
+  {
+   "type": "stars",
+   "t0": 0.0,
+   "t1": 1.8
+  },
+  {
+   "type": "sticker",
+   "t0": 1.7,
+   "t1": 4.9,
+   "look": "tile"
+  },
+  {
+   "type": "topic-card",
+   "t0": 4.9,
+   "t1": 9.7,
+   "header": "nó mở thêm",
+   "media": {
+    "src": "project/editor.png",
+    "kind": "window"
+   },
+   "lines": [
+    {
+     "t": 5.0,
+     "text": "tool Editor trực tiếp",
+     "pill": true
+    },
+    {
+     "t": 5.8,
+     "text": "tách đầy đủ layer",
+     "hl": true,
+     "slot": 0,
+     "until": 8.0
+    },
+    {
+     "t": 7.0,
+     "text": "hiển thị timeline",
+     "slot": 1,
+     "until": 8.0
+    },
+    {
+     "t": 8.0,
+     "text": "như công cụ chỉnh sửa",
+     "slot": 0
+    },
+    {
+     "t": 9.0,
+     "text": "video thực thụ",
+     "hl": true,
+     "slot": 1
+    }
+   ]
+  },
+  {
+   "type": "avatar-chain",
+   "t0": 11.8,
+   "t1": 14.0,
+   "left": "Mike",
+   "chip": "edit video",
+   "right": "AI",
+   "badge": "chất lượng cao"
+  },
+  {
+   "type": "sticker",
+   "t0": 14.7,
+   "t1": 16.9,
+   "label": "Claude Opus 5.5",
+   "look": "label-above",
+   "hl": "Opus 5.5"
+  },
+  {
+   "type": "chip-stack",
+   "t0": 15.8,
+   "t1": 21.0,
+   "items": [
+    {
+     "t": 15.9,
+     "title": "Typography",
+     "sub": "đủ kiểu",
+     "icon": "aa"
+    },
+    {
+     "t": 17.7,
+     "title": "Graphic",
+     "sub": "đa dạng",
+     "icon": "shapes"
+    },
+    {
+     "t": 18.7,
+     "title": "Motion",
+     "sub": "mượt mà",
+     "icon": "motion"
+    },
+    {
+     "t": 19.7,
+     "title": "Âm thanh",
+     "sub": "khớp từng khung",
+     "icon": "sound"
+    }
+   ]
+  },
+  {
+   "type": "prompt-box",
+   "t0": 21.8,
+   "t1": 24.8,
+   "text": "Sửa giúp mình chữ này to hơn...",
+   "strikeAt": 23.0
+  },
+  {
+   "type": "info-scene",
+   "t0": 24.9,
+   "t1": 30.9,
+   "header": "thay vì prompt từng lỗi",
+   "headline": {
+    "t": 28.45,
+    "text": "giao diện Editor"
+   },
+   "cards": [
+    {
+     "t": 25.4,
+     "text": "Prompt sửa từng chi tiết",
+     "strike": true
+    },
+    {
+     "t": 26.3,
+     "text": "Tốn thời gian",
+     "strike": true
+    },
+    {
+     "t": 27.2,
+     "text": "Tốn token",
+     "strike": true
+    }
+   ],
+   "pill": {
+    "t": 29.0,
+    "text": "Tự sửa trực tiếp"
+   },
+   "media": {
+    "src": "project/editor.png",
+    "kind": "window",
+    "t": 29.0
+   },
+   "cardsExitAt": 28.45
+  },
+  {
+   "type": "title-burst",
+   "t0": 30.9,
+   "t1": 33.9,
+   "title": "Chỉnh rồi render",
+   "sub": "không tốn thêm token",
+   "rec": "00:21",
+   "timeline": true
+  },
+  {
+   "type": "big-word",
+   "t0": 33.9,
+   "t1": 36.6,
+   "text": "token"
+  },
+  {
+   "type": "selection-box",
+   "t0": 35.0,
+   "t1": 36.6,
+   "label": "token",
+   "size": "457 × 237"
+  },
+  {
+   "type": "topic-card",
+   "t0": 36.6,
+   "t1": 40.3,
+   "header": "video ngắn đẹp",
+   "media": {
+    "src": "project/phone.png",
+    "kind": "phone"
+   },
+   "lines": [
+    {
+     "t": 38.5,
+     "text": "cho kênh TikTok",
+     "hl": true
+    }
+   ]
+  },
+  {
+   "type": "info-scene",
+   "t0": 40.3,
+   "t1": 42.9,
+   "header": "chỉ mất",
+   "headline": {
+    "t": 40.5,
+    "text": "hơn nửa tiếng"
+   },
+   "cards": [
+    {
+     "t": 41.1,
+     "text": "~30 phút",
+     "sub": "chờ Claude làm",
+     "icon": "brand"
+    },
+    {
+     "t": 42.0,
+     "text": "5-10 phút",
+     "sub": "tự chỉnh theo ý",
+     "icon": "user",
+     "accent": true
+    }
+   ],
+   "pill": {
+    "t": 41.6,
+    "text": "+ thêm"
+   }
+  },
+  {
+   "type": "big-word",
+   "t0": 42.9,
+   "t1": 44.0,
+   "text": "tiện!",
+   "sparkles": true
+  },
+  {
+   "type": "sticker",
+   "t0": 45.3,
+   "t1": 46.9,
+   "label": "Edit Video",
+   "sub": "bộ skill",
+   "look": "label-right",
+   "icon": "bolt"
+  },
+  {
+   "type": "comment-box",
+   "t0": 47.15,
+   "t1": 48.6,
+   "typed": "tham khảo",
+   "bubble": "tham khảo"
+  }
+ ]
+}

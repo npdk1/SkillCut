@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "source": {
+    "file": "project/raw.mp4",
+    "fps": 30.0,
+    "durationSec": 48.6
+  },
+  "target": {
+    "minSec": 20,
+    "maxSec": 38.9,
+    "ratio": 0.771
+  },
+  "segments": [
+    {
+      "id": "s00",
+      "srcIn": 0,
+      "srcOut": 1.38,
+      "role": "hook",
+      "reason": "hookiness, energy, emotion, novelty",
+      "score": 0.76,
+      "framing": "wide",
+      "punch": false,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s01",
+      "srcIn": 1.46,
+      "srcOut": 4.26,
+      "role": "body",
+      "reason": "energy, emotion, novelty",
+      "score": 0.567,
+      "framing": "wide",
+      "punch": false,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s02",
+      "srcIn": 4.26,
+      "srcOut": 9.76,
+      "role": "body",
+      "reason": "information, energy, clarity, novelty",
+      "score": 0.485,
+      "framing": "wide",
+      "punch": false,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s03",
+      "srcIn": 9.64,
+      "srcOut": 12.18,
+      "role": "body",
+      "reason": "information, energy, novelty",
+      "score": 0.456,
+      "framing": "mid",
+      "punch": true,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s04",
+      "srcIn": 12.06,
+      "srcOut": 14.36,
+      "role": "body",
+      "reason": "information, energy, clarity, novelty",
+      "score": 0.522,
+      "framing": "mid",
+      "punch": false,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s05",
+      "srcIn": 14.24,
+      "srcOut": 17.36,
+      "role": "body",
+      "reason": "information, energy, clarity, novelty",
+      "score": 0.497,
+      "framing": "wide",
+      "punch": true,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s06",
+      "srcIn": 20.68,
+      "srcOut": 25.4,
+      "role": "body",
+      "reason": "information, energy, novelty",
+      "score": 0.597,
+      "framing": "wide",
+      "punch": false,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s07",
+      "srcIn": 30.4,
+      "srcOut": 36.96,
+      "role": "body",
+      "reason": "information, energy, clarity, novelty",
+      "score": 0.615,
+      "framing": "mid",
+      "punch": true,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s08",
+      "srcIn": 39.9,
+      "srcOut": 43.8,
+      "role": "payoff",
+      "reason": "information, energy, clarity, emotion, payoff",
+      "score": 0.703,
+      "framing": "wide",
+      "punch": true,
+      "transitionIn": "cut"
+    },
+    {
+      "id": "s09",
+      "srcIn": 43.96,
+      "srcOut": 48.6,
+      "role": "cta",
+      "reason": "information, energy, clarity, emotion, novelty, payoff",
+      "score": 0.732,
+      "framing": "wide",
+      "punch": false,
+      "transitionIn": "cut"
+    }
+  ],
+  "dropped": [
+    {
+      "srcIn": 17.52,
+      "srcOut": 20.72,
+      "reason": "manual",
+      "note": "over target window (39s), score 0.403"
+    },
+    {
+      "srcIn": 25.32,
+      "srcOut": 27.88,
+      "reason": "manual",
+      "note": "over target window (39s), score 0.423"
+    },
+    {
+      "srcIn": 27.88,
+      "srcOut": 30.44,
+      "reason": "manual",
+      "note": "over target window (39s), score 0.34"
+    },
+    {
+      "srcIn": 36.88,
+      "srcOut": 37.04,
+      "reason": "manual",
+      "note": "over target window (39s), score 0.362"
+    },
+    {
+      "srcIn": 37.04,
+      "srcOut": 39.94,
+      "reason": "manual",
+      "note": "over target window (39s), score 0.448"
+    },
+    {
+      "srcIn": 43.92,
+      "srcOut": 44.0,
+      "reason": "filler",
+      "note": "leading filler"
+    },
+    {
+      "srcIn": 46.56,
+      "srcOut": 46.82,
+      "reason": "manual",
+      "note": "over target window (39s), score 0.44"
+    }
+  ],
+  "stats": {
+    "rawSec": 48.6,
+    "keptSec": 37.46,
+    "segments": 10,
+    "avgShotSec": 3.75,
+    "silenceSecDetected": 0,
+    "wordsPerSec": 4.75,
+    "referenceAvgShotSec": 3.7
+  }
+}

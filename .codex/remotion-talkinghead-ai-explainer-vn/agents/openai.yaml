@@ -1,0 +1,5 @@
+interface:
+  display_name: "Remotion Talking-head AI Explainer VN"
+  short_description: "Dựng video talking-head AI/tech explainer từ raw + transcript, tự chọn highlight"
+  brand_color: "#F8E277"
+  default_prompt: "Dùng $remotion-talkinghead-ai-explainer-vn: probe video raw trước, rồi tạo EDL highlight+tighten và dựng demo 30 giây."

@@ -1,0 +1,23 @@
+{
+ "version": 1,
+ "source": {
+  "file": "project/raw.mp4",
+  "fps": 30,
+  "durationSec": 48.6
+ },
+ "segments": [
+  {
+   "id": "ref",
+   "srcIn": 0,
+   "srcOut": 48.6,
+   "role": "body",
+   "reason": "the reference is already edited: keep it whole (use this to render the template over a clean background and compare)",
+   "framing": "wide",
+   "punch": false,
+   "transitionIn": "cut",
+   "grade": false
+  }
+ ],
+ "dropped": [],
+ "stats": {}
+}
